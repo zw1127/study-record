@@ -6,6 +6,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>spring-boot-quick-start</module>
+        <module>spring-boot-properties</module>
     </modules>
     <parent>
         <groupId>cn.javastudy</groupId>
