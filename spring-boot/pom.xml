@@ -7,6 +7,7 @@
     <modules>
         <module>spring-boot-quick-start</module>
         <module>spring-boot-properties</module>
+        <module>spring-boot-xml</module>
     </modules>
     <parent>
         <groupId>cn.javastudy</groupId>
