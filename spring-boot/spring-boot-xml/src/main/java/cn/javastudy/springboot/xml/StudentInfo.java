@@ -1,4 +1,4 @@
-package cn.javastudy.xml;
+package cn.javastudy.springboot.xml;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;

@@ -1,6 +1,6 @@
-package cn.javastudy;
+package cn.javastudy.springboot;
 
-import cn.javastudy.properties.UserProperties;
+import cn.javastudy.springboot.properties.UserProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

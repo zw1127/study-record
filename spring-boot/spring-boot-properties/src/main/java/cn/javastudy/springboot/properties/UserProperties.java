@@ -1,4 +1,4 @@
-package cn.javastudy.properties;
+package cn.javastudy.springboot.properties;
 
 import java.util.Date;
 import java.util.StringJoiner;

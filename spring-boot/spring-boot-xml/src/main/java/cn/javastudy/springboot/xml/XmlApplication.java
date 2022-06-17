@@ -1,9 +1,8 @@
-package cn.javastudy.xml;
+package cn.javastudy.springboot.xml;
 
 import java.time.Clock;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
