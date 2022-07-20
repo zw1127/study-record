@@ -13,6 +13,31 @@
     <artifactId>spring-boot-aggregator</artifactId>
     <packaging>pom</packaging>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>2.7.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
     <modules>
         <module>spring-boot-quick-start</module>
         <module>spring-boot-properties</module>
@@ -20,6 +45,7 @@
         <module>spring-boot-datasource</module>
         <module>spring-boot-quartz</module>
         <module>spring-boot-mybatis</module>
+        <module>spring-boot-exception</module>
     </modules>
 
 </project>
