@@ -57,6 +57,7 @@
         <module>spring-boot-jpa</module>
         <module>spring-boot-schedule</module>
         <module>spring-boot-web</module>
+        <module>spring-boot-ldap</module>
     </modules>
 
 </project>
