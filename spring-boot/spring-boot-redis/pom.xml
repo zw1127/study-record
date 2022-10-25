@@ -31,18 +31,6 @@
             <artifactId>jedis</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
         <!-- 单元测试，我们采用内嵌的 Redis 数据库 -->
         <dependency>
             <groupId>com.github.fppt</groupId>
