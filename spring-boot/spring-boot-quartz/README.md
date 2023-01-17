@@ -173,7 +173,7 @@ scheduler.addCalendar("holidays",holidays, false,false);，注意这里的第一
 在这里，除了可以使用AnnualCalendar外，还有CronCalendar(表达式),DailyCalendar(指定的时间范围内的每一天),HolidayCalendar(排除节假日),MonthlyCalendar(排除月份中的数天),WeeklyCalendar(排除星期中的一天或多天)
 
 至此，我们的核心类基本讲解完毕，下面附上我们的完整测试代码：
-```
+```java
 /*********************1.+版本*********************/
 public class pickNewsJob implements Job {
 
@@ -271,11 +271,12 @@ public class pickNewsJob implements Job {
 可见，两个不同版本的主要区别在于JobDetail和Triiger的配置。
 
 此外，除了使用scheduler.scheduleJob(jobDetail, simpleTrigger)来建立jobDetail和simpleTrigger的关联外，在1.+版本中的配置还可以采用如下所示方式
-
+```
 simpleTrigger.setJobName("job1");//jobName和我们前面jobDetail的的名字一致
 simpleTrigger.setJobGroup("jgroup1");//jobGroup和我们之前jobDetail的组名一致
 scheduler.addJob(jobDetail, true);//注册jobDetail,此时jobDetail必须已指定job名和组名，否则会抛异常Trigger's related Job's name cannot be null
 scheduler.scheduleJob(simpleTrigger);//注册triiger必须在注册jobDetail之后，否则会抛异常Trigger's related Job's name cannot be null
+```
 这里还需要注意的是，如果我们使用scheduler.addCalendar("holidays", holidays, false, false)必须在向scheduler注册trigger之前scheduler.scheduleJob(simpleTrigger)，否则会抛异常：Calendar not found: holidays
 
 而在2.+版本中，我尝试在创建triiger时用forJob(“job1”, “jgroup1”)来绑定job名和组名
@@ -290,14 +291,16 @@ SimpleTrigger simpleTrigger = TriggerBuilder
     .build();
 ```
 //后面是一样的
+```
 scheduler.addJob(jobDetail, true);
 scheduler.scheduleJob(simpleTrigger);
+```
 
 ## 存储与持久化操作配置详细解
 ### 内存存储RAMJobStore
 Quartz默认使用RAMJobStore，它的优点是速度。因为所有的 Scheduler 信息都保存在计算机内存中，访问这些数据随着电脑而变快。而无须访问数据库或IO等操作，但它的缺点是将 Job 和 Trigger 信息存储在内存中的。因而我们每次重启程序，Scheduler 的状态，包括 Job 和 Trigger 信息都丢失了。
 Quartz 的内存 Job 存储的能力是由一个叫做 org.quartz.simple.RAMJobStore 类提供。在我们的quartz-2.x.x.jar包下的org.quartz包下即存储了我们的默认配置quartz.properties。打开这个配置文件，我们会看到如下信息
-```
+```properties
 # Default Properties file for use by StdSchedulerFactory
 # to create a Quartz Scheduler Instance, if a different
 # properties file is not explicitly specified.
@@ -709,3 +712,699 @@ SchedulerFactory schedulerFactory = new StdSchedulerFactory();
 }
 ```
 调用此方法，我们在数据库中异常中断任务记录就会被读取执行，然后被删除掉。
+
+## JobListener分版本解析
+### JobListener
+我们的jobListener实现类必须实现其以下方法：
+
+| 方法                   | 说明                                                                                                                                           |
+|----------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| getName()            | getName() 方法返回一个字符串用以说明 JobListener 的名称。对于注册为全局的监听器，getName()主要用于记录日志，对于由特定Job引用的JobListener，注册在JobDetail 上的监听器名称必须匹配从监听器上 getName() 方法的返回值。 |
+| jobToBeExecuted()    | Scheduler 在 JobDetail 将要被执行时调用这个方法。                                                                                                          |
+| jobExecutionVetoed() | Scheduler 在 JobDetail 即将被执行，但又被 TriggerListener 否决了时调用这个方法。                                                                                  |
+| jobWasExecuted()     | Scheduler 在 JobDetail 被执行之后调用这个方法。                                                                                                           |
+
+#### 1. 自定义监听器接口实现类
+```java
+public class MyJobListener implements JobListener {
+
+    @Override//相当于为我们的监听器命名
+    public String getName() {
+        return "myJobListener";
+    }
+
+    @Override
+    public void jobToBeExecuted(JobExecutionContext context) {
+        System.out.println(getName() + "触发对"+context.getJobDetail().getJobClass()+"的开始执行的监听工作，这里可以完成任务前的一些资源准备工作或日志记录");
+    }
+
+    @Override//“否决JobDetail”是在Triiger被其相应的监听器监听时才具备的能力
+    public void jobExecutionVetoed(JobExecutionContext context) {
+        System.out.println("被否决执行了，可以做些日志记录。");
+    }
+
+    @Override
+    public void jobWasExecuted(JobExecutionContext context,
+            JobExecutionException jobException) {
+        System.out.println(getName() + "触发对"+context.getJobDetail().getJobClass()+"结束执行的监听工作，这里可以进行资源销毁工作或做一些新闻扒取结果的统计工作");
+
+    }
+
+}
+```
+
+#### 2. 在scheduler中注册监听器
+这里有两种方式，一种是注册为全局监听器，对所有的JobDetail都有效，另一种是注册为针对特定JobDetail的局部监听器。针对不同的版本，有不同的配置方式
+
+##### 1. 准备工作
+在测试中我们用到工作实现类为
+```java
+public class PickNewsJob implements Job {
+
+    @Override
+    public void execute(JobExecutionContext jec) throws JobExecutionException {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        System.out.println("在" + sdf.format(new Date()) + "扒取新闻");
+    }
+}
+
+public class GetHottestJob implements Job {
+
+    @Override
+    public void execute(JobExecutionContext jec) throws JobExecutionException {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        System.out.println("在" + sdf.format(new Date()) +"根据文章的阅读量和评论量来生成我们的最热文章列表");
+    }
+
+}
+```
+
+##### 2. 1.x版本配置
+在1.+版本中，我们可以通过如下代码监听job
+```
+/**********局部监听器配置**********/
+JobListener myJobListener = new MyJobListener();
+pickNewsJob.addJobListener("myJobListener");//这里的名字和myJobListener中getName()方法的名字一样
+scheduler.addJobListener(myJobListener);//向scheduler注册我们的监听器
+/*********全局监听器配置************/
+JobListener myJobListener = new MyJobListener();
+scheduler.addGlobalJobListener(myJobListener);//直接添加为全局监听器
+```
+下面是我们的完整测试代码：
+```
+public static void main(String args[]) throws SchedulerException {
+    JobDetail pickNewsJob =new JobDetail("job1", "jgroup1", PickNewsJob.class); 
+    JobDetail getHottestJob =new JobDetail("job2", "jgroup2", GetHottestJob.class);
+    SimpleTrigger pickNewsTrigger = new SimpleTrigger("trigger1", "group1",1,2000);
+    SimpleTrigger getHottestTrigger = new SimpleTrigger("trigger2", "group2",1,3000);
+
+    SchedulerFactory schedulerFactory = new StdSchedulerFactory();
+    Scheduler scheduler = schedulerFactory.getScheduler();
+
+    /**********局部监听器配置**********/
+    JobListener myJobListener = new MyJobListener();
+    pickNewsJob.addJobListener("myJobListener");//这里的名字和myJobListener中getName()方法的名字一样
+    scheduler.addJobListener(myJobListener);//向scheduler注册我们的监听器
+    /*********全局监听器配置************/
+//      JobListener myJobListener = new MyJobListener();
+//      scheduler.addGlobalJobListener(myJobListener);//直接添加为全局监听器
+
+    scheduler.scheduleJob(pickNewsJob,pickNewsTrigger);
+    scheduler.scheduleJob(getHottestJob,getHottestTrigger);
+
+    scheduler.start();
+
+}
+```
+现在是使用局部监听器的配置，运行程序，控制台打印：
+```
+myJobListener触发对class tool.job.PickNewsJob的开始执行的监听工作，这里可以完成任务前的一些资源准备工作或日志记录
+在11:18:31扒取新闻
+在11:18:31根据文章的阅读量和评论量来生成我们的最热文章列表————————从这里我们可以看出两个工作是异步进行的
+myJobListener触发对class tool.job.PickNewsJob结束执行的监听工作，这里可以进行资源销毁工作或做一些新闻扒取结果的统计工作
+myJobListener触发对class tool.job.PickNewsJob的开始执行的监听工作，这里可以完成任务前的一些资源准备工作或日志记录
+在11:18:33扒取新闻
+myJobListener触发对class tool.job.PickNewsJob结束执行的监听工作，这里可以进行资源销毁工作或做一些新闻扒取结果的统计工作
+在11:18:34根据文章的阅读量和评论量来生成我们的最热文章列表
+```
+我们细心观察还会发现，我们两个工作都运行了三次，但我们在配置触发器时，repeatCount都是设为2。这说明我们的任务调度特点是：主执行了1次，重复了2次，于是共执行3（1+repeatCount)次。
+
+如果我们注释掉局部监听代码，启用全局监听，会看到控制台打印：
+```
+myJobListener触发对class tool.job.PickNewsJob的开始执行的监听工作，这里可以完成任务前的一些资源准备工作或日志记录
+myJobListener触发对class tool.job.GetHottestJob的开始执行的监听工作，这里可以完成任务前的一些资源准备工作或日志记录
+在11:25:41扒取新闻
+在11:25:41根据文章的阅读量和评论量来生成我们的最热文章列表
+myJobListener触发对class tool.job.GetHottestJob结束执行的监听工作，这里可以进行资源销毁工作或做一些新闻扒取结果的统计工作
+myJobListener触发对class tool.job.PickNewsJob结束执行的监听工作，这里可以进行资源销毁工作或做一些新闻扒取结果的统计工作
+myJobListener触发对class tool.job.PickNewsJob的开始执行的监听工作，这里可以完成任务前的一些资源准备工作或日志记录
+在11:25:43扒取新闻
+myJobListener触发对class tool.job.PickNewsJob结束执行的监听工作，这里可以进行资源销毁工作或做一些新闻扒取结果的统计工作
+myJobListener触发对class tool.job.GetHottestJob的开始执行的监听工作，这里可以完成任务前的一些资源准备工作或日志记录
+在11:25:44根据文章的阅读量和评论量来生成我们的最热文章列表
+```
+myJobListener触发对class tool.job.GetHottestJob结束执行的监听工作，这里可以进行资源销毁工作或做一些新闻扒取结果的统计工作
+即我们的两个任务都被监听了
+
+##### 3. 2.x版本配置
+在2.+版本中，引入了**org.quartz.ListenerManager和org.quartz.Matcher
+**来对我们的监听器进行更细粒度的管理配置
+
+###### 1. ListenerManager
+我们通过ListenerManager向scheduler中添加我们的监听器。它针对JobDetail的常用方法有：
+1. public void addJobListener(JobListener jobListener)
+   添加全局监听器，即所有JobDetail都会被此监听器监听
+2. public void addJobListener(JobListener jobListener, Matcher matcher)
+   添加带条件匹配的监听器，在matcher中声明我们的匹配条件
+3. public void addJobListener(JobListener jobListener, Matcher … matchers)
+   添加附带不定参条件陪陪的监听器
+4. public boolean removeJobListener(String name)
+   根据名字移除JobListener
+5. public List getJobListeners()
+   获取所有的监听器
+6. public JobListener getJobListener(String name)
+   根据名字获取监听器
+
+###### 2. matcher
+我们通过matcher让不同的监听器监听不同的任务。它有很多实现类，先逐一分析如下：
+1. KeyMatcher<JobKey>
+   根据JobKey进行匹配，每个JobDetail都有一个对应的JobKey,里面存储了JobName和JobGroup来定位唯一的JobDetail。它的常用方法有：
+
+```
+   /************构造Matcher方法************/
+   KeyMatcher<JobKey> keyMatcher = KeyMatcher.keyEquals(pickNewsJob.getKey());//构造匹配pickNewsJob中的JobKey的keyMatcher。
+
+   /*********使用方法************/
+   scheduler.getListenerManager().addJobListener(myJobListener, keyMatcher);//通过这句完成我们监听器对pickNewsJob的唯一监听
+```
+2. GroupMatcher
+   根据组名信息匹配，它的常用方法有：
+```
+    GroupMatcher<JobKey> groupMatcher = GroupMatcher.jobGroupContains("group1");//包含特定字符串
+    GroupMatcher.groupEndsWith("oup1");//以特定字符串结尾
+    GroupMatcher.groupEquals("jgroup1");//以特定字符串完全匹配
+    GroupMatcher.groupStartsWith("jgou");//以特定字符串开头
+```
+3. AndMatcher
+   对两个匹配器取交集，实例如下：
+```
+    KeyMatcher<JobKey> keyMatcher = KeyMatcher.keyEquals(pickNewsJob.getKey());
+    GroupMatcher<JobKey> groupMatcher = GroupMatcher.jobGroupContains("group1");
+    AndMatcher<JobKey> andMatcher = AndMatcher.and(keyMatcher,groupMatcher);//同时满足两个入参匹配
+```
+4. OrMatcher
+   对两个匹配器取并集，实例如下：
+```
+    OrMatcher<JobKey> orMatcher = OrMatcher.or(keyMatcher, groupMatcher);//满足任意一个即可
+```
+
+5. EverythingMatcher
+   局部全局匹配，它有两个构造方法：
+```
+    EverythingMatcher.allJobs();//对全部JobListener匹配
+    EverythingMatcher.allTriggers();//对全部TriggerListener匹配
+```
+下面是我们的完整测试测序：
+
+```
+public static void main(String args[]) throws SchedulerException {
+    final JobDetail pickNewsJob = JobBuilder.newJob(PickNewsJob.class)
+            .withIdentity("job1", "jgroup1").build();
+    JobDetail getHottestJob = JobBuilder.newJob(GetHottestJob.class)
+            .withIdentity("job2", "jgroup2").build();
+    SimpleTrigger pickNewsTrigger = TriggerBuilder
+            .newTrigger()
+            .withIdentity("trigger1","tgroup1")
+            .withSchedule(SimpleScheduleBuilder.repeatSecondlyForTotalCount(2, 1)).startNow()
+            .build();
+    SimpleTrigger getHottestTrigger = TriggerBuilder
+            .newTrigger()
+            .withIdentity("trigger2","tgroup2")
+            .withSchedule(SimpleScheduleBuilder.repeatSecondlyForTotalCount(2, 2)).startNow()
+            .build();
+    Scheduler scheduler = new StdSchedulerFactory().getScheduler();
+    JobListener myJobListener = new MyJobListener();
+    KeyMatcher<JobKey> keyMatcher = KeyMatcher.keyEquals(pickNewsJob.getKey());
+    scheduler.getListenerManager().addJobListener(myJobListener, keyMatcher);
+    scheduler.scheduleJob(pickNewsJob, pickNewsTrigger);
+    scheduler.scheduleJob(getHottestJob,getHottestTrigger);
+    scheduler.start();
+}
+```
+运行程序，我们得到下列打印信息：
+```
+myJobListener触发对class tool.job.PickNewsJob的开始执行的监听工作，这里可以完成任务前的一些资源准备工作或日志记录
+根据文章的阅读量和评论量来生成我们的最热文章列表
+在12:48:58扒取新闻
+myJobListener触发对class tool.job.PickNewsJob结束执行的监听工作，这里可以进行资源销毁工作或做一些新闻扒取结果的统计工作
+myJobListener触发对class tool.job.PickNewsJob的开始执行的监听工作，这里可以完成任务前的一些资源准备工作或日志记录
+在12:48:59扒取新闻
+myJobListener触发对class tool.job.PickNewsJob结束执行的监听工作，这里可以进行资源销毁工作或做一些新闻扒取结果的统计工作
+根据文章的阅读量和评论量来生成我们的最热文章列表
+```
+显然，myJobListener只和我们的PickNewsJob匹配了。
+
+## TriggerListener分版本解析
+### TriggerListener
+在我们的触发器监听器中，也包含了一系列监听方法
+
+| 方法                 | 说明                                                                                                                             |
+|--------------------|--------------------------------------------------------------------------------------------------------------------------------|
+| getName()          | 定义并返回监听器的名字                                                                                                                    |
+| triggerFired()     | 当与监听器相关联的 Trigger 被触发，Job 上的 execute() 方法将要被执行时，Scheduler 就调用这个方法。在全局 TriggerListener情况下，这个方法为所有Trigger 被调用。                   |
+| vetoJobExecution() | 在 Trigger 触发后，Job 将要被执行时由 Scheduler 调用这个方法。TriggerListener 给了一个选择去否决 Job 的执行。假如这个方法返回 true，这个Job 将不会为此次 Trigger 触发而得到执行。       |
+| triggerMisfired()  | Scheduler 调用这个方法是在 Trigger 错过触发时。如这个方法的 JavaDoc 所指出的，你应该关注此方法中持续时间长的逻辑：在出现许多错过触发的 Trigger 时，长逻辑会导致骨牌效应。你应当保持这上方法尽量的小。          |
+| triggerComplete()  | Trigger 被触发并且完成了 Job 的执行时，Scheduler 调用这个方法。这不是说这个 Trigger 将不再触发了，而仅仅是当前 Trigger 的触发(并且紧接着的 Job执行) 结束时。这个 Trigger 也许还要在将来触发多次的。 |
+
+#### 1. 自定义监听器
+```java
+public class MyTriggerListener implements TriggerListener {
+
+    @Override
+    public String getName() {
+        return "myTriggerListener";
+    }
+
+    @Override
+    public void triggerFired(Trigger trigger, JobExecutionContext context) {
+        System.out.println(" Trigger 被触发了，此时Job 上的 execute() 方法将要被执行");
+    }
+
+    @Override
+    public boolean vetoJobExecution(Trigger trigger, JobExecutionContext context) {
+        System.out.println("发现此次Job的相关资源准备存在问题，不便展开任务，返回true表示否决此次任务执行");
+        return true;
+    }
+
+    @Override
+    public void triggerMisfired(Trigger trigger) {
+        System.out.println( "当前Trigger触发错过了");
+    }
+
+    @Override//1.+版本
+    public void triggerComplete(Trigger trigger, JobExecutionContext context,
+            int triggerInstructionCode) {
+        System.out.println("Trigger 被触发并且完成了 Job 的执行,此方法被调用");
+    }
+    /*
+    @Override//这是2.+版本的配置，差别在于将triggerInstructionCode从整型改成了枚举类型
+    public void triggerComplete(Trigger trigger, JobExecutionContext context,
+            CompletedExecutionInstruction triggerInstructionCode) {
+        System.out.println("Trigger 被触发并且完成了 Job 的执行,此方法被调用");
+    }
+    */
+}
+```
+使用TriggerListener和JobListener的方法大同小异，思路都是一样的。
+
+#### 2. 1.x版本
+下面是我们的完整测试代码：
+```
+public static void main(String args[]) throws SchedulerException {
+    JobDetail pickNewsJob =new JobDetail("job1", "jgroup1", PickNewsJob.class); 
+    JobDetail getHottestJob =new JobDetail("job2", "jgroup2", GetHottestJob.class);
+    SimpleTrigger pickNewsTrigger = new SimpleTrigger("trigger1", "group1",1,2000);
+    SimpleTrigger getHottestTrigger = new SimpleTrigger("trigger2", "group2",1,3000);
+
+    SchedulerFactory schedulerFactory = new StdSchedulerFactory();
+    Scheduler scheduler = schedulerFactory.getScheduler();
+    JobListener myJobListener = new MyJobListener();
+    /**********局部Job监听器配置**********/
+        pickNewsJob.addJobListener("myJobListener");//这里的名字和myJobListener中getName()方法的名字一样
+    scheduler.addJobListener(myJobListener);//向scheduler注册我们的监听器
+    /*********全局Job监听器配置************/
+//      scheduler.addGlobalJobListener(myJobListener);//直接添加为全局监听器
+
+    TriggerListener myTriggerListener = new MyTriggerListener();
+    /**********局部Trigger监听器配置**********/
+    pickNewsTrigger.addTriggerListener("myTriggerListener");
+    scheduler.addTriggerListener(myTriggerListener);
+    /*********全局Trigger监听器配置************/
+//      scheduler.addGlobalTriggerListener(myTriggerListener);//直接添加为全局监听器
+
+    scheduler.scheduleJob(pickNewsJob,pickNewsTrigger);
+    scheduler.scheduleJob(getHottestJob,getHottestTrigger);
+
+    scheduler.start();
+
+}
+```
+
+运行程序，我们会看到：
+```
+Trigger 被触发了，此时Job 上的 execute() 方法将要被执行
+发现此次Job的相关资源准备存在问题，不便展开任务，返回true表示否决此次任务执行——————我们的Trigger监听器要否决我们的任务，触发了相应的监听方法，同时后续的complete监听方法自然不会再被执行
+被否决执行了，可以做些日志记录。——————我们的pickNewsJob被否决了，触发了相应的监听方法
+在13:15:39根据文章的阅读量和评论量来生成我们的最热文章列表
+Trigger 被触发了，此时Job 上的 execute() 方法将要被执行
+发现此次Job的相关资源准备存在问题，不便展开任务，返回true表示否决此次任务执行
+被否决执行了，可以做些日志记录。
+```
+
+如果我们将TriggerListener中的vetoJobExecution()方法改成如下所示：
+```
+@Override
+public boolean vetoJobExecution(Trigger trigger, JobExecutionContext context) {
+//      System.out.println("发现此次Job的相关资源准备存在问题，不便展开任务，返回true表示否决此次任务执行");
+//      return true;
+    System.out.println("不否决Job,正常执行");
+    return false;
+}
+```
+
+再运行我们的测试程序，会打印：
+```
+Trigger 被触发了，此时Job 上的 execute() 方法将要被执行
+不否决Job,正常执行
+myJobListener触发对class tool.job.PickNewsJob的开始执行的监听工作，这里可以完成任务前的一些资源准备工作或日志记录
+在13:20:20扒取新闻
+在13:20:20根据文章的阅读量和评论量来生成我们的最热文章列表
+myJobListener触发对class tool.job.PickNewsJob结束执行的监听工作，这里可以进行资源销毁工作或做一些新闻扒取结果的统计工作
+Trigger 被触发并且完成了 Job 的执行,此方法被调用
+Trigger 被触发了，此时Job 上的 execute() 方法将要被执行
+不否决Job,正常执行
+myJobListener触发对class tool.job.PickNewsJob的开始执行的监听工作，这里可以完成任务前的一些资源准备工作或日志记录
+在13:20:22扒取新闻
+myJobListener触发对class tool.job.PickNewsJob结束执行的监听工作，这里可以进行资源销毁工作或做一些新闻扒取结果的统计工作
+Trigger 被触发并且完成了 Job 的执行,此方法被调用
+在13:20:23根据文章的阅读量和评论量来生成我们的最热文章列表
+```
+我们的Job不被否决，同时有后续的Job成功执行的监听方法调用
+
+#### 3. 2.x版本
+我们可以调用如下所示测试代码：
+```
+public static void main(String args[]) throws SchedulerException {
+    final JobDetail pickNewsJob = JobBuilder.newJob(PickNewsJob.class)
+            .withIdentity("job1", "jgroup1").build();
+    JobDetail getHottestJob = JobBuilder.newJob(GetHottestJob.class)
+            .withIdentity("job2", "jgroup2").build();
+
+    SimpleTrigger pickNewsTrigger = TriggerBuilder
+            .newTrigger()
+            .withIdentity("trigger1","tgroup1")
+            .withSchedule(SimpleScheduleBuilder.repeatSecondlyForTotalCount(2, 1)).startNow()
+            .build();
+    SimpleTrigger getHottestTrigger = TriggerBuilder
+            .newTrigger()
+            .withIdentity("trigger2","tgroup2")
+            .withSchedule(SimpleScheduleBuilder.repeatSecondlyForTotalCount(2, 2)).startNow()
+            .build();
+
+    Scheduler scheduler = new StdSchedulerFactory().getScheduler();
+    JobListener myJobListener = new MyJobListener();
+    KeyMatcher<JobKey> keyMatcher = KeyMatcher.keyEquals(pickNewsJob.getKey());
+    scheduler.getListenerManager().addJobListener(myJobListener, keyMatcher);
+    /********下面是新加部分***********/
+    TriggerListener myTriggerListener = new MyTriggerListener();
+    KeyMatcher<TriggerKey> tkeyMatcher = KeyMatcher.keyEquals(pickNewsTrigger.getKey());
+    scheduler.getListenerManager().addTriggerListener(myTriggerListener, tkeyMatcher);
+
+    scheduler.scheduleJob(pickNewsJob, pickNewsTrigger);
+    scheduler.scheduleJob(getHottestJob,getHottestTrigger);
+    scheduler.start();
+}
+```
+调用此方法，我们和得到和1.+版本中类似的结果：
+```
+Trigger 被触发了，此时Job 上的 execute() 方法将要被执行
+发现此次Job的相关资源准备存在问题，不便展开任务，返回true表示否决此次任务执行
+被否决执行了，可以做些日志记录。
+根据文章的阅读量和评论量来生成我们的最热文章列表
+Trigger 被触发了，此时Job 上的 execute() 方法将要被执行
+发现此次Job的相关资源准备存在问题，不便展开任务，返回true表示否决此次任务执行
+被否决执行了，可以做些日志记录。
+根据文章的阅读量和评论量来生成我们的最热文章列表
+```
+
+## SchedulerListener分版本解析
+### SchedulerListener
+在我们的监听器实现类中，这个类中需实现的方法很多，不需要的可以给出空实现，下面是一些常用的用法：
+
+| 方法                  | 说明                                                                                                                                                                                                                      |
+|---------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| jobScheduled()      | Scheduler 在有新的 JobDetail 部署时调用此方法。                                                                                                                                                                                      |
+| jobUnscheduled()    | Scheduler 在有新的 JobDetail卸载时调用此方法                                                             <br/>    <br/>                                                                                                             |
+| triggerFinalized()  | 当一个 Trigger 来到了再也不会触发的状态时调用这个方法。除非这个 Job 已设置成了持久性，否则它就会从 Scheduler 中移除。                      <br/><br/>                                                                                                                 |
+| triggersPaused()    | Scheduler 调用这个方法是发生在一个 Trigger 或 Trigger 组被暂停时。假如是 Trigger 组的话，triggerName 参数将为 null。        <br/>    <br/>                                                                                                             |
+| triggersResumed()   | Scheduler 调用这个方法是发生成一个 Trigger 或 Trigger 组从暂停中恢复时。假如是 Trigger 组的话，triggerName 参数将为 null。     <br/><br/>                                                                                                                 |
+| jobsPaused()        | 当一个或一组 JobDetail 暂停时调用这个方法。                                                                      <br/>    <br/>                                                                                                         |
+| jobsResumed()       | 当一个或一组 Job 从暂停上恢复时调用这个方法。假如是一个 Job 组，jobName 参数将为 null。                                          <br/><br/>                                                                                                             |
+| schedulerError()    | Scheduler 的正常运行期间产生一个严重错误时调用这个方法。错误的类型会各式的，但是下面列举了一些错误例子：初始化 Job 类的问题,试图去找到下一 Trigger 的问题,<br/><br/>JobStore 中重复的问题,数据存储连接的问题。我们可以使用 SchedulerException 的 getErrorCode() 或者 getUnderlyingException() 方法或获取到特定错误的更详尽的信息。 |
+| schedulerShutdown() | Scheduler 调用这个方法用来通知 SchedulerListener Scheduler 将要被关闭。                                      <br/><br/>                                                                                                                 |
+
+#### 1.x 版本配置
+下面是一个1.+版本实例配置：
+```java
+package tool.job;
+
+import org.quartz.JobDetail;
+import org.quartz.SchedulerException;
+import org.quartz.SchedulerListener;
+import org.quartz.Trigger;
+
+public class MySchedulerListener implements SchedulerListener {
+
+    @Override
+    public void jobScheduled(Trigger trigger) {
+        System.out.println("任务被部署时被执行");
+    }
+
+
+    @Override
+    public void triggerFinalized(Trigger trigger) {
+        System.out.println("任务完成了它的使命，光荣退休时被执行");
+    }
+
+    @Override
+    public void jobAdded(JobDetail jobDetail) {
+        System.out.println("一个新的任务被动态添加时执行");
+    }
+
+
+
+    @Override
+    public void jobUnscheduled(String triggerName, String triggerGroup) {
+        System.out.println("任务被卸载时被执行");
+
+    }
+
+    @Override
+    public void triggersPaused(String triggerName, String triggerGroup) {
+        System.out.println(triggerGroup + "所在组的全部触发器被停止时被执行");
+    }
+
+    @Override
+    public void triggersResumed(String triggerName, String triggerGroup) {
+        System.out.println(triggerGroup + "所在组的全部触发器被回复时被执行");
+    }
+
+    @Override
+    public void jobDeleted(String jobName, String groupName) {
+        System.out.println(groupName + "." + jobName + "被删除时被执行");
+    }
+
+    @Override
+    public void jobsPaused(String jobName, String jobGroup) {
+        System.out.println(jobGroup + "(一组任务）被暂停时被执行");
+    }
+
+    @Override
+    public void jobsResumed(String jobName, String jobGroup) {
+        System.out.println(jobGroup + "(一组任务）被回复时被执行");
+    }
+    @Override
+    public void schedulerError(String msg, SchedulerException cause) {
+        System.out.println("出现异常" + msg + "时被执行");
+        cause.printStackTrace();
+    }
+
+    @Override
+    public void schedulerInStandbyMode() {
+        System.out.println("scheduler被设为standBy等候模式时被执行");
+
+    }
+
+    @Override
+    public void schedulerStarted() {
+        System.out.println("scheduler启动时被执行");
+
+    }
+
+    @Override
+    public void schedulerShutdown() {
+        System.out.println("scheduler关闭时被执行");
+    }
+
+    @Override
+    public void schedulerShuttingdown() {
+        System.out.println("scheduler正在关闭时被执行");
+    }
+}
+```
+下面是我们的测试方法
+```
+public static void main(String args[]) throws SchedulerException {
+    JobDetail pickNewsJob =new JobDetail("job1", "jgroup1", PickNewsJob.class); 
+    JobDetail getHottestJob =new JobDetail("job2", "jgroup2", GetHottestJob.class);
+    SimpleTrigger pickNewsTrigger = new SimpleTrigger("trigger1", "group1",1,2000);
+    SimpleTrigger getHottestTrigger = new SimpleTrigger("trigger2", "group2",1,3000);
+
+    SchedulerFactory schedulerFactory = new StdSchedulerFactory();
+    Scheduler scheduler = schedulerFactory.getScheduler();
+    JobListener myJobListener = new MyJobListener();
+    /**********局部Job监听器配置**********/
+    pickNewsJob.addJobListener("myJobListener");//这里的名字和myJobListener中getName()方法的名字一样
+    scheduler.addJobListener(myJobListener);//向scheduler注册我们的监听器
+    /*********全局Job监听器配置************/
+//      scheduler.addGlobalJobListener(myJobListener);//直接添加为全局监听器
+
+    TriggerListener myTriggerListener = new MyTriggerListener();
+    /**********局部Trigger监听器配置**********/
+    pickNewsTrigger.addTriggerListener("myTriggerListener");
+    scheduler.addTriggerListener(myTriggerListener);
+    /*********全局Trigger监听器配置************/
+//      scheduler.addGlobalTriggerListener(myTriggerListener);//直接添加为全局监听器
+    /************SchedulerListener配置*************/
+    SchedulerListener mySchedulerListener = new MySchedulerListener();
+    scheduler.addSchedulerListener(mySchedulerListener);
+
+    scheduler.scheduleJob(pickNewsJob,pickNewsTrigger);
+    scheduler.scheduleJob(getHottestJob,getHottestTrigger);
+
+    scheduler.start();
+
+}
+```
+运行方法，我们会看到：
+```
+一个新的任务被动态添加时执行————SchedulerListener中的方法被调用
+任务被部署时被执行————SchedulerListener中的方法被调用
+一个新的任务被动态添加时执行————SchedulerListener中的方法被调用
+任务被部署时被执行————SchedulerListener中的方法被调用
+scheduler启动时被执行————SchedulerListener中的方法被调用
+Trigger 被触发了，此时Job 上的 execute() 方法将要被执行
+不否决Job,正常执行
+myJobListener触发对class tool.job.PickNewsJob的开始执行的监听工作，这里可以完成任务前的一些资源准备工作或日志记录
+在13:53:18扒取新闻
+在13:53:18根据文章的阅读量和评论量来生成我们的最热文章列表
+myJobListener触发对class tool.job.PickNewsJob结束执行的监听工作，这里可以进行资源销毁工作或做一些新闻扒取结果的统计工作
+Trigger 被触发并且完成了 Job 的执行,此方法被调用
+Trigger 被触发了，此时Job 上的 execute() 方法将要被执行
+不否决Job,正常执行
+myJobListener触发对class tool.job.PickNewsJob的开始执行的监听工作，这里可以完成任务前的一些资源准备工作或日志记录
+在13:53:20扒取新闻
+myJobListener触发对class tool.job.PickNewsJob结束执行的监听工作，这里可以进行资源销毁工作或做一些新闻扒取结果的统计工作
+Trigger 被触发并且完成了 Job 的执行,此方法被调用
+任务完成了它的使命，光荣退休时被执行————SchedulerListener中的方法被调用
+在13:53:21根据文章的阅读量和评论量来生成我们的最热文章列表
+任务完成了它的使命，光荣退休时被执行————SchedulerListener中的方法被调用
+```
+
+#### 2.x 版本配置
+下面是配置实例：
+```java
+package tool.job;
+
+import org.quartz.JobDetail;
+import org.quartz.JobKey;
+import org.quartz.SchedulerException;
+import org.quartz.SchedulerListener;
+import org.quartz.Trigger;
+import org.quartz.TriggerKey;
+
+public class MySchedulerListener implements SchedulerListener {
+
+    @Override
+    public void jobScheduled(Trigger trigger) {
+        System.out.println("任务被部署时被执行");
+    }
+
+    @Override
+    public void jobUnscheduled(TriggerKey triggerKey) {
+        System.out.println("任务被卸载时被执行");
+    }
+
+    @Override
+    public void triggerFinalized(Trigger trigger) {
+        System.out.println("任务完成了它的使命，光荣退休时被执行");
+    }
+
+    @Override
+    public void triggerPaused(TriggerKey triggerKey) {
+        System.out.println(triggerKey + "（一个触发器）被暂停时被执行");
+    }
+
+    @Override
+    public void triggersPaused(String triggerGroup) {
+        System.out.println(triggerGroup + "所在组的全部触发器被停止时被执行");
+    }
+
+    @Override
+    public void triggerResumed(TriggerKey triggerKey) {
+        System.out.println(triggerKey + "（一个触发器）被恢复时被执行");
+    }
+
+    @Override
+    public void triggersResumed(String triggerGroup) {
+        System.out.println(triggerGroup + "所在组的全部触发器被回复时被执行");
+    }
+
+    @Override
+    public void jobAdded(JobDetail jobDetail) {
+        System.out.println("一个JobDetail被动态添加进来");
+    }
+
+    @Override
+    public void jobDeleted(JobKey jobKey) {
+        System.out.println(jobKey + "被删除时被执行");
+    }
+
+    @Override
+    public void jobPaused(JobKey jobKey) {
+        System.out.println(jobKey + "被暂停时被执行");
+
+    }
+
+    @Override
+    public void jobsPaused(String jobGroup) {
+        System.out.println(jobGroup + "(一组任务）被暂停时被执行");
+    }
+
+    @Override
+    public void jobResumed(JobKey jobKey) {
+        System.out.println(jobKey + "被恢复时被执行");
+    }
+
+    @Override
+    public void jobsResumed(String jobGroup) {
+        System.out.println(jobGroup + "(一组任务）被回复时被执行");
+    }
+
+    @Override
+    public void schedulerError(String msg, SchedulerException cause) {
+        System.out.println("出现异常" + msg + "时被执行");
+        cause.printStackTrace();
+    }
+
+    @Override
+    public void schedulerInStandbyMode() {
+        System.out.println("scheduler被设为standBy等候模式时被执行");
+
+    }
+
+    @Override
+    public void schedulerStarted() {
+        System.out.println("scheduler启动时被执行");
+
+    }
+
+    @Override
+    public void schedulerStarting() {
+        System.out.println("scheduler正在启动时被执行");
+
+    }
+
+    @Override
+    public void schedulerShutdown() {
+        System.out.println("scheduler关闭时被执行");
+    }
+
+    @Override
+    public void schedulerShuttingdown() {
+        System.out.println("scheduler正在关闭时被执行");
+
+    }
+
+    @Override
+    public void schedulingDataCleared() {
+        System.out.println("scheduler中所有数据包括jobs, triggers和calendars都被清空时被执行");
+    }
+
+}
+```
+在2.+版本中，我们通过以下方式注册我们的监听器:
+```
+    SchedulerListener mySchedulerListener = new MySchedulerListener();
+    scheduler.getListenerManager().addSchedulerListener(mySchedulerListener);
+```
