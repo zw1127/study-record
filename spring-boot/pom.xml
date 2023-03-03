@@ -70,6 +70,7 @@
         <module>spring-boot-schedule</module>
         <module>spring-boot-web</module>
         <module>spring-boot-ldap</module>
+        <module>spring-boot-elasticjob</module>
     </modules>
 
 </project>

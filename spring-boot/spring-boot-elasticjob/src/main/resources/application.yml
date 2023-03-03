@@ -1,0 +1,13 @@
+server:
+  port: 8443
+  ssl:
+    protocol: TLS
+    key-store-type: JKS
+    key-store: classpath:server.keystore
+    key-store-password: admin@12
+
+spring:
+  security:
+    user:
+      name: root
+      password: root

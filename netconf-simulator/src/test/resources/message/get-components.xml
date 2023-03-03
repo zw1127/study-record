@@ -1,0 +1,11 @@
+<rpc message-id="m-38604" xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+    <get>
+        <filter xmlns:ns0="urn:ietf:params:xml:ns:netconf:base:1.0" ns0:type="subtree">
+            <components xmlns="http://openconfig.net/yang/platform">
+                <component>
+                    <name>OCH-1-5-L1</name>
+                </component>
+            </components>
+        </filter>
+    </get>
+</rpc>
