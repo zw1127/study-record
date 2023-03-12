@@ -16,3 +16,11 @@ spring:
 #    restart:
 #      log-condition-evaluation-delta: false
 #      trigger-file: ".reloadtrigger"
+knife4j:
+  # 开启增强
+  enable: true
+  # 开启登录认证
+  basic:
+    enable: true
+    username: test
+    password: test
