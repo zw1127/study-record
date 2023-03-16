@@ -61,8 +61,6 @@ public class NetconfMessageSenderTest {
 
         String host = "10.190.23.232";
         int port = 851;
-//        String userName = "fiberhome";
-//        String pw = "fiberhome";
         String userName = "BaiduOLS";
         String pw = "Baidu_ott@123";
         AuthenticationHandler authHandler = new LoginPasswordHandler(userName, pw);

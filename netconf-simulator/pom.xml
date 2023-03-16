@@ -17,6 +17,22 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>io.lighty.core</groupId>
+                <artifactId>lighty-bom</artifactId>
+                <version>16.3.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>io.lighty.core</groupId>
+                <artifactId>dependency-versions</artifactId>
+                <version>16.3.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>2.7.5</version>
@@ -25,6 +41,13 @@
             </dependency>
 
             <dependency>
+                <groupId>org.eclipse.jdt</groupId>
+                <artifactId>org.eclipse.jdt.annotation</artifactId>
+                <version>2.2.600</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!--<dependency>
                 <groupId>org.opendaylight.netconf</groupId>
                 <artifactId>netconf-artifacts</artifactId>
                 <version>5.0.1</version>
@@ -38,7 +61,7 @@
                 <version>10.0.2</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
+            </dependency>-->
         </dependencies>
     </dependencyManagement>
 
@@ -55,14 +78,24 @@
         </dependency>
 
         <dependency>
+            <groupId>org.eclipse.jdt</groupId>
+            <artifactId>org.eclipse.jdt.annotation</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
 
         <dependency>
-            <groupId>org.opendaylight.netconf</groupId>
-            <artifactId>netconf-api</artifactId>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.lighty.core</groupId>
+            <artifactId>lighty-codecs-util</artifactId>
         </dependency>
 
         <dependency>
@@ -72,7 +105,18 @@
 
         <dependency>
             <groupId>org.opendaylight.netconf</groupId>
-            <artifactId>sal-netconf-connector</artifactId>
+            <artifactId>mdsal-netconf-ssh</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.opendaylight.yangtools</groupId>
+            <artifactId>yang-data-impl</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.opendaylight.yangtools</groupId>
+            <artifactId>yang-test-util</artifactId>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>
@@ -85,11 +129,7 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <scope>test</scope>
-        </dependency>
+
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
