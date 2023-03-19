@@ -1,15 +1,20 @@
 package cn.simulator.netconf.service;
 
+import java.io.File;
+import java.util.Set;
 import javax.xml.transform.dom.DOMResult;
 import org.opendaylight.netconf.api.DocumentedException;
+import org.opendaylight.netconf.api.capability.Capability;
 import org.opendaylight.netconf.api.xml.XmlElement;
 import org.opendaylight.yangtools.yang.common.QName;
 import org.opendaylight.yangtools.yang.common.QNameModule;
 import org.opendaylight.yangtools.yang.data.api.YangInstanceIdentifier.PathArgument;
 import org.opendaylight.yangtools.yang.data.api.schema.NormalizedNode;
 import org.opendaylight.yangtools.yang.data.api.schema.stream.NormalizedNodeStreamWriter;
-import org.opendaylight.yangtools.yang.model.api.DataSchemaNode;
+import org.opendaylight.yangtools.yang.model.api.EffectiveModelContext;
 import org.opendaylight.yangtools.yang.model.api.SchemaTreeInference;
+import org.opendaylight.yangtools.yang.model.repo.api.YangTextSchemaSource;
+import org.opendaylight.yangtools.yang.model.repo.spi.SchemaSourceProvider;
 
 public interface SchemaContextService {
 
@@ -44,4 +49,12 @@ public interface SchemaContextService {
     NormalizedNode parseToNormalizedNode(XmlElement element) throws DocumentedException;
 
     DOMResult writeNormalizedNode(NormalizedNode normalized, PathArgument pathArgument);
+
+    EffectiveModelContext getSchemaContext();
+
+    SchemaSourceProvider<YangTextSchemaSource> getSourceProvider();
+
+    Set<Capability> supportedCapabilities();
+
+    File schemaDirectory();
 }

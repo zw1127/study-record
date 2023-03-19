@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fiberhome.netconf.simulator.manager.datastore.mapper.SimulatorConfigMapper">
+    <resultMap id="BaseResultMap" type="com.fiberhome.netconf.simulator.manager.datastore.entity.SimulatorConfig">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="device_id" jdbcType="VARCHAR" property="deviceId"/>
+        <result column="node_name" jdbcType="VARCHAR" property="nodeName"/>
+        <result column="node_value" jdbcType="CLOB" typeHandler="org.apache.ibatis.type.ClobTypeHandler"
+                property="nodeValue"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, device_id, node_name, node_value
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from simulator.simulator_config
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByDeviceId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from simulator.simulator_config
+        where device_id = #{deviceId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByKey"
+            parameterType="com.fiberhome.netconf.simulator.manager.datastore.entity.SimulatorConfigKey"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from simulator.simulator_config
+        where device_id = #{deviceId,jdbcType=VARCHAR}
+        and node_name = #{nodeName,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select id, device_id, node_name
+        from simulator.simulator_config
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete
+        from simulator.simulator_config
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <select id="deleteByKey"
+            parameterType="com.fiberhome.netconf.simulator.manager.datastore.entity.SimulatorConfigKey">
+        delete
+        from simulator.simulator_config
+        where device_id = #{deviceId,jdbcType=VARCHAR}
+          and node_name = #{nodeName,jdbcType=VARCHAR}
+    </select>
+
+    <select id="deleteByDeviceId" parameterType="java.lang.String">
+        delete
+        from simulator.simulator_config
+        where device_id = #{deviceId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteAll">
+        delete
+        from simulator.simulator_config
+    </delete>
+
+    <insert id="insert" parameterType="com.fiberhome.netconf.simulator.manager.datastore.entity.SimulatorConfig">
+        insert into simulator.simulator_config (device_id, node_name, node_value)
+        values (#{deviceId,jdbcType=VARCHAR}, #{nodeName,jdbcType=VARCHAR}, #{nodeValue,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        insert into simulator.simulator_config (device_id, node_name, node_value)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            #{item.deviceId,jdbcType=VARCHAR},
+            #{item.nodeName,jdbcType=VARCHAR},
+            #{item.nodeValue,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+
+    <update id="updateByPrimaryKey"
+            parameterType="com.fiberhome.netconf.simulator.manager.datastore.entity.SimulatorConfig">
+        update simulator.simulator_config
+        set device_id  = #{deviceId,jdbcType=VARCHAR},
+            node_name  = #{nodeName,jdbcType=VARCHAR},
+            node_value = #{nodeValue,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateValueByPrimaryKey"
+            parameterType="com.fiberhome.netconf.simulator.manager.datastore.entity.SimulatorConfig">
+        update simulator.simulator_config
+        set node_value = #{nodeValue,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateValueByKey"
+            parameterType="com.fiberhome.netconf.simulator.manager.datastore.entity.SimulatorConfig">
+        update simulator.simulator_config
+        set node_value = #{nodeValue,jdbcType=VARCHAR}
+        where device_id = #{deviceId,jdbcType=VARCHAR}
+          and node_name = #{nodeName,jdbcType=VARCHAR}
+    </update>
+</mapper>

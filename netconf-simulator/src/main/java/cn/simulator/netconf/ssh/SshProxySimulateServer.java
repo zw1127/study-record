@@ -6,9 +6,12 @@ import com.google.common.collect.ImmutableList;
 import io.netty.channel.EventLoopGroup;
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.SocketAddress;
 import java.nio.channels.AsynchronousChannelGroup;
 import java.time.Duration;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -24,6 +27,7 @@ import org.opendaylight.netconf.shaded.sshd.common.io.IoHandler;
 import org.opendaylight.netconf.shaded.sshd.common.io.IoServiceEventListener;
 import org.opendaylight.netconf.shaded.sshd.common.io.IoServiceFactory;
 import org.opendaylight.netconf.shaded.sshd.common.io.IoServiceFactoryFactory;
+import org.opendaylight.netconf.shaded.sshd.common.io.IoSession;
 import org.opendaylight.netconf.shaded.sshd.common.io.nio2.Nio2Acceptor;
 import org.opendaylight.netconf.shaded.sshd.common.io.nio2.Nio2Connector;
 import org.opendaylight.netconf.shaded.sshd.common.io.nio2.Nio2ServiceFactoryFactory;
@@ -44,6 +48,8 @@ import org.slf4j.LoggerFactory;
 public class SshProxySimulateServer implements AutoCloseable {
 
     private static final Logger LOG = LoggerFactory.getLogger(SshProxySimulateServer.class);
+
+    private final Map<InetSocketAddress, IoConnectFuture> callhomeServerMap = new ConcurrentHashMap<>();
     private final SshServer sshServer;
     private final ScheduledExecutorService minaTimerExecutor;
     private final EventLoopGroup clientGroup;
@@ -114,7 +120,24 @@ public class SshProxySimulateServer implements AutoCloseable {
         this.connector = sshServer.getIoServiceFactory().createConnector(sshServer.getSessionFactory());
     }
 
-    public IoConnectFuture connect(final InetSocketAddress address) throws IOException {
+    public IoConnectFuture connect(final InetSocketAddress address) {
+        IoConnectFuture connectFuture = reconnect(address);
+
+        callhomeServerMap.put(address, connectFuture);
+        return connectFuture;
+    }
+
+    public void disconnect(final InetSocketAddress address) {
+        IoConnectFuture connectFuture = callhomeServerMap.remove(address);
+        if (connectFuture != null) {
+            IoSession session = connectFuture.getSession();
+            if (session != null) {
+                session.close(true);
+            }
+        }
+    }
+
+    private IoConnectFuture reconnect(final InetSocketAddress address) {
         return requireNonNull(connector).connect(address, null, null);
     }
 
@@ -133,13 +156,26 @@ public class SshProxySimulateServer implements AutoCloseable {
             @Override
             public void sessionClosed(final Session session) {
                 LOG.info("SSH Session {} closed", session);
+                SocketAddress remoteAddress = session.getRemoteAddress();
+                if (remoteAddress instanceof InetSocketAddress) {
+                    InetSocketAddress callhomeServerAddress = (InetSocketAddress) remoteAddress;
+                    if (callhomeServerMap.containsKey(callhomeServerAddress)) {
+                        LOG.info("sleep 10 seconds, reconnect");
+                        minaTimerExecutor.schedule(() -> reconnect(callhomeServerAddress), 10, TimeUnit.SECONDS);
+                    }
+                }
             }
 
         };
     }
 
+
     @Override
     public void close() throws IOException {
+        if (connector != null) {
+            connector.close();
+        }
+
         try {
             sshServer.stop(true);
         } finally {

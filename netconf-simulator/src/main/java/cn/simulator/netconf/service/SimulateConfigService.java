@@ -1,18 +1,15 @@
 package cn.simulator.netconf.service;
 
-import org.opendaylight.netconf.api.NetconfServerDispatcher;
+import cn.simulator.netconf.domain.DeviceUniqueInfo;
 
 public interface SimulateConfigService {
 
     /**
      * 生成指定唯一标识和ManageIP的初始化xml.
      *
-     * @param uniqueSign 唯一标识
-     * @param manageIp   管理IP
+     * @param uniqueInfo 模拟器唯一信息对象
      * @return 设备初始化xml
      */
-    String initialConfigXml(String uniqueSign, String manageIp);
-
-    NetconfServerDispatcher getDispatcher();
+    String initialConfigXml(DeviceUniqueInfo uniqueInfo);
 
 }
