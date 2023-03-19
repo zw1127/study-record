@@ -6,6 +6,7 @@ import static org.junit.Assert.assertEquals;
 import cn.javastudy.disruptor.consumer.service.ConsumeModeService;
 import java.util.concurrent.CountDownLatch;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+@Ignore
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Slf4j

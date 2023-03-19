@@ -1,0 +1,234 @@
+module openconfig-rpc {
+
+  yang-version "1";
+
+    // namespace
+  namespace "http://openconfig.net/yang/rpc";
+
+  prefix "oc-rpc";
+
+  // import 
+  import openconfig-types { prefix oc-types; }
+  import openconfig-yang-types { prefix oc-yang; }
+  import openconfig-platform { prefix oc-platform; }
+  import openconfig-extensions { prefix oc-ext; }
+  import openconfig-transport-types { prefix oc-opt-types; }
+  import ietf-yang-types { prefix yang; }
+
+
+  // meta
+  organization "private";
+
+  description
+    "This YANG module contains all RPCs for OLS systems.
+       This module includes all RPCs usable by NETCONF.";
+  
+  oc-ext:openconfig-version "1.7.2";
+
+  revision "2020-06-30" {     
+    description
+      "Initial release version";
+    reference "0.1.0";
+  }
+
+  // typedef statements 
+
+  typedef rpc-result {
+    type enumeration {
+      enum SUCCESS {
+        description
+        "The RPC action is success";
+      }
+      enum FAIL {
+        description
+        "The RPC action is fail";
+      }     
+    }    
+  }
+
+  typedef pm-point-type {
+    type enumeration {
+      enum ALL {
+        description
+        "ALL pm point type";
+      } 
+    }
+  }
+    
+  typedef pm-point {
+    type enumeration {
+      enum ALL {
+        description
+        "ALL pm point";
+      }
+    }
+  }
+  // grouping statements 
+
+  
+
+  // rpc statements
+
+  rpc reboot {
+    description 
+       "Reboot the specific component, i.e. card, transceiver";
+      input {
+        leaf component-name {
+          type leafref {
+            path "/oc-platform:components/oc-platform:component/" +
+             "oc-platform:name";
+          }
+          description
+             "target reboot components";
+        }       
+
+        leaf reboot-type {
+          type enumeration {
+            enum warm { 
+              description "warm reboot";
+            }
+            enum cold { 
+              description "cold reboot";
+            }
+          }
+          description 
+            "Reboot type";
+        }
+      }
+      output {
+        leaf reboot-result {
+          type rpc-result;
+          description 
+            "Result of the reboot operation";
+        }
+      }
+  }
+
+   
+  //rpc switch olp
+  rpc switch-olp {
+    description 
+       "Manual switch the aps to the desired port";
+      input {
+        
+        leaf name {
+          type leafref  {
+            path "/oc-platform:components/oc-platform:component/" +
+             "oc-platform:name";
+          }
+          description
+             "target aps name";
+        }  
+      
+        leaf switch-to-port {
+          type enumeration {
+            enum PRIMARY {
+              description
+                "manual switch the OLP to the primary line port";
+            }
+            enum SECONDARY {
+              description
+                "manual switch the OLP to the secondary line port";
+            }
+          }
+          description
+            "manual set the optical switch to a port";
+        }
+      }
+
+      output {
+        leaf switch-olp-result {
+          type rpc-result;
+          description 
+            "Result of the switch olp operation";
+        }
+      }
+  }
+  
+
+    // rpc set-datetime
+  rpc set-datetime {
+    description 
+       "Set equipments' datetime.";
+      input {
+        leaf datetime {
+          type yang:date-and-time;
+          description
+             "Target datetime to be set";
+        }       
+      }
+      output {
+        leaf set-datetime-result {
+          type rpc-result;
+          description 
+            "Result of the set operation";
+        }
+      }
+  }
+  
+  //rpc get oduk delay
+  rpc get-oduk-delay {
+    description 
+       "Get delay of ODUk.";
+      input {
+        leaf index {
+          type uint32;
+          description
+             "The index of logical channel(ODU)";
+        }  
+
+		leaf delay-test-times {
+          type uint32;
+		  default 10;
+          description
+             "Measurement repeated times.";
+        }  
+
+        	
+      }
+      output {
+        leaf get-delay-result {
+          type rpc-result;
+          description 
+            "Result of the set operation";
+        }
+		
+		container delay-data-value {
+          uses oc-opt-types:avg-min-max-instant-stats-precision2-ns;
+          description
+             "Test results of ODUk delay measurement";
+        }  	
+      }
+  }
+ 
+   // rpc reset-counter
+  rpc reset-counter {
+    description 
+       "reset pm counter.";
+      input {
+        leaf pm-point {
+          type pm-point;
+          description
+             "pm point ";
+        }
+        leaf pm-point-type {
+          type pm-point-type;
+          description
+             "pm point type";
+        }
+      }
+      output {
+        leaf result {
+          type rpc-result;
+          description 
+            "Result of the reset counter";
+        }
+      }
+  }
+  // notification statements
+
+
+
+}
+
+

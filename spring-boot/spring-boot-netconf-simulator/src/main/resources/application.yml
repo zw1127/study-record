@@ -1,0 +1,28 @@
+server:
+  port: 8088
+logging:
+  level:
+    org.opendaylight.netconf.shaded: info
+    cn.javastudy.springboot.simulator.netconf: debug
+    org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping: DEBUG
+
+spring:
+  datasource:
+    url: jdbc:h2:~/db/simulator-data
+    driver-class-name: org.h2.Driver
+    username: simulator
+    password: Test.2023
+  h2:
+    console:
+      enabled: true
+      path: /console
+      settings:
+        trace: false
+        web-allow-others: true
+  sql:
+    init:
+      schema-locations: classpath:db/schema.sql
+      mode: always
+  mybatis:
+    mapper-locations: classpath*:mapping/*.xml
+    type-aliases-package: cn.javastudy.springboot.simulator.netconf.datastore.mapper

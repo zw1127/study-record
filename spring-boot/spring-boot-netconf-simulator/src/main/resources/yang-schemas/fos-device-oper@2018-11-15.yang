@@ -1,0 +1,1178 @@
+module fos-device-oper {
+
+  namespace "http://fiberhome.com/fhnw/devicemanager/fos-device-oper";
+
+  prefix "device-oper";
+  import ietf-inet-types {prefix inet; revision-date "2013-07-15";}
+  import ietf-yang-types {prefix yang; revision-date "2013-07-15";}
+  import yang-ext {prefix ext; revision-date "2013-07-09";}
+
+  organization "Fiberhome Systems, Inc.";
+
+  contact
+    "Fiberhome Systems, Inc.
+    Postcode: 430073
+    Address: No.6,Gaoxin 4 Rd,Donghu Hi-Tech Development Zone, Wuhan, Hubei
+    Tel: +XXXXXXXXXXXX
+    
+    E-mail: yang- author@fiberhome.com";
+
+  description
+    "This module contains a collection of YANG definitions
+    for Fiberhome device info.
+    
+    This module contains definitions
+    for the following management objects:
+         ***
+    E-mail: yang- author@fiberhome.com
+    All rights reserved.";
+
+  revision "2018-11-15" {
+    description
+      "FOS 1.0 revision.";
+	}
+	
+	typedef switchover-state-type{
+	  type enumeration {
+      enum READY {
+        value 1;
+        description "READY";
+      }
+      enum NO-SLAVE {
+        value 2;
+        description "NO-SLAVE";
+      }
+	   enum BATCH-BACKUP {
+        value 3;
+        description "BATCH-BACKUP";
+      }
+	   enum BACKUP-FAULT {
+        value 4;
+        description "BACKUP-FAULT";
+      }
+	   enum ERROR {
+        value 5;
+        description "ERROR";
+      }
+	  enum NO-READY{
+        value 6;
+        description "NO-READY";
+      }
+    }
+    description "switchover-state-type";
+  }
+  
+  
+	typedef board-state-type{
+	type enumeration {
+	enum INACTIVE {
+		value 0;
+		description "INACTIVE";
+		}
+	enum ACTIVE {
+		value 1;
+		description "ACTIVE";
+		}
+	}
+  }
+  
+  
+	typedef active-type {
+    type enumeration {
+      enum active {
+        value 0;
+        description "active";
+      }
+      enum unactive {
+        value 1;
+        description "unactive";
+      }
+    }
+	description "active-type";
+  }
+	
+	
+	typedef register-type {
+    type enumeration {
+      enum register {
+        value 0;
+        description "register";
+      }
+      enum unregister {
+        value 1;
+        description "unregister";
+      }
+    }
+	description "register-type";
+  }
+	
+	typedef reboot-type-state{
+    type enumeration {
+      enum smi-reboot-mpu-only {
+        value 0;
+        description "sm-reboot-mpu-only";
+      }
+      enum smi-reboot-pfu-only {
+        value 1;
+        description "smi-reboot-pfu-only";
+      }
+	   enum smi-reboot-local-rack {
+        value 2;
+        description "smi-reboot-local-rack";
+      }
+	   enum smi-reboot-all-rack {
+        value 3;
+        description "smi-reboot-all-rack";
+      }
+	   enum smi-reboot-slot {
+        value 4;
+        description "smi-reboot-slot";
+      }
+	  enum smi-reboot-time {
+        value 5;
+        description "smi-reboot-time";
+      }
+    }
+    description "reboot-type";
+  }
+  
+  typedef reboot-subcard-type {
+    type enumeration {
+      enum reboot-subcard-card1 {
+        value 0;
+        description "reboot-subcard-card1";
+      }
+      enum reboot-subcard-card2 {
+        value 1;
+        description "reboot-subcard-card2";
+      }
+	  enum reboot-subcard-all {
+        value 2;
+        description "reboot-subcard-all";
+      }
+    }
+    description "reboot-subcard-type";
+  }
+  
+  typedef reboot-time-type {
+    type enumeration {
+      enum reboot-time-now {
+        value 0;
+        description "reboot-time-now";
+      }
+      enum reboot-time-standby {
+        value 1;
+        description "reboot-time-standby";
+      }
+	  enum reboot-time-schedule-at {
+        value 2;
+        description "reboot-time-schedule-at";
+      }
+	  enum reboot-time-schedule-delay {
+        value 3;
+        description "reboot-time-schedule-delay";
+      }
+    }
+    description "reboot-time-type";
+  }
+  
+  typedef chassis-role {
+    description "chassis role";
+      type enumeration {
+        enum main-chassis {
+          value 0;
+          description "main chassis";
+        }
+        enum ext-chassis {
+          value 1;
+          description "ext chassis";
+        }      
+      }
+    }
+
+ typedef fanctrl-runmode-type {
+    description "fanctrl runmode type";
+      type enumeration {
+        enum manual {
+          value 0;
+          description "manual";
+        }
+        enum auto {
+          value 1;
+          description "auto";
+        }      
+      }
+    }
+
+ typedef power-type {
+    description "fanctrl power type";
+      type enumeration {
+        enum down {
+          value 0;
+          description "down";
+        }
+        enum up {
+          value 1;
+          description "up";
+        }      
+      }
+    }
+    
+    
+    
+  grouping  chassis-info {
+    description "chassis info";
+    
+  leaf role{
+type chassis-role;  
+description "chassis role";
+  }
+    
+  leaf chassis-num{
+type string;
+description "chassis unmber";
+  }
+
+    leaf chassis-name {
+        type string {
+            length "1..32";
+        }
+        description "chassis name";
+    }
+
+    leaf snid {
+        type string {
+            length "1..32";
+        }
+        description "chassis sn unmber";
+    }
+
+    leaf main-board-name {
+        type string {
+            length "1..32";
+        }
+        description "main board name";
+    }
+
+    leaf main-board-slot-num {
+        type string;
+        description "main board slot unmber";
+    }
+  }
+
+  grouping device-oper-grouping {
+		description "device information";
+		
+		container device-info-status {
+			description "device status information.";
+			
+			leaf rack {
+				type uint8 {
+					range "0..255";
+				}
+				description
+				"sn id which uniquely identifies a device";
+			}
+			
+			leaf uuid {
+				type string {
+					length "1..32";
+				}
+				description
+				"device id which uniquely identifies a device";
+			}
+		
+			leaf snid {
+				type string {
+					length "1..32";
+				}
+				description
+				"sn id which uniquely identifies a device";
+			}
+		
+			leaf device-type { 
+				type string {
+					length "1..64";
+				}
+				description
+				"device type, eg:switch/vbras/cer....if cann't obtion device type,
+				this item can be ignore ";
+			}
+
+			leaf hardware-version {
+				type string {
+					length "1..32";
+				}
+				description
+				"device hardware version.";
+			}
+		
+			leaf software-version { 
+				type string {
+					length "1..32";
+				}
+				description
+				"device software version.";
+			}
+		
+			leaf manufacturer {
+				type string {
+					length "1..32";
+				}
+				description
+				"device manufacturer info.eg:fiberhome";
+			}
+			leaf cpu-info {
+				type string {
+					length "1..256";
+				}
+				description
+				"cpu info of device. format is :core:4, frequency:2G, 64 bit processor";
+			}
+			leaf memory {
+				type string {
+					length "1..256";
+				}
+				description
+				"device's total memory.eg:4096M or 4G";
+			}
+			leaf sys-mac {
+				type string;
+				description
+					"eth if mac";
+			}
+			leaf sys-ready {
+				type int32{
+					range "0..1";
+				}
+				description
+					"whether system is ready for subsequent processes. 0: ready 1:not-ready";
+			}
+		}	
+			
+		container board-infos {
+			description "board state infomation.";
+		
+			list board-info{
+			key "slot-num cpu-num";
+						
+				leaf uptime {
+					type string {
+					length "0..31";
+					}
+				}
+				
+				leaf name {
+					type string {
+					length "0..31";
+					}
+				}				
+		
+				leaf role {
+					type string {
+					length "0..15";
+					}
+				}
+						
+				leaf reg-info {
+					type string {
+					length "0..7";
+					}
+				}
+		
+				leaf init-info {
+					type string {
+					length "0..7";
+					}
+				}
+		
+				leaf online {
+					type string {
+					length "0..7";
+					}
+				}
+				
+				leaf software-version {
+					type string {
+					length "1..64";
+					}
+				}
+				
+				leaf pcb-version {
+					type string {
+					length "1..64";
+					}
+				}
+			
+				leaf board-version {
+					type string {
+					length "1..64";
+					}
+				}
+			
+				leaf complie-time {
+					type string {
+					length "1..64";
+					}
+				}
+			
+				leaf board-state {
+					type string {
+					length "1..32";
+					}
+				}
+			
+				leaf board-sn {
+					type string {
+					length "1..32";
+					}
+				}
+				
+				leaf board-type {
+					type string {
+					length "1..32";
+					}
+				}
+				
+				leaf slot-num {
+					type string;					
+				}
+															
+				leaf cpu-num {
+					type uint8 {
+					range "0..255";
+					}
+				}
+			}
+		}
+		container board-state-infos {
+		
+		description
+			"board state information";	
+		list board-state-info {
+		key "slot-id";
+			leaf slot-id {
+				type string;
+				description
+				"slot id which uniquely identifies a board.";
+			}
+			
+			leaf board-version {
+				type string {
+					length "1..64";
+				}
+				description
+				"board version";
+			}
+			
+			leaf pcb-version {  
+				type string {
+					length "1..64";
+				}
+				description
+				"pcb version";
+			}
+
+			leaf software-version {
+				type string {
+					length "1..64";
+				}
+				description
+				"board software version.eg:RP0100";
+			}
+			
+			leaf board-temperature {   
+				type string {
+					length "1..64";
+				}
+				description
+				"the temperature of board.";
+			}
+			
+			leaf shelf-type {
+				type string {
+					length "1..64";
+				}
+				description
+				"type of the shelf .eg:CITRANS8010";
+			}
+			leaf main-src-slot {
+				type string;
+				description
+				"the slot of the main src";
+			}
+			leaf power-on-time {
+			 
+				type string {
+					length "1..64";
+				}
+				description
+				"time during the board power on";
+			}
+			
+			leaf register {
+			 
+				type register-type;
+				description
+				"register or not register";
+			}
+			leaf active  {
+			 
+				type active-type;
+				description
+				"active or not unactive";
+			}
+		}
+	  }
+		
+		container board-filesystem-usages {
+		description
+			"board filesystem information.";
+		list board-filesystem-usage {
+			key "slot-id filesystem mounted-on";
+			description
+			"filesystem information.";
+			
+			leaf slot-id {
+			    type string;
+				description
+				"slot id which uniquely identifies a slot";
+			}
+		
+			leaf filesystem {
+				type string {
+					length "1..128";
+				}
+			}
+		
+			leaf size {  
+				type string {
+					length "1..32";
+				}
+			}
+
+			leaf used {
+				type string {
+					length "1..32";
+				}
+				description
+				"use value";
+			}
+		
+			leaf avail {   
+				type string {
+					length "1..32";
+				}
+			}
+		
+			leaf use {
+				type string {
+					length "1..32";
+				}
+				description
+				"use percent";
+			}
+		
+
+			leaf mounted-on {
+			 
+				type string {
+					length "1..128";
+				}
+			}
+		}
+	}
+		
+		container system-usage-slots {
+		
+		description
+			"board system usage information.";	
+		list system-usage-slot {
+			key "slot-id";
+			leaf slot-id {
+				type string;
+				description
+				"slot id which uniquely identifies a board";
+				
+			}
+			
+			leaf cpu-usage {
+				type string {
+					length "1..32";
+				}
+			}
+			
+			leaf memory-usage {  
+				type string {
+					length "1..32";
+				}
+			}
+		}
+	  }
+	  
+	  container board-switchover-info {
+		description
+			"switch-over information";	
+			leaf switchover-state{
+				type switchover-state-type;
+				description
+					"switchover-stat";
+			}
+			
+			leaf mainboard-slot {  
+				type string;
+				description
+					"mainboard-slot";
+			}
+			
+			leaf slaveboard-slot {  
+				type string;
+				description
+					"slaveboard-slot";
+			}
+
+			leaf proc-group-cnt { 
+				type uint16 {
+						range "0..65535";
+				}
+				description
+					"proc-group-cnt";
+			}
+		}
+
+    container neighbor-device-infos{
+    description "neighbor device infos";
+
+    list neighbor-device-info{
+    key "uuid";    
+        leaf uuid {
+            type string {
+                length "1..32";
+            }
+            description "neighbor device uuid";
+        }
+    
+       leaf ip {
+            type inet:ip-address;
+            description "neighbor device ip address";
+        }
+    
+        leaf mac-num{
+            type yang:mac-address;
+            description "neighbor device MAC address";
+        }
+            
+        list chassis-list {
+            key "chassis-num";   
+            uses chassis-info;  
+        }
+    }
+      }
+      
+      container fan-infos {
+			description "fans infomation.";
+		
+			list fan-info{
+				key "slot-id";		
+						
+				leaf slot-id {
+				type string;
+				description
+				"slot id which uniquely identifies a board.";
+			 }	
+		
+				leaf board_info {
+					type string {
+					length "0..20";
+					}
+				}
+						
+				leaf material {
+					type string {
+					length "0..20";
+					}
+				}
+		
+				leaf sn {
+					type string {
+					length "0..20";
+					}
+				}
+		
+				leaf status {
+					type string {
+					length "0..20";
+					}
+				}
+				
+				leaf level {
+					type uint8 {
+					range "0..255";
+					}
+				}
+				
+				leaf speed {
+					type uint16 {
+					range "0..65535";
+					}
+				}
+			
+				leaf board-pcb {
+					type string {
+					length "1..64";
+					}
+				}
+			
+				leaf board-ver {
+					type string {
+					length "0..20";
+					}
+				}
+				
+			}
+		}
+		
+		container power-infos {
+			description "powers infomation.";
+		
+			list power-info{
+				key "slot-id";
+						
+				leaf slot-id {
+				type string;
+				description
+				"slot id which uniquely identifies a board.";
+			 }	
+		
+				leaf board_info {
+					type string {
+					length "0..20";
+					}
+				}
+						
+				leaf material {
+					type string {
+					length "0..20";
+					}
+				}
+		
+				leaf sn {
+					type string {
+					length "0..20";
+					}
+				}
+			
+				leaf board-pcb {
+					type string {
+					length "1..64";
+					}
+				}
+			
+				leaf board-ver {
+					type string {
+					length "0..20";
+					}
+				}
+				
+			}
+		}
+		
+		 container cardtemp-infos {
+			description "cardtemp infomation.";
+		
+			list cardtemp-info{
+				key "slot-id";
+						
+				leaf slot-id {
+				type string;
+				description
+				"slot id which uniquely identifies a board.";
+			 }			
+		
+				leaf board_name {
+					type string {
+					length "0..20";
+					}
+				}
+						
+				leaf loc {
+					type uint16 {
+					range "0..65535";
+					}
+				}
+		
+				leaf temp {
+					type int32 {
+					range "-256..256";
+					}
+				}
+		
+				leaf tref_val {
+					type int32 {
+					range "-256..256";
+					}
+				}
+				
+				leaf tmax_val {
+					type int32 {
+					range "-256..256";
+					}
+				}
+				
+				leaf tdiff {
+					type int32 {
+					range "-256..256";
+					}
+				}
+				
+			}
+		}
+		
+		container uptime-infos {
+			description "uptime infomation.";	
+		
+				leaf uptime {
+					type string {
+					length "0..30";
+					}
+				}
+		  }
+		
+		 container subframe-infos {
+			description "subframe infomation.";
+		
+			list subframe-info{
+				key "chassis-no";
+						
+				leaf chassis-no {
+				type string ;
+				description
+				"chassis no which uniquely identifies a board.";
+			  }		
+				
+				leaf mainboard_mac {
+				  type yang:mac-address;
+          description "mainboard MAC address";
+				}				
+		
+				leaf info {
+					type string {
+					length "0..20";
+					}
+				}
+						
+				leaf sn {
+					type string {
+					length "0..20";
+					}
+				}
+		
+				leaf board_ver {
+					type string {
+					length "0..20";
+					}
+				}
+				
+			}
+		}
+		
+		 container bmustatus-infos {
+			description "bmustatus infomation.";
+		
+			list bmustatus-info{
+				key "slot-id";
+						
+				leaf slot-id {
+				type string;
+				description
+				"slot id which uniquely identifies a board.";
+			 }		
+		
+				leaf bmu_volt {
+					type int32 {
+					range "-256..500";
+					}
+				}
+						
+				leaf bmu_power {
+					type int32 {
+					range "-256..500";
+					}
+				}
+		
+				leaf bmu_temp {
+					type int32 {
+					range "-256..500";
+					}
+				}
+				
+			}
+		}
+		
+		container version-infos {
+			description "version state informaiton";
+			
+			list version-info {
+				key "slot";	
+				leaf name {
+					type string {
+					length "1..16";
+					}
+				}
+					
+				leaf slot {
+					type string;
+				}
+					
+				leaf board-version {
+					type string {
+					length "1..64";
+					}
+				}
+					
+				leaf pcb-version {
+					type string {
+					length "1..64";
+					}
+				}
+					
+				leaf software-version {
+					type string {
+					length "1..64";
+					}
+				}
+					
+				leaf build-time {
+					type string {
+					length "1..64";
+					}
+				}
+			}	
+		}
+			container system-mac-infos{
+		description "system-mac infos";
+						
+			leaf system-mac-start {
+				type yang:mac-address;
+			}
+				
+			leaf system-mac-end {
+				type yang:mac-address;
+			}
+			
+			leaf system-mac-num {
+				type uint32 {
+				range "0..4294967295";
+				}
+			}
+			
+			leaf logical-mac-start {
+				type yang:mac-address;
+			}
+				
+			leaf logical-mac-end {
+				type yang:mac-address;
+			}
+			
+			leaf logical-mac-num {
+				type uint32 {
+				range "0..4294967295";
+				}
+			}
+			
+			leaf all-physi-mac-start {
+				type yang:mac-address;
+			}
+				
+			leaf all-physi-mac-end {
+				type yang:mac-address;
+			}
+			
+			leaf all-physi-mac-num {
+				type uint32 {
+				range "0..4294967295";
+				}
+			}
+		list physical-mac-info{
+			key "physical-mac-index";
+			
+		    leaf physical-mac-index {
+				type string;
+			}
+			
+			leaf physical-mac-start {
+				type yang:mac-address;
+			}
+				
+			leaf physical-mac-end {
+				type yang:mac-address;
+			}
+			
+			leaf physical-mac-num {
+				type uint32 {
+				range "0..4294967295";
+				}
+			}
+		}
+	}
+        
+        container write-file {
+            description
+                "write file";
+        }
+}
+
+	container device-oper {
+	    config false;
+	    uses device-oper-grouping;
+	}
+
+	grouping wri-device-oper-grouping {
+        container wri-device-oper {
+          uses device-oper-grouping;
+        }
+    }
+	
+	/* REBOOT CMD RPC */
+	rpc reboot-device-cmd {
+		description "reboot mpu/lpu/slot";
+		input {	
+				leaf reboot-type {
+				
+					type reboot-type-state;
+					default smi-reboot-all-rack;	
+				}
+				leaf sbucard {
+				
+					type reboot-subcard-type ; 
+				}
+				
+				leaf slot-id {
+					type string;
+					
+				}
+				
+			}
+		}
+		
+	rpc reboot-cancel-master-board-cmd {
+		description "cancel reboot mpu ";
+		
+	}	
+		
+		
+	rpc reboot-time-master-board-cmd {
+			
+		description "reboot mpu delay";
+		input {	
+				
+				leaf reboot-type {
+					type  reboot-type-state;
+					default smi-reboot-time;
+				}
+				
+				leaf reboot-time-type {
+					type reboot-time-type;
+				}
+				
+				leaf datatime {
+				
+					type string {
+					    length "1..64";
+					}
+					
+				}
+				
+				leaf delay-time {
+				
+					type uint32 {
+						range "0..4294967295";
+					}
+				}
+				
+			}
+	}
+	
+	/* SWITCH OVER   */
+	rpc board-switch-over {
+		output {	
+			leaf switchover-result{
+				type string {
+					    length "1..256";
+					}
+				description
+					"switchover-result";
+			}
+		}
+	}
+	
+	/* SET BOARD ACTIVE */
+	rpc set-board-state-cmd {
+		input {
+			leaf  slot-id {
+				type string;
+				description 
+					"board_slot_id";	
+			}
+			leaf  active-status{
+				type board-state-type;
+				description 
+					"board_active_status";	
+			}
+		}	
+	}
+	
+	/* FANCTRL RUNMODE CMD RPC */
+	rpc fanctrl-runmode-cmd {
+		description "fanctrl runmode auto/manual";
+		input {	
+		
+				leaf chassis-no {
+				type string ;
+				description
+				"chassis no which uniquely identifies a board.";
+			  }	
+			  
+				leaf status {
+				
+					type fanctrl-runmode-type ;
+					default auto; 
+				}
+				
+				leaf level {
+					
+					type uint8 {
+						range "0..255";
+					}
+				}
+				
+			}
+		}
+		
+		/* POWER CMD RPC */
+	rpc power-cmd {
+		description "power up/down";
+		input {	
+				
+				leaf power-ctrl {
+				
+					type power-type ;
+					default up; 
+				}
+				
+				leaf chassis-no {
+				type string ;
+				description
+				"chassis no which uniquely identifies a board.";
+			  }	
+				
+				leaf slot-no {
+					
+					type uint16 {
+						range "0..65535";
+					}
+				}
+				
+			}
+		}
+}

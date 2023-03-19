@@ -1,0 +1,177 @@
+module openconfig-platform-mux {
+
+  yang-version "1";
+
+  // namespace
+  namespace "http://openconfig.net/yang/platform/mux";
+
+  prefix "oc-mux";
+
+  import openconfig-platform { prefix oc-platform; }
+  import openconfig-platform-types { prefix oc-platform-types; }
+  import openconfig-extensions { prefix oc-ext; }
+
+
+  // meta
+  organization "OpenConfig working group";
+
+  contact
+    "OpenConfig working group
+    www.openconfig.net";
+
+  description
+    "This module defines data related to MUX components in
+    the openconfig-platform model";
+
+  oc-ext:openconfig-version "0.1.2";
+    
+  revision "2020-05-10" {
+    description
+      "Remove when statement that references read-only entity from
+      a read-write context.";
+    reference "0.1.2";
+  }
+
+  revision "2018-11-21" {
+    description
+      "Add OpenConfig module metadata extensions.";
+    reference "0.1.1";
+  }
+
+  revision "2017-08-03" {
+    description
+      "Initial revision";
+    reference "0.1.0";
+  }
+
+  // OpenConfig specific extensions for module metadata.
+  oc-ext:regexp-posix;
+  oc-ext:catalog-organization "openconfig";
+  oc-ext:origin "openconfig";
+
+  // extension statements
+
+  // feature statements
+
+  // identity statements
+
+  // typedef statements
+
+  // grouping statements
+
+
+  grouping mux-config {
+    description
+      "Configuration data for mux components";
+
+  }
+
+  grouping mux-state {
+    description
+      "Operational state data for mux components";
+                
+    leaf channel-interval  {
+      //TODO: mandatory true;
+      type oc-platform-types:channel-interval-type;
+      description
+         "channel interval, 50/75/100GHz";
+    }     
+    
+    leaf support-flex-grid  {
+      //TODO: mandatory true;
+      type boolean;      
+      description
+         "Support flex grid status for mux components";
+    }    
+    
+    leaf channel-num  {
+      //TODO: mandatory true;
+      type uint32;
+      description
+         "The channel number for the mux, example 44,96";
+    }
+  }
+
+  grouping mux-top {
+    description
+      "Top-level grouping for mux data";
+
+    container mux {
+      description
+        "Top-level container for mux data";
+
+      container config {
+        description
+          "Configuration data for muxs";
+
+        uses mux-config;
+      }
+
+      container state {
+
+        config false;
+
+        description
+          "Operational state data for muxs";
+
+        uses mux-config;
+        uses mux-state;
+      }
+    }
+  }
+
+  grouping frequency-channel-grouping {
+        description "Frequency channel grouping.";
+        leaf uper-frequency {
+            type uint64;
+            units MHz;
+            description "Uper frequency.";
+        }
+        leaf lower-frequency {
+            type uint64;
+            units MHz;
+            description "Lower frequency.";
+        }
+        leaf add-drop-port {
+            type string;
+            description "Add drop port.";
+        }
+        container ports {
+            description "Add/Drop port.";
+            uses oc-mux:add-drop-grouping;
+        }
+    }
+    grouping add-drop-grouping {
+        description "Add/Drop port grouping.";
+        leaf add-port {
+            type leafref {
+                path "/oc-platform:components/oc-platform:component/oc-platform:name";
+            }
+            description "Add port.";
+        }
+        leaf drop-port {
+            type leafref {
+                path "/oc-platform:components/oc-platform:component/oc-platform:name";
+            }
+            description "Drop port.";
+        }
+    }
+
+  // data definition statements
+
+  // augment statements
+
+  augment "/oc-platform:components/oc-platform:component" {
+    description
+      "Adding mux data to physical inventory. This subtree
+      is only valid when the type of the component is MUX.";
+
+    uses mux-top;
+  }
+
+  // rpc statements
+
+  // notification statements
+
+}
+

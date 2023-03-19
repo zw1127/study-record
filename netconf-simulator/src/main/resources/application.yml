@@ -1,9 +1,0 @@
-server:
-  port: 8088
-logging:
-  level:
-    org.opendaylight.netconf.shaded: info
-    org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping: DEBUG
-simulator:
-  netconf:
-    thread-pool-size: 20

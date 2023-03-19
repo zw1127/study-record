@@ -1,0 +1,298 @@
+module fos-datatype-common {
+
+  namespace "http://fiberhome.com/fhnw/yang/datatype/fos-datatype-common";
+  prefix "co-type";
+
+  import ietf-yang-types {
+    prefix yang;
+  }
+  
+   description
+   "Common Datatype in fosv5.";
+
+  revision 2020-07-01 {
+    description
+     "Add typedef for ip-address-with-mask";
+  }
+
+  revision 2020-04-15 {
+    description
+     "Add package-name-string";
+  }
+
+  revision 2018-01-15 {
+    description
+     "is-enable/floatN/stringN";
+  }
+
+  typedef is-enable {
+    type enumeration {
+		enum enable {
+			value 1;
+		}
+		enum disable {
+			value 0;
+		}
+    }
+  }
+
+  typedef float1 {
+    type decimal64 {
+		fraction-digits 1;
+	}
+  }
+
+  typedef float2 {
+    type decimal64 {
+		fraction-digits 2;
+	}
+  }
+
+  typedef float3 {
+    type decimal64 {
+		fraction-digits 3;
+	}
+  }
+
+  typedef float4 {
+    type decimal64 {
+		fraction-digits 4;
+	}
+  }
+
+  typedef float5 {
+    type decimal64 {
+		fraction-digits 5;
+	}
+  }
+
+  typedef float6 {
+    type decimal64 {
+		fraction-digits 6;
+	}
+  }
+  
+  typedef string16 {
+    type string {
+		length 0..16;
+    }
+  }
+
+  typedef string32 {
+    type string {
+		length 0..32;
+    }
+  }
+
+  typedef string64 {
+    type string {
+		length 0..64;
+    }
+  }
+
+  typedef string128 {
+    type string {
+		length 0..128;
+    }
+  }
+  
+  
+  typedef vpn-name{
+    type string{
+        length "0..31";
+    }
+    description "vpn instance name";
+  }
+  
+  typedef vpn-name-with-global {
+   type union {
+				type vpn-name;
+				type string {
+				pattern '_public_';
+            }
+        }
+    }
+  
+  typedef shelf-num-string {
+    type string {
+		length 0..8;
+        pattern '\d+' {
+            description "A";
+		}
+    }
+	description "String type for shelf-num";
+  }
+
+  typedef slot-num-string {
+    type string {
+		length 0..16;
+        pattern '\d+/\d+/\d+' {
+            description "A/B/C";
+		}
+    }
+	description "String type for slot-num";
+  }
+
+  typedef package-name-string {
+    type string{
+      length "0..128";
+    }
+    description "String type for package name";
+  }
+  
+	typedef string-nil {
+		type string {
+			pattern "nil";
+		}
+		description "String type for string-nil";
+    }
+	
+	typedef string-public {
+		type string {
+			pattern '_public_';
+		}
+		description "String type for string-public";
+    }	
+
+    typedef datetime {
+    type string {
+      pattern '\d{4}/(0[0-9]|1[0-2])/([0-2]\d|3[0-1]) (([0-1][0-9])|(2[0-3])):[0-5][0-9]';
+    }
+	description "Specify the start time and date.The time format is YYYY/MM/DD hh:mm";
+  }
+  
+    typedef time {
+    type string {
+      pattern '(([0-1][0-9])|(2[0-3])):[0-5][0-9]';
+    }
+	description "Specify the start time and date.The time format is hh:mm";
+  }	
+  
+  typedef resource {
+    type union {
+      type instance-identifier {
+        require-instance false;
+      }
+      type yang:object-identifier;
+      type string;
+      type yang:uuid;
+    }
+    description
+      "This is an identification of the alarming resource, such as an
+       interface.  It should be as fine-grained as possible both to
+       guide the operator and to guarantee uniqueness of the alarms.
+       If the alarming resource is modelled in YANG, this type will
+       be an instance-identifier.
+       If the resource is an SNMP object, the type will be an
+       object-identifier.
+       If the resource is anything else, for example a distinguished
+       name or a CIM path, this type will be a string.
+       If the alarming object is identified by a UUID use the uuid
+       type.  Be cautious when using this type, since a UUID is hard
+       to use for an operator.
+       If the server supports several models, the presedence should
+       be in the order as given in the union definition.";
+  }
+  
+  typedef alarm-text {
+    type string {
+	  length 0..100;
+	}
+    description
+      "The string used to inform operators about the alarm.  This
+       MUST contain enough information for an operator to be able to
+       understand the problem and how to resolve it.  If this string
+       contains structure, this format should be clearly documented
+       for programs to be able to parse that information.";
+  }
+  
+  typedef alarm-type-qualifier {
+    type union {
+	    type string {
+	      length 0..30;
+	    }
+	    type string {
+		  pattern 'INVALID';
+        }
+	}
+    description
+      "If an alarm type can not be fully specified at design time by
+       alarm-type-id, this string qualifier is used in addition to
+       fully define a unique alarm type.
+       The definition of alarm qualifiers is considered being part of
+       the instrumentation and out of scope for this module.  An
+       empty string is used when this is part of a key.";
+  }
+  
+  typedef pm-text {
+    type string {
+	  length 0..100;
+	}
+    description
+      "The string used to inform operators about the pm.  This
+       MUST contain enough information for an operator to be able to
+       understand the problem and how to resolve it.  If this string
+       contains structure, this format should be clearly documented
+       for programs to be able to parse that information.";
+  }
+  
+  typedef pm-type-qualifier {
+    type union {
+	    type string {
+	      length 0..30;
+	    }
+	    type string {
+		  pattern 'INVALID';
+        }
+	}
+    description
+      "If a pm type can not be fully specified at design time by
+       pm-type-id, this string qualifier is used in addition to
+       fully define a unique pm type.
+       The definition of pm qualifiers is considered being part of
+       the instrumentation and out of scope for this module.  An
+       empty string is used when this is part of a key.";
+  }
+  
+  typedef ip-address-with-mask {
+    type union {
+      type co-type:ipv4-address-with-mask;
+      type co-type:ipv6-address-with-mask;
+    }
+    description
+     "The ip-address-with-mask type represents an IP with mask.";
+  }
+
+  typedef ipv4-address-with-mask {
+    type string {
+      pattern
+         '(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}'
+       +  '([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])'
+       + '/(([0-9])|([1-2][0-9])|(3[0-2]))';
+    }
+    description
+     "The ipv4-address-with-mask type represents an IPv4 address with mask.
+      The mask length is given by the number following the
+      slash character and must be less than or equal to 32.";
+  }
+
+  typedef ipv6-address-with-mask {
+    type string {
+      pattern '((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}'
+            + '((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|'
+            + '(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.){3}'
+            + '(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))'
+            + '(/(([0-9])|([0-9]{2})|(1[0-1][0-9])|(12[0-8])))';
+      pattern '(([^:]+:){6}(([^:]+:[^:]+)|(.*\..*)))|'
+            + '((([^:]+:)*[^:]+)?::(([^:]+:)*[^:]+)?)'
+            + '(/.+)';
+    }
+
+
+    description
+     "The ipv6-address-with-mask type represents an IPv6 address with mask.
+      The mask length is given by the number following the
+      slash character and must be less than or equal to 128.";
+  }
+	
+}

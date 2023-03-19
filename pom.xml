@@ -20,7 +20,6 @@
         <module>spring-boot</module>
         <module>disruptor-study</module>
         <module>disruptor-tutorials</module>
-        <module>netconf-simulator</module>
     </modules>
 
 </project>
