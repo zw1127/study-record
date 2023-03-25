@@ -1,6 +1,5 @@
 package cn.javastudy.springboot.web.controller;
 
-import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -18,7 +17,7 @@ public class Knife4jController {
 
     @ApiImplicitParam(name = "name", value = "名称", required = true)
     @ApiOperation(value = "Hello world!")
-    @ApiOperationSupport(order = 2, author = "test")
+//    @ApiOperationSupport(order = 2, author = "test")
     @GetMapping("/knife4j/hi")
     public ResponseEntity<String> hello(@RequestParam(value = "name") String name) {
         return ResponseEntity.ok("Hi:" + name);
@@ -29,7 +28,7 @@ public class Knife4jController {
         @ApiImplicitParam(name = "password", value = "密码", required = true)
     })
     @ApiOperation(value = "接口登录！")
-    @ApiOperationSupport(order = 1, author = "栈长")
+//    @ApiOperationSupport(order = 1, author = "栈长")
     @PostMapping("/knife4j/login")
     public ResponseEntity<String> login(@RequestParam(value = "username") String username,
                                         @RequestParam(value = "password") String password) {

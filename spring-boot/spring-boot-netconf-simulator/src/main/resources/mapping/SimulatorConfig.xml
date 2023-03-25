@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fiberhome.netconf.simulator.manager.datastore.mapper.SimulatorConfigMapper">
+<mapper namespace="cn.javastudy.springboot.simulator.netconf.datastore.mapper.SimulatorConfigMapper">
     <resultMap id="BaseResultMap" type="cn.javastudy.springboot.simulator.netconf.datastore.entity.SimulatorConfig">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="device_id" jdbcType="VARCHAR" property="deviceId"/>
@@ -8,6 +8,10 @@
         <result column="node_value" jdbcType="CLOB" typeHandler="org.apache.ibatis.type.ClobTypeHandler"
                 property="nodeValue"/>
     </resultMap>
+
+    <sql id="Base_Key_Column_List">
+        id, device_id, node_name
+    </sql>
 
     <sql id="Base_Column_List">
         id, device_id, node_name, node_value
@@ -38,7 +42,7 @@
     </select>
 
     <select id="selectAll" resultMap="BaseResultMap">
-        select id, device_id, node_name
+        select <include refid="Base_Key_Column_List"/>
         from simulator.simulator_config
     </select>
 
@@ -48,19 +52,19 @@
         where id = #{id,jdbcType=INTEGER}
     </delete>
 
-    <select id="deleteByKey"
+    <delete id="deleteByKey"
             parameterType="cn.javastudy.springboot.simulator.netconf.datastore.entity.SimulatorConfigKey">
         delete
         from simulator.simulator_config
         where device_id = #{deviceId,jdbcType=VARCHAR}
           and node_name = #{nodeName,jdbcType=VARCHAR}
-    </select>
+    </delete>
 
-    <select id="deleteByDeviceId" parameterType="java.lang.String">
+    <delete id="deleteByDeviceId" parameterType="java.lang.String">
         delete
         from simulator.simulator_config
         where device_id = #{deviceId,jdbcType=VARCHAR}
-    </select>
+    </delete>
 
     <delete id="deleteAll">
         delete

@@ -6,27 +6,19 @@ import static cn.javastudy.springboot.simulator.netconf.utils.Constants.SIMULATE
 import static cn.javastudy.springboot.simulator.netconf.utils.Constants.SIMULATE_HOME;
 import static cn.javastudy.springboot.simulator.netconf.utils.Constants.UUID_KEY;
 
-import cn.javastudy.springboot.simulator.netconf.datastore.mapper.SimulatorConfigMapper;
 import cn.javastudy.springboot.simulator.netconf.domain.DeviceUniqueInfo;
-import cn.javastudy.springboot.simulator.netconf.properties.NetconfSimulatorProperties;
-import cn.javastudy.springboot.simulator.netconf.rpchandler.RpcHandler;
-import cn.javastudy.springboot.simulator.netconf.rpchandler.RpcHandlerDefault;
-import cn.javastudy.springboot.simulator.netconf.service.SchemaContextService;
 import cn.javastudy.springboot.simulator.netconf.service.SimulateConfigService;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
-import org.opendaylight.mdsal.dom.api.DOMDataBroker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 
 @Service
 public class SimulateConfigServiceImpl implements SimulateConfigService {
@@ -35,27 +27,22 @@ public class SimulateConfigServiceImpl implements SimulateConfigService {
 
     private static final StringBuilder TEMPLATE_BUILDER = new StringBuilder();
 
-    private static final RpcHandler RPC_HANDLER = new RpcHandlerDefault();
-    private final Map<DeviceUniqueInfo, DOMDataBroker> deviceDataBrokerMap = new ConcurrentHashMap<>();
-    @Resource
-    private SchemaContextService schemaContextService;
-
-    @Resource
-    private NetconfSimulatorProperties properties;
-
-    @Resource
-    private SimulatorConfigMapper simulatorConfigMapper;
-
     @PostConstruct
     public void init() {
-        String homePath = System.getProperty(SIMULATE_HOME, ".");
-        Path templatePath = Paths.get(homePath, RESOURCE_TEMPLATE_PATH, SIMULATED_CONFIG);
-
         try {
+            String homePath = System.getProperty(SIMULATE_HOME);
+            Path templatePath;
+            if (StringUtils.isNotEmpty(homePath)) {
+                templatePath = Paths.get(homePath, RESOURCE_TEMPLATE_PATH, SIMULATED_CONFIG);
+            } else {
+                templatePath =
+                    ResourceUtils.getFile("classpath:" + RESOURCE_TEMPLATE_PATH + "/" + SIMULATED_CONFIG).toPath();
+            }
+
             String templateString = Files.readString(templatePath, StandardCharsets.UTF_8);
             TEMPLATE_BUILDER.append(templateString);
         } catch (IOException e) {
-            LOG.warn("read template file {} error.", templatePath);
+            LOG.warn("read template file error.", e);
         }
     }
 

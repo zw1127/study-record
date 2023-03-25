@@ -50,7 +50,10 @@ module openconfig-mux {
       "Configuration data for muxs";
 
     leaf name {
-      type string;
+      type leafref {
+        path "/oc-platform:components/oc-platform:component/"
+                 + "oc-platform:name";
+      }
       description
         "Reference to the component name (in the platform model)
         corresponding to this mux in the device";

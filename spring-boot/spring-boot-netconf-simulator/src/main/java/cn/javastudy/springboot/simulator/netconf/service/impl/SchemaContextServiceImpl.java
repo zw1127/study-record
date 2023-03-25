@@ -6,6 +6,7 @@ import static cn.javastudy.springboot.simulator.netconf.utils.Constants.YANG_SCH
 
 import cn.javastudy.springboot.simulator.netconf.schemacache.SchemaSourceCache;
 import cn.javastudy.springboot.simulator.netconf.service.SchemaContextService;
+import io.lighty.codecs.util.XmlNodeConverter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -56,6 +57,7 @@ import org.opendaylight.yangtools.yang.model.api.Module;
 import org.opendaylight.yangtools.yang.model.api.ModuleLike;
 import org.opendaylight.yangtools.yang.model.api.SchemaTreeInference;
 import org.opendaylight.yangtools.yang.model.api.Submodule;
+import org.opendaylight.yangtools.yang.model.api.stmt.ModuleEffectiveStatement;
 import org.opendaylight.yangtools.yang.model.repo.api.RevisionSourceIdentifier;
 import org.opendaylight.yangtools.yang.model.repo.api.SchemaSourceRepresentation;
 import org.opendaylight.yangtools.yang.model.repo.api.SourceIdentifier;
@@ -88,19 +90,11 @@ public class SchemaContextServiceImpl implements SchemaContextService {
     private final Set<Capability> capabilities = new HashSet<>();
 
     private EffectiveModelContext schemaContext;
-    private DataSchemaContextTree dataContextTree;
-
     private SchemaSourceProvider<YangTextSchemaSource> sourceProvider;
 
-    private DefaultYangParserFactory yangParserFactory;
-
-    private ModuleInfoSnapshot moduleInfoSnapshot;
-    private ModuleInfoSnapshotResolver snapshotResolver;
-    private DOMSchemaService schemaService;
-
-    private List<ObjectRegistration<YangModuleInfo>> modelsRegistration = new ArrayList<>();
-
     private File yangSchemaPath;
+
+    private XmlNodeConverter xmlNodeConverter;
 
     @PostConstruct
     public void init() {
@@ -121,7 +115,8 @@ public class SchemaContextServiceImpl implements SchemaContextService {
         initSchemaContext();
         LOG.info("init schemaContext successful...");
         schemaContext.getModules();
-        this.dataContextTree = DataSchemaContextTree.from(schemaContext);
+//        this.dataContextTree = DataSchemaContextTree.from(schemaContext);
+        this.xmlNodeConverter = new XmlNodeConverter(this.schemaContext);
         LOG.info("{} init successful.", getClass());
     }
 
@@ -177,6 +172,18 @@ public class SchemaContextServiceImpl implements SchemaContextService {
         LOG.info("load capabilities successful, capabilities size:{}", capabilities.size());
 
         sourceProvider = sourceIdentifier -> consumer.getSchemaSource(sourceIdentifier, YangTextSchemaSource.class);
+        initQnameModuleMap();
+    }
+
+    private void initQnameModuleMap() {
+        if (schemaContext != null) {
+            Map<QNameModule, ModuleEffectiveStatement> effectiveStatementMap = schemaContext.getModuleStatements();
+            if (!effectiveStatementMap.isEmpty()) {
+                for (Map.Entry<QNameModule, ModuleEffectiveStatement> entry : effectiveStatementMap.entrySet()) {
+                    namespaceToQNameModule.put(entry.getKey().getNamespace().toString(), entry.getKey());
+                }
+            }
+        }
     }
 
     private static void addModuleCapability(final SharedSchemaRepository consumer, final Set<Capability> capabilities,
@@ -310,4 +317,16 @@ public class SchemaContextServiceImpl implements SchemaContextService {
         namespaceToQNameModule.clear();
     }
 
+    @Override
+    public SchemaInferenceStack.Inference getRootInference() {
+        if (schemaContext == null) {
+            return null;
+        }
+        return SchemaInferenceStack.of(schemaContext).toInference();
+    }
+
+    @Override
+    public XmlNodeConverter getXmlNodeConverter() {
+        return xmlNodeConverter;
+    }
 }

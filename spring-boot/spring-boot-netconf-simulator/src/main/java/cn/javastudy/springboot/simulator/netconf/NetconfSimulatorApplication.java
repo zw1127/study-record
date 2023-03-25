@@ -1,6 +1,5 @@
 package cn.javastudy.springboot.simulator.netconf;
 
-import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import org.springframework.boot.SpringApplication;
@@ -12,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class NetconfSimulatorApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(NetconfSimulatorApplication.class);
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(NetconfSimulatorApplication.class, args);
     }
 
     @RequestMapping("/hello")

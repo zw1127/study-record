@@ -1,13 +1,15 @@
 package cn.javastudy.springboot.simulator.netconf.service;
 
+import cn.javastudy.springboot.simulator.netconf.device.NetconfSimulateDevice;
 import cn.javastudy.springboot.simulator.netconf.domain.SimulateDeviceInfo;
 import com.google.common.util.concurrent.ListenableFuture;
+import java.util.Map;
 
 public interface SimluateDeviceService {
 
     Integer DEFAULT_CALLHOME_PORT = 4334;
 
-    void startSimulateDevice(SimulateDeviceInfo deviceInfo);
+    ListenableFuture<Boolean> startSimulateDevice(SimulateDeviceInfo deviceInfo);
 
     void stopSimulateDevice(String uniqueKey);
 
@@ -22,4 +24,6 @@ public interface SimluateDeviceService {
     default void callhomeDisconnect(String uniqueKey, String callhomeIp) {
         callhomeDisconnect(uniqueKey, callhomeIp, DEFAULT_CALLHOME_PORT);
     }
+
+    Map<String, NetconfSimulateDevice> startedDevices();
 }

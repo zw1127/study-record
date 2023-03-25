@@ -41,7 +41,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.opendaylight.mdsal.common.api.CommitInfo;
@@ -51,7 +53,6 @@ import org.opendaylight.mdsal.dom.api.DOMDataTreeWriteTransaction;
 import org.opendaylight.mdsal.dom.broker.SerializedDOMDataBroker;
 import org.opendaylight.mdsal.dom.spi.store.DOMStore;
 import org.opendaylight.mdsal.dom.store.inmemory.InMemoryDOMDataStore;
-import org.opendaylight.mdsal.dom.store.inmemory.InMemoryDOMDataStoreConfigProperties;
 import org.opendaylight.netconf.api.DocumentedException;
 import org.opendaylight.netconf.api.NetconfServerDispatcher;
 import org.opendaylight.netconf.api.capability.BasicCapability;
@@ -80,7 +81,6 @@ public class SimluateDeviceServiceImpl implements SimluateDeviceService {
     private static final Logger LOG = LoggerFactory.getLogger(SimluateDeviceServiceImpl.class);
 
     private static final RpcHandler RPC_HANDLER = new RpcHandlerDefault();
-    private final Map<DeviceUniqueInfo, DOMDataBroker> deviceDataBrokerMap = new ConcurrentHashMap<>();
     private final Map<String, NetconfSimulateDevice> startedDeviceMap = new ConcurrentHashMap<>();
 
     @Resource
@@ -106,6 +106,11 @@ public class SimluateDeviceServiceImpl implements SimluateDeviceService {
         initThreadPool();
     }
 
+    @PreDestroy
+    public void stop() {
+
+    }
+
     private void initThreadPool() {
         LOG.info("starting init thread pool.");
         this.nettyThreadgroup = new NioEventLoopGroup();
@@ -127,19 +132,24 @@ public class SimluateDeviceServiceImpl implements SimluateDeviceService {
     }
 
     @Override
-    public void startSimulateDevice(SimulateDeviceInfo deviceInfo) {
+    public ListenableFuture<Boolean> startSimulateDevice(SimulateDeviceInfo deviceInfo) {
         LOG.info("start simulate device:{} ", deviceInfo);
-        NetconfServerDispatcher serverDispatcher = createDispatcher(deviceInfo);
+        AtomicBoolean initFlag = new AtomicBoolean(true);
+        NetconfServerDispatcher serverDispatcher = createDispatcher(deviceInfo, initFlag);
 
         NetconfSimulateDevice simulateDevice =
             new NetconfSimulateDevice(serverDispatcher, nettyThreadgroup, channelGroup, deviceInfo);
-        simulateDevice.start();
+        ListenableFuture<Boolean> future = simulateDevice.start();
+
+        future.addListener(() -> initFlag.set(false), MoreExecutors.directExecutor());
         startedDeviceMap.put(deviceInfo.getUniqueKey(), simulateDevice);
+
+        return future;
     }
 
     @Override
     public void stopSimulateDevice(String uniqueKey) {
-        NetconfSimulateDevice simulateDevice = startedDeviceMap.get(uniqueKey);
+        NetconfSimulateDevice simulateDevice = startedDeviceMap.remove(uniqueKey);
         if (simulateDevice != null) {
             simulateDevice.stop();
         }
@@ -165,7 +175,12 @@ public class SimluateDeviceServiceImpl implements SimluateDeviceService {
         simulateDevice.callhomeDisconnect(callhomeIp, callhomePort);
     }
 
-    private NetconfServerDispatcher createDispatcher(DeviceUniqueInfo uniqueInfo) {
+    @Override
+    public Map<String, NetconfSimulateDevice> startedDevices() {
+        return Map.copyOf(startedDeviceMap);
+    }
+
+    private NetconfServerDispatcher createDispatcher(DeviceUniqueInfo uniqueInfo, AtomicBoolean initFlag) {
         final SessionIdProvider idProvider = new SessionIdProvider();
 
         Set<Capability> transformedCapabilities = new HashSet<>(schemaContextService.supportedCapabilities());
@@ -173,7 +188,7 @@ public class SimluateDeviceServiceImpl implements SimluateDeviceService {
 
         NetconfMonitoringService monitoringService = new DummyMonitoringService(transformedCapabilities);
         NetconfOperationServiceFactory aggregatedFactory = createOperationServiceFactory(
-            transformedCapabilities, monitoringService, uniqueInfo);
+            transformedCapabilities, monitoringService, uniqueInfo, initFlag);
 
         NetconfServerSessionNegotiatorFactory serverNegotiatorFactory = new SimulateNegotiationFactory(
             hashedWheelTimer, aggregatedFactory, idProvider,
@@ -185,8 +200,9 @@ public class SimluateDeviceServiceImpl implements SimluateDeviceService {
 
     private NetconfOperationServiceFactory createOperationServiceFactory(Set<Capability> capabilities,
                                                                          NetconfMonitoringService monitoringService,
-                                                                         DeviceUniqueInfo uniqueInfo) {
-        DOMDataBroker domDataBroker = deviceDataBrokerMap.computeIfAbsent(uniqueInfo, this::createDomDataBroker);
+                                                                         DeviceUniqueInfo uniqueInfo,
+                                                                         AtomicBoolean initFlag) {
+        DOMDataBroker domDataBroker = createDomDataBroker(uniqueInfo, initFlag);
         initConfigData(uniqueInfo, domDataBroker);
 
         AggregatedNetconfOperationServiceFactory aggregatedFactory = new AggregatedNetconfOperationServiceFactory();
@@ -195,7 +211,7 @@ public class SimluateDeviceServiceImpl implements SimluateDeviceService {
             new NetconfMonitoringOperationServiceFactory(new NetconfMonitoringOperationService(monitoringService));
 
         InMemoryOperationServiceFactory operationServiceFactory =
-            new InMemoryOperationServiceFactory(capabilities, schemaContextService, aggregatedFactory, domDataBroker);
+            new InMemoryOperationServiceFactory(capabilities, schemaContextService, domDataBroker);
 
         aggregatedFactory.onAddNetconfOperationServiceFactory(operationServiceFactory);
         aggregatedFactory.onAddNetconfOperationServiceFactory(monitoringServiceFactory);
@@ -223,7 +239,7 @@ public class SimluateDeviceServiceImpl implements SimluateDeviceService {
                     return;
                 }
 
-                xmlElementList.forEach(element -> saveToDatastore(element, uniqueKey, writeTransaction));
+                xmlElementList.forEach(element -> saveDatabroker(element, uniqueKey, writeTransaction));
             } else {
                 for (SimulatorConfig simulatorConfig : simulatorConfigs) {
                     saveSimulatorConfig(simulatorConfig, writeTransaction);
@@ -258,44 +274,50 @@ public class SimluateDeviceServiceImpl implements SimluateDeviceService {
         }
 
         XmlElement xmlElement = XmlElement.fromString(nodeValue);
-        saveToDatastore(xmlElement, simulatorConfig.getDeviceId(), writeTransaction);
+        saveDatabroker(xmlElement, simulatorConfig.getDeviceId(), writeTransaction);
     }
 
     @SuppressWarnings("IllegalCatch")
-    public void saveToDatastore(XmlElement xmlElement, String deviceId, DOMDataTreeWriteTransaction writeTransaction) {
+    public void saveDatabroker(XmlElement xmlElement, String deviceId, DOMDataTreeWriteTransaction writeTransaction) {
         try {
             NormalizedNode normalizedNode = schemaContextService.parseToNormalizedNode(xmlElement);
             YangInstanceIdentifier identifier = YangInstanceIdentifier.builder()
                 .node(schemaContextService.findQName(xmlElement))
                 .build();
-            writeTransaction.put(LogicalDatastoreType.CONFIGURATION, identifier, normalizedNode);
+//            writeTransaction.put(LogicalDatastoreType.CONFIGURATION, identifier, normalizedNode);
+            //目前get 和 get-config 都从Operational datastore中读配置数据
             writeTransaction.put(LogicalDatastoreType.OPERATIONAL, identifier, normalizedNode);
         } catch (Throwable ex) {
             LOG.error("initia device:{} xmlElement name:{} failed.", deviceId, xmlElement.getName(), ex);
         }
     }
 
-    private DOMDataBroker createDomDataBroker(DeviceUniqueInfo uniqueInfo) {
+    private DOMDataBroker createDomDataBroker(DeviceUniqueInfo uniqueInfo, AtomicBoolean initFlag) {
         String uniqueSign = uniqueInfo.getUniqueKey();
         ListenerRegistry<EffectiveModelContextListener> listeners = ListenerRegistry.create();
+
+//        InMemoryDOMDataStore cfgStore = new InMemoryDOMDataStore("CFG-" + uniqueSign,
+//            LogicalDatastoreType.CONFIGURATION,
+//            getDataTreeChangeListenerExecutor(),
+//            InMemoryDOMDataStoreConfigProperties.DEFAULT_MAX_DATA_CHANGE_LISTENER_QUEUE_SIZE, false);
+//        cfgStore.registerTreeChangeListener(YangInstanceIdentifier.create(), new)
+//        listeners.register(cfgStore);
+
+        InMemoryDOMDataStore optStore =
+            new InMemoryDOMDataStore("OPER" + uniqueSign, getDataTreeChangeListenerExecutor());
+        listeners.register(optStore);
+
         listeners.streamListeners().forEach(listener ->
             listener.onModelContextUpdated(schemaContextService.getSchemaContext()));
 
-        InMemoryDOMDataStore cfgStore = new InMemoryDOMDataStore("CFG-" + uniqueSign,
-            LogicalDatastoreType.CONFIGURATION,
-            getDataTreeChangeListenerExecutor(),
-            InMemoryDOMDataStoreConfigProperties.DEFAULT_MAX_DATA_CHANGE_LISTENER_QUEUE_SIZE, false);
-        listeners.register(cfgStore);
-
-        InMemoryDOMDataStore optStore = new InMemoryDOMDataStore("OPER-" + uniqueSign,
-            LogicalDatastoreType.CONFIGURATION,
-            getDataTreeChangeListenerExecutor(),
-            InMemoryDOMDataStoreConfigProperties.DEFAULT_MAX_DATA_CHANGE_LISTENER_QUEUE_SIZE, false);
-        listeners.register(optStore);
+        SimulateDOMDataTreeChangeListener dataTreeChangeListener =
+            new SimulateDOMDataTreeChangeListener(uniqueInfo, initFlag, schemaContextService, simulatorConfigMapper);
+        optStore.registerTreeChangeListener(YangInstanceIdentifier.create(), dataTreeChangeListener);
 
         Map<LogicalDatastoreType, DOMStore> datastores = ImmutableMap.<LogicalDatastoreType, DOMStore>builder()
             .put(LogicalDatastoreType.OPERATIONAL, optStore)
-            .put(LogicalDatastoreType.CONFIGURATION, cfgStore).build();
+//            .put(LogicalDatastoreType.CONFIGURATION, cfgStore)
+            .build();
 
         ThreadFactory threadFactory = new ThreadFactoryBuilder()
             .setNameFormat("datastore-" + uniqueSign + "-%d")

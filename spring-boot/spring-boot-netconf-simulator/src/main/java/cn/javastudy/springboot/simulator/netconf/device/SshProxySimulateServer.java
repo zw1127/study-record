@@ -50,6 +50,8 @@ public class SshProxySimulateServer implements AutoCloseable {
     private static final Logger LOG = LoggerFactory.getLogger(SshProxySimulateServer.class);
 
     private final Map<InetSocketAddress, IoConnectFuture> callhomeServerMap = new ConcurrentHashMap<>();
+    private final Map<InetSocketAddress, Session> sessionMap = new ConcurrentHashMap<>();
+
     private final SshServer sshServer;
     private final ScheduledExecutorService minaTimerExecutor;
     private final EventLoopGroup clientGroup;
@@ -137,6 +139,10 @@ public class SshProxySimulateServer implements AutoCloseable {
         }
     }
 
+    public Map<InetSocketAddress, Session> getSessions() {
+        return Map.copyOf(sessionMap);
+    }
+
     private IoConnectFuture reconnect(final InetSocketAddress address) {
         return requireNonNull(connector).connect(address, null, null);
     }
@@ -151,6 +157,12 @@ public class SshProxySimulateServer implements AutoCloseable {
             @Override
             public void sessionCreated(final Session session) {
                 LOG.info("SSH session {} created", session);
+                SocketAddress remoteAddress = session.getRemoteAddress();
+                if (remoteAddress instanceof InetSocketAddress) {
+                    InetSocketAddress inetSocketAddress = (InetSocketAddress) remoteAddress;
+
+                    sessionMap.put(inetSocketAddress, session);
+                }
             }
 
             @Override
@@ -159,6 +171,7 @@ public class SshProxySimulateServer implements AutoCloseable {
                 SocketAddress remoteAddress = session.getRemoteAddress();
                 if (remoteAddress instanceof InetSocketAddress) {
                     InetSocketAddress callhomeServerAddress = (InetSocketAddress) remoteAddress;
+                    sessionMap.remove(callhomeServerAddress);
                     if (callhomeServerMap.containsKey(callhomeServerAddress)) {
                         LOG.info("sleep 10 seconds, reconnect");
                         minaTimerExecutor.schedule(() -> reconnect(callhomeServerAddress), 10, TimeUnit.SECONDS);

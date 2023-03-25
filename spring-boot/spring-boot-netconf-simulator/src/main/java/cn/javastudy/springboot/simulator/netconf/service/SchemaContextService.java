@@ -1,5 +1,6 @@
 package cn.javastudy.springboot.simulator.netconf.service;
 
+import io.lighty.codecs.util.XmlNodeConverter;
 import java.io.File;
 import java.util.Set;
 import javax.xml.transform.dom.DOMResult;
@@ -15,6 +16,7 @@ import org.opendaylight.yangtools.yang.model.api.EffectiveModelContext;
 import org.opendaylight.yangtools.yang.model.api.SchemaTreeInference;
 import org.opendaylight.yangtools.yang.model.repo.api.YangTextSchemaSource;
 import org.opendaylight.yangtools.yang.model.repo.spi.SchemaSourceProvider;
+import org.opendaylight.yangtools.yang.model.util.SchemaInferenceStack;
 
 public interface SchemaContextService {
 
@@ -57,4 +59,8 @@ public interface SchemaContextService {
     Set<Capability> supportedCapabilities();
 
     File schemaDirectory();
+
+    SchemaInferenceStack.Inference getRootInference();
+
+    XmlNodeConverter getXmlNodeConverter();
 }
