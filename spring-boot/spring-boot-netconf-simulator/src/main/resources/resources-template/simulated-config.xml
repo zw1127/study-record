@@ -8,7 +8,9 @@
             </config>
             <state>
                 <name>SOFTWARE_MANAGER</name>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:OPERATING_SYSTEM</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:OPERATING_SYSTEM
+                </type>
                 <software-version>V100R021C10SPC300</software-version>
             </state>
         </component>
@@ -25,7 +27,9 @@
                 <admin-state>ENABLED</admin-state>
                 <vendor-type>N1SCC</vendor-type>
                 <led>DISABLED</led>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:CONTROLLER_CARD</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:CONTROLLER_CARD
+                </type>
                 <location>1-41</location>
                 <description>N1SCC</description>
                 <mfg-name>Huawei</mfg-name>
@@ -36,7 +40,9 @@
                 <serial-no>026TCV10N7100774</serial-no>
                 <part-no>03026TCV</part-no>
                 <removable>true</removable>
-                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:ACTIVE</oper-status>
+                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:ACTIVE
+                </oper-status>
                 <empty>false</empty>
                 <parent>CHASSIS-1</parent>
                 <memory>
@@ -120,7 +126,8 @@
                 <remark>huawei</remark>
                 <admin-state>ENABLED</admin-state>
                 <vendor-type>OptiXtrans DC908</vendor-type>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:CHASSIS</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:CHASSIS
+                </type>
                 <description>OptiXtrans DC908</description>
                 <mfg-name>Huawei</mfg-name>
                 <mfg-date>2022-08-17</mfg-date>
@@ -129,7 +136,9 @@
                 <serial-no>{UUID}</serial-no>
                 <part-no>02301619</part-no>
                 <removable>false</removable>
-                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:ACTIVE</oper-status>
+                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:ACTIVE
+                </oper-status>
                 <empty>false</empty>
                 <allocated-power>1315</allocated-power>
                 <used-power>174</used-power>
@@ -232,7 +241,8 @@
                 <admin-state>ENABLED</admin-state>
                 <vendor-type>N2MD02</vendor-type>
                 <led>DISABLED</led>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:LINECARD</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:LINECARD
+                </type>
                 <location>1-4</location>
                 <description>N2MD02</description>
                 <mfg-name>Huawei</mfg-name>
@@ -242,7 +252,9 @@
                 <serial-no>029LGY10N7100690</serial-no>
                 <part-no>03029LGY</part-no>
                 <removable>true</removable>
-                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:ACTIVE</oper-status>
+                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:ACTIVE
+                </oper-status>
                 <empty>false</empty>
                 <parent>CHASSIS-1</parent>
                 <allocated-power>110</allocated-power>
@@ -327,7 +339,9 @@
                 <name>PSU-1-21</name>
                 <admin-state>ENABLED</admin-state>
                 <vendor-type>N1APSU</vendor-type>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:POWER_SUPPLY</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:POWER_SUPPLY
+                </type>
                 <location>1-21</location>
                 <description>N1APSU</description>
                 <mfg-name>Huawei</mfg-name>
@@ -337,7 +351,9 @@
                 <serial-no>2102312NBTBTM8000568</serial-no>
                 <part-no>02312NBT</part-no>
                 <removable>true</removable>
-                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:ACTIVE</oper-status>
+                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:ACTIVE
+                </oper-status>
                 <empty>false</empty>
                 <parent>CHASSIS-1</parent>
                 <allocated-power>210</allocated-power>
@@ -362,7 +378,9 @@
                 <name>PSU-1-22</name>
                 <admin-state>ENABLED</admin-state>
                 <vendor-type>N1APSU</vendor-type>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:POWER_SUPPLY</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:POWER_SUPPLY
+                </type>
                 <location>1-22</location>
                 <description>N1APSU</description>
                 <mfg-name>Huawei</mfg-name>
@@ -372,7 +390,9 @@
                 <serial-no>2102312NBTBTM8000572</serial-no>
                 <part-no>02312NBT</part-no>
                 <removable>true</removable>
-                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:ACTIVE</oper-status>
+                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:ACTIVE
+                </oper-status>
                 <empty>false</empty>
                 <parent>CHASSIS-1</parent>
                 <allocated-power>210</allocated-power>
@@ -407,7 +427,9 @@
                 <serial-no>026TMHW0N7001730</serial-no>
                 <part-no>03026TMH</part-no>
                 <removable>true</removable>
-                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:ACTIVE</oper-status>
+                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:ACTIVE
+                </oper-status>
                 <empty>false</empty>
                 <parent>CHASSIS-1</parent>
                 <allocated-power>165</allocated-power>
@@ -443,7 +465,9 @@
                 <serial-no>026TMHW0N7001759</serial-no>
                 <part-no>03026TMH</part-no>
                 <removable>true</removable>
-                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:ACTIVE</oper-status>
+                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:ACTIVE
+                </oper-status>
                 <empty>false</empty>
                 <parent>CHASSIS-1</parent>
                 <allocated-power>165</allocated-power>
@@ -479,7 +503,9 @@
                 <serial-no>026TMHW0N7001617</serial-no>
                 <part-no>03026TMH</part-no>
                 <removable>true</removable>
-                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:ACTIVE</oper-status>
+                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:ACTIVE
+                </oper-status>
                 <empty>false</empty>
                 <parent>CHASSIS-1</parent>
                 <allocated-power>165</allocated-power>
@@ -517,7 +543,9 @@
                 <serial-no>026TML10N7100607</serial-no>
                 <part-no>03026TML</part-no>
                 <removable>true</removable>
-                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:ACTIVE</oper-status>
+                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:ACTIVE
+                </oper-status>
                 <empty>false</empty>
                 <parent>CHASSIS-1</parent>
                 <allocated-power>10</allocated-power>
@@ -556,11 +584,14 @@
             <state>
                 <name>LINECARD-1-1</name>
                 <admin-state>ENABLED</admin-state>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:LINECARD</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:LINECARD
+                </type>
                 <location>1-1</location>
                 <description>N2MD02A</description>
                 <removable>true</removable>
-                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:INACTIVE</oper-status>
+                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:INACTIVE
+                </oper-status>
                 <empty>true</empty>
                 <parent>CHASSIS-1</parent>
                 <allocated-power>240</allocated-power>
@@ -745,7 +776,9 @@
             </config>
             <state>
                 <name>TRANSCEIVER-1-4-L1</name>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:TRANSCEIVER</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:TRANSCEIVER
+                </type>
                 <location>L1</location>
                 <description>A29</description>
                 <mfg-name>Huawei</mfg-name>
@@ -754,7 +787,9 @@
                 <serial-no>034KKP10N1003192</serial-no>
                 <part-no>34160048-001</part-no>
                 <removable>true</removable>
-                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:INACTIVE</oper-status>
+                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:INACTIVE
+                </oper-status>
                 <empty>false</empty>
                 <parent>PORT-1-4-L1</parent>
                 <allocated-power>22</allocated-power>
@@ -764,14 +799,21 @@
             <transceiver xmlns="http://openconfig.net/yang/platform/transceiver">
                 <config>
                     <enabled>true</enabled>
-                    <fec-mode xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:FEC_ENABLED</fec-mode>
+                    <fec-mode xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                        oc-platform-types:FEC_ENABLED
+                    </fec-mode>
                 </config>
                 <state>
                     <enabled>true</enabled>
-                    <fec-mode xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:FEC_ENABLED</fec-mode>
+                    <fec-mode xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                        oc-platform-types:FEC_ENABLED
+                    </fec-mode>
                     <present>PRESENT</present>
-                    <form-factor xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:CFP2</form-factor>
-                    <connector-type xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:LC_CONNECTOR</connector-type>
+                    <form-factor xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:CFP2
+                    </form-factor>
+                    <connector-type xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:LC_CONNECTOR
+                    </connector-type>
                     <vendor>Huawei</vendor>
                     <vendor-part>34160048-001</vendor-part>
                     <serial-no>034KKP10N1003192</serial-no>
@@ -803,7 +845,9 @@
             </config>
             <state>
                 <name>TRANSCEIVER-1-4-L2</name>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:TRANSCEIVER</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:TRANSCEIVER
+                </type>
                 <location>L2</location>
                 <description>A29</description>
                 <mfg-name>Huawei</mfg-name>
@@ -812,7 +856,9 @@
                 <serial-no>034MTP10N8007585</serial-no>
                 <part-no>34160048-001</part-no>
                 <removable>true</removable>
-                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:INACTIVE</oper-status>
+                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:INACTIVE
+                </oper-status>
                 <empty>false</empty>
                 <parent>PORT-1-4-L2</parent>
                 <allocated-power>25</allocated-power>
@@ -822,14 +868,21 @@
             <transceiver xmlns="http://openconfig.net/yang/platform/transceiver">
                 <config>
                     <enabled>true</enabled>
-                    <fec-mode xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:FEC_ENABLED</fec-mode>
+                    <fec-mode xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                        oc-platform-types:FEC_ENABLED
+                    </fec-mode>
                 </config>
                 <state>
                     <enabled>true</enabled>
-                    <fec-mode xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:FEC_ENABLED</fec-mode>
+                    <fec-mode xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                        oc-platform-types:FEC_ENABLED
+                    </fec-mode>
                     <present>PRESENT</present>
-                    <form-factor xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:CFP2</form-factor>
-                    <connector-type xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:LC_CONNECTOR</connector-type>
+                    <form-factor xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:CFP2
+                    </form-factor>
+                    <connector-type xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:LC_CONNECTOR
+                    </connector-type>
                     <vendor>Huawei</vendor>
                     <vendor-part>34160048-001</vendor-part>
                     <serial-no>034MTP10N8007585</serial-no>
@@ -861,7 +914,9 @@
             </config>
             <state>
                 <name>TRANSCEIVER-1-4-C1</name>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:TRANSCEIVER</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:TRANSCEIVER
+                </type>
                 <location>C1</location>
                 <description>100GBASE-SR4</description>
                 <mfg-name>FINISAR CORP</mfg-name>
@@ -869,7 +924,9 @@
                 <serial-no>X5DBFXH</serial-no>
                 <part-no>FTLC9558REPM</part-no>
                 <removable>true</removable>
-                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:DISABLED</oper-status>
+                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:DISABLED
+                </oper-status>
                 <empty>false</empty>
                 <parent>PORT-1-4-C1</parent>
                 <allocated-power>5</allocated-power>
@@ -879,22 +936,39 @@
             <transceiver xmlns="http://openconfig.net/yang/platform/transceiver">
                 <config>
                     <enabled>true</enabled>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:QSFP28</form-factor-preconf>
-                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:ETH_100GBASE_SR4</ethernet-pmd-preconf>
-                    <fec-mode xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:FEC_AUTO</fec-mode>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:QSFP28
+                    </form-factor-preconf>
+                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:ETH_100GBASE_SR4
+                    </ethernet-pmd-preconf>
+                    <fec-mode xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                        oc-platform-types:FEC_AUTO
+                    </fec-mode>
                 </config>
                 <state>
                     <enabled>false</enabled>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:QSFP28</form-factor-preconf>
-                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:ETH_100GBASE_SR4</ethernet-pmd-preconf>
-                    <fec-mode xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:FEC_AUTO</fec-mode>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:QSFP28
+                    </form-factor-preconf>
+                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:ETH_100GBASE_SR4
+                    </ethernet-pmd-preconf>
+                    <fec-mode xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                        oc-platform-types:FEC_AUTO
+                    </fec-mode>
                     <present>PRESENT</present>
-                    <form-factor xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:QSFP28</form-factor>
-                    <connector-type xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:MPO_CONNECTOR</connector-type>
+                    <form-factor xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:QSFP28
+                    </form-factor>
+                    <connector-type xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:MPO_CONNECTOR
+                    </connector-type>
                     <vendor>FINISAR CORP</vendor>
                     <vendor-part>FTLC9558REPM</vendor-part>
                     <vendor-rev>A1</vendor-rev>
-                    <ethernet-pmd xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:ETH_100GBASE_SR4</ethernet-pmd>
+                    <ethernet-pmd xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:ETH_100GBASE_SR4
+                    </ethernet-pmd>
                     <serial-no>X5DBFXH</serial-no>
                     <date-code>2021-04-08T00:00:00Z+00:00</date-code>
                     <fault-condition>true</fault-condition>
@@ -954,7 +1028,9 @@
                 <location>L1</location>
                 <description>LINEPORT</description>
                 <removable>false</removable>
-                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:INACTIVE</oper-status>
+                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:INACTIVE
+                </oper-status>
                 <empty>false</empty>
                 <parent>LINECARD-1-4</parent>
             </state>
@@ -992,7 +1068,9 @@
                 <location>L2</location>
                 <description>LINEPORT</description>
                 <removable>false</removable>
-                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:INACTIVE</oper-status>
+                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:INACTIVE
+                </oper-status>
                 <empty>false</empty>
                 <parent>LINECARD-1-4</parent>
             </state>
@@ -1030,7 +1108,9 @@
                 <location>C1</location>
                 <description>CLIENTPORT</description>
                 <removable>false</removable>
-                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:INACTIVE</oper-status>
+                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:INACTIVE
+                </oper-status>
                 <empty>false</empty>
                 <parent>LINECARD-1-4</parent>
             </state>
@@ -1049,11 +1129,15 @@
                 <breakout-mode xmlns="http://openconfig.net/yang/platform/port">
                     <config>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_100GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">
+                            oc-eth:SPEED_100GB
+                        </channel-speed>
                     </config>
                     <state>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_100GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">
+                            oc-eth:SPEED_100GB
+                        </channel-speed>
                     </state>
                 </breakout-mode>
             </port>
@@ -1071,7 +1155,9 @@
                 <location>C2</location>
                 <description>CLIENTPORT</description>
                 <removable>false</removable>
-                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:INACTIVE</oper-status>
+                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:INACTIVE
+                </oper-status>
                 <empty>true</empty>
                 <parent>LINECARD-1-4</parent>
             </state>
@@ -1079,11 +1165,15 @@
                 <breakout-mode xmlns="http://openconfig.net/yang/platform/port">
                     <config>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_100GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">
+                            oc-eth:SPEED_100GB
+                        </channel-speed>
                     </config>
                     <state>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_100GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">
+                            oc-eth:SPEED_100GB
+                        </channel-speed>
                     </state>
                 </breakout-mode>
             </port>
@@ -1095,10 +1185,14 @@
             </config>
             <state>
                 <name>TRANSCEIVER-1-4-C2</name>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:TRANSCEIVER</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:TRANSCEIVER
+                </type>
                 <location>C2</location>
                 <removable>true</removable>
-                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:INACTIVE</oper-status>
+                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:INACTIVE
+                </oper-status>
                 <empty>true</empty>
                 <parent>PORT-1-4-C2</parent>
                 <equipment-failure xmlns="http://openconfig.net/yang/alarms">false</equipment-failure>
@@ -1107,11 +1201,15 @@
             <transceiver xmlns="http://openconfig.net/yang/platform/transceiver">
                 <config>
                     <enabled>true</enabled>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:QSFP28</form-factor-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:QSFP28
+                    </form-factor-preconf>
                 </config>
                 <state>
                     <enabled>true</enabled>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:QSFP28</form-factor-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:QSFP28
+                    </form-factor-preconf>
                     <present>NOT_PRESENT</present>
                     <fault-condition>true</fault-condition>
                 </state>
@@ -1170,7 +1268,9 @@
                 <location>C3</location>
                 <description>CLIENTPORT</description>
                 <removable>false</removable>
-                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:INACTIVE</oper-status>
+                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:INACTIVE
+                </oper-status>
                 <empty>true</empty>
                 <parent>LINECARD-1-4</parent>
             </state>
@@ -1178,11 +1278,15 @@
                 <breakout-mode xmlns="http://openconfig.net/yang/platform/port">
                     <config>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_100GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">
+                            oc-eth:SPEED_100GB
+                        </channel-speed>
                     </config>
                     <state>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_100GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">
+                            oc-eth:SPEED_100GB
+                        </channel-speed>
                     </state>
                 </breakout-mode>
             </port>
@@ -1194,10 +1298,14 @@
             </config>
             <state>
                 <name>TRANSCEIVER-1-4-C3</name>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:TRANSCEIVER</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:TRANSCEIVER
+                </type>
                 <location>C3</location>
                 <removable>true</removable>
-                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:INACTIVE</oper-status>
+                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:INACTIVE
+                </oper-status>
                 <empty>true</empty>
                 <parent>PORT-1-4-C3</parent>
                 <equipment-failure xmlns="http://openconfig.net/yang/alarms">false</equipment-failure>
@@ -1206,11 +1314,15 @@
             <transceiver xmlns="http://openconfig.net/yang/platform/transceiver">
                 <config>
                     <enabled>true</enabled>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:QSFP28</form-factor-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:QSFP28
+                    </form-factor-preconf>
                 </config>
                 <state>
                     <enabled>true</enabled>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:QSFP28</form-factor-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:QSFP28
+                    </form-factor-preconf>
                     <present>NOT_PRESENT</present>
                     <fault-condition>true</fault-condition>
                 </state>
@@ -1269,7 +1381,9 @@
                 <location>C4</location>
                 <description>CLIENTPORT</description>
                 <removable>false</removable>
-                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:INACTIVE</oper-status>
+                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:INACTIVE
+                </oper-status>
                 <empty>true</empty>
                 <parent>LINECARD-1-4</parent>
             </state>
@@ -1277,11 +1391,15 @@
                 <breakout-mode xmlns="http://openconfig.net/yang/platform/port">
                     <config>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_100GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">
+                            oc-eth:SPEED_100GB
+                        </channel-speed>
                     </config>
                     <state>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_100GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">
+                            oc-eth:SPEED_100GB
+                        </channel-speed>
                     </state>
                 </breakout-mode>
             </port>
@@ -1293,10 +1411,14 @@
             </config>
             <state>
                 <name>TRANSCEIVER-1-4-C4</name>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:TRANSCEIVER</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:TRANSCEIVER
+                </type>
                 <location>C4</location>
                 <removable>true</removable>
-                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:INACTIVE</oper-status>
+                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:INACTIVE
+                </oper-status>
                 <empty>true</empty>
                 <parent>PORT-1-4-C4</parent>
                 <equipment-failure xmlns="http://openconfig.net/yang/alarms">false</equipment-failure>
@@ -1305,15 +1427,27 @@
             <transceiver xmlns="http://openconfig.net/yang/platform/transceiver">
                 <config>
                     <enabled>true</enabled>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:QSFP28</form-factor-preconf>
-                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:ETH_100GBASE_CWDM4</ethernet-pmd-preconf>
-                    <fec-mode xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:FEC_AUTO</fec-mode>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:QSFP28
+                    </form-factor-preconf>
+                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:ETH_100GBASE_CWDM4
+                    </ethernet-pmd-preconf>
+                    <fec-mode xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                        oc-platform-types:FEC_AUTO
+                    </fec-mode>
                 </config>
                 <state>
                     <enabled>true</enabled>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:QSFP28</form-factor-preconf>
-                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:ETH_100GBASE_CWDM4</ethernet-pmd-preconf>
-                    <fec-mode xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:FEC_AUTO</fec-mode>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:QSFP28
+                    </form-factor-preconf>
+                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:ETH_100GBASE_CWDM4
+                    </ethernet-pmd-preconf>
+                    <fec-mode xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                        oc-platform-types:FEC_AUTO
+                    </fec-mode>
                     <present>NOT_PRESENT</present>
                     <fault-condition>true</fault-condition>
                 </state>
@@ -1366,7 +1500,9 @@
             </config>
             <state>
                 <name>TRANSCEIVER-1-1-L1</name>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:TRANSCEIVER</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:TRANSCEIVER
+                </type>
                 <location>L1</location>
                 <removable>false</removable>
                 <empty>true</empty>
@@ -1375,10 +1511,14 @@
             <transceiver xmlns="http://openconfig.net/yang/platform/transceiver">
                 <config>
                     <enabled>true</enabled>
-                    <fec-mode xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:FEC_ENABLED</fec-mode>
+                    <fec-mode xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                        oc-platform-types:FEC_ENABLED
+                    </fec-mode>
                 </config>
                 <state>
-                    <fec-mode xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:FEC_ENABLED</fec-mode>
+                    <fec-mode xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                        oc-platform-types:FEC_ENABLED
+                    </fec-mode>
                     <present>NOT_PRESENT</present>
                 </state>
                 <physical-channels>
@@ -1441,7 +1581,8 @@
             </config>
             <state>
                 <name>OCH-1-1-L1</name>
-                <type xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:OPTICAL_CHANNEL</type>
+                <type xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:OPTICAL_CHANNEL
+                </type>
                 <location>L1</location>
                 <description>Optical Channel L1</description>
                 <removable>false</removable>
@@ -1470,7 +1611,9 @@
             </config>
             <state>
                 <name>TRANSCEIVER-1-1-L2</name>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:TRANSCEIVER</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:TRANSCEIVER
+                </type>
                 <location>L2</location>
                 <removable>true</removable>
                 <empty>true</empty>
@@ -1479,10 +1622,14 @@
             <transceiver xmlns="http://openconfig.net/yang/platform/transceiver">
                 <config>
                     <enabled>true</enabled>
-                    <fec-mode xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:FEC_ENABLED</fec-mode>
+                    <fec-mode xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                        oc-platform-types:FEC_ENABLED
+                    </fec-mode>
                 </config>
                 <state>
-                    <fec-mode xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:FEC_ENABLED</fec-mode>
+                    <fec-mode xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                        oc-platform-types:FEC_ENABLED
+                    </fec-mode>
                     <present>NOT_PRESENT</present>
                 </state>
                 <physical-channels>
@@ -1525,7 +1672,8 @@
             </config>
             <state>
                 <name>OCH-1-1-L2</name>
-                <type xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:OPTICAL_CHANNEL</type>
+                <type xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:OPTICAL_CHANNEL
+                </type>
                 <location>L2</location>
                 <description>Optical Channel L2</description>
                 <removable>false</removable>
@@ -1554,7 +1702,9 @@
             </config>
             <state>
                 <name>TRANSCEIVER-1-1-C1</name>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:TRANSCEIVER</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:TRANSCEIVER
+                </type>
                 <location>C1</location>
                 <removable>true</removable>
                 <empty>true</empty>
@@ -1563,10 +1713,14 @@
             <transceiver xmlns="http://openconfig.net/yang/platform/transceiver">
                 <config>
                     <enabled>true</enabled>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:QSFP28</form-factor-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:QSFP28
+                    </form-factor-preconf>
                 </config>
                 <state>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:QSFP28</form-factor-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:QSFP28
+                    </form-factor-preconf>
                     <present>NOT_PRESENT</present>
                 </state>
                 <physical-channels>
@@ -1630,11 +1784,15 @@
                 <breakout-mode xmlns="http://openconfig.net/yang/platform/port">
                     <config>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_100GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">
+                            oc-eth:SPEED_100GB
+                        </channel-speed>
                     </config>
                     <state>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_100GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">
+                            oc-eth:SPEED_100GB
+                        </channel-speed>
                     </state>
                 </breakout-mode>
             </port>
@@ -1646,7 +1804,9 @@
             </config>
             <state>
                 <name>TRANSCEIVER-1-1-C2</name>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:TRANSCEIVER</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:TRANSCEIVER
+                </type>
                 <location>C2</location>
                 <removable>true</removable>
                 <empty>true</empty>
@@ -1655,10 +1815,14 @@
             <transceiver xmlns="http://openconfig.net/yang/platform/transceiver">
                 <config>
                     <enabled>true</enabled>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:QSFP28</form-factor-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:QSFP28
+                    </form-factor-preconf>
                 </config>
                 <state>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:QSFP28</form-factor-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:QSFP28
+                    </form-factor-preconf>
                     <present>NOT_PRESENT</present>
                 </state>
                 <physical-channels>
@@ -1722,11 +1886,15 @@
                 <breakout-mode xmlns="http://openconfig.net/yang/platform/port">
                     <config>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_100GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">
+                            oc-eth:SPEED_100GB
+                        </channel-speed>
                     </config>
                     <state>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_100GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">
+                            oc-eth:SPEED_100GB
+                        </channel-speed>
                     </state>
                 </breakout-mode>
             </port>
@@ -1738,7 +1906,9 @@
             </config>
             <state>
                 <name>TRANSCEIVER-1-1-C3</name>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:TRANSCEIVER</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:TRANSCEIVER
+                </type>
                 <location>C3</location>
                 <removable>true</removable>
                 <empty>true</empty>
@@ -1747,10 +1917,14 @@
             <transceiver xmlns="http://openconfig.net/yang/platform/transceiver">
                 <config>
                     <enabled>true</enabled>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:QSFP28</form-factor-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:QSFP28
+                    </form-factor-preconf>
                 </config>
                 <state>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:QSFP28</form-factor-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:QSFP28
+                    </form-factor-preconf>
                     <present>NOT_PRESENT</present>
                 </state>
                 <physical-channels>
@@ -1814,11 +1988,15 @@
                 <breakout-mode xmlns="http://openconfig.net/yang/platform/port">
                     <config>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_100GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">
+                            oc-eth:SPEED_100GB
+                        </channel-speed>
                     </config>
                     <state>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_100GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">
+                            oc-eth:SPEED_100GB
+                        </channel-speed>
                     </state>
                 </breakout-mode>
             </port>
@@ -1830,7 +2008,9 @@
             </config>
             <state>
                 <name>TRANSCEIVER-1-1-C4</name>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:TRANSCEIVER</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:TRANSCEIVER
+                </type>
                 <location>C4</location>
                 <removable>true</removable>
                 <empty>true</empty>
@@ -1839,10 +2019,14 @@
             <transceiver xmlns="http://openconfig.net/yang/platform/transceiver">
                 <config>
                     <enabled>true</enabled>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:QSFP28</form-factor-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:QSFP28
+                    </form-factor-preconf>
                 </config>
                 <state>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:QSFP28</form-factor-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:QSFP28
+                    </form-factor-preconf>
                     <present>NOT_PRESENT</present>
                 </state>
                 <physical-channels>
@@ -1906,11 +2090,15 @@
                 <breakout-mode xmlns="http://openconfig.net/yang/platform/port">
                     <config>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_100GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">
+                            oc-eth:SPEED_100GB
+                        </channel-speed>
                     </config>
                     <state>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_100GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">
+                            oc-eth:SPEED_100GB
+                        </channel-speed>
                     </state>
                 </breakout-mode>
             </port>
@@ -1922,7 +2110,9 @@
             </config>
             <state>
                 <name>TRANSCEIVER-1-1-C5</name>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:TRANSCEIVER</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:TRANSCEIVER
+                </type>
                 <location>C5</location>
                 <removable>true</removable>
                 <empty>true</empty>
@@ -1931,12 +2121,20 @@
             <transceiver xmlns="http://openconfig.net/yang/platform/transceiver">
                 <config>
                     <enabled>true</enabled>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:SFP_PLUS</form-factor-preconf>
-                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:ETH_10GBASE_LR</ethernet-pmd-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:SFP_PLUS
+                    </form-factor-preconf>
+                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:ETH_10GBASE_LR
+                    </ethernet-pmd-preconf>
                 </config>
                 <state>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:SFP_PLUS</form-factor-preconf>
-                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:ETH_10GBASE_LR</ethernet-pmd-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:SFP_PLUS
+                    </form-factor-preconf>
+                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:ETH_10GBASE_LR
+                    </ethernet-pmd-preconf>
                     <present>NOT_PRESENT</present>
                 </state>
                 <physical-channels>
@@ -1973,11 +2171,13 @@
                 <breakout-mode xmlns="http://openconfig.net/yang/platform/port">
                     <config>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB
+                        </channel-speed>
                     </config>
                     <state>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB
+                        </channel-speed>
                     </state>
                 </breakout-mode>
             </port>
@@ -1989,7 +2189,9 @@
             </config>
             <state>
                 <name>TRANSCEIVER-1-1-C6</name>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:TRANSCEIVER</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:TRANSCEIVER
+                </type>
                 <location>C6</location>
                 <removable>true</removable>
                 <empty>true</empty>
@@ -1998,12 +2200,20 @@
             <transceiver xmlns="http://openconfig.net/yang/platform/transceiver">
                 <config>
                     <enabled>true</enabled>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:SFP_PLUS</form-factor-preconf>
-                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:ETH_10GBASE_LR</ethernet-pmd-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:SFP_PLUS
+                    </form-factor-preconf>
+                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:ETH_10GBASE_LR
+                    </ethernet-pmd-preconf>
                 </config>
                 <state>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:SFP_PLUS</form-factor-preconf>
-                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:ETH_10GBASE_LR</ethernet-pmd-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:SFP_PLUS
+                    </form-factor-preconf>
+                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:ETH_10GBASE_LR
+                    </ethernet-pmd-preconf>
                     <present>NOT_PRESENT</present>
                 </state>
                 <physical-channels>
@@ -2040,11 +2250,13 @@
                 <breakout-mode xmlns="http://openconfig.net/yang/platform/port">
                     <config>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB
+                        </channel-speed>
                     </config>
                     <state>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB
+                        </channel-speed>
                     </state>
                 </breakout-mode>
             </port>
@@ -2056,7 +2268,9 @@
             </config>
             <state>
                 <name>TRANSCEIVER-1-1-C7</name>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:TRANSCEIVER</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:TRANSCEIVER
+                </type>
                 <location>C7</location>
                 <removable>true</removable>
                 <empty>true</empty>
@@ -2065,12 +2279,20 @@
             <transceiver xmlns="http://openconfig.net/yang/platform/transceiver">
                 <config>
                     <enabled>true</enabled>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:SFP_PLUS</form-factor-preconf>
-                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:ETH_10GBASE_LR</ethernet-pmd-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:SFP_PLUS
+                    </form-factor-preconf>
+                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:ETH_10GBASE_LR
+                    </ethernet-pmd-preconf>
                 </config>
                 <state>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:SFP_PLUS</form-factor-preconf>
-                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:ETH_10GBASE_LR</ethernet-pmd-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:SFP_PLUS
+                    </form-factor-preconf>
+                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:ETH_10GBASE_LR
+                    </ethernet-pmd-preconf>
                     <present>NOT_PRESENT</present>
                 </state>
                 <physical-channels>
@@ -2107,11 +2329,13 @@
                 <breakout-mode xmlns="http://openconfig.net/yang/platform/port">
                     <config>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB
+                        </channel-speed>
                     </config>
                     <state>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB
+                        </channel-speed>
                     </state>
                 </breakout-mode>
             </port>
@@ -2123,7 +2347,9 @@
             </config>
             <state>
                 <name>TRANSCEIVER-1-1-C8</name>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:TRANSCEIVER</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:TRANSCEIVER
+                </type>
                 <location>C8</location>
                 <removable>true</removable>
                 <empty>true</empty>
@@ -2132,12 +2358,20 @@
             <transceiver xmlns="http://openconfig.net/yang/platform/transceiver">
                 <config>
                     <enabled>true</enabled>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:SFP_PLUS</form-factor-preconf>
-                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:ETH_10GBASE_LR</ethernet-pmd-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:SFP_PLUS
+                    </form-factor-preconf>
+                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:ETH_10GBASE_LR
+                    </ethernet-pmd-preconf>
                 </config>
                 <state>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:SFP_PLUS</form-factor-preconf>
-                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:ETH_10GBASE_LR</ethernet-pmd-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:SFP_PLUS
+                    </form-factor-preconf>
+                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:ETH_10GBASE_LR
+                    </ethernet-pmd-preconf>
                     <present>NOT_PRESENT</present>
                 </state>
                 <physical-channels>
@@ -2174,11 +2408,13 @@
                 <breakout-mode xmlns="http://openconfig.net/yang/platform/port">
                     <config>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB
+                        </channel-speed>
                     </config>
                     <state>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB
+                        </channel-speed>
                     </state>
                 </breakout-mode>
             </port>
@@ -2190,7 +2426,9 @@
             </config>
             <state>
                 <name>TRANSCEIVER-1-1-C9</name>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:TRANSCEIVER</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:TRANSCEIVER
+                </type>
                 <location>C9</location>
                 <removable>true</removable>
                 <empty>true</empty>
@@ -2199,12 +2437,20 @@
             <transceiver xmlns="http://openconfig.net/yang/platform/transceiver">
                 <config>
                     <enabled>true</enabled>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:SFP_PLUS</form-factor-preconf>
-                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:ETH_10GBASE_LR</ethernet-pmd-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:SFP_PLUS
+                    </form-factor-preconf>
+                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:ETH_10GBASE_LR
+                    </ethernet-pmd-preconf>
                 </config>
                 <state>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:SFP_PLUS</form-factor-preconf>
-                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:ETH_10GBASE_LR</ethernet-pmd-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:SFP_PLUS
+                    </form-factor-preconf>
+                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:ETH_10GBASE_LR
+                    </ethernet-pmd-preconf>
                     <present>NOT_PRESENT</present>
                 </state>
                 <physical-channels>
@@ -2241,11 +2487,13 @@
                 <breakout-mode xmlns="http://openconfig.net/yang/platform/port">
                     <config>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB
+                        </channel-speed>
                     </config>
                     <state>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB
+                        </channel-speed>
                     </state>
                 </breakout-mode>
             </port>
@@ -2257,7 +2505,9 @@
             </config>
             <state>
                 <name>TRANSCEIVER-1-1-C10</name>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:TRANSCEIVER</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:TRANSCEIVER
+                </type>
                 <location>C10</location>
                 <removable>true</removable>
                 <empty>true</empty>
@@ -2266,12 +2516,20 @@
             <transceiver xmlns="http://openconfig.net/yang/platform/transceiver">
                 <config>
                     <enabled>true</enabled>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:SFP_PLUS</form-factor-preconf>
-                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:ETH_10GBASE_LR</ethernet-pmd-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:SFP_PLUS
+                    </form-factor-preconf>
+                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:ETH_10GBASE_LR
+                    </ethernet-pmd-preconf>
                 </config>
                 <state>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:SFP_PLUS</form-factor-preconf>
-                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:ETH_10GBASE_LR</ethernet-pmd-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:SFP_PLUS
+                    </form-factor-preconf>
+                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:ETH_10GBASE_LR
+                    </ethernet-pmd-preconf>
                     <present>NOT_PRESENT</present>
                 </state>
                 <physical-channels>
@@ -2308,11 +2566,13 @@
                 <breakout-mode xmlns="http://openconfig.net/yang/platform/port">
                     <config>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB
+                        </channel-speed>
                     </config>
                     <state>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB
+                        </channel-speed>
                     </state>
                 </breakout-mode>
             </port>
@@ -2324,7 +2584,9 @@
             </config>
             <state>
                 <name>TRANSCEIVER-1-1-C11</name>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:TRANSCEIVER</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:TRANSCEIVER
+                </type>
                 <location>C11</location>
                 <removable>true</removable>
                 <empty>true</empty>
@@ -2333,12 +2595,20 @@
             <transceiver xmlns="http://openconfig.net/yang/platform/transceiver">
                 <config>
                     <enabled>true</enabled>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:SFP_PLUS</form-factor-preconf>
-                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:ETH_10GBASE_LR</ethernet-pmd-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:SFP_PLUS
+                    </form-factor-preconf>
+                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:ETH_10GBASE_LR
+                    </ethernet-pmd-preconf>
                 </config>
                 <state>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:SFP_PLUS</form-factor-preconf>
-                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:ETH_10GBASE_LR</ethernet-pmd-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:SFP_PLUS
+                    </form-factor-preconf>
+                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:ETH_10GBASE_LR
+                    </ethernet-pmd-preconf>
                     <present>NOT_PRESENT</present>
                 </state>
                 <physical-channels>
@@ -2375,11 +2645,13 @@
                 <breakout-mode xmlns="http://openconfig.net/yang/platform/port">
                     <config>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB
+                        </channel-speed>
                     </config>
                     <state>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB
+                        </channel-speed>
                     </state>
                 </breakout-mode>
             </port>
@@ -2391,7 +2663,9 @@
             </config>
             <state>
                 <name>TRANSCEIVER-1-1-C12</name>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:TRANSCEIVER</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:TRANSCEIVER
+                </type>
                 <location>C12</location>
                 <removable>true</removable>
                 <empty>true</empty>
@@ -2400,12 +2674,20 @@
             <transceiver xmlns="http://openconfig.net/yang/platform/transceiver">
                 <config>
                     <enabled>true</enabled>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:SFP_PLUS</form-factor-preconf>
-                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:ETH_10GBASE_LR</ethernet-pmd-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:SFP_PLUS
+                    </form-factor-preconf>
+                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:ETH_10GBASE_LR
+                    </ethernet-pmd-preconf>
                 </config>
                 <state>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:SFP_PLUS</form-factor-preconf>
-                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:ETH_10GBASE_LR</ethernet-pmd-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:SFP_PLUS
+                    </form-factor-preconf>
+                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:ETH_10GBASE_LR
+                    </ethernet-pmd-preconf>
                     <present>NOT_PRESENT</present>
                 </state>
                 <physical-channels>
@@ -2442,11 +2724,13 @@
                 <breakout-mode xmlns="http://openconfig.net/yang/platform/port">
                     <config>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB
+                        </channel-speed>
                     </config>
                     <state>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB
+                        </channel-speed>
                     </state>
                 </breakout-mode>
             </port>
@@ -2458,7 +2742,9 @@
             </config>
             <state>
                 <name>TRANSCEIVER-1-1-C13</name>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:TRANSCEIVER</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:TRANSCEIVER
+                </type>
                 <location>C13</location>
                 <removable>true</removable>
                 <empty>true</empty>
@@ -2467,12 +2753,20 @@
             <transceiver xmlns="http://openconfig.net/yang/platform/transceiver">
                 <config>
                     <enabled>true</enabled>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:SFP_PLUS</form-factor-preconf>
-                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:ETH_10GBASE_LR</ethernet-pmd-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:SFP_PLUS
+                    </form-factor-preconf>
+                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:ETH_10GBASE_LR
+                    </ethernet-pmd-preconf>
                 </config>
                 <state>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:SFP_PLUS</form-factor-preconf>
-                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:ETH_10GBASE_LR</ethernet-pmd-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:SFP_PLUS
+                    </form-factor-preconf>
+                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:ETH_10GBASE_LR
+                    </ethernet-pmd-preconf>
                     <present>NOT_PRESENT</present>
                 </state>
                 <physical-channels>
@@ -2509,11 +2803,13 @@
                 <breakout-mode xmlns="http://openconfig.net/yang/platform/port">
                     <config>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB
+                        </channel-speed>
                     </config>
                     <state>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB
+                        </channel-speed>
                     </state>
                 </breakout-mode>
             </port>
@@ -2525,7 +2821,9 @@
             </config>
             <state>
                 <name>TRANSCEIVER-1-1-C14</name>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:TRANSCEIVER</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:TRANSCEIVER
+                </type>
                 <location>C14</location>
                 <removable>true</removable>
                 <empty>true</empty>
@@ -2534,12 +2832,20 @@
             <transceiver xmlns="http://openconfig.net/yang/platform/transceiver">
                 <config>
                     <enabled>true</enabled>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:SFP_PLUS</form-factor-preconf>
-                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:ETH_10GBASE_LR</ethernet-pmd-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:SFP_PLUS
+                    </form-factor-preconf>
+                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:ETH_10GBASE_LR
+                    </ethernet-pmd-preconf>
                 </config>
                 <state>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:SFP_PLUS</form-factor-preconf>
-                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:ETH_10GBASE_LR</ethernet-pmd-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:SFP_PLUS
+                    </form-factor-preconf>
+                    <ethernet-pmd-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:ETH_10GBASE_LR
+                    </ethernet-pmd-preconf>
                     <present>NOT_PRESENT</present>
                 </state>
                 <physical-channels>
@@ -2576,11 +2882,13 @@
                 <breakout-mode xmlns="http://openconfig.net/yang/platform/port">
                     <config>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB
+                        </channel-speed>
                     </config>
                     <state>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB
+                        </channel-speed>
                     </state>
                 </breakout-mode>
             </port>
@@ -2592,7 +2900,9 @@
             </config>
             <state>
                 <name>TRANSCEIVER-1-1-C15</name>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:TRANSCEIVER</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:TRANSCEIVER
+                </type>
                 <location>C15</location>
                 <removable>true</removable>
                 <empty>true</empty>
@@ -2601,10 +2911,14 @@
             <transceiver xmlns="http://openconfig.net/yang/platform/transceiver">
                 <config>
                     <enabled>true</enabled>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:SFP_PLUS</form-factor-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:SFP_PLUS
+                    </form-factor-preconf>
                 </config>
                 <state>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:SFP_PLUS</form-factor-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:SFP_PLUS
+                    </form-factor-preconf>
                     <present>NOT_PRESENT</present>
                 </state>
                 <physical-channels>
@@ -2641,11 +2955,13 @@
                 <breakout-mode xmlns="http://openconfig.net/yang/platform/port">
                     <config>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB
+                        </channel-speed>
                     </config>
                     <state>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB
+                        </channel-speed>
                     </state>
                 </breakout-mode>
             </port>
@@ -2657,7 +2973,9 @@
             </config>
             <state>
                 <name>TRANSCEIVER-1-1-C16</name>
-                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:TRANSCEIVER</type>
+                <type xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:TRANSCEIVER
+                </type>
                 <location>C16</location>
                 <removable>true</removable>
                 <empty>true</empty>
@@ -2666,10 +2984,14 @@
             <transceiver xmlns="http://openconfig.net/yang/platform/transceiver">
                 <config>
                     <enabled>true</enabled>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:SFP_PLUS</form-factor-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:SFP_PLUS
+                    </form-factor-preconf>
                 </config>
                 <state>
-                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:SFP_PLUS</form-factor-preconf>
+                    <form-factor-preconf xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">
+                        oc-opt-types:SFP_PLUS
+                    </form-factor-preconf>
                     <present>NOT_PRESENT</present>
                 </state>
                 <physical-channels>
@@ -2706,11 +3028,13 @@
                 <breakout-mode xmlns="http://openconfig.net/yang/platform/port">
                     <config>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB
+                        </channel-speed>
                     </config>
                     <state>
                         <num-channels>1</num-channels>
-                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB</channel-speed>
+                        <channel-speed xmlns:oc-eth="http://openconfig.net/yang/interfaces/ethernet">oc-eth:SPEED_10GB
+                        </channel-speed>
                     </state>
                 </breakout-mode>
             </port>
@@ -2722,7 +3046,8 @@
             </config>
             <state>
                 <name>OCH-1-4-L1</name>
-                <type xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:OPTICAL_CHANNEL</type>
+                <type xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:OPTICAL_CHANNEL
+                </type>
                 <location>L1</location>
                 <description>Optical Channel L1</description>
                 <removable>false</removable>
@@ -2751,7 +3076,8 @@
             </config>
             <state>
                 <name>OCH-1-4-L2</name>
-                <type xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:OPTICAL_CHANNEL</type>
+                <type xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:OPTICAL_CHANNEL
+                </type>
                 <location>L2</location>
                 <description>Optical Channel L2</description>
                 <removable>false</removable>
@@ -2786,7 +3112,9 @@
                 <location>1-41</location>
                 <description>PORT ETH4</description>
                 <removable>false</removable>
-                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:ACTIVE</oper-status>
+                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:ACTIVE
+                </oper-status>
                 <empty>false</empty>
                 <parent>MCU-1-41</parent>
             </state>
@@ -2804,7 +3132,9 @@
                 <location>1-41</location>
                 <description>PORT ETH3</description>
                 <removable>false</removable>
-                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:ACTIVE</oper-status>
+                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:ACTIVE
+                </oper-status>
                 <empty>false</empty>
                 <parent>MCU-1-41</parent>
             </state>
@@ -2822,7 +3152,9 @@
                 <location>1-41</location>
                 <description>PORT ETH2</description>
                 <removable>false</removable>
-                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:ACTIVE</oper-status>
+                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:ACTIVE
+                </oper-status>
                 <empty>false</empty>
                 <parent>MCU-1-41</parent>
             </state>
@@ -2840,7 +3172,9 @@
                 <location>1-41</location>
                 <description>PORT ETH1</description>
                 <removable>false</removable>
-                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:ACTIVE</oper-status>
+                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:ACTIVE
+                </oper-status>
                 <empty>false</empty>
                 <parent>MCU-1-41</parent>
             </state>
@@ -2856,7 +3190,9 @@
                 <location>1-41</location>
                 <description>PORT NM</description>
                 <removable>false</removable>
-                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:ACTIVE</oper-status>
+                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:ACTIVE
+                </oper-status>
                 <empty>false</empty>
                 <parent>MCU-1-41</parent>
             </state>
@@ -2872,7 +3208,9 @@
                 <location>1-40</location>
                 <description>PORT ETH</description>
                 <removable>false</removable>
-                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:ACTIVE</oper-status>
+                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:ACTIVE
+                </oper-status>
                 <empty>false</empty>
                 <parent>PANEL-1-40</parent>
             </state>
@@ -2888,7 +3226,9 @@
                 <location>1-40</location>
                 <description>PORT CONSOLE</description>
                 <removable>false</removable>
-                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">oc-platform-types:ACTIVE</oper-status>
+                <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                    oc-platform-types:ACTIVE
+                </oper-status>
                 <empty>false</empty>
                 <parent>PANEL-1-40</parent>
             </state>
@@ -2985,8 +3325,11 @@
                     <type xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">oc-opt-amp:EDFA</type>
                     <target-gain>22.00</target-gain>
                     <target-gain-tilt>-2.50</target-gain-tilt>
-                    <gain-range xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">oc-opt-amp:HIGH_GAIN_RANGE</gain-range>
-                    <amp-mode xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">oc-opt-amp:CONSTANT_GAIN</amp-mode>
+                    <gain-range xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">
+                        oc-opt-amp:HIGH_GAIN_RANGE
+                    </gain-range>
+                    <amp-mode xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">oc-opt-amp:CONSTANT_GAIN
+                    </amp-mode>
                     <target-output-power>1.00</target-output-power>
                     <enabled>true</enabled>
                     <target-voa-attenuation>22.00</target-voa-attenuation>
@@ -3004,8 +3347,11 @@
                     <min-gain>0.0</min-gain>
                     <max-gain>0.0</max-gain>
                     <target-gain-tilt>-2.50</target-gain-tilt>
-                    <gain-range xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">oc-opt-amp:HIGH_GAIN_RANGE</gain-range>
-                    <amp-mode xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">oc-opt-amp:CONSTANT_GAIN</amp-mode>
+                    <gain-range xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">
+                        oc-opt-amp:HIGH_GAIN_RANGE
+                    </gain-range>
+                    <amp-mode xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">oc-opt-amp:CONSTANT_GAIN
+                    </amp-mode>
                     <target-output-power>1.00</target-output-power>
                     <max-output-power>0.0</max-output-power>
                     <enabled>true</enabled>
@@ -3056,8 +3402,11 @@
                     <type xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">oc-opt-amp:EDFA</type>
                     <target-gain>22.00</target-gain>
                     <target-gain-tilt>-2.50</target-gain-tilt>
-                    <gain-range xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">oc-opt-amp:MID_GAIN_RANGE</gain-range>
-                    <amp-mode xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">oc-opt-amp:CONSTANT_GAIN</amp-mode>
+                    <gain-range xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">
+                        oc-opt-amp:MID_GAIN_RANGE
+                    </gain-range>
+                    <amp-mode xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">oc-opt-amp:CONSTANT_GAIN
+                    </amp-mode>
                     <target-output-power>1.00</target-output-power>
                     <enabled>true</enabled>
                     <target-voa-attenuation>22.00</target-voa-attenuation>
@@ -3075,8 +3424,11 @@
                     <min-gain>0.0</min-gain>
                     <max-gain>0.0</max-gain>
                     <target-gain-tilt>-2.50</target-gain-tilt>
-                    <gain-range xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">oc-opt-amp:MID_GAIN_RANGE</gain-range>
-                    <amp-mode xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">oc-opt-amp:CONSTANT_GAIN</amp-mode>
+                    <gain-range xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">
+                        oc-opt-amp:MID_GAIN_RANGE
+                    </gain-range>
+                    <amp-mode xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">oc-opt-amp:CONSTANT_GAIN
+                    </amp-mode>
                     <target-output-power>1.00</target-output-power>
                     <max-output-power>0.0</max-output-power>
                     <enabled>true</enabled>
@@ -3127,8 +3479,11 @@
                     <type xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">oc-opt-amp:EDFA</type>
                     <target-gain>22.00</target-gain>
                     <target-gain-tilt>-2.50</target-gain-tilt>
-                    <gain-range xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">oc-opt-amp:HIGH_GAIN_RANGE</gain-range>
-                    <amp-mode xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">oc-opt-amp:CONSTANT_GAIN</amp-mode>
+                    <gain-range xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">
+                        oc-opt-amp:HIGH_GAIN_RANGE
+                    </gain-range>
+                    <amp-mode xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">oc-opt-amp:CONSTANT_GAIN
+                    </amp-mode>
                     <target-output-power>1.00</target-output-power>
                     <enabled>true</enabled>
                     <target-voa-attenuation>1.50</target-voa-attenuation>
@@ -3146,8 +3501,11 @@
                     <min-gain>0.0</min-gain>
                     <max-gain>0.0</max-gain>
                     <target-gain-tilt>-2.50</target-gain-tilt>
-                    <gain-range xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">oc-opt-amp:HIGH_GAIN_RANGE</gain-range>
-                    <amp-mode xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">oc-opt-amp:CONSTANT_GAIN</amp-mode>
+                    <gain-range xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">
+                        oc-opt-amp:HIGH_GAIN_RANGE
+                    </gain-range>
+                    <amp-mode xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">oc-opt-amp:CONSTANT_GAIN
+                    </amp-mode>
                     <target-output-power>1.00</target-output-power>
                     <max-output-power>0.0</max-output-power>
                     <enabled>true</enabled>
@@ -3198,8 +3556,11 @@
                     <type xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">oc-opt-amp:EDFA</type>
                     <target-gain>22.00</target-gain>
                     <target-gain-tilt>-2.50</target-gain-tilt>
-                    <gain-range xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">oc-opt-amp:HIGH_GAIN_RANGE</gain-range>
-                    <amp-mode xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">oc-opt-amp:CONSTANT_GAIN</amp-mode>
+                    <gain-range xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">
+                        oc-opt-amp:HIGH_GAIN_RANGE
+                    </gain-range>
+                    <amp-mode xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">oc-opt-amp:CONSTANT_GAIN
+                    </amp-mode>
                     <target-output-power>1.00</target-output-power>
                     <enabled>true</enabled>
                     <target-voa-attenuation>1.50</target-voa-attenuation>
@@ -3217,8 +3578,11 @@
                     <min-gain>0.0</min-gain>
                     <max-gain>0.0</max-gain>
                     <target-gain-tilt>-2.50</target-gain-tilt>
-                    <gain-range xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">oc-opt-amp:HIGH_GAIN_RANGE</gain-range>
-                    <amp-mode xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">oc-opt-amp:CONSTANT_GAIN</amp-mode>
+                    <gain-range xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">
+                        oc-opt-amp:HIGH_GAIN_RANGE
+                    </gain-range>
+                    <amp-mode xmlns:oc-opt-amp="http://openconfig.net/yang/optical-amplifier">oc-opt-amp:CONSTANT_GAIN
+                    </amp-mode>
                     <target-output-power>1.00</target-output-power>
                     <max-output-power>0.0</max-output-power>
                     <enabled>true</enabled>
@@ -3402,8 +3766,10 @@
                     <resource>PORT-2-4-L2</resource>
                     <text>CRC error packet overrun alarm</text>
                     <time-created>1603846899016</time-created>
-                    <severity xmlns:oc-alarm-types="http://openconfig.net/yang/alarms/types">oc-alarm-types:MAJOR</severity>
-                    <type-id xmlns:oc-alarm-types="http://openconfig.net/yang/alarms/types">oc-alarm-types:EQPT-ALARM</type-id>
+                    <severity xmlns:oc-alarm-types="http://openconfig.net/yang/alarms/types">oc-alarm-types:MAJOR
+                    </severity>
+                    <type-id xmlns:oc-alarm-types="http://openconfig.net/yang/alarms/types">oc-alarm-types:EQPT-ALARM
+                    </type-id>
                     <alarm-abbreviate>CRC_ERR</alarm-abbreviate>
                 </state>
             </alarm>
@@ -3414,8 +3780,10 @@
                     <resource>OCH-1-1-L1</resource>
                     <text>Loss of payload signal in OCH layer</text>
                     <time-created>1603847587151</time-created>
-                    <severity xmlns:oc-alarm-types="http://openconfig.net/yang/alarms/types">oc-alarm-types:CRITICAL</severity>
-                    <type-id xmlns:oc-alarm-types="http://openconfig.net/yang/alarms/types">oc-alarm-types:EQPT-ALARM</type-id>
+                    <severity xmlns:oc-alarm-types="http://openconfig.net/yang/alarms/types">oc-alarm-types:CRITICAL
+                    </severity>
+                    <type-id xmlns:oc-alarm-types="http://openconfig.net/yang/alarms/types">oc-alarm-types:EQPT-ALARM
+                    </type-id>
                     <alarm-abbreviate>LOS</alarm-abbreviate>
                 </state>
             </alarm>
@@ -3928,27 +4296,40 @@
                         </config>
                     </sensor-path>
                     <sensor-path>
-                        <path>/openconfig-platform:components/component/port/openconfig-transport-line-common:optical-port/state</path>
+                        <path>
+                            /openconfig-platform:components/component/port/openconfig-transport-line-common:optical-port/state
+                        </path>
                         <config>
-                            <path>/openconfig-platform:components/component/port/openconfig-transport-line-common:optical-port/state</path>
+                            <path>
+                                /openconfig-platform:components/component/port/openconfig-transport-line-common:optical-port/state
+                            </path>
                         </config>
                     </sensor-path>
                     <sensor-path>
-                        <path>/openconfig-platform:components/component/openconfig-platform-transceiver:transceiver/state</path>
+                        <path>
+                            /openconfig-platform:components/component/openconfig-platform-transceiver:transceiver/state
+                        </path>
                         <config>
-                            <path>/openconfig-platform:components/component/openconfig-platform-transceiver:transceiver/state</path>
+                            <path>
+                                /openconfig-platform:components/component/openconfig-platform-transceiver:transceiver/state
+                            </path>
                         </config>
                     </sensor-path>
                     <sensor-path>
                         <path>/openconfig-terminal-device:terminal-device/logical-channels/channel/ethernet/state</path>
                         <config>
-                            <path>/openconfig-terminal-device:terminal-device/logical-channels/channel/ethernet/state</path>
+                            <path>/openconfig-terminal-device:terminal-device/logical-channels/channel/ethernet/state
+                            </path>
                         </config>
                     </sensor-path>
                     <sensor-path>
-                        <path>/openconfig-platform:components/component/openconfig-terminal-device:optical-channel/state</path>
+                        <path>
+                            /openconfig-platform:components/component/openconfig-terminal-device:optical-channel/state
+                        </path>
                         <config>
-                            <path>/openconfig-platform:components/component/openconfig-terminal-device:optical-channel/state</path>
+                            <path>
+                                /openconfig-platform:components/component/openconfig-terminal-device:optical-channel/state
+                            </path>
                         </config>
                     </sensor-path>
                 </sensor-paths>
@@ -4005,4 +4386,1674 @@
             </destination-group>
         </destination-groups>
     </telemetry-system>
+
+    <wavelength-selective-switch xmlns="http://openconfig.net/yang/wavelength-selective-switch">
+        <wsses>
+            <wss>
+                <name>WSS-1-1-TR1</name>
+                <config>
+                    <name>WSS-1-1-TR1</name>
+                </config>
+                <media-channels>
+                    <media-channel>
+                        <index>1</index>
+                        <config>
+                            <index>1</index>
+                            <lower-frequency>191325000</lower-frequency>
+                            <dest>
+                                <port-name>PORT-1-1-OUT1</port-name>
+                            </dest>
+                            <upper-frequency>191375000</upper-frequency>
+                            <frequency-slots>
+                                <frequency-slot>
+                                    <lower-frequency>191325000</lower-frequency>
+                                    <upper-frequency>191375000</upper-frequency>
+                                </frequency-slot>
+                            </frequency-slots>
+                            <source>
+                                <port-name>PORT-1-1-AM1</port-name>
+                            </source>
+                        </config>
+                        <state>
+                            <index>1</index>
+                            <name>1</name>
+                            <lower-frequency>191325000</lower-frequency>
+                            <upper-frequency>191375000</upper-frequency>
+                            <admin-status>ENABLED</admin-status>
+                            <oper-status xmlns:oc-platform-types="http://openconfig.net/yang/platform-types">
+                                oc-platform-types:ACTIVE
+                            </oper-status>
+                            <channel-power>-33.34</channel-power>
+                            <source>
+                                <port-name>PORT-1-1-AM1</port-name>
+                            </source>
+                            <dest>
+                                <port-name>PORT-1-1-OUT1</port-name>
+                            </dest>
+                            <frequency-slots>
+                                <frequency-slot>
+                                    <lower-frequency>191325000</lower-frequency>
+                                    <upper-frequency>191375000</upper-frequency>
+                                    <control-mode>SET-ATTENUATION</control-mode>
+                                    <attenuation-value>15.0</attenuation-value>
+                                    <target-power-value>0.0</target-power-value>
+                                    <actual-power-value>-33.34</actual-power-value>
+                                </frequency-slot>
+                            </frequency-slots>
+                        </state>
+                    </media-channel>
+                </media-channels>
+                <state>
+                    <in-ports-num>33</in-ports-num>
+                    <out-ports-num>33</out-ports-num>
+                    <lower-frequency>191300000</lower-frequency>
+                    <upper-frequency>196200000</upper-frequency>
+                    <in-ports>
+                        <in-port>
+                            <name>PORT-1-1-AM1</name>
+                            <optical-power>
+                                <instant>-0.91</instant>
+                                <avg>-0.89</avg>
+                                <min>-0.97</min>
+                                <max>-0.89</max>
+                                <interval>900000000</interval>
+                                <min-time>1679905063</min-time>
+                                <max-time>1679904902</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM2</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM3</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM4</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM5</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM6</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM7</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM8</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM9</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM10</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM11</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM12</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM13</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM14</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM15</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM16</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM17</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM18</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM19</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM20</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM21</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM22</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM23</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM24</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM25</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM26</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM27</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM28</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM29</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM30</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM31</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM32</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-IN1</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                    </in-ports>
+                    <out-ports>
+                        <out-port>
+                            <name>PORT-1-1-DM1</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM2</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM3</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM4</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM5</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM6</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM7</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM8</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM9</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM10</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM11</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM12</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM13</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM14</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM15</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM16</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM17</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM18</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM19</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM20</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM21</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM22</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM23</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM24</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM25</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM26</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM27</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM28</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM29</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM30</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM31</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM32</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-OUT1</name>
+                            <optical-power>
+                                <instant>-29.47</instant>
+                                <avg>-29.29</avg>
+                                <min>-29.79</min>
+                                <max>-29.21</max>
+                                <interval>900000000</interval>
+                                <min-time>1679905067</min-time>
+                                <max-time>1679904915</max-time>
+                            </optical-power>
+                        </out-port>
+                    </out-ports>
+                </state>
+            </wss>
+            <wss>
+                <name>WSS-1-1-TR2</name>
+                <config>
+                    <name>WSS-1-1-TR2</name>
+                </config>
+                <state>
+                    <in-ports-num>33</in-ports-num>
+                    <out-ports-num>33</out-ports-num>
+                    <lower-frequency>191300000</lower-frequency>
+                    <upper-frequency>196200000</upper-frequency>
+                    <in-ports>
+                        <in-port>
+                            <name>PORT-1-1-AM33</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM34</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM35</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM36</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM37</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM38</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM39</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM40</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM41</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM42</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM43</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM44</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM45</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM46</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM47</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM48</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM49</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM50</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM51</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM52</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM53</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM54</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM55</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM56</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM57</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM58</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM59</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM60</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM61</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM62</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM63</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-AM64</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                        <in-port>
+                            <name>PORT-1-1-IN2</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </in-port>
+                    </in-ports>
+                    <out-ports>
+                        <out-port>
+                            <name>PORT-1-1-DM33</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM34</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM35</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM36</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM37</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM38</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM39</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM40</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM41</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM42</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM43</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM44</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM45</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM46</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM47</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM48</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM49</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM50</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM51</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM52</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM53</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM54</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM55</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM56</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM57</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM58</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM59</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM60</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM61</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM62</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM63</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-DM64</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                        <out-port>
+                            <name>PORT-1-1-OUT2</name>
+                            <optical-power>
+                                <instant>-45.0</instant>
+                                <avg>-45.0</avg>
+                                <min>-45.0</min>
+                                <max>-45.0</max>
+                                <interval>900000000</interval>
+                                <min-time>1679904901</min-time>
+                                <max-time>1679904901</max-time>
+                            </optical-power>
+                        </out-port>
+                    </out-ports>
+                </state>
+            </wss>
+        </wsses>
+    </wavelength-selective-switch>
 </top>

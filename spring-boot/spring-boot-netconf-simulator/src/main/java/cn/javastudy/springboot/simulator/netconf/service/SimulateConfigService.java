@@ -1,6 +1,7 @@
 package cn.javastudy.springboot.simulator.netconf.service;
 
 import cn.javastudy.springboot.simulator.netconf.domain.DeviceUniqueInfo;
+import org.opendaylight.netconf.api.xml.XmlElement;
 
 public interface SimulateConfigService {
 
@@ -12,4 +13,7 @@ public interface SimulateConfigService {
      */
     String initialConfigXml(DeviceUniqueInfo uniqueInfo);
 
+    void saveToDb(String deviceId, XmlElement xmlElement);
+
+    void deleteFromDb(String deviceId, XmlElement beforeElement);
 }

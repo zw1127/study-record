@@ -4,6 +4,7 @@ import cn.javastudy.springboot.simulator.netconf.device.NetconfSimulateDevice;
 import cn.javastudy.springboot.simulator.netconf.domain.SimulateDeviceInfo;
 import com.google.common.util.concurrent.ListenableFuture;
 import java.util.Map;
+import org.w3c.dom.Document;
 
 public interface SimluateDeviceService {
 
@@ -26,4 +27,6 @@ public interface SimluateDeviceService {
     }
 
     Map<String, NetconfSimulateDevice> startedDevices();
+
+    void sendNotification(Document notificationContent, String deviceId, String targetIp, Integer targetPort);
 }

@@ -3,6 +3,7 @@ package cn.javastudy.springboot.simulator.netconf.ops;
 import static org.opendaylight.netconf.api.xml.XmlNetconfConstants.URN_IETF_PARAMS_XML_NS_NETCONF_BASE_1_0;
 
 import cn.javastudy.springboot.simulator.netconf.service.SchemaContextService;
+import cn.javastudy.springboot.simulator.netconf.utils.XmlUtils;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -22,7 +23,6 @@ import org.opendaylight.mdsal.dom.api.DOMDataTreeReadWriteTransaction;
 import org.opendaylight.netconf.api.DocumentedException;
 import org.opendaylight.netconf.api.xml.XmlElement;
 import org.opendaylight.netconf.api.xml.XmlNetconfConstants;
-import org.opendaylight.netconf.api.xml.XmlUtil;
 import org.opendaylight.netconf.mdsal.connector.TransactionProvider;
 import org.opendaylight.netconf.mdsal.connector.ops.Datastore;
 import org.opendaylight.yangtools.yang.common.ErrorSeverity;
@@ -133,7 +133,7 @@ public final class CopyConfig extends AbstractEdit {
         final Node node = transformNormalizedNode(document, data);
 
         // Save XML to file:
-        final String xml = XmlUtil.toString((Element) node);
+        final String xml = XmlUtils.toString((Element) node);
         try {
             final Path file = Paths.get(new URI(url));
             Files.write(file, xml.getBytes(StandardCharsets.UTF_8));

@@ -17,7 +17,8 @@ public class NetconfSimulatorApplication {
 
     @RequestMapping("/hello")
     public String helloWorld() {
-        return "Hello world!" + DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'Z").format(ZonedDateTime.now());
+        String time = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'Z").format(ZonedDateTime.now());
+        return "Hello world!" + time;
     }
 
 }

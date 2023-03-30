@@ -1,15 +1,19 @@
 package cn.javastudy.springboot.simulator.netconf.utils;
 
+import java.lang.reflect.Field;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
-import java.util.concurrent.TimeUnit;
+import org.opendaylight.netconf.api.messages.NetconfHelloMessageAdditionalHeader;
+import org.opendaylight.netconf.api.monitoring.NetconfManagementSession;
 import org.opendaylight.netconf.auth.AuthProvider;
+import org.opendaylight.netconf.impl.NetconfServerSession;
 import org.opendaylight.netconf.shaded.sshd.server.auth.pubkey.PublickeyAuthenticator;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IetfInetUtil;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpAddress;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpAddressBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.ReflectionUtils;
 
 public final class Utils {
 
@@ -34,11 +38,39 @@ public final class Utils {
         return new InetSocketAddress(inetAd, Integer.parseInt(portNumber));
     }
 
-    public static void sleep(int timeSeconds) {
+    public static NetconfHelloMessageAdditionalHeader resolveHeader(NetconfManagementSession session) {
         try {
-            TimeUnit.SECONDS.sleep(timeSeconds);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
+            if (!(session instanceof NetconfServerSession)) {
+                return null;
+            }
+            NetconfServerSession serverSession = (NetconfServerSession) session;
+
+            Field field = ReflectionUtils.findField(serverSession.getClass(), "header");
+            if (field == null) {
+                return null;
+            }
+
+            Object header = getValue(field, serverSession);
+            if (header instanceof NetconfHelloMessageAdditionalHeader) {
+                return (NetconfHelloMessageAdditionalHeader) header;
+            }
+        } catch (Throwable throwable) {
+            LOG.warn("get field failed. serverSession:{}", session, throwable);
         }
+        return null;
+    }
+
+    private static <T> Object getValue(Field field, T instance) {
+        try {
+            field.setAccessible(true);
+            return field.get(instance);
+        } catch (IllegalAccessException | IllegalArgumentException e) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("get instance:{} field:{} value failed", instance, field.getName(), e);
+            }
+            LOG.warn("get instance:{} field:{} value failed, error:{}", instance, field.getName(), e.getMessage());
+        }
+
+        return null;
     }
 }

@@ -1,10 +1,10 @@
 package cn.javastudy.springboot.simulator.netconf.rpchandler;
 
+import cn.javastudy.springboot.simulator.netconf.utils.XmlUtils;
 import java.util.Optional;
 import org.opendaylight.netconf.api.DocumentedException;
 import org.opendaylight.netconf.api.xml.XmlElement;
 import org.opendaylight.netconf.api.xml.XmlNetconfConstants;
-import org.opendaylight.netconf.api.xml.XmlUtil;
 import org.opendaylight.netconf.mapping.api.HandlingPriority;
 import org.opendaylight.netconf.mapping.api.NetconfOperation;
 import org.opendaylight.netconf.mapping.api.NetconfOperationChainedExecution;
@@ -44,7 +44,7 @@ class SettableRpc implements NetconfOperation {
             document.getDocumentElement().setAttribute(XmlNetconfConstants.MESSAGE_ID, msgId);
             return document;
         } else if (subsequentOperation.isExecutionTermination()) {
-            throw new DocumentedException("Mapping not found " + XmlUtil.toString(requestMessage),
+            throw new DocumentedException("Mapping not found " + XmlUtils.toString(requestMessage),
                 ErrorType.APPLICATION, ErrorTag.OPERATION_NOT_SUPPORTED,
                 ErrorSeverity.ERROR);
         } else {

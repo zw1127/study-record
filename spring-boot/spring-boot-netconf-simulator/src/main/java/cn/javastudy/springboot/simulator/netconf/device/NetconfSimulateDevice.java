@@ -16,11 +16,9 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.channels.AsynchronousChannelGroup;
-import java.util.Map;
 import java.util.StringJoiner;
 import java.util.concurrent.ScheduledExecutorService;
 import org.opendaylight.netconf.api.NetconfServerDispatcher;
-import org.opendaylight.netconf.shaded.sshd.common.session.Session;
 import org.opendaylight.netconf.shaded.sshd.server.keyprovider.SimpleGeneratorHostKeyProvider;
 import org.opendaylight.netconf.ssh.SshProxyServerConfigurationBuilder;
 import org.slf4j.Logger;
@@ -41,17 +39,20 @@ public class NetconfSimulateDevice {
     private final String uniqueKey;
 
     private final SimulateDeviceInfo deviceInfo;
+    private final DeviceSessionManager sessionManager;
 
     public NetconfSimulateDevice(final NetconfServerDispatcher netconfServerDispatcher,
                                  final NioEventLoopGroup nettyThreadgroup,
                                  final AsynchronousChannelGroup group,
-                                 final SimulateDeviceInfo deviceInfo) {
+                                 final SimulateDeviceInfo deviceInfo,
+                                 final DeviceSessionManager sessionManager) {
         this.netconfServerDispatcher = netconfServerDispatcher;
         this.nettyThreadgroup = nettyThreadgroup;
         this.group = group;
         this.deviceInfo = deviceInfo;
         this.portNumber = requireNonNull(deviceInfo.getPortNumber()).toString();
         this.uniqueKey = requireNonNull(deviceInfo.getUniqueKey());
+        this.sessionManager = sessionManager;
 
         this.minaTimerExecutor = newScheduledThreadPool(1, new ThreadFactoryBuilder()
             .setNameFormat("netconf-ssh-simulator-timer-" + uniqueKey + "-%d")
@@ -170,8 +171,8 @@ public class NetconfSimulateDevice {
         return deviceInfo;
     }
 
-    public Map<InetSocketAddress, Session> getSessions() {
-        return simulateServer.getSessions();
+    public DeviceSessionManager getSessionManager() {
+        return sessionManager;
     }
 
     @Override

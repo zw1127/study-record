@@ -5,6 +5,7 @@ import static com.google.common.util.concurrent.MoreExecutors.listeningDecorator
 
 import cn.javastudy.springboot.simulator.netconf.datastore.entity.SimulatorConfig;
 import cn.javastudy.springboot.simulator.netconf.datastore.mapper.SimulatorConfigMapper;
+import cn.javastudy.springboot.simulator.netconf.device.DeviceSessionManager;
 import cn.javastudy.springboot.simulator.netconf.device.NetconfSimulateDevice;
 import cn.javastudy.springboot.simulator.netconf.domain.DeviceUniqueInfo;
 import cn.javastudy.springboot.simulator.netconf.domain.SimulateDeviceInfo;
@@ -20,6 +21,7 @@ import cn.javastudy.springboot.simulator.netconf.rpchandler.SettableOperationRpc
 import cn.javastudy.springboot.simulator.netconf.service.SchemaContextService;
 import cn.javastudy.springboot.simulator.netconf.service.SimluateDeviceService;
 import cn.javastudy.springboot.simulator.netconf.service.SimulateConfigService;
+import cn.javastudy.springboot.simulator.netconf.utils.Utils;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
@@ -28,9 +30,12 @@ import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.ListeningScheduledExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.util.HashedWheelTimer;
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.nio.channels.AsynchronousChannelGroup;
 import java.util.HashSet;
 import java.util.List;
@@ -60,11 +65,13 @@ import org.opendaylight.netconf.api.capability.Capability;
 import org.opendaylight.netconf.api.monitoring.NetconfMonitoringService;
 import org.opendaylight.netconf.api.xml.XmlElement;
 import org.opendaylight.netconf.impl.NetconfServerDispatcherImpl;
+import org.opendaylight.netconf.impl.NetconfServerSession;
 import org.opendaylight.netconf.impl.NetconfServerSessionNegotiatorFactory;
 import org.opendaylight.netconf.impl.ServerChannelInitializer;
 import org.opendaylight.netconf.impl.SessionIdProvider;
 import org.opendaylight.netconf.impl.osgi.AggregatedNetconfOperationServiceFactory;
 import org.opendaylight.netconf.mapping.api.NetconfOperationServiceFactory;
+import org.opendaylight.netconf.notifications.NetconfNotification;
 import org.opendaylight.netconf.shaded.sshd.common.util.threads.ThreadUtils;
 import org.opendaylight.yangtools.util.ListenerRegistry;
 import org.opendaylight.yangtools.yang.data.api.YangInstanceIdentifier;
@@ -74,6 +81,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.w3c.dom.Document;
 
 @Service
 public class SimluateDeviceServiceImpl implements SimluateDeviceService {
@@ -135,10 +143,11 @@ public class SimluateDeviceServiceImpl implements SimluateDeviceService {
     public ListenableFuture<Boolean> startSimulateDevice(SimulateDeviceInfo deviceInfo) {
         LOG.info("start simulate device:{} ", deviceInfo);
         AtomicBoolean initFlag = new AtomicBoolean(true);
-        NetconfServerDispatcher serverDispatcher = createDispatcher(deviceInfo, initFlag);
+        DeviceSessionManager sessionManager = new DeviceSessionManager(deviceInfo);
+        NetconfServerDispatcher serverDispatcher = createDispatcher(deviceInfo, sessionManager, initFlag);
 
         NetconfSimulateDevice simulateDevice =
-            new NetconfSimulateDevice(serverDispatcher, nettyThreadgroup, channelGroup, deviceInfo);
+            new NetconfSimulateDevice(serverDispatcher, nettyThreadgroup, channelGroup, deviceInfo, sessionManager);
         ListenableFuture<Boolean> future = simulateDevice.start();
 
         future.addListener(() -> initFlag.set(false), MoreExecutors.directExecutor());
@@ -180,15 +189,49 @@ public class SimluateDeviceServiceImpl implements SimluateDeviceService {
         return Map.copyOf(startedDeviceMap);
     }
 
-    private NetconfServerDispatcher createDispatcher(DeviceUniqueInfo uniqueInfo, AtomicBoolean initFlag) {
+    @Override
+    public void sendNotification(Document notificationContent, String deviceId, String targetIp, Integer targetPort) {
+        NetconfSimulateDevice simulateDevice = startedDeviceMap.get(deviceId);
+        if (simulateDevice == null) {
+            LOG.warn("device:{} does not exist.", deviceId);
+            return;
+        }
+
+        Map<InetSocketAddress, NetconfServerSession> sessions = simulateDevice.getSessionManager().getSessions();
+        if (CollectionUtils.isEmpty(sessions)) {
+            LOG.warn("device:{} connected session is null.", deviceId);
+            return;
+        }
+
+        InetSocketAddress inetAddress = Utils.getInetAddress(targetIp, targetPort.toString());
+        NetconfServerSession session = sessions.get(inetAddress);
+        if (session == null) {
+            LOG.warn("targetIp:{} targetPort:{} session does not exist.", targetIp, targetPort);
+            return;
+        }
+
+        NetconfNotification notification = new NetconfNotification(notificationContent);
+        ChannelFuture channelFuture = session.sendMessage(notification);
+        channelFuture.addListener((ChannelFutureListener) future -> {
+            if (future.isSuccess()) {
+                LOG.info("device: {} send notification:{} to target: {}:{} successful.",
+                    deviceId, notification, targetIp, targetPort);
+            }
+        });
+    }
+
+    private NetconfServerDispatcher createDispatcher(DeviceUniqueInfo uniqueInfo,
+                                                     DeviceSessionManager sessionManager,
+                                                     AtomicBoolean initFlag) {
         final SessionIdProvider idProvider = new SessionIdProvider();
 
-        Set<Capability> transformedCapabilities = new HashSet<>(schemaContextService.supportedCapabilities());
-        transformedCapabilities.add(new BasicCapability("urn:ietf:params:netconf:capability:candidate:1.0"));
+        Set<Capability> capabilities = new HashSet<>(schemaContextService.supportedCapabilities());
+        capabilities.add(new BasicCapability("urn:ietf:params:netconf:capability:candidate:1.0"));
 
-        NetconfMonitoringService monitoringService = new DummyMonitoringService(transformedCapabilities);
+        NetconfMonitoringService monitoringService = new DummyMonitoringService(capabilities, sessionManager);
+
         NetconfOperationServiceFactory aggregatedFactory = createOperationServiceFactory(
-            transformedCapabilities, monitoringService, uniqueInfo, initFlag);
+            capabilities, monitoringService, uniqueInfo, initFlag);
 
         NetconfServerSessionNegotiatorFactory serverNegotiatorFactory = new SimulateNegotiationFactory(
             hashedWheelTimer, aggregatedFactory, idProvider,
@@ -287,6 +330,9 @@ public class SimluateDeviceServiceImpl implements SimluateDeviceService {
 //            writeTransaction.put(LogicalDatastoreType.CONFIGURATION, identifier, normalizedNode);
             //目前get 和 get-config 都从Operational datastore中读配置数据
             writeTransaction.put(LogicalDatastoreType.OPERATIONAL, identifier, normalizedNode);
+
+            //同时也要更新数据库中的数据
+            simulateConfigService.saveToDb(deviceId, xmlElement);
         } catch (Throwable ex) {
             LOG.error("initia device:{} xmlElement name:{} failed.", deviceId, xmlElement.getName(), ex);
         }
@@ -311,7 +357,7 @@ public class SimluateDeviceServiceImpl implements SimluateDeviceService {
             listener.onModelContextUpdated(schemaContextService.getSchemaContext()));
 
         SimulateDOMDataTreeChangeListener dataTreeChangeListener =
-            new SimulateDOMDataTreeChangeListener(uniqueInfo, initFlag, schemaContextService, simulatorConfigMapper);
+            new SimulateDOMDataTreeChangeListener(uniqueInfo, initFlag, schemaContextService, simulateConfigService);
         optStore.registerTreeChangeListener(YangInstanceIdentifier.create(), dataTreeChangeListener);
 
         Map<LogicalDatastoreType, DOMStore> datastores = ImmutableMap.<LogicalDatastoreType, DOMStore>builder()

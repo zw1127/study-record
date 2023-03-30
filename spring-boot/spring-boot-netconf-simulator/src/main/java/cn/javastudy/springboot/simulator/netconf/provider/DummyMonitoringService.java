@@ -53,11 +53,13 @@ public class DummyMonitoringService implements NetconfMonitoringService {
     private final Capabilities capabilities;
     private final ArrayListMultimap<String, Capability> capabilityMultiMap;
     private final Schemas schemas;
+    private final SessionListener sessionListener;
 
-    public DummyMonitoringService(final Set<Capability> capabilities) {
+    public DummyMonitoringService(final Set<Capability> capabilities, final SessionListener sessionListener) {
 
         this.capabilities = new CapabilitiesBuilder().setCapability(
             ImmutableSet.copyOf(Collections2.transform(capabilities, CAPABILITY_URI_FUNCTION))).build();
+        this.sessionListener = sessionListener;
 
         Set<Capability> moduleCapabilities = new HashSet<>();
         capabilityMultiMap = ArrayListMultimap.create();
@@ -81,26 +83,7 @@ public class DummyMonitoringService implements NetconfMonitoringService {
 
     @Override
     public SessionListener getSessionListener() {
-        return new SessionListener() {
-            @Override
-            public void onSessionUp(final NetconfManagementSession session) {
-                //no op
-                LOG.info("onSessionUp, session is: {} ", session.toManagementSession());
-            }
-
-            @Override
-            public void onSessionDown(final NetconfManagementSession session) {
-                //no op
-                LOG.info("onSessionDown, session is: {}", session.toManagementSession());
-            }
-
-            @Override
-            public void onSessionEvent(final SessionEvent event) {
-                //no op
-                LOG.debug("on SessionEvent event type: {}, session:{}", event.getType(),
-                    event.getSession().toManagementSession());
-            }
-        };
+        return sessionListener;
     }
 
     @Override

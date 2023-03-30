@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -191,8 +192,8 @@ public class SchemaContextServiceImpl implements SchemaContextService {
         final SourceIdentifier moduleSourceIdentifier = RevisionSourceIdentifier.create(module.getName(),
             module.getRevision());
         try {
-            final String moduleContent = new String(
-                consumer.getSchemaSource(moduleSourceIdentifier, YangTextSchemaSource.class).get().read());
+            final String moduleContent = consumer.getSchemaSource(moduleSourceIdentifier, YangTextSchemaSource.class)
+                .get().asCharSource(StandardCharsets.UTF_8).read();
             capabilities.add(new YangModuleCapability(module, moduleContent));
             //IOException would be thrown in creating SchemaContext already
         } catch (final ExecutionException | InterruptedException | IOException e) {

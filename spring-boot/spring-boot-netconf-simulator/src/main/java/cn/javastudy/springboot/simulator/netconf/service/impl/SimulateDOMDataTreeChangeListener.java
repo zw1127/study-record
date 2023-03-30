@@ -5,6 +5,7 @@ import cn.javastudy.springboot.simulator.netconf.datastore.entity.SimulatorConfi
 import cn.javastudy.springboot.simulator.netconf.datastore.mapper.SimulatorConfigMapper;
 import cn.javastudy.springboot.simulator.netconf.domain.DeviceUniqueInfo;
 import cn.javastudy.springboot.simulator.netconf.service.SchemaContextService;
+import cn.javastudy.springboot.simulator.netconf.service.SimulateConfigService;
 import io.lighty.codecs.util.XmlNodeConverter;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,16 +28,16 @@ public class SimulateDOMDataTreeChangeListener implements DOMDataTreeChangeListe
 
     private final DeviceUniqueInfo uniqueInfo;
     private final XmlNodeConverter xmlNodeConverter;
-    private final SimulatorConfigMapper simulatorConfigMapper;
+    private final SimulateConfigService simulateConfigService;
     private final AtomicBoolean initFlag;
 
     public SimulateDOMDataTreeChangeListener(final DeviceUniqueInfo uniqueInfo,
                                              final AtomicBoolean initFlag,
                                              final SchemaContextService schemaContextService,
-                                             final SimulatorConfigMapper simulatorConfigMapper) {
+                                             final SimulateConfigService simulateConfigService) {
         this.uniqueInfo = uniqueInfo;
         this.xmlNodeConverter = schemaContextService.getXmlNodeConverter();
-        this.simulatorConfigMapper = simulatorConfigMapper;
+        this.simulateConfigService = simulateConfigService;
         this.initFlag = initFlag;
     }
 
@@ -49,7 +50,6 @@ public class SimulateDOMDataTreeChangeListener implements DOMDataTreeChangeListe
             }
 
             for (DataTreeCandidate change : changes) {
-                ModificationType modificationType = change.getRootNode().getModificationType();
                 ContainerNode before = change.getRootNode().getDataBefore()
                     .filter(ContainerNode.class::isInstance)
                     .map(ContainerNode.class::cast)
@@ -68,6 +68,7 @@ public class SimulateDOMDataTreeChangeListener implements DOMDataTreeChangeListe
         }
     }
 
+    @SuppressWarnings("IllegalCatch")
     private void processDataChange(ContainerNode before, ContainerNode after) {
         if (before == null && after == null) {
             LOG.warn("node:{} before and after date are null.", uniqueInfo);
@@ -84,43 +85,19 @@ public class SimulateDOMDataTreeChangeListener implements DOMDataTreeChangeListe
             if (!CollectionUtils.isEmpty(deleteDataList)) {
                 for (DataContainerChild child : deleteDataList) {
                     XmlElement element = XmlElement.fromString(xmlNodeConverter.serializeData(child).toString());
-                    deleteFromDb(uniqueInfo.getUniqueKey(), element);
+                    simulateConfigService.deleteFromDb(uniqueInfo.getUniqueKey(), element);
                 }
             }
 
             if (!CollectionUtils.isEmpty(updateDataList)) {
                 for (DataContainerChild child : updateDataList) {
                     XmlElement element = XmlElement.fromString(xmlNodeConverter.serializeData(child).toString());
-                    saveToDb(uniqueInfo.getUniqueKey(), element);
+                    simulateConfigService.saveToDb(uniqueInfo.getUniqueKey(), element);
                 }
             }
         } catch (Throwable throwable) {
             LOG.warn("process device:{} DataChange error:", uniqueInfo, throwable);
         }
-    }
-
-    private void saveToDb(String deviceId, XmlElement xmlElement) {
-        SimulatorConfigKey key = new SimulatorConfigKey(deviceId, xmlElement.getName());
-
-        SimulatorConfig config = new SimulatorConfig();
-        config.setDeviceId(deviceId);
-        config.setNodeName(xmlElement.getName());
-        config.setNodeValue(XmlUtil.toString(xmlElement));
-
-        SimulatorConfig dbConfig = simulatorConfigMapper.selectByKey(key);
-        if (dbConfig == null) {
-            boolean result = simulatorConfigMapper.insert(config) > 0;
-            LOG.debug("insert device:{} config:{} to database result:{}.", deviceId, config.getNodeName(), result);
-        } else {
-            boolean result = simulatorConfigMapper.updateValueByKey(config) > 0;
-            LOG.debug("update device:{} config:{} to database result:{}.", deviceId, config.getNodeName(), result);
-        }
-    }
-
-    private void deleteFromDb(String deviceId, XmlElement beforeElement) {
-        SimulatorConfigKey key = new SimulatorConfigKey(deviceId, beforeElement.getName());
-        int deleted = simulatorConfigMapper.deleteByKey(key);
-        LOG.debug("delete device:{} nodeName:{} deleted size:{}", deleted, beforeElement.getName(), deleted);
     }
 
 
