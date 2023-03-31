@@ -9,6 +9,7 @@ import cn.javastudy.springboot.simulator.netconf.device.DeviceSessionManager;
 import cn.javastudy.springboot.simulator.netconf.device.NetconfSimulateDevice;
 import cn.javastudy.springboot.simulator.netconf.domain.DeviceUniqueInfo;
 import cn.javastudy.springboot.simulator.netconf.domain.SimulateDeviceInfo;
+import cn.javastudy.springboot.simulator.netconf.exception.SimulateException;
 import cn.javastudy.springboot.simulator.netconf.monitoring.NetconfMonitoringOperationService;
 import cn.javastudy.springboot.simulator.netconf.monitoring.NetconfMonitoringOperationServiceFactory;
 import cn.javastudy.springboot.simulator.netconf.operate.InMemoryOperationServiceFactory;
@@ -29,6 +30,7 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.ListeningScheduledExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
@@ -190,34 +192,46 @@ public class SimluateDeviceServiceImpl implements SimluateDeviceService {
     }
 
     @Override
-    public void sendNotification(Document notificationContent, String deviceId, String targetIp, Integer targetPort) {
+    public ListenableFuture<Boolean> sendNotification(Document notificationContent,
+                                                      String deviceId,
+                                                      String targetIp,
+                                                      Integer targetPort) {
+        NetconfNotification notification = new NetconfNotification(notificationContent);
+
         NetconfSimulateDevice simulateDevice = startedDeviceMap.get(deviceId);
         if (simulateDevice == null) {
             LOG.warn("device:{} does not exist.", deviceId);
-            return;
+            return Futures.immediateFailedFuture(new SimulateException("device:{0} does not exist.", deviceId));
         }
 
         Map<InetSocketAddress, NetconfServerSession> sessions = simulateDevice.getSessionManager().getSessions();
         if (CollectionUtils.isEmpty(sessions)) {
             LOG.warn("device:{} connected session is null.", deviceId);
-            return;
+            return Futures.immediateFailedFuture(
+                new SimulateException("device:{0} connected session is null.", deviceId));
         }
 
         InetSocketAddress inetAddress = Utils.getInetAddress(targetIp, targetPort.toString());
         NetconfServerSession session = sessions.get(inetAddress);
         if (session == null) {
             LOG.warn("targetIp:{} targetPort:{} session does not exist.", targetIp, targetPort);
-            return;
+            return Futures.immediateFailedFuture(
+                new SimulateException("targetIp:{0} targetPort:{} session does not exist.", deviceId));
         }
 
-        NetconfNotification notification = new NetconfNotification(notificationContent);
+        SettableFuture<Boolean> result = SettableFuture.create();
         ChannelFuture channelFuture = session.sendMessage(notification);
         channelFuture.addListener((ChannelFutureListener) future -> {
             if (future.isSuccess()) {
+                result.set(Boolean.TRUE);
                 LOG.info("device: {} send notification:{} to target: {}:{} successful.",
                     deviceId, notification, targetIp, targetPort);
+            } else {
+                result.set(Boolean.FALSE);
             }
         });
+
+        return Futures.withTimeout(result, 120, TimeUnit.SECONDS, scheduledExecutorService);
     }
 
     private NetconfServerDispatcher createDispatcher(DeviceUniqueInfo uniqueInfo,

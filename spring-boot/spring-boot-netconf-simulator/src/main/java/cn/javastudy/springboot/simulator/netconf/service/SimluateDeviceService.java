@@ -28,5 +28,8 @@ public interface SimluateDeviceService {
 
     Map<String, NetconfSimulateDevice> startedDevices();
 
-    void sendNotification(Document notificationContent, String deviceId, String targetIp, Integer targetPort);
+    ListenableFuture<Boolean> sendNotification(Document notificationContent,
+                                               String deviceId,
+                                               String targetIp,
+                                               Integer targetPort);
 }

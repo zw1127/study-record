@@ -1,8 +1,5 @@
 package cn.javastudy.springboot.simulator.netconf.service.impl;
 
-import cn.javastudy.springboot.simulator.netconf.datastore.entity.SimulatorConfig;
-import cn.javastudy.springboot.simulator.netconf.datastore.entity.SimulatorConfigKey;
-import cn.javastudy.springboot.simulator.netconf.datastore.mapper.SimulatorConfigMapper;
 import cn.javastudy.springboot.simulator.netconf.domain.DeviceUniqueInfo;
 import cn.javastudy.springboot.simulator.netconf.service.SchemaContextService;
 import cn.javastudy.springboot.simulator.netconf.service.SimulateConfigService;
@@ -13,11 +10,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.eclipse.jdt.annotation.NonNull;
 import org.opendaylight.mdsal.dom.api.DOMDataTreeChangeListener;
 import org.opendaylight.netconf.api.xml.XmlElement;
-import org.opendaylight.netconf.api.xml.XmlUtil;
 import org.opendaylight.yangtools.yang.data.api.schema.ContainerNode;
 import org.opendaylight.yangtools.yang.data.api.schema.DataContainerChild;
 import org.opendaylight.yangtools.yang.data.tree.api.DataTreeCandidate;
-import org.opendaylight.yangtools.yang.data.tree.api.ModificationType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
@@ -41,6 +36,7 @@ public class SimulateDOMDataTreeChangeListener implements DOMDataTreeChangeListe
         this.initFlag = initFlag;
     }
 
+    @SuppressWarnings("IllegalCatch")
     @Override
     public void onDataTreeChanged(@NonNull List<DataTreeCandidate> changes) {
         try {
