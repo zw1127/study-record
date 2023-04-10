@@ -1,9 +1,12 @@
 package cn.javastudy.springboot.simulator.netconf.utils;
 
-import java.io.StringReader;
+import com.google.common.io.Resources;
+import java.io.IOException;
 import java.io.StringWriter;
 import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Templates;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.TransformerFactoryConfigurationError;
@@ -11,23 +14,23 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import org.opendaylight.netconf.api.xml.XmlElement;
+import org.opendaylight.netconf.api.xml.XmlUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 public final class XmlUtils {
 
-    private static final TransformerFactory TRANSFORMER_FACTORY = TransformerFactory.newInstance();
+    private static final Templates PRETTY_PRINT_TEMPLATE;
 
-    private static final String PRETTY_PRINT_XSL =
-        "<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">"
-            + "    <xsl:strip-space elements=\"*\"/>"
-            + "    <xsl:output method=\"xml\" encoding=\"UTF-8\"/>"
-            + "    <xsl:template match=\"@*|node()\">"
-            + "        <xsl:copy>"
-            + "            <xsl:apply-templates select=\"@*|node()\"/>"
-            + "        </xsl:copy>"
-            + "    </xsl:template>"
-            + "</xsl:stylesheet>";
+    static {
+        try {
+            PRETTY_PRINT_TEMPLATE = TransformerFactory.newInstance()
+                .newTemplates(new StreamSource(
+                    Resources.getResource(XmlUtil.class, "/pretty-print.xsl").openStream()));
+        } catch (IOException | TransformerConfigurationException e) {
+            throw new ExceptionInInitializerError(e);
+        }
+    }
 
     private XmlUtils() {
     }
@@ -45,20 +48,28 @@ public final class XmlUtils {
     }
 
     public static String toString(final Element xml, final boolean addXmlDeclaration) {
+        final StringWriter writer = new StringWriter();
         try {
-            StreamSource streamSource = new StreamSource(new StringReader(PRETTY_PRINT_XSL));
-            Transformer transformer = TRANSFORMER_FACTORY.newTransformer(streamSource);
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            Transformer transformer = newIndentingTransformer();
             transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, addXmlDeclaration ? "no" : "yes");
-
-            StreamResult result = new StreamResult(new StringWriter());
-            DOMSource source = new DOMSource(xml);
-            transformer.transform(source, result);
-
-            return result.getWriter().toString();
+            transformer.transform(new DOMSource(xml), new StreamResult(writer));
         } catch (TransformerFactoryConfigurationError | TransformerException e) {
             throw new IllegalStateException("Unable to serialize xml element " + xml, e);
         }
+
+        return writer.toString();
+    }
+
+    /**
+     * Return a new {@link Transformer} which performs indentation.
+     *
+     * @return A new Transformer
+     * @throws TransformerConfigurationException if a Transformer can not be created
+     */
+    public static Transformer newIndentingTransformer() throws TransformerConfigurationException {
+        final Transformer ret = PRETTY_PRINT_TEMPLATE.newTransformer();
+        ret.setOutputProperty(OutputKeys.INDENT, "yes");
+        return ret;
     }
 
     public static String toString(final Document doc, final boolean addXmlDeclaration) {
