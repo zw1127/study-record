@@ -111,6 +111,7 @@ public class SshProxySimulateServer implements AutoCloseable {
         CoreModuleProperties.NIO2_READ_TIMEOUT.set(sshServer, nioReadTimeout);
         CoreModuleProperties.AUTH_TIMEOUT.set(sshServer, idleTimeout);
         CoreModuleProperties.TCP_NODELAY.set(sshServer, Boolean.TRUE);
+        CoreModuleProperties.REKEY_TIME_LIMIT.set(sshServer, Duration.ofSeconds(-1));
 
         final RemoteNetconfCommand.NetconfCommandFactory netconfCommandFactory =
             new RemoteNetconfCommand.NetconfCommandFactory(clientGroup,
