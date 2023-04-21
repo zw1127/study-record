@@ -13,7 +13,7 @@
     <artifactId>spring-boot-jasypt</artifactId>
 
     <properties>
-        <jasypt.version>2.0.0</jasypt.version>
+        <jasypt.version>3.0.4</jasypt.version>
     </properties>
 
     <dependencies>
