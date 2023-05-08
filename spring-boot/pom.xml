@@ -117,6 +117,7 @@
         <module>spring-boot-elasticjob</module>
         <module>spring-boot-netconf-simulator</module>
         <module>spring-boot-jasypt</module>
+        <module>spring-boot-mqtt</module>
     </modules>
 
     <build>

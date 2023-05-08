@@ -1,4 +1,4 @@
-package cn.javastudy.springboot.json;
+package cn.javastudy.springboot.mqtt;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

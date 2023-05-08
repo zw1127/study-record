@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  cn.javastudy.springboot.mqtt.configuration.MqttAutoConfiguration
