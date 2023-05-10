@@ -1,0 +1,23 @@
+mqtt:
+  producers:
+    producer-test-01:
+      url: [ tcp://10.190.51.113:1883 ]
+      topics: [ consumer/* ]
+      qos: [ 1 ]
+      async: true
+      client-id: producer-test-01
+  consumers:
+    consumer-test-01:
+      url: [ tcp://10.190.51.113:1883 ]
+      topics: [ consumer/* ]
+      qos: [ 1 ]
+      async: true
+      client-id: consumer-test-01
+spring:
+  mqtt:
+    username:
+    password:
+    url: tcp://10.190.51.113:1883
+    clientId: clientId
+    topic: MTNs
+    completionTimeout: 2000
