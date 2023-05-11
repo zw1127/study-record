@@ -6,7 +6,7 @@ logging:
   level:
     org.opendaylight.netconf.shaded: info
     cn.javastudy.springboot.simulator.netconf: debug
-    cn.javastudy.springboot.simulator.netconf.datastore.mappper: info
+    cn.javastudy.springboot.simulator.netconf.datastore.mapper: info
     org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping: DEBUG
 
 spring:
