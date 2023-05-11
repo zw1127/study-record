@@ -2,7 +2,6 @@ package cn.javastudy.springboot.mqtt;
 
 import cn.javastudy.springboot.mqtt.configuration.MqttGateway;
 import cn.javastudy.springboot.mqtt.models.BizMqttException;
-import cn.javastudy.springboot.mqtt.utils.MqttUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.PostMapping;
