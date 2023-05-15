@@ -54,6 +54,12 @@
             </dependency>
 
             <dependency>
+                <groupId>org.snmp4j</groupId>
+                <artifactId>snmp4j</artifactId>
+                <version>3.7.7</version>
+            </dependency>
+
+            <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <!-- When bumping this version, remember to also change the JavaDoc link in odlparent-lite and docs -->
@@ -118,6 +124,7 @@
         <module>spring-boot-netconf-simulator</module>
         <module>spring-boot-jasypt</module>
         <module>spring-boot-mqtt</module>
+        <module>spring-boot-snmp</module>
     </modules>
 
     <build>
