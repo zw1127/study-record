@@ -17,7 +17,13 @@ spring:
   mqtt:
     username:
     password:
-    url: tcp://10.190.51.113:1883
+    url: tcp://10.190.49.234:1883
     clientId: clientId
-    topic: MTNs
+    topic: MTN
     completionTimeout: 2000
+
+encrypt:
+  cipher-transforms: AES/CBC/PKCS7Padding
+  encrypt-type: AES
+  encrypt-iv: "0000000000000000"
+  encrypt-key: "10293847561029384756102938475600"

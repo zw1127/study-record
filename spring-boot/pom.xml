@@ -127,7 +127,7 @@
         <module>spring-boot-snmp</module>
     </modules>
 
-    <build>
+   <!-- <build>
         <plugins>
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -169,6 +169,6 @@
                 </executions>
             </plugin>
         </plugins>
-    </build>
+    </build>-->
 
 </project>
