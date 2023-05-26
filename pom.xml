@@ -21,6 +21,7 @@
         <module>disruptor-study</module>
         <module>disruptor-tutorials</module>
         <module>leetcode</module>
+        <module>jacoco-study</module>
     </modules>
 
 </project>
