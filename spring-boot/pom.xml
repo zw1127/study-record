@@ -125,6 +125,7 @@
         <module>spring-boot-jasypt</module>
         <module>spring-boot-mqtt</module>
         <module>spring-boot-snmp</module>
+        <module>spring-boot-mqtt-aggregator</module>
     </modules>
 
    <!-- <build>
