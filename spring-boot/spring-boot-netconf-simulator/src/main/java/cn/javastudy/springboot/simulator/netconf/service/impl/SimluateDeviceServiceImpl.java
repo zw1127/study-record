@@ -16,9 +16,10 @@ import cn.javastudy.springboot.simulator.netconf.operate.InMemoryOperationServic
 import cn.javastudy.springboot.simulator.netconf.properties.NetconfSimulatorProperties;
 import cn.javastudy.springboot.simulator.netconf.provider.DummyMonitoringService;
 import cn.javastudy.springboot.simulator.netconf.provider.SimulateNegotiationFactory;
-import cn.javastudy.springboot.simulator.netconf.rpchandler.RpcHandler;
-import cn.javastudy.springboot.simulator.netconf.rpchandler.RpcHandlerDefault;
+import cn.javastudy.springboot.simulator.netconf.rpchandler.RequestProcessor;
+import cn.javastudy.springboot.simulator.netconf.rpchandler.RpcHandlerImpl;
 import cn.javastudy.springboot.simulator.netconf.rpchandler.SettableOperationRpcProvider;
+import cn.javastudy.springboot.simulator.netconf.rpchandler.impl.CreateSubscriptionRequestProcessor;
 import cn.javastudy.springboot.simulator.netconf.service.SchemaContextService;
 import cn.javastudy.springboot.simulator.netconf.service.SimluateDeviceService;
 import cn.javastudy.springboot.simulator.netconf.service.SimulateConfigService;
@@ -39,6 +40,7 @@ import io.netty.util.HashedWheelTimer;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.channels.AsynchronousChannelGroup;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -76,6 +78,7 @@ import org.opendaylight.netconf.mapping.api.NetconfOperationServiceFactory;
 import org.opendaylight.netconf.notifications.NetconfNotification;
 import org.opendaylight.netconf.shaded.sshd.common.util.threads.ThreadUtils;
 import org.opendaylight.yangtools.util.ListenerRegistry;
+import org.opendaylight.yangtools.yang.common.QName;
 import org.opendaylight.yangtools.yang.data.api.YangInstanceIdentifier;
 import org.opendaylight.yangtools.yang.data.api.schema.NormalizedNode;
 import org.opendaylight.yangtools.yang.model.api.EffectiveModelContextListener;
@@ -90,7 +93,6 @@ public class SimluateDeviceServiceImpl implements SimluateDeviceService {
 
     private static final Logger LOG = LoggerFactory.getLogger(SimluateDeviceServiceImpl.class);
 
-    private static final RpcHandler RPC_HANDLER = new RpcHandlerDefault();
     private final Map<String, NetconfSimulateDevice> startedDeviceMap = new ConcurrentHashMap<>();
 
     @Resource
@@ -273,7 +275,14 @@ public class SimluateDeviceServiceImpl implements SimluateDeviceService {
         aggregatedFactory.onAddNetconfOperationServiceFactory(operationServiceFactory);
         aggregatedFactory.onAddNetconfOperationServiceFactory(monitoringServiceFactory);
 
-        SettableOperationRpcProvider settableService = new SettableOperationRpcProvider(RPC_HANDLER);
+        Map<QName, RequestProcessor> rpcProcessors = new HashMap<>();
+
+        CreateSubscriptionRequestProcessor createSubscription = new CreateSubscriptionRequestProcessor();
+        rpcProcessors.put(createSubscription.getIdentifier(), createSubscription);
+
+        //后续支持其它的RPC可以加在这里
+        RpcHandlerImpl rpcHandler = new RpcHandlerImpl(schemaContextService, rpcProcessors);
+        SettableOperationRpcProvider settableService = new SettableOperationRpcProvider(rpcHandler);
         aggregatedFactory.onAddNetconfOperationServiceFactory(settableService);
 
         return aggregatedFactory;
