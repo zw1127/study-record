@@ -38,6 +38,7 @@ public final class Utils {
         return new InetSocketAddress(inetAd, Integer.parseInt(portNumber));
     }
 
+    @SuppressWarnings("IllegalCatch")
     public static NetconfHelloMessageAdditionalHeader resolveHeader(NetconfManagementSession session) {
         try {
             if (!(session instanceof NetconfServerSession)) {

@@ -679,7 +679,7 @@ module openconfig-rpc {
                     "List of output pm data parameter, keyed by pm-parameter and pm-point";       
             
                   leaf pm-parameter {
-                    type pm-parameter-type;
+                    type string;
                     description 
                       "the pm parameters that can be saved in device";
                   }
