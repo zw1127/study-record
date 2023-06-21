@@ -2,6 +2,8 @@ package cn.javastudy.springboot.mqtt.api;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.security.AccessController;
+import java.security.PrivilegedAction;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.StringJoiner;
@@ -78,7 +80,11 @@ public final class MqttPojoKeyValueUtils {
                     continue;
                 }
 
-                enmuField.setAccessible(true);
+                AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
+                    enmuField.setAccessible(true);
+                    return null;
+                });
+
                 Object fieldValue = enmuField.get(value);
                 // 如果枚举有Value的话，则取枚举的Value，否则取枚举的name
                 if (fieldValue != null) {
@@ -155,7 +161,10 @@ public final class MqttPojoKeyValueUtils {
                         return null;
                     }
 
-                    field.setAccessible(true);
+                    AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
+                        field.setAccessible(true);
+                        return null;
+                    });
 
                     // 根据字段类型设置对应的值
                     if (field.getType() == String.class) {
@@ -169,7 +178,6 @@ public final class MqttPojoKeyValueUtils {
                         if (enumValue == null) {
                             LOG.warn("resolve field:{} value:{} error.", field, fieldValue);
                         } else {
-                            field.setAccessible(true);
                             field.set(obj, enumValue);
                         }
                     }
