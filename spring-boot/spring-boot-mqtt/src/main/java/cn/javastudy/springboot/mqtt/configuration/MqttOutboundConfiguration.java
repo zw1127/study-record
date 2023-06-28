@@ -26,7 +26,7 @@ public class MqttOutboundConfiguration {
     @ServiceActivator(inputChannel = "mqttOutboundChannel")
     public MessageHandler mqttOutbound() {
         MqttPahoMessageHandler messageHandler = new MqttPahoMessageHandler(
-            mqttConfig.getClientId() + "-" + System.currentTimeMillis() + System.currentTimeMillis(), factory);
+            mqttConfig.getClientId() + "-" + System.currentTimeMillis(), factory);
 
         messageHandler.setDefaultQos(0);
         //开启异步

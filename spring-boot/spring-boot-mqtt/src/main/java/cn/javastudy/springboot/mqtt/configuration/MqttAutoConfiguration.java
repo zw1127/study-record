@@ -27,9 +27,6 @@ import org.springframework.integration.mqtt.support.DefaultPahoMessageConverter;
 import org.springframework.messaging.MessageChannel;
 
 @Data
-@AllArgsConstructor
-@Configuration
-@EnableConfigurationProperties(MqttProperties.class)
 public class MqttAutoConfiguration implements ApplicationContextAware, BeanPostProcessor {
 
     private static final Logger LOG = LoggerFactory.getLogger(MqttAutoConfiguration.class);
@@ -38,7 +35,7 @@ public class MqttAutoConfiguration implements ApplicationContextAware, BeanPostP
     public static final String HANDLER_SUFFIX = "-handler";
     private ConfigurableApplicationContext applicationContext;
 
-    private final MqttProperties mqttProperties;
+//    private final MqttProperties mqttProperties;
 
     /**
      * 设置应用上下文
@@ -49,8 +46,8 @@ public class MqttAutoConfiguration implements ApplicationContextAware, BeanPostP
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = (ConfigurableApplicationContext) applicationContext;
-        mqttProperties.getProducers().forEach(this::initProducer);
-        mqttProperties.getConsumers().forEach(this::initConsumer);
+//        mqttProperties.getProducers().forEach(this::initProducer);
+//        mqttProperties.getConsumers().forEach(this::initConsumer);
     }
 
     /**

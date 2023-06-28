@@ -9,7 +9,6 @@ import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.MessagingException;
 import org.springframework.stereotype.Component;
 
-@Component
 public class ConsumerHandler implements MessageHandler {
 
     private static final Logger LOG = LoggerFactory.getLogger(ConsumerHandler.class);
