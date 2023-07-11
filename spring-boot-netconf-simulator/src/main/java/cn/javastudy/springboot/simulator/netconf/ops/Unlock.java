@@ -24,8 +24,8 @@ public class Unlock extends AbstractSingletonNetconfOperation {
     protected Element handleWithNoSubsequentOperations(final Document document, final XmlElement operationElement)
             throws DocumentedException {
         final Datastore targetDatastore = Lock.extractTargetParameter(operationElement);
-        if (targetDatastore == Datastore.candidate) {
-            LOG.debug("Unlocking candidate datastore on session: {}", getNetconfSessionIdForReporting());
+        if (targetDatastore == Datastore.candidate || targetDatastore == Datastore.running) {
+            LOG.debug("Unlocking {} datastore on session: {}", targetDatastore, getNetconfSessionIdForReporting());
             return document.createElement(XmlNetconfConstants.OK);
         }
 

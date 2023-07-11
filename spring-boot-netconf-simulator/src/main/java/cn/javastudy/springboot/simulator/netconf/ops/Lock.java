@@ -27,8 +27,8 @@ public class Lock extends AbstractSingletonNetconfOperation {
     protected Element handleWithNoSubsequentOperations(final Document document, final XmlElement operationElement)
             throws DocumentedException {
         final Datastore targetDatastore = extractTargetParameter(operationElement);
-        if (targetDatastore == Datastore.candidate) {
-            LOG.debug("Locking candidate datastore on session: {}", getNetconfSessionIdForReporting());
+        if (targetDatastore == Datastore.candidate || targetDatastore == Datastore.running) {
+            LOG.debug("Locking {} datastore on session: {}", targetDatastore, getNetconfSessionIdForReporting());
             return document.createElement(XmlNetconfConstants.OK);
         }
 
