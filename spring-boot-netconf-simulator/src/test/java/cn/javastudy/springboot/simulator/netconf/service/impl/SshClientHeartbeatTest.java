@@ -12,7 +12,6 @@ import org.opendaylight.netconf.nettyutil.handler.ssh.client.NetconfSshClient;
 import org.opendaylight.netconf.nettyutil.handler.ssh.client.NettyAwareClientSession;
 import org.opendaylight.netconf.shaded.sshd.client.future.AuthFuture;
 import org.opendaylight.netconf.shaded.sshd.common.PropertyResolverUtils;
-import org.opendaylight.netconf.shaded.sshd.common.io.BuiltinIoServiceFactoryFactories;
 import org.opendaylight.netconf.shaded.sshd.core.CoreModuleProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +27,7 @@ public class SshClientHeartbeatTest {
     public void testHeartbeat() throws Exception {
         NetconfSshClient sshClient = new NetconfClientBuilder().build();
 
-        sshClient.setIoServiceFactoryFactory(BuiltinIoServiceFactoryFactories.NETTY.create());
+//        sshClient.setIoServiceFactoryFactory(BuiltinIoServiceFactoryFactories.NETTY.create());
 
         // Disable default timeouts from mina sshd
         sshClient.getProperties().put(CoreModuleProperties.AUTH_TIMEOUT.getName(), "0");
@@ -47,7 +46,7 @@ public class SshClientHeartbeatTest {
         String username = "admin";
         LoginPasswordHandler authenticationHandler = new LoginPasswordHandler(username, "Admin_123");
 
-        sshClient.connect(authenticationHandler.getUsername(), "10.190.23.232", 848)
+        sshClient.connect(authenticationHandler.getUsername(), "10.190.23.232", 107)
             .verify(15, TimeUnit.SECONDS)
             .addListener(connectFuture -> {
                 final var clientSession = connectFuture.getSession();
