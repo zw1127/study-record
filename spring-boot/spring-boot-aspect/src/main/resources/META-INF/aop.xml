@@ -1,0 +1,8 @@
+<aspectj>
+    <aspects>
+        <aspect name="cn.javastudy.springboot.aspect.UserServiceAspect"/>
+        <weaver options="-verbose -showWeaveInfo">
+            <include within="cn.javastudy.springboot.aspect.*"/>
+        </weaver>
+    </aspects>
+</aspectj>

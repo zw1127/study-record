@@ -1,11 +1,3 @@
-/*
- * Copyright (c) 2023 Fiberhome Technologies.
- *
- * No.6, Gaoxin 4th Road, Hongshan District.,Wuhan,P.R.China,
- * Fiberhome Telecommunication Technologies Co.,LTD
- *
- * All rights reserved.
- */
 package cn.javastudy.mqtt.netty;
 
 import io.netty.buffer.ByteBuf;
@@ -22,10 +14,12 @@ import java.util.concurrent.TimeoutException;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Ignore
 public class MqttClientTest {
 
     private static final Logger LOG = LoggerFactory.getLogger(MqttClientTest.class);

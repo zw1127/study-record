@@ -122,6 +122,7 @@
         <module>spring-boot-snmp</module>
         <module>spring-boot-mqtt-aggregator</module>
         <module>spring-boot-webflux</module>
+        <module>spring-boot-aspect</module>
     </modules>
 
    <!-- <build>
