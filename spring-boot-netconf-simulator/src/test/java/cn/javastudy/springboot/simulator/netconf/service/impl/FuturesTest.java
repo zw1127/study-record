@@ -1,11 +1,3 @@
-/*
- * Copyright (c) 2023 Fiberhome Technologies.
- *
- * No.6, Gaoxin 4th Road, Hongshan District.,Wuhan,P.R.China,
- * Fiberhome Telecommunication Technologies Co.,LTD
- *
- * All rights reserved.
- */
 package cn.javastudy.springboot.simulator.netconf.service.impl;
 
 import com.google.common.util.concurrent.FutureCallback;
@@ -18,6 +10,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.junit.Test;
 
+@SuppressWarnings("RegexpSinglelineJava")
 public class FuturesTest {
 
     @Test

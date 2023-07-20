@@ -5,6 +5,7 @@ import static cn.javastudy.springboot.simulator.netconf.utils.Utils.getRandomDec
 import java.math.BigDecimal;
 import org.junit.Test;
 
+@SuppressWarnings("RegexpSinglelineJava")
 public class RandomTest {
 
     @Test

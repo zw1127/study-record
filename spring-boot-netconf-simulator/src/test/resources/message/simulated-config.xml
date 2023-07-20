@@ -1,0 +1,1439 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="8">
+    <data>
+        <components xmlns="http://openconfig.net/yang/platform">
+            <component>
+                <name>CHASSIS-1</name>
+                <state>
+                    <mfg-name>Huawei</mfg-name>
+                    <part-no>02301620</part-no>
+                    <admin-state>ENABLED</admin-state>
+                    <name>CHASSIS-1</name>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:CHASSIS</type>
+                    <used-power>168</used-power>
+                    <description>OptiXtrans DC908</description>
+                    <software-version>V100R021C10SPC300</software-version>
+                    <allocated-power>1087</allocated-power>
+                    <mfg-date>2022-08-10</mfg-date>
+                    <removable>false</removable>
+                    <equipment-failure xmlns="http://openconfig.net/yang/alarms">false</equipment-failure>
+                    <serial-no>sim-1</serial-no>
+                    <empty>false</empty>
+                    <vendor-type>OptiXtrans DC908</vendor-type>
+                    <hardware-version>TMN1AFB VER.B</hardware-version>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                </state>
+                <config>
+                    <admin-state>ENABLED</admin-state>
+                    <name>CHASSIS-1</name>
+                    <vendor-type>OptiXtrans DC908</vendor-type>
+                </config>
+                <subcomponents>
+                    <subcomponent>
+                        <name>MCU-1-41</name>
+                        <state>
+                            <name>MCU-1-41</name>
+                        </state>
+                        <config>
+                            <name>MCU-1-41</name>
+                        </config>
+                    </subcomponent>
+                    <subcomponent>
+                        <name>FAN-1-31</name>
+                        <state>
+                            <name>FAN-1-31</name>
+                        </state>
+                        <config>
+                            <name>FAN-1-31</name>
+                        </config>
+                    </subcomponent>
+                    <subcomponent>
+                        <name>OLP-1-1</name>
+                        <state>
+                            <name>OLP-1-1</name>
+                        </state>
+                        <config>
+                            <name>OLP-1-1</name>
+                        </config>
+                    </subcomponent>
+                    <subcomponent>
+                        <name>FAN-1-32</name>
+                        <state>
+                            <name>FAN-1-32</name>
+                        </state>
+                        <config>
+                            <name>FAN-1-32</name>
+                        </config>
+                    </subcomponent>
+                    <subcomponent>
+                        <name>PANEL-1-40</name>
+                        <state>
+                            <name>PANEL-1-40</name>
+                        </state>
+                        <config>
+                            <name>PANEL-1-40</name>
+                        </config>
+                    </subcomponent>
+                    <subcomponent>
+                        <name>PSU-1-21</name>
+                        <state>
+                            <name>PSU-1-21</name>
+                        </state>
+                        <config>
+                            <name>PSU-1-21</name>
+                        </config>
+                    </subcomponent>
+                    <subcomponent>
+                        <name>OA-1-5</name>
+                        <state>
+                            <name>OA-1-5</name>
+                        </state>
+                        <config>
+                            <name>OA-1-5</name>
+                        </config>
+                    </subcomponent>
+                    <subcomponent>
+                        <name>PSU-1-22</name>
+                        <state>
+                            <name>PSU-1-22</name>
+                        </state>
+                        <config>
+                            <name>PSU-1-22</name>
+                        </config>
+                    </subcomponent>
+                    <subcomponent>
+                        <name>FAN-1-33</name>
+                        <state>
+                            <name>FAN-1-33</name>
+                        </state>
+                        <config>
+                            <name>FAN-1-33</name>
+                        </config>
+                    </subcomponent>
+                </subcomponents>
+            </component>
+            <component>
+                <name>OLP-1-1</name>
+                <state>
+                    <mfg-name>Huawei</mfg-name>
+                    <part-no>03026UND</part-no>
+                    <memory>
+                        <utilized>118575104</utilized>
+                        <available>664518656</available>
+                    </memory>
+                    <admin-state>ENABLED</admin-state>
+                    <firmware-version>7.15</firmware-version>
+                    <name>OLP-1-1</name>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:OLP</type>
+                    <used-power>32</used-power>
+                    <description>N1OPC</description>
+                    <software-version>21.26</software-version>
+                    <allocated-power>48</allocated-power>
+                    <mfg-date>2022-07-30</mfg-date>
+                    <parent>CHASSIS-1</parent>
+                    <removable>true</removable>
+                    <equipment-failure xmlns="http://openconfig.net/yang/alarms">false</equipment-failure>
+                    <equipment-mismatch xmlns="http://openconfig.net/yang/alarms">false</equipment-mismatch>
+                    <led>DISABLED</led>
+                    <serial-no>026UND10N7100029</serial-no>
+                    <empty>false</empty>
+                    <vendor-type>N1OPC</vendor-type>
+                    <location>1-1</location>
+                    <temperature>
+                        <instant>39.8</instant>
+                        <min>39.4</min>
+                        <max>39.8</max>
+                        <interval>900000000000</interval>
+                    </temperature>
+                    <hardware-version>VER.A</hardware-version>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                </state>
+                <config>
+                    <admin-state>ENABLED</admin-state>
+                    <led>DISABLED</led>
+                    <name>OLP-1-1</name>
+                    <vendor-type>N1OPC</vendor-type>
+                </config>
+                <cpu>
+                    <utilization xmlns="http://openconfig.net/yang/platform/cpu">
+                        <state>
+                            <avg>3</avg>
+                            <min>3</min>
+                            <interval>900000000000</interval>
+                            <instant>3</instant>
+                            <max>4</max>
+                        </state>
+                    </utilization>
+                </cpu>
+                <linecard xmlns="http://openconfig.net/yang/platform/linecard">
+                    <config>
+                        <power-admin-state>POWER_ENABLED</power-admin-state>
+                    </config>
+                    <state>
+                        <power-admin-state>POWER_ENABLED</power-admin-state>
+                        <slot-id>1</slot-id>
+                    </state>
+                </linecard>
+                <subcomponents>
+                    <subcomponent>
+                        <name>SUBSLOT-1-1-1</name>
+                        <state>
+                            <name>SUBSLOT-1-1-1</name>
+                        </state>
+                        <config>
+                            <name>SUBSLOT-1-1-1</name>
+                        </config>
+                    </subcomponent>
+                    <subcomponent>
+                        <name>SUBSLOT-1-1-2</name>
+                        <state>
+                            <name>SUBSLOT-1-1-2</name>
+                        </state>
+                        <config>
+                            <name>SUBSLOT-1-1-2</name>
+                        </config>
+                    </subcomponent>
+                </subcomponents>
+            </component>
+            <component>
+                <name>FAN-1-32</name>
+                <state>
+                    <mfg-name>Huawei</mfg-name>
+                    <part-no>03026TMH</part-no>
+                    <admin-state>ENABLED</admin-state>
+                    <name>FAN-1-32</name>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:FAN</type>
+                    <used-power>8</used-power>
+                    <description>N1FAN</description>
+                    <software-version>1.10</software-version>
+                    <allocated-power>165</allocated-power>
+                    <mfg-date>2022-07-30</mfg-date>
+                    <parent>CHASSIS-1</parent>
+                    <removable>true</removable>
+                    <equipment-failure xmlns="http://openconfig.net/yang/alarms">false</equipment-failure>
+                    <equipment-mismatch xmlns="http://openconfig.net/yang/alarms">false</equipment-mismatch>
+                    <serial-no>026TMHW0N7001601</serial-no>
+                    <empty>false</empty>
+                    <vendor-type>N1FAN</vendor-type>
+                    <location>1-32</location>
+                    <hardware-version>VER.B</hardware-version>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                </state>
+                <config>
+                    <admin-state>ENABLED</admin-state>
+                    <name>FAN-1-32</name>
+                    <vendor-type>N1FAN</vendor-type>
+                </config>
+                <fan>
+                    <state>
+                        <speed-level xmlns="http://openconfig.net/yang/platform/fan">LOW</speed-level>
+                        <speed xmlns="http://openconfig.net/yang/platform/fan">4200</speed>
+                    </state>
+                </fan>
+            </component>
+            <component>
+                <name>PANEL-1-40</name>
+                <state>
+                    <mfg-name>Huawei</mfg-name>
+                    <part-no>03026TML</part-no>
+                    <admin-state>ENABLED</admin-state>
+                    <name>PANEL-1-40</name>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:PANEL</type>
+                    <used-power>8</used-power>
+                    <description>N1PANEL</description>
+                    <software-version>1.11</software-version>
+                    <allocated-power>10</allocated-power>
+                    <mfg-date>2022-08-23</mfg-date>
+                    <parent>CHASSIS-1</parent>
+                    <removable>true</removable>
+                    <equipment-failure xmlns="http://openconfig.net/yang/alarms">false</equipment-failure>
+                    <equipment-mismatch xmlns="http://openconfig.net/yang/alarms">false</equipment-mismatch>
+                    <led>DISABLED</led>
+                    <serial-no>026TML10N8100347</serial-no>
+                    <empty>false</empty>
+                    <vendor-type>N1PANEL</vendor-type>
+                    <location>1-40</location>
+                    <temperature>
+                        <instant>14.3</instant>
+                        <min>14.2</min>
+                        <max>14.3</max>
+                        <interval>900000000000</interval>
+                    </temperature>
+                    <hardware-version>VER.B</hardware-version>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                </state>
+                <config>
+                    <admin-state>ENABLED</admin-state>
+                    <led>DISABLED</led>
+                    <name>PANEL-1-40</name>
+                    <vendor-type>N1PANEL</vendor-type>
+                </config>
+                <subcomponents>
+                    <subcomponent>
+                        <name>PORT-1-40-ETH</name>
+                        <state>
+                            <name>PORT-1-40-ETH</name>
+                        </state>
+                        <config>
+                            <name>PORT-1-40-ETH</name>
+                        </config>
+                    </subcomponent>
+                    <subcomponent>
+                        <name>PORT-1-40-CONSOLE</name>
+                        <state>
+                            <name>PORT-1-40-CONSOLE</name>
+                        </state>
+                        <config>
+                            <name>PORT-1-40-CONSOLE</name>
+                        </config>
+                    </subcomponent>
+                </subcomponents>
+            </component>
+            <component>
+                <name>FAN-1-31</name>
+                <state>
+                    <mfg-name>Huawei</mfg-name>
+                    <part-no>03026TMH</part-no>
+                    <admin-state>ENABLED</admin-state>
+                    <name>FAN-1-31</name>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:FAN</type>
+                    <used-power>8</used-power>
+                    <description>N1FAN</description>
+                    <software-version>1.10</software-version>
+                    <allocated-power>165</allocated-power>
+                    <mfg-date>2022-07-30</mfg-date>
+                    <parent>CHASSIS-1</parent>
+                    <removable>true</removable>
+                    <equipment-failure xmlns="http://openconfig.net/yang/alarms">false</equipment-failure>
+                    <equipment-mismatch xmlns="http://openconfig.net/yang/alarms">false</equipment-mismatch>
+                    <serial-no>026TMHW0N7001616</serial-no>
+                    <empty>false</empty>
+                    <vendor-type>N1FAN</vendor-type>
+                    <location>1-31</location>
+                    <hardware-version>VER.B</hardware-version>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                </state>
+                <config>
+                    <admin-state>ENABLED</admin-state>
+                    <name>FAN-1-31</name>
+                    <vendor-type>N1FAN</vendor-type>
+                </config>
+                <fan>
+                    <state>
+                        <speed-level xmlns="http://openconfig.net/yang/platform/fan">LOW</speed-level>
+                        <speed xmlns="http://openconfig.net/yang/platform/fan">4200</speed>
+                    </state>
+                </fan>
+            </component>
+            <component>
+                <name>PORT-1-40-ETH</name>
+                <state>
+                    <removable>false</removable>
+                    <empty>false</empty>
+                    <name>PORT-1-40-ETH</name>
+                    <location>1-40</location>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:PORT</type>
+                    <description>PORT ETH</description>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                    <parent>PANEL-1-40</parent>
+                </state>
+                <config>
+                    <name>PORT-1-40-ETH</name>
+                </config>
+            </component>
+            <component>
+                <name>PORT-1-5-LOUT</name>
+                <state>
+                    <removable>false</removable>
+                    <equipment-failure xmlns="http://openconfig.net/yang/alarms">false</equipment-failure>
+                    <admin-state>ENABLED</admin-state>
+                    <empty>false</empty>
+                    <name>PORT-1-5-LOUT</name>
+                    <remark/>
+                    <location>LOUT</location>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:PORT</type>
+                    <description>PORT LOUT</description>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                    <parent>OA-1-5</parent>
+                </state>
+                <optical-port xmlns="http://openconfig.net/yang/transport-line-common">
+                    <state>
+                        <output-power>
+                            <max>-8.70</max>
+                            <instant>-8.70</instant>
+                            <min>-8.70</min>
+                            <interval>900000000000</interval>
+                        </output-power>
+                        <optical-port-type>EGRESS</optical-port-type>
+                    </state>
+                </optical-port>
+                <config>
+                    <remark/>
+                    <admin-state>ENABLED</admin-state>
+                    <name>PORT-1-5-LOUT</name>
+                </config>
+            </component>
+            <component>
+                <name>FAN-1-33</name>
+                <state>
+                    <mfg-name>Huawei</mfg-name>
+                    <part-no>03026TMH</part-no>
+                    <admin-state>ENABLED</admin-state>
+                    <name>FAN-1-33</name>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:FAN</type>
+                    <used-power>8</used-power>
+                    <description>N1FAN</description>
+                    <software-version>1.10</software-version>
+                    <allocated-power>165</allocated-power>
+                    <mfg-date>2022-07-30</mfg-date>
+                    <parent>CHASSIS-1</parent>
+                    <removable>true</removable>
+                    <equipment-failure xmlns="http://openconfig.net/yang/alarms">false</equipment-failure>
+                    <equipment-mismatch xmlns="http://openconfig.net/yang/alarms">false</equipment-mismatch>
+                    <serial-no>026TMHW0N7001603</serial-no>
+                    <empty>false</empty>
+                    <vendor-type>N1FAN</vendor-type>
+                    <location>1-33</location>
+                    <hardware-version>VER.B</hardware-version>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                </state>
+                <config>
+                    <admin-state>ENABLED</admin-state>
+                    <name>FAN-1-33</name>
+                    <vendor-type>N1FAN</vendor-type>
+                </config>
+                <fan>
+                    <state>
+                        <speed-level xmlns="http://openconfig.net/yang/platform/fan">LOW</speed-level>
+                        <speed xmlns="http://openconfig.net/yang/platform/fan">4200</speed>
+                    </state>
+                </fan>
+            </component>
+            <component>
+                <name>PORT-1-5-CIN</name>
+                <state>
+                    <removable>false</removable>
+                    <equipment-failure xmlns="http://openconfig.net/yang/alarms">false</equipment-failure>
+                    <admin-state>ENABLED</admin-state>
+                    <empty>false</empty>
+                    <name>PORT-1-5-CIN</name>
+                    <remark/>
+                    <location>CIN</location>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:PORT</type>
+                    <description>PORT CIN</description>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                    <parent>OA-1-5</parent>
+                </state>
+                <optical-port xmlns="http://openconfig.net/yang/transport-line-common">
+                    <state>
+                        <input-power>
+                            <max>-4.20</max>
+                            <instant>-4.30</instant>
+                            <min>-4.30</min>
+                            <interval>900000000000</interval>
+                        </input-power>
+                        <optical-port-type>INGRESS</optical-port-type>
+                    </state>
+                </optical-port>
+                <config>
+                    <remark/>
+                    <admin-state>ENABLED</admin-state>
+                    <name>PORT-1-5-CIN</name>
+                </config>
+            </component>
+            <component>
+                <name>OA-1-5</name>
+                <state>
+                    <mfg-name>Huawei</mfg-name>
+                    <part-no>03033PKF</part-no>
+                    <memory>
+                        <utilized>161787904</utilized>
+                        <available>621305856</available>
+                    </memory>
+                    <admin-state>ENABLED</admin-state>
+                    <firmware-version>7.15</firmware-version>
+                    <name>OA-1-5</name>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:OA</type>
+                    <used-power>73</used-power>
+                    <description>N1OL</description>
+                    <software-version>21.26</software-version>
+                    <allocated-power>74</allocated-power>
+                    <mfg-date>2022-08-31</mfg-date>
+                    <parent>CHASSIS-1</parent>
+                    <removable>true</removable>
+                    <equipment-failure xmlns="http://openconfig.net/yang/alarms">false</equipment-failure>
+                    <equipment-mismatch xmlns="http://openconfig.net/yang/alarms">false</equipment-mismatch>
+                    <led>DISABLED</led>
+                    <serial-no>033PKF10N8100057</serial-no>
+                    <empty>false</empty>
+                    <vendor-type>N1OL</vendor-type>
+                    <location>1-5</location>
+                    <temperature>
+                        <instant>42.9</instant>
+                        <min>42.4</min>
+                        <max>42.9</max>
+                        <interval>900000000000</interval>
+                    </temperature>
+                    <hardware-version>VER.C</hardware-version>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                </state>
+                <config>
+                    <admin-state>ENABLED</admin-state>
+                    <led>DISABLED</led>
+                    <name>OA-1-5</name>
+                    <vendor-type>N1OL</vendor-type>
+                </config>
+                <cpu>
+                    <utilization xmlns="http://openconfig.net/yang/platform/cpu">
+                        <state>
+                            <avg>3</avg>
+                            <min>2</min>
+                            <interval>900000000000</interval>
+                            <instant>3</instant>
+                            <max>4</max>
+                        </state>
+                    </utilization>
+                </cpu>
+                <linecard xmlns="http://openconfig.net/yang/platform/linecard">
+                    <config>
+                        <power-admin-state>POWER_ENABLED</power-admin-state>
+                    </config>
+                    <state>
+                        <power-admin-state>POWER_ENABLED</power-admin-state>
+                        <slot-id>5</slot-id>
+                    </state>
+                </linecard>
+                <subcomponents>
+                    <subcomponent>
+                        <name>EDFA-1-5-T</name>
+                        <state>
+                            <name>EDFA-1-5-T</name>
+                        </state>
+                        <config>
+                            <name>EDFA-1-5-T</name>
+                        </config>
+                    </subcomponent>
+                    <subcomponent>
+                        <name>EDFA-1-5-R</name>
+                        <state>
+                            <name>EDFA-1-5-R</name>
+                        </state>
+                        <config>
+                            <name>EDFA-1-5-R</name>
+                        </config>
+                    </subcomponent>
+                    <subcomponent>
+                        <name>PORT-1-5-OSC1</name>
+                        <state>
+                            <name>PORT-1-5-OSC1</name>
+                        </state>
+                        <config>
+                            <name>PORT-1-5-OSC1</name>
+                        </config>
+                    </subcomponent>
+                    <subcomponent>
+                        <name>PORT-1-5-OSC2</name>
+                        <state>
+                            <name>PORT-1-5-OSC2</name>
+                        </state>
+                        <config>
+                            <name>PORT-1-5-OSC2</name>
+                        </config>
+                    </subcomponent>
+                    <subcomponent>
+                        <name>PORT-1-5-COUT</name>
+                        <state>
+                            <name>PORT-1-5-COUT</name>
+                        </state>
+                        <config>
+                            <name>PORT-1-5-COUT</name>
+                        </config>
+                    </subcomponent>
+                    <subcomponent>
+                        <name>OTDR-1-5-T</name>
+                        <state>
+                            <name>OTDR-1-5-T</name>
+                        </state>
+                        <config>
+                            <name>OTDR-1-5-T</name>
+                        </config>
+                    </subcomponent>
+                    <subcomponent>
+                        <name>PORT-1-5-LIN</name>
+                        <state>
+                            <name>PORT-1-5-LIN</name>
+                        </state>
+                        <config>
+                            <name>PORT-1-5-LIN</name>
+                        </config>
+                    </subcomponent>
+                    <subcomponent>
+                        <name>OTDR-1-5-R</name>
+                        <state>
+                            <name>OTDR-1-5-R</name>
+                        </state>
+                        <config>
+                            <name>OTDR-1-5-R</name>
+                        </config>
+                    </subcomponent>
+                    <subcomponent>
+                        <name>PORT-1-5-CIN</name>
+                        <state>
+                            <name>PORT-1-5-CIN</name>
+                        </state>
+                        <config>
+                            <name>PORT-1-5-CIN</name>
+                        </config>
+                    </subcomponent>
+                    <subcomponent>
+                        <name>OCM-1-5-T</name>
+                        <state>
+                            <name>OCM-1-5-T</name>
+                        </state>
+                        <config>
+                            <name>OCM-1-5-T</name>
+                        </config>
+                    </subcomponent>
+                    <subcomponent>
+                        <name>PORT-1-5-LOUT</name>
+                        <state>
+                            <name>PORT-1-5-LOUT</name>
+                        </state>
+                        <config>
+                            <name>PORT-1-5-LOUT</name>
+                        </config>
+                    </subcomponent>
+                    <subcomponent>
+                        <name>OCM-1-5-R</name>
+                        <state>
+                            <name>OCM-1-5-R</name>
+                        </state>
+                        <config>
+                            <name>OCM-1-5-R</name>
+                        </config>
+                    </subcomponent>
+                </subcomponents>
+            </component>
+            <component>
+                <name>SUBSLOT-1-1-2</name>
+                <state>
+                    <removable>true</removable>
+                    <equipment-failure xmlns="http://openconfig.net/yang/alarms">false</equipment-failure>
+                    <admin-state>ENABLED</admin-state>
+                    <empty>false</empty>
+                    <name>SUBSLOT-1-1-2</name>
+                    <remark/>
+                    <location>2</location>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:SUBSLOT</type>
+                    <description>SUBSLOT 2</description>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:INACTIVE</oper-status>
+                    <parent>OLP-1-1</parent>
+                </state>
+                <config>
+                    <remark/>
+                    <admin-state>ENABLED</admin-state>
+                    <name>SUBSLOT-1-1-2</name>
+                </config>
+                <subcomponents>
+                    <subcomponent>
+                        <name>APS-1-1-2</name>
+                        <state>
+                            <name>APS-1-1-2</name>
+                        </state>
+                        <config>
+                            <name>APS-1-1-2</name>
+                        </config>
+                    </subcomponent>
+                </subcomponents>
+            </component>
+            <component>
+                <name>PORT-1-5-LIN</name>
+                <state>
+                    <removable>false</removable>
+                    <equipment-failure xmlns="http://openconfig.net/yang/alarms">false</equipment-failure>
+                    <admin-state>ENABLED</admin-state>
+                    <empty>false</empty>
+                    <name>PORT-1-5-LIN</name>
+                    <remark/>
+                    <location>LIN</location>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:PORT</type>
+                    <description>PORT LIN</description>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                    <parent>OA-1-5</parent>
+                </state>
+                <optical-port xmlns="http://openconfig.net/yang/transport-line-common">
+                    <state>
+                        <input-power>
+                            <max>-9.0</max>
+                            <instant>-9.10</instant>
+                            <min>-9.10</min>
+                            <interval>900000000000</interval>
+                        </input-power>
+                        <optical-port-type>INGRESS</optical-port-type>
+                    </state>
+                </optical-port>
+                <config>
+                    <remark/>
+                    <admin-state>ENABLED</admin-state>
+                    <name>PORT-1-5-LIN</name>
+                </config>
+            </component>
+            <component>
+                <name>SUBSLOT-1-1-1</name>
+                <state>
+                    <removable>true</removable>
+                    <equipment-failure xmlns="http://openconfig.net/yang/alarms">false</equipment-failure>
+                    <admin-state>ENABLED</admin-state>
+                    <empty>false</empty>
+                    <name>SUBSLOT-1-1-1</name>
+                    <remark/>
+                    <location>1</location>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:SUBSLOT</type>
+                    <description>SUBSLOT 1</description>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                    <parent>OLP-1-1</parent>
+                </state>
+                <config>
+                    <remark/>
+                    <admin-state>ENABLED</admin-state>
+                    <name>SUBSLOT-1-1-1</name>
+                </config>
+                <subcomponents>
+                    <subcomponent>
+                        <name>APS-1-1-1</name>
+                        <state>
+                            <name>APS-1-1-1</name>
+                        </state>
+                        <config>
+                            <name>APS-1-1-1</name>
+                        </config>
+                    </subcomponent>
+                </subcomponents>
+            </component>
+            <component>
+                <name>PORT-1-41-NM</name>
+                <state>
+                    <removable>false</removable>
+                    <empty>false</empty>
+                    <name>PORT-1-41-NM</name>
+                    <location>1-41</location>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:PORT</type>
+                    <description>PORT NM</description>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                    <parent>MCU-1-41</parent>
+                </state>
+                <config>
+                    <name>PORT-1-41-NM</name>
+                </config>
+            </component>
+            <component>
+                <name>OCM-1-5-R</name>
+                <state>
+                    <removable>false</removable>
+                    <equipment-failure xmlns="http://openconfig.net/yang/alarms">false</equipment-failure>
+                    <admin-state>ENABLED</admin-state>
+                    <empty>false</empty>
+                    <name>OCM-1-5-R</name>
+                    <remark/>
+                    <location>R</location>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:OCM</type>
+                    <description>OCM R</description>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                    <parent>OA-1-5</parent>
+                </state>
+                <config>
+                    <remark/>
+                    <admin-state>ENABLED</admin-state>
+                    <name>OCM-1-5-R</name>
+                </config>
+            </component>
+            <component>
+                <name>OCM-1-5-T</name>
+                <state>
+                    <removable>false</removable>
+                    <equipment-failure xmlns="http://openconfig.net/yang/alarms">false</equipment-failure>
+                    <admin-state>ENABLED</admin-state>
+                    <empty>false</empty>
+                    <name>OCM-1-5-T</name>
+                    <remark/>
+                    <location>T</location>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:OCM</type>
+                    <description>OCM T</description>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                    <parent>OA-1-5</parent>
+                </state>
+                <config>
+                    <remark/>
+                    <admin-state>ENABLED</admin-state>
+                    <name>OCM-1-5-T</name>
+                </config>
+            </component>
+            <component>
+                <name>TRANSCEIVER-1-5-OSC2</name>
+                <state>
+                    <mfg-name>Hisense</mfg-name>
+                    <part-no>34061362</part-no>
+                    <admin-state>ENABLED</admin-state>
+                    <name>TRANSCEIVER-1-5-OSC2</name>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:TRANSCEIVER</type>
+                    <description>TRANSCEIVER OSC2</description>
+                    <mfg-date>2021-10-22</mfg-date>
+                    <parent>PORT-1-5-OSC2</parent>
+                    <removable>false</removable>
+                    <equipment-failure xmlns="http://openconfig.net/yang/alarms">false</equipment-failure>
+                    <serial-no>UW7BA008577</serial-no>
+                    <empty>false</empty>
+                    <remark/>
+                    <location>OSC2</location>
+                    <temperature>
+                        <instant>37.7</instant>
+                        <min>37.0</min>
+                        <max>37.7</max>
+                        <interval>900000000000</interval>
+                    </temperature>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                </state>
+                <transceiver xmlns="http://openconfig.net/yang/platform/transceiver">
+                    <config>
+                        <enabled>true</enabled>
+                    </config>
+                    <state>
+                        <date-code>2021-10-22T00:00:00Z+00:00</date-code>
+                        <vendor>Hisense</vendor>
+                        <present>PRESENT</present>
+                        <vendor-part>34061362</vendor-part>
+                        <form-factor xmlns:x="http://openconfig.net/yang/transport-types">x:SFP</form-factor>
+                        <laser-bias-current>
+                            <min>13.0</min>
+                            <max>13.10</max>
+                            <instant>13.10</instant>
+                            <interval>900000000000</interval>
+                        </laser-bias-current>
+                        <input-power>
+                            <min>-21.10</min>
+                            <max>-20.90</max>
+                            <instant>-20.90</instant>
+                            <interval>900000000000</interval>
+                        </input-power>
+                        <output-power>
+                            <min>2.50</min>
+                            <max>2.60</max>
+                            <instant>2.60</instant>
+                            <interval>900000000000</interval>
+                        </output-power>
+                        <enabled>true</enabled>
+                        <serial-no>UW7BA008577</serial-no>
+                    </state>
+                </transceiver>
+                <config>
+                    <remark/>
+                    <admin-state>ENABLED</admin-state>
+                    <name>TRANSCEIVER-1-5-OSC2</name>
+                </config>
+            </component>
+            <component>
+                <name>APS-1-1-1</name>
+                <state>
+                    <mfg-name>Huawei</mfg-name>
+                    <part-no>34100520</part-no>
+                    <admin-state>ENABLED</admin-state>
+                    <name>APS-1-1-1</name>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:APS</type>
+                    <description>APS 1</description>
+                    <mfg-date>2022-06-04</mfg-date>
+                    <parent>SUBSLOT-1-1-1</parent>
+                    <removable>true</removable>
+                    <equipment-failure xmlns="http://openconfig.net/yang/alarms">false</equipment-failure>
+                    <equipment-mismatch xmlns="http://openconfig.net/yang/alarms">false</equipment-mismatch>
+                    <serial-no>127860274</serial-no>
+                    <empty>false</empty>
+                    <vendor-type>N1OLPE</vendor-type>
+                    <remark/>
+                    <location>1</location>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                </state>
+                <config>
+                    <remark/>
+                    <admin-state>ENABLED</admin-state>
+                    <name>APS-1-1-1</name>
+                    <vendor-type>N1OLPE</vendor-type>
+                </config>
+            </component>
+            <component>
+                <name>APS-1-1-2</name>
+                <state>
+                    <mfg-name>Huawei</mfg-name>
+                    <part-no>34100352</part-no>
+                    <admin-state>ENABLED</admin-state>
+                    <name>APS-1-1-2</name>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:APS</type>
+                    <description>APS 2</description>
+                    <mfg-date>2022-01-07</mfg-date>
+                    <parent>SUBSLOT-1-1-2</parent>
+                    <removable>true</removable>
+                    <equipment-failure xmlns="http://openconfig.net/yang/alarms">false</equipment-failure>
+                    <equipment-mismatch xmlns="http://openconfig.net/yang/alarms">false</equipment-mismatch>
+                    <serial-no>OLP2021120117</serial-no>
+                    <empty>false</empty>
+                    <vendor-type>N1OLP</vendor-type>
+                    <remark/>
+                    <location>2</location>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:INACTIVE</oper-status>
+                </state>
+                <config>
+                    <remark/>
+                    <admin-state>ENABLED</admin-state>
+                    <name>APS-1-1-2</name>
+                    <vendor-type>N1OLP</vendor-type>
+                </config>
+            </component>
+            <component>
+                <name>TRANSCEIVER-1-5-OSC1</name>
+                <state>
+                    <mfg-name>Hisense</mfg-name>
+                    <part-no>34061361</part-no>
+                    <admin-state>ENABLED</admin-state>
+                    <name>TRANSCEIVER-1-5-OSC1</name>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:TRANSCEIVER</type>
+                    <description>TRANSCEIVER OSC1</description>
+                    <mfg-date>2021-09-09</mfg-date>
+                    <parent>PORT-1-5-OSC1</parent>
+                    <removable>false</removable>
+                    <equipment-failure xmlns="http://openconfig.net/yang/alarms">false</equipment-failure>
+                    <serial-no>UW8B9003909</serial-no>
+                    <empty>false</empty>
+                    <remark/>
+                    <location>OSC1</location>
+                    <temperature>
+                        <instant>35.6</instant>
+                        <min>35.0</min>
+                        <max>35.6</max>
+                        <interval>900000000000</interval>
+                    </temperature>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                </state>
+                <transceiver xmlns="http://openconfig.net/yang/platform/transceiver">
+                    <config>
+                        <enabled>true</enabled>
+                    </config>
+                    <state>
+                        <date-code>2021-09-09T00:00:00Z+00:00</date-code>
+                        <vendor>Hisense</vendor>
+                        <present>PRESENT</present>
+                        <vendor-part>34061361</vendor-part>
+                        <form-factor xmlns:x="http://openconfig.net/yang/transport-types">x:SFP</form-factor>
+                        <laser-bias-current>
+                            <min>11.20</min>
+                            <max>11.20</max>
+                            <instant>11.20</instant>
+                            <interval>900000000000</interval>
+                        </laser-bias-current>
+                        <input-power>
+                            <min>-21.50</min>
+                            <max>-21.30</max>
+                            <instant>-21.40</instant>
+                            <interval>900000000000</interval>
+                        </input-power>
+                        <output-power>
+                            <min>2.40</min>
+                            <max>2.50</max>
+                            <instant>2.40</instant>
+                            <interval>900000000000</interval>
+                        </output-power>
+                        <enabled>true</enabled>
+                        <serial-no>UW8B9003909</serial-no>
+                    </state>
+                </transceiver>
+                <config>
+                    <remark/>
+                    <admin-state>ENABLED</admin-state>
+                    <name>TRANSCEIVER-1-5-OSC1</name>
+                </config>
+            </component>
+            <component>
+                <name>PORT-1-41-ETH3</name>
+                <state>
+                    <removable>false</removable>
+                    <admin-state>ENABLED</admin-state>
+                    <empty>false</empty>
+                    <name>PORT-1-41-ETH3</name>
+                    <location>1-41</location>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:PORT</type>
+                    <description>PORT ETH3</description>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                    <parent>MCU-1-41</parent>
+                </state>
+                <config>
+                    <admin-state>ENABLED</admin-state>
+                    <name>PORT-1-41-ETH3</name>
+                </config>
+            </component>
+            <component>
+                <name>SOFTWARE_MANAGER</name>
+                <state>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:OPERATING_SYSTEM</type>
+                    <software-version>V100R021C10SPC300</software-version>
+                    <name>SOFTWARE_MANAGER</name>
+                </state>
+                <config>
+                    <name>SOFTWARE_MANAGER</name>
+                </config>
+            </component>
+            <component>
+                <name>PORT-1-41-ETH4</name>
+                <state>
+                    <removable>false</removable>
+                    <admin-state>ENABLED</admin-state>
+                    <empty>false</empty>
+                    <name>PORT-1-41-ETH4</name>
+                    <location>1-41</location>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:PORT</type>
+                    <description>PORT ETH4</description>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                    <parent>MCU-1-41</parent>
+                </state>
+                <config>
+                    <admin-state>ENABLED</admin-state>
+                    <name>PORT-1-41-ETH4</name>
+                </config>
+            </component>
+            <component>
+                <name>PORT-1-5-COUT</name>
+                <state>
+                    <removable>false</removable>
+                    <equipment-failure xmlns="http://openconfig.net/yang/alarms">false</equipment-failure>
+                    <admin-state>ENABLED</admin-state>
+                    <empty>false</empty>
+                    <name>PORT-1-5-COUT</name>
+                    <remark/>
+                    <location>COUT</location>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:PORT</type>
+                    <description>PORT COUT</description>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                    <parent>OA-1-5</parent>
+                </state>
+                <optical-port xmlns="http://openconfig.net/yang/transport-line-common">
+                    <state>
+                        <output-power>
+                            <max>4.20</max>
+                            <instant>4.20</instant>
+                            <min>4.20</min>
+                            <interval>900000000000</interval>
+                        </output-power>
+                        <optical-port-type>EGRESS</optical-port-type>
+                    </state>
+                </optical-port>
+                <config>
+                    <remark/>
+                    <admin-state>ENABLED</admin-state>
+                    <name>PORT-1-5-COUT</name>
+                </config>
+            </component>
+            <component>
+                <name>PSU-1-22</name>
+                <state>
+                    <mfg-name>Huawei</mfg-name>
+                    <part-no>02312NBT</part-no>
+                    <admin-state>ENABLED</admin-state>
+                    <name>PSU-1-22</name>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:POWER_SUPPLY</type>
+                    <used-power>0</used-power>
+                    <description>N1APSU</description>
+                    <software-version>1.15</software-version>
+                    <allocated-power>210</allocated-power>
+                    <mfg-date>2021-08-14</mfg-date>
+                    <parent>CHASSIS-1</parent>
+                    <removable>true</removable>
+                    <equipment-failure xmlns="http://openconfig.net/yang/alarms">true</equipment-failure>
+                    <equipment-mismatch xmlns="http://openconfig.net/yang/alarms">false</equipment-mismatch>
+                    <serial-no>2102312NBTBTM8000535</serial-no>
+                    <empty>false</empty>
+                    <vendor-type>N1APSU</vendor-type>
+                    <location>1-22</location>
+                    <temperature>
+                        <instant>25.0</instant>
+                        <min>24.0</min>
+                        <max>25.0</max>
+                        <interval>900000000000</interval>
+                    </temperature>
+                    <hardware-version>VER.A</hardware-version>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                </state>
+                <config>
+                    <admin-state>ENABLED</admin-state>
+                    <name>PSU-1-22</name>
+                    <vendor-type>N1APSU</vendor-type>
+                </config>
+                <power-supply>
+                    <state>
+                        <capacity xmlns="http://openconfig.net/yang/platform/psu">RTuAAA==</capacity>
+                        <output-current xmlns="http://openconfig.net/yang/platform/psu">AAAAAA==</output-current>
+                        <output-power xmlns="http://openconfig.net/yang/platform/psu">AAAAAA==</output-power>
+                        <input-current xmlns="http://openconfig.net/yang/platform/psu">AAAAAA==</input-current>
+                        <input-voltage xmlns="http://openconfig.net/yang/platform/psu">AAAAAA==</input-voltage>
+                        <output-voltage xmlns="http://openconfig.net/yang/platform/psu">AAAAAA==</output-voltage>
+                    </state>
+                </power-supply>
+            </component>
+            <component>
+                <name>PSU-1-21</name>
+                <state>
+                    <mfg-name>Huawei</mfg-name>
+                    <part-no>02312NBT</part-no>
+                    <admin-state>ENABLED</admin-state>
+                    <name>PSU-1-21</name>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:POWER_SUPPLY</type>
+                    <used-power>30</used-power>
+                    <description>N1DPSU</description>
+                    <software-version>1.15</software-version>
+                    <allocated-power>210</allocated-power>
+                    <mfg-date>2021-08-14</mfg-date>
+                    <parent>CHASSIS-1</parent>
+                    <removable>true</removable>
+                    <equipment-failure xmlns="http://openconfig.net/yang/alarms">false</equipment-failure>
+                    <equipment-mismatch xmlns="http://openconfig.net/yang/alarms">true</equipment-mismatch>
+                    <serial-no>2102312NBTBTM8000513</serial-no>
+                    <empty>false</empty>
+                    <vendor-type>N1APSU</vendor-type>
+                    <location>1-21</location>
+                    <temperature>
+                        <instant>28.0</instant>
+                        <min>28.0</min>
+                        <max>28.0</max>
+                        <interval>900000000000</interval>
+                    </temperature>
+                    <hardware-version>VER.A</hardware-version>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                </state>
+                <config>
+                    <admin-state>ENABLED</admin-state>
+                    <name>PSU-1-21</name>
+                    <vendor-type>N1DPSU</vendor-type>
+                </config>
+                <power-supply>
+                    <state>
+                        <capacity xmlns="http://openconfig.net/yang/platform/psu">RTuAAA==</capacity>
+                        <output-current xmlns="http://openconfig.net/yang/platform/psu">QCZmZg==</output-current>
+                        <output-power xmlns="http://openconfig.net/yang/platform/psu">QwoAAA==</output-power>
+                        <input-current xmlns="http://openconfig.net/yang/platform/psu">Pzxqfw==</input-current>
+                        <input-voltage xmlns="http://openconfig.net/yang/platform/psu">Q2QAAA==</input-voltage>
+                        <output-voltage xmlns="http://openconfig.net/yang/platform/psu">QlQAAA==</output-voltage>
+                    </state>
+                </power-supply>
+            </component>
+            <component>
+                <name>PORT-1-40-CONSOLE</name>
+                <state>
+                    <removable>false</removable>
+                    <empty>false</empty>
+                    <name>PORT-1-40-CONSOLE</name>
+                    <location>1-40</location>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:PORT</type>
+                    <description>PORT CONSOLE</description>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                    <parent>PANEL-1-40</parent>
+                </state>
+                <config>
+                    <name>PORT-1-40-CONSOLE</name>
+                </config>
+            </component>
+            <component>
+                <name>PORT-1-5-OSC2</name>
+                <state>
+                    <removable>false</removable>
+                    <equipment-failure xmlns="http://openconfig.net/yang/alarms">false</equipment-failure>
+                    <admin-state>ENABLED</admin-state>
+                    <empty>false</empty>
+                    <name>PORT-1-5-OSC2</name>
+                    <remark/>
+                    <location>OSC2</location>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:PORT</type>
+                    <description>PORT OSC2</description>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                    <parent>OA-1-5</parent>
+                </state>
+                <config>
+                    <remark/>
+                    <admin-state>ENABLED</admin-state>
+                    <name>PORT-1-5-OSC2</name>
+                </config>
+                <subcomponents>
+                    <subcomponent>
+                        <name>TRANSCEIVER-1-5-OSC2</name>
+                        <state>
+                            <name>TRANSCEIVER-1-5-OSC2</name>
+                        </state>
+                        <config>
+                            <name>TRANSCEIVER-1-5-OSC2</name>
+                        </config>
+                    </subcomponent>
+                </subcomponents>
+            </component>
+            <component>
+                <name>PORT-1-5-OSC1</name>
+                <state>
+                    <removable>false</removable>
+                    <equipment-failure xmlns="http://openconfig.net/yang/alarms">false</equipment-failure>
+                    <admin-state>ENABLED</admin-state>
+                    <empty>false</empty>
+                    <name>PORT-1-5-OSC1</name>
+                    <remark/>
+                    <location>OSC1</location>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:PORT</type>
+                    <description>PORT OSC1</description>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                    <parent>OA-1-5</parent>
+                </state>
+                <config>
+                    <remark/>
+                    <admin-state>ENABLED</admin-state>
+                    <name>PORT-1-5-OSC1</name>
+                </config>
+                <subcomponents>
+                    <subcomponent>
+                        <name>TRANSCEIVER-1-5-OSC1</name>
+                        <state>
+                            <name>TRANSCEIVER-1-5-OSC1</name>
+                        </state>
+                        <config>
+                            <name>TRANSCEIVER-1-5-OSC1</name>
+                        </config>
+                    </subcomponent>
+                </subcomponents>
+            </component>
+            <component>
+                <name>EDFA-1-5-R</name>
+                <state>
+                    <removable>false</removable>
+                    <equipment-failure xmlns="http://openconfig.net/yang/alarms">false</equipment-failure>
+                    <admin-state>ENABLED</admin-state>
+                    <empty>false</empty>
+                    <name>EDFA-1-5-R</name>
+                    <remark/>
+                    <location>R</location>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:EDFA</type>
+                    <temperature>
+                        <instant>25.0</instant>
+                        <min>25.0</min>
+                        <max>25.0</max>
+                        <interval>900000000000</interval>
+                    </temperature>
+                    <description>EDFA R</description>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                    <parent>OA-1-5</parent>
+                </state>
+                <config>
+                    <remark/>
+                    <admin-state>ENABLED</admin-state>
+                    <name>EDFA-1-5-R</name>
+                </config>
+            </component>
+            <component>
+                <name>EDFA-1-5-T</name>
+                <state>
+                    <removable>false</removable>
+                    <equipment-failure xmlns="http://openconfig.net/yang/alarms">false</equipment-failure>
+                    <admin-state>ENABLED</admin-state>
+                    <empty>false</empty>
+                    <name>EDFA-1-5-T</name>
+                    <remark/>
+                    <location>T</location>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:EDFA</type>
+                    <temperature>
+                        <instant>25.0</instant>
+                        <min>25.0</min>
+                        <max>25.0</max>
+                        <interval>900000000000</interval>
+                    </temperature>
+                    <description>EDFA T</description>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                    <parent>OA-1-5</parent>
+                </state>
+                <config>
+                    <remark/>
+                    <admin-state>ENABLED</admin-state>
+                    <name>EDFA-1-5-T</name>
+                </config>
+            </component>
+            <component>
+                <name>OTDR-1-5-T</name>
+                <state>
+                    <removable>false</removable>
+                    <equipment-failure xmlns="http://openconfig.net/yang/alarms">false</equipment-failure>
+                    <admin-state>ENABLED</admin-state>
+                    <empty>false</empty>
+                    <name>OTDR-1-5-T</name>
+                    <remark/>
+                    <location>T</location>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:OTDR</type>
+                    <description>OTDR T</description>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                    <parent>OA-1-5</parent>
+                </state>
+                <config>
+                    <remark/>
+                    <admin-state>ENABLED</admin-state>
+                    <name>OTDR-1-5-T</name>
+                </config>
+            </component>
+            <component>
+                <name>OTDR-1-5-R</name>
+                <state>
+                    <removable>false</removable>
+                    <equipment-failure xmlns="http://openconfig.net/yang/alarms">false</equipment-failure>
+                    <admin-state>ENABLED</admin-state>
+                    <empty>false</empty>
+                    <name>OTDR-1-5-R</name>
+                    <remark/>
+                    <location>R</location>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:OTDR</type>
+                    <description>OTDR R</description>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                    <parent>OA-1-5</parent>
+                </state>
+                <config>
+                    <remark/>
+                    <admin-state>ENABLED</admin-state>
+                    <name>OTDR-1-5-R</name>
+                </config>
+            </component>
+            <component>
+                <name>PORT-1-41-ETH1</name>
+                <state>
+                    <removable>false</removable>
+                    <admin-state>ENABLED</admin-state>
+                    <empty>false</empty>
+                    <name>PORT-1-41-ETH1</name>
+                    <location>1-41</location>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:PORT</type>
+                    <description>PORT ETH1</description>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                    <parent>MCU-1-41</parent>
+                </state>
+                <config>
+                    <admin-state>ENABLED</admin-state>
+                    <name>PORT-1-41-ETH1</name>
+                </config>
+            </component>
+            <component>
+                <name>MCU-1-41</name>
+                <state>
+                    <mfg-name>Huawei</mfg-name>
+                    <part-no>03026TCV</part-no>
+                    <memory>
+                        <utilized>863039488</utilized>
+                        <available>5962567680</available>
+                    </memory>
+                    <admin-state>ENABLED</admin-state>
+                    <firmware-version>9.07.15</firmware-version>
+                    <name>MCU-1-41</name>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:CONTROLLER_CARD</type>
+                    <used-power>35</used-power>
+                    <description>N1SCC</description>
+                    <software-version>5.223.21.26</software-version>
+                    <allocated-power>40</allocated-power>
+                    <mfg-date>2022-08-06</mfg-date>
+                    <parent>CHASSIS-1</parent>
+                    <removable>true</removable>
+                    <equipment-failure xmlns="http://openconfig.net/yang/alarms">false</equipment-failure>
+                    <equipment-mismatch xmlns="http://openconfig.net/yang/alarms">false</equipment-mismatch>
+                    <led>DISABLED</led>
+                    <serial-no>026TCV10N8100369</serial-no>
+                    <empty>false</empty>
+                    <vendor-type>N1SCC</vendor-type>
+                    <location>1-41</location>
+                    <temperature>
+                        <instant>40.3</instant>
+                        <min>40.1</min>
+                        <max>40.3</max>
+                        <interval>900000000000</interval>
+                    </temperature>
+                    <hardware-version>VER.B</hardware-version>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                </state>
+                <config>
+                    <admin-state>ENABLED</admin-state>
+                    <led>DISABLED</led>
+                    <name>MCU-1-41</name>
+                    <vendor-type>N1SCC</vendor-type>
+                </config>
+                <cpu>
+                    <utilization xmlns="http://openconfig.net/yang/platform/cpu">
+                        <state>
+                            <avg>11</avg>
+                            <min>10</min>
+                            <interval>900000000000</interval>
+                            <instant>16</instant>
+                            <max>16</max>
+                        </state>
+                    </utilization>
+                </cpu>
+                <subcomponents>
+                    <subcomponent>
+                        <name>PORT-1-41-NM</name>
+                        <state>
+                            <name>PORT-1-41-NM</name>
+                        </state>
+                        <config>
+                            <name>PORT-1-41-NM</name>
+                        </config>
+                    </subcomponent>
+                    <subcomponent>
+                        <name>PORT-1-41-ETH4</name>
+                        <state>
+                            <name>PORT-1-41-ETH4</name>
+                        </state>
+                        <config>
+                            <name>PORT-1-41-ETH4</name>
+                        </config>
+                    </subcomponent>
+                    <subcomponent>
+                        <name>PORT-1-41-ETH3</name>
+                        <state>
+                            <name>PORT-1-41-ETH3</name>
+                        </state>
+                        <config>
+                            <name>PORT-1-41-ETH3</name>
+                        </config>
+                    </subcomponent>
+                    <subcomponent>
+                        <name>PORT-1-41-ETH2</name>
+                        <state>
+                            <name>PORT-1-41-ETH2</name>
+                        </state>
+                        <config>
+                            <name>PORT-1-41-ETH2</name>
+                        </config>
+                    </subcomponent>
+                    <subcomponent>
+                        <name>PORT-1-41-ETH1</name>
+                        <state>
+                            <name>PORT-1-41-ETH1</name>
+                        </state>
+                        <config>
+                            <name>PORT-1-41-ETH1</name>
+                        </config>
+                    </subcomponent>
+                </subcomponents>
+            </component>
+            <component>
+                <name>PORT-1-41-ETH2</name>
+                <state>
+                    <removable>false</removable>
+                    <admin-state>ENABLED</admin-state>
+                    <empty>false</empty>
+                    <name>PORT-1-41-ETH2</name>
+                    <location>1-41</location>
+                    <type xmlns:x="http://openconfig.net/yang/platform-types">x:PORT</type>
+                    <description>PORT ETH2</description>
+                    <oper-status xmlns:x="http://openconfig.net/yang/platform-types">x:ACTIVE</oper-status>
+                    <parent>MCU-1-41</parent>
+                </state>
+                <config>
+                    <admin-state>ENABLED</admin-state>
+                    <name>PORT-1-41-ETH2</name>
+                </config>
+            </component>
+        </components>
+    </data>
+</rpc-reply>
