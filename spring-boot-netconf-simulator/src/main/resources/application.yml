@@ -34,6 +34,14 @@ mybatis:
   type-aliases-package: cn.javastudy.springboot.simulator.netconf.datastore.mapper
   mapper-locations: classpath*:mapping/*.xml
 
+simulator:
+  netconf:
+    dynamic-config-list:
+      - path: "/rpc-reply/data/components/component/state/temperature/instant"
+        scale: 1
+        start: "1.0"
+        end: "99.9"
+
 springdoc:
   swagger-ui:
     path: /swagger-ui.html

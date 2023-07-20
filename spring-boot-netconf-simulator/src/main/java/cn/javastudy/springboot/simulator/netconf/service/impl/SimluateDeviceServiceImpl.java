@@ -8,6 +8,7 @@ import cn.javastudy.springboot.simulator.netconf.datastore.mapper.SimulatorConfi
 import cn.javastudy.springboot.simulator.netconf.device.DeviceSessionManager;
 import cn.javastudy.springboot.simulator.netconf.device.NetconfSimulateDevice;
 import cn.javastudy.springboot.simulator.netconf.domain.DeviceUniqueInfo;
+import cn.javastudy.springboot.simulator.netconf.domain.Result;
 import cn.javastudy.springboot.simulator.netconf.domain.SimulateDeviceInfo;
 import cn.javastudy.springboot.simulator.netconf.exception.SimulateException;
 import cn.javastudy.springboot.simulator.netconf.monitoring.NetconfMonitoringOperationService;
@@ -144,7 +145,7 @@ public class SimluateDeviceServiceImpl implements SimluateDeviceService {
     }
 
     @Override
-    public ListenableFuture<Boolean> startSimulateDevice(SimulateDeviceInfo deviceInfo) {
+    public ListenableFuture<Result<SimulateDeviceInfo>> startSimulateDevice(SimulateDeviceInfo deviceInfo) {
         LOG.info("start simulate device:{} ", deviceInfo);
         AtomicBoolean initFlag = new AtomicBoolean(true);
         DeviceSessionManager sessionManager = new DeviceSessionManager(deviceInfo);
@@ -152,7 +153,7 @@ public class SimluateDeviceServiceImpl implements SimluateDeviceService {
 
         NetconfSimulateDevice simulateDevice =
             new NetconfSimulateDevice(serverDispatcher, nettyThreadgroup, channelGroup, deviceInfo, sessionManager);
-        ListenableFuture<Boolean> future = simulateDevice.start();
+        ListenableFuture<Result<SimulateDeviceInfo>> future = simulateDevice.start();
 
         future.addListener(() -> initFlag.set(false), MoreExecutors.directExecutor());
         startedDeviceMap.put(deviceInfo.getUniqueKey(), simulateDevice);

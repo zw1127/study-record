@@ -5,6 +5,8 @@ import static cn.javastudy.springboot.simulator.netconf.utils.Utils.getInetAddre
 import static java.util.Objects.requireNonNull;
 import static java.util.concurrent.Executors.newScheduledThreadPool;
 
+import cn.javastudy.springboot.simulator.netconf.domain.Result;
+import cn.javastudy.springboot.simulator.netconf.domain.ResultBuilder;
 import cn.javastudy.springboot.simulator.netconf.domain.SimulateDeviceInfo;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -61,8 +63,8 @@ public class NetconfSimulateDevice {
     }
 
     @SuppressWarnings("IllegalCatch")
-    public ListenableFuture<Boolean> start() {
-        SettableFuture<Boolean> settableFuture = SettableFuture.create();
+    public ListenableFuture<Result<SimulateDeviceInfo>> start() {
+        SettableFuture<Result<SimulateDeviceInfo>> settableFuture = SettableFuture.create();
         try {
             LocalAddress localAddress = new LocalAddress(portNumber);
             this.localServer = netconfServerDispatcher.createLocalServer(localAddress);
@@ -81,21 +83,21 @@ public class NetconfSimulateDevice {
             localServer.addListener(future -> {
                 if (future.isDone() && !future.isCancellable()) {
                     try {
-                        settableFuture.set(Boolean.TRUE);
                         simulateServer.bind(builder.createSshProxyServerConfiguration());
+                        settableFuture.set(ResultBuilder.success(deviceInfo).build());
                         LOG.info("Netconf Simulator:{} SSH endpoint started succssful at:{}", inetAddress, uniqueKey);
                     } catch (final IOException e) {
-                        LOG.warn("Unable to start SSH netconf simulate server.");
-                        settableFuture.setException(e);
+                        LOG.warn("Unable to start SSH netconf simulate server.", e);
+                        settableFuture.set(ResultBuilder.failed(deviceInfo, "bind error").build());
                     }
                 } else {
                     LOG.warn("Unalbe to start SSH netconf server:{} at:{}", uniqueKey, inetAddress, future.cause());
-                    settableFuture.set(Boolean.FALSE);
+                    settableFuture.set(ResultBuilder.failed(deviceInfo).build());
                 }
             });
         } catch (Throwable throwable) {
             LOG.warn("start device:{} error.", this, throwable);
-            settableFuture.setException(throwable);
+            settableFuture.set(ResultBuilder.failed(deviceInfo, "start error").build());
         }
 
         return settableFuture;

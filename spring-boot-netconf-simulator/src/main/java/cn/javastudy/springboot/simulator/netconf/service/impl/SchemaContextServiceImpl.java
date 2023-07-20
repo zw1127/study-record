@@ -3,26 +3,34 @@ package cn.javastudy.springboot.simulator.netconf.service.impl;
 import static cn.javastudy.springboot.simulator.netconf.utils.Constants.DEFAULT_SUPPORTED_MODULE_INFOS;
 import static cn.javastudy.springboot.simulator.netconf.utils.Constants.SIMULATE_HOME;
 import static cn.javastudy.springboot.simulator.netconf.utils.Constants.YANG_SCHEMAS_PATH;
+import static cn.javastudy.springboot.simulator.netconf.utils.Utils.getRandomDecimal;
 
+import cn.javastudy.springboot.simulator.netconf.properties.DynamicConfig;
+import cn.javastudy.springboot.simulator.netconf.properties.NetconfSimulatorProperties;
 import cn.javastudy.springboot.simulator.netconf.schemacache.SchemaSourceCache;
 import cn.javastudy.springboot.simulator.netconf.service.SchemaContextService;
+import cn.javastudy.springboot.simulator.netconf.utils.Utils;
 import io.lighty.codecs.util.XmlNodeConverter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutionException;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
@@ -69,6 +77,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 import org.springframework.util.StringUtils;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 @Service
@@ -88,6 +99,9 @@ public class SchemaContextServiceImpl implements SchemaContextService {
     private File yangSchemaPath;
 
     private XmlNodeConverter xmlNodeConverter;
+
+    @Resource
+    private NetconfSimulatorProperties netconfSimulatorProperties;
 
     @PostConstruct
     public void init() {
@@ -322,4 +336,44 @@ public class SchemaContextServiceImpl implements SchemaContextService {
     public XmlNodeConverter getXmlNodeConverter() {
         return xmlNodeConverter;
     }
+
+    @Override
+    public void processDynamicConfig(Document document) {
+        modify(document);
+    }
+
+    private void modify(Document document) {
+        Optional.ofNullable(netconfSimulatorProperties.getDynamicConfigList()).orElse(Collections.emptyList())
+            .forEach(config -> {
+                String path = config.getPath();
+                try {
+                    if (StringUtils.hasLength(path)) {
+                        NodeList nodeList = Utils.evaluate(document, config);
+                        if (nodeList == null || nodeList.getLength() == 0) {
+                            return;
+                        }
+
+                        for (int i = 0; i < nodeList.getLength(); i++) {
+                            Node titleAttribute = nodeList.item(i);
+                            // 修改属性的值
+                            titleAttribute.setTextContent(generateDynamicValue(config));
+                        }
+                    }
+                } catch (Throwable throwable) {
+                    LOG.warn("process DynamicConfig:{} error.", config, throwable);
+                }
+            });
+
+    }
+
+    private String generateDynamicValue(DynamicConfig config) {
+        Integer scale = config.getScale();
+
+        BigDecimal min = new BigDecimal(config.getStart());
+        BigDecimal max = new BigDecimal(config.getEnd());
+
+        BigDecimal randomDecimal = getRandomDecimal(min, max, scale);
+        return randomDecimal.toString();
+    }
+
 }

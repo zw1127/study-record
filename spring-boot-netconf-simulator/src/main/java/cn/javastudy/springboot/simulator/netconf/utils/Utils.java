@@ -1,10 +1,23 @@
 package cn.javastudy.springboot.simulator.netconf.utils;
 
+import cn.javastudy.springboot.simulator.netconf.properties.DynamicConfig;
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import javax.xml.namespace.NamespaceContext;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+import org.apache.commons.lang3.StringUtils;
 import org.opendaylight.netconf.api.messages.NetconfHelloMessageAdditionalHeader;
 import org.opendaylight.netconf.api.monitoring.NetconfManagementSession;
+import org.opendaylight.netconf.api.xml.XmlNetconfConstants;
 import org.opendaylight.netconf.auth.AuthProvider;
 import org.opendaylight.netconf.impl.NetconfServerSession;
 import org.opendaylight.netconf.shaded.sshd.server.auth.pubkey.PublickeyAuthenticator;
@@ -14,10 +27,19 @@ import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.ReflectionUtils;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 
 public final class Utils {
 
     private static final Logger LOG = LoggerFactory.getLogger(Utils.class);
+
+    private static final XPathFactory FACTORY = XPathFactory.newInstance();
+    private static final NamespaceContext NS_CONTEXT =
+        new HardcodedNamespaceResolver("netconf", XmlNetconfConstants.URN_IETF_PARAMS_XML_NS_NETCONF_BASE_1_0);
+    private static final String DELIMITER = "/";
+    private static final String NAMESPACE_TEMP = "*[local-name()='{TEMP}']";
+    private static final String TEMP_VALUE = "{TEMP}";
 
     public static final AuthProvider DEFAULT_AUTH_PROVIDER = (username, password) -> {
         LOG.info("Auth with username and password: {}", username);
@@ -73,5 +95,51 @@ public final class Utils {
         }
 
         return null;
+    }
+
+    // 生成指定区间和指定小数位数的随机小数
+    public static BigDecimal getRandomDecimal(BigDecimal min, BigDecimal max, int decimalPlaces) {
+        BigDecimal range = max.subtract(min);
+        BigDecimal randomFactor = BigDecimal.valueOf(Math.random());
+        BigDecimal scaledValue = range.multiply(randomFactor);
+        BigDecimal roundedValue = scaledValue.setScale(decimalPlaces, RoundingMode.HALF_UP);
+        return min.add(roundedValue);
+    }
+
+    public static String buildPath(String path) {
+        String[] split = StringUtils.split(path, DELIMITER);
+        if (split == null || split.length == 0) {
+            return path;
+        }
+
+        return DELIMITER + Arrays.stream(split)
+            .map(subpath -> StringUtils.replace(NAMESPACE_TEMP, TEMP_VALUE, subpath))
+            .collect(Collectors.joining(DELIMITER));
+    }
+
+    public static NodeList evaluate(Document document, DynamicConfig config) {
+        try {
+            // 执行 XPath 查询
+            String path = config.getPath();
+            XPathExpression expression = compileXPath(buildPath(path));
+            Object evaluate = expression.evaluate(document, XPathConstants.NODESET);
+            if (evaluate instanceof NodeList) {
+                return (NodeList) evaluate;
+            }
+        } catch (XPathExpressionException e) {
+            LOG.warn("evaluate error.", e);
+        }
+
+        return null;
+    }
+
+    private static XPathExpression compileXPath(final String xpath) {
+        final XPath newXPath = FACTORY.newXPath();
+        newXPath.setNamespaceContext(NS_CONTEXT);
+        try {
+            return newXPath.compile(xpath);
+        } catch (final XPathExpressionException e) {
+            throw new IllegalStateException("Error while compiling xpath expression " + xpath, e);
+        }
     }
 }

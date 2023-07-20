@@ -17,6 +17,7 @@ import org.opendaylight.yangtools.yang.model.api.SchemaTreeInference;
 import org.opendaylight.yangtools.yang.model.repo.api.YangTextSchemaSource;
 import org.opendaylight.yangtools.yang.model.repo.spi.SchemaSourceProvider;
 import org.opendaylight.yangtools.yang.model.util.SchemaInferenceStack;
+import org.w3c.dom.Document;
 
 public interface SchemaContextService {
 
@@ -63,4 +64,6 @@ public interface SchemaContextService {
     SchemaInferenceStack.Inference getRootInference();
 
     XmlNodeConverter getXmlNodeConverter();
+
+    void processDynamicConfig(Document input);
 }

@@ -2,7 +2,10 @@ package cn.javastudy.springboot.simulator.netconf.controller;
 
 import cn.javastudy.springboot.simulator.netconf.device.DeviceSessionManager;
 import cn.javastudy.springboot.simulator.netconf.device.NetconfSimulateDevice;
+import cn.javastudy.springboot.simulator.netconf.domain.DeviceBatchInfo;
 import cn.javastudy.springboot.simulator.netconf.domain.DeviceInfo;
+import cn.javastudy.springboot.simulator.netconf.domain.Result;
+import cn.javastudy.springboot.simulator.netconf.domain.ResultBuilder;
 import cn.javastudy.springboot.simulator.netconf.domain.SimulateDeviceInfo;
 import cn.javastudy.springboot.simulator.netconf.service.SimluateDeviceService;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
@@ -15,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -50,14 +54,32 @@ public class SimulatorController {
     @ApiOperationSupport
     @PostMapping("/start")
     @Operation(summary = "启动模拟器")
-    public String startDevice(@RequestBody SimulateDeviceInfo deviceInfo) {
+    public Result<SimulateDeviceInfo> startDevice(@RequestBody SimulateDeviceInfo deviceInfo) {
         try {
-            ListenableFuture<Boolean> future = simluateDeviceService.startSimulateDevice(deviceInfo);
-            Boolean result = future.get(TIME_OUT, TimeUnit.SECONDS);
+            ListenableFuture<Result<SimulateDeviceInfo>> future =
+                simluateDeviceService.startSimulateDevice(deviceInfo);
+            Result<SimulateDeviceInfo> result = future.get(TIME_OUT, TimeUnit.SECONDS);
             LOG.info("start netconf simulator:{} result:{}", deviceInfo, result);
-            return Boolean.TRUE.equals(result) ? "successful" : "failed";
+
+            return result;
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
-            return "failed";
+            return ResultBuilder.failed(deviceInfo, e).build();
+        }
+    }
+
+    @ApiOperationSupport
+    @PostMapping("/start-batch")
+    @Operation(summary = "批量启动模拟器")
+    public List<Result<SimulateDeviceInfo>> startDevices(@RequestBody DeviceBatchInfo deviceBatchInfo) {
+        try {
+            int timeout = Optional.ofNullable(deviceBatchInfo.getBatchSize()).orElse(1) * TIME_OUT;
+            ListenableFuture<List<Result<SimulateDeviceInfo>>> future =
+                simluateDeviceService.startSimulateBatch(deviceBatchInfo);
+            List<Result<SimulateDeviceInfo>> result = future.get(timeout, TimeUnit.SECONDS);
+            LOG.info("start netconf simulator:{} result:{}", deviceBatchInfo, result);
+            return result.stream().filter(Objects::nonNull).collect(Collectors.toList());
+        } catch (InterruptedException | ExecutionException | TimeoutException e) {
+            throw new RuntimeException("start batch:" + deviceBatchInfo + " error.", e);
         }
     }
 

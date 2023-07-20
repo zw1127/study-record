@@ -60,6 +60,10 @@ public final class XmlUtils {
         return writer.toString();
     }
 
+    public static String toString(final Document doc, final boolean addXmlDeclaration) {
+        return toString(doc.getDocumentElement(), addXmlDeclaration);
+    }
+
     /**
      * Return a new {@link Transformer} which performs indentation.
      *
@@ -70,10 +74,6 @@ public final class XmlUtils {
         final Transformer ret = PRETTY_PRINT_TEMPLATE.newTransformer();
         ret.setOutputProperty(OutputKeys.INDENT, "yes");
         return ret;
-    }
-
-    public static String toString(final Document doc, final boolean addXmlDeclaration) {
-        return toString(doc.getDocumentElement(), addXmlDeclaration);
     }
 
 }

@@ -14,6 +14,7 @@ import javax.xml.transform.dom.DOMResult;
 import org.opendaylight.netconf.api.DocumentedException;
 import org.opendaylight.netconf.api.xml.XmlElement;
 import org.opendaylight.netconf.api.xml.XmlNetconfConstants;
+import org.opendaylight.netconf.mapping.api.NetconfOperationChainedExecution;
 import org.opendaylight.netconf.util.mapping.AbstractSingletonNetconfOperation;
 import org.opendaylight.yangtools.yang.common.ErrorSeverity;
 import org.opendaylight.yangtools.yang.common.ErrorTag;
@@ -73,6 +74,16 @@ public abstract class AbstractGet extends AbstractSingletonNetconfOperation {
         }
 
         return result.getNode();
+    }
+
+    @Override
+    public Document handle(Document requestMessage, NetconfOperationChainedExecution subsequentOperation)
+        throws DocumentedException {
+        Document document = super.handle(requestMessage, subsequentOperation);
+
+        schemaContext.processDynamicConfig(document);
+
+        return document;
     }
 
     private static void write(final NormalizedNodeStreamWriter nnStreamWriter,
