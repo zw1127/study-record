@@ -15,5 +15,7 @@ public class NetconfSimulatorProperties {
 
     private int generateConfigsTimeout = (int) TimeUnit.MINUTES.toMillis(30);
 
+    private boolean runningWritable = false;
+
     private List<DynamicConfig> dynamicConfigList;
 }

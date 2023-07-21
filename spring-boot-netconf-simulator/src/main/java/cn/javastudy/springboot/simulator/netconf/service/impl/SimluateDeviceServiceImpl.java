@@ -244,7 +244,9 @@ public class SimluateDeviceServiceImpl implements SimluateDeviceService {
 
         Set<Capability> capabilities = new HashSet<>(schemaContextService.supportedCapabilities());
         capabilities.add(new BasicCapability("urn:ietf:params:netconf:capability:candidate:1.0"));
-        capabilities.add(new BasicCapability("urn:ietf:params:netconf:capability:writable-running:1.0"));
+        if (properties.isRunningWritable()) {
+            capabilities.add(new BasicCapability("urn:ietf:params:netconf:capability:writable-running:1.0"));
+        }
 
         NetconfMonitoringService monitoringService = new DummyMonitoringService(capabilities, sessionManager);
 
