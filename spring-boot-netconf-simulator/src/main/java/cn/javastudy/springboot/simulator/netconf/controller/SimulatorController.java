@@ -2,6 +2,9 @@ package cn.javastudy.springboot.simulator.netconf.controller;
 
 import cn.javastudy.springboot.simulator.netconf.device.DeviceSessionManager;
 import cn.javastudy.springboot.simulator.netconf.device.NetconfSimulateDevice;
+import cn.javastudy.springboot.simulator.netconf.domain.CallhomeBatchInfo;
+import cn.javastudy.springboot.simulator.netconf.domain.CallhomeInfo;
+import cn.javastudy.springboot.simulator.netconf.domain.DeviceBatchBaseInfo;
 import cn.javastudy.springboot.simulator.netconf.domain.DeviceBatchInfo;
 import cn.javastudy.springboot.simulator.netconf.domain.DeviceInfo;
 import cn.javastudy.springboot.simulator.netconf.domain.Result;
@@ -91,17 +94,45 @@ public class SimulatorController {
         return "stop simulator: " + uniqueKey + " successful.";
     }
 
+    @ApiOperationSupport(order = 1)
+    @PostMapping("/stop")
+    @Operation(summary = "批量停止模拟器")
+    public String stopDeviceBatch(@RequestBody DeviceBatchBaseInfo batchBaseInfo) {
+        simluateDeviceService.stopSimulateDeviceBatch(batchBaseInfo);
+        return "stop simulator batch: " + batchBaseInfo + " successful.";
+    }
+
     @ApiOperationSupport(order = 2)
     @PostMapping("/callhome-connect")
     @Operation(summary = "callhome连接控制器")
-    public String callhomeConnect(String uniqueKey, String callhomeIp) {
+    public Result<CallhomeInfo> callhomeConnect(String uniqueKey, String callhomeIp) {
+        CallhomeInfo callhomeInfo = new CallhomeInfo();
+        callhomeInfo.setCallhomeIp(callhomeIp);
+        callhomeInfo.setUniqueKey(uniqueKey);
         try {
-            ListenableFuture<Boolean> future = simluateDeviceService.callhomeConnect(uniqueKey, callhomeIp);
-            Boolean result = future.get(TIME_OUT, TimeUnit.SECONDS);
+            ListenableFuture<Result<CallhomeInfo>> future =
+                simluateDeviceService.callhomeConnect(uniqueKey, callhomeIp);
+            Result<CallhomeInfo> result = future.get(TIME_OUT, TimeUnit.SECONDS);
             LOG.info("start netconf simulator result:{}", result);
-            return Boolean.TRUE.equals(result) ? "successful" : "failed";
+            return result;
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
-            return "failed";
+            return ResultBuilder.failed(callhomeInfo, e).build();
+        }
+    }
+
+    @ApiOperationSupport(order = 2)
+    @PostMapping("/callhome-connect-batch")
+    @Operation(summary = "callhome批量连接控制器")
+    public List<Result<CallhomeInfo>> callhomeConnectBatch(@RequestBody CallhomeBatchInfo callhomeBatchInfo) {
+        try {
+            int timeout = Optional.ofNullable(callhomeBatchInfo.getBatchSize()).orElse(1) * TIME_OUT;
+            ListenableFuture<List<Result<CallhomeInfo>>> future =
+                simluateDeviceService.callhomeConnectBatch(callhomeBatchInfo);
+            List<Result<CallhomeInfo>> result = future.get(timeout, TimeUnit.SECONDS);
+            LOG.info("start netconf simulator result:{}", result);
+            return result;
+        } catch (InterruptedException | ExecutionException | TimeoutException e) {
+            throw new RuntimeException("callhome connect batch:" + callhomeBatchInfo + " error.", e);
         }
     }
 
@@ -111,6 +142,13 @@ public class SimulatorController {
     public String callhomeDisconnect(String uniqueKey, String callhomeIp) {
         simluateDeviceService.callhomeDisconnect(uniqueKey, callhomeIp);
         return "disconnect device: " + uniqueKey + " callhome connectd controller:" + callhomeIp + " successful.";
+    }
+
+    @PostMapping("/callhome-disconnect")
+    @Operation(summary = "批量断开控制器的callhome连接")
+    public String callhomeDisconnectBatch(@RequestBody CallhomeBatchInfo callhomeBatchInfo) {
+        simluateDeviceService.callhomeDisconnectBatch(callhomeBatchInfo);
+        return "disconnect device batch: " + callhomeBatchInfo + " callhome connected successful.";
     }
 
     @ApiOperationSupport(order = 4)

@@ -8,11 +8,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CallhomeInfo extends DeviceUniqueInfo {
+public class CallhomeBatchInfo extends DeviceBatchBaseInfo {
 
     @JsonProperty("callhome-ip")
     private String callhomeIp;
 
     @JsonProperty("callhome-port")
-    private Integer callhomePort;
+    private Integer callhomePort = 4334;
+
 }

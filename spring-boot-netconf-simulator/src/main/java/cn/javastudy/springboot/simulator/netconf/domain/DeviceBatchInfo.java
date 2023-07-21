@@ -8,18 +8,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DeviceBatchInfo {
-
-    @JsonProperty("device-id-prefix")
-    private String deviceIdPrefix;
-
-    @JsonProperty("device-id-start")
-    private Integer deviceIdStart;
+public class DeviceBatchInfo extends DeviceBatchBaseInfo {
 
     @JsonProperty("port-start")
     private Integer portStart;
-
-    @JsonProperty("batch-size")
-    private Integer batchSize;
 
 }

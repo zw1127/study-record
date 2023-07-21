@@ -7,6 +7,7 @@ import cn.javastudy.springboot.simulator.netconf.datastore.entity.SimulatorConfi
 import cn.javastudy.springboot.simulator.netconf.datastore.mapper.SimulatorConfigMapper;
 import cn.javastudy.springboot.simulator.netconf.device.DeviceSessionManager;
 import cn.javastudy.springboot.simulator.netconf.device.NetconfSimulateDevice;
+import cn.javastudy.springboot.simulator.netconf.domain.CallhomeInfo;
 import cn.javastudy.springboot.simulator.netconf.domain.DeviceUniqueInfo;
 import cn.javastudy.springboot.simulator.netconf.domain.Result;
 import cn.javastudy.springboot.simulator.netconf.domain.SimulateDeviceInfo;
@@ -170,7 +171,9 @@ public class SimluateDeviceServiceImpl implements SimluateDeviceService {
     }
 
     @Override
-    public ListenableFuture<Boolean> callhomeConnect(String uniqueKey, String callhomeIp, Integer callhomePort) {
+    public ListenableFuture<Result<CallhomeInfo>> callhomeConnect(String uniqueKey,
+                                                                  String callhomeIp,
+                                                                  Integer callhomePort) {
         NetconfSimulateDevice simulateDevice = startedDeviceMap.get(uniqueKey);
         if (simulateDevice == null) {
             LOG.warn("device:{} does not started.", uniqueKey);

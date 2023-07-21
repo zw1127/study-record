@@ -5,6 +5,7 @@ import static cn.javastudy.springboot.simulator.netconf.utils.Utils.getInetAddre
 import static java.util.Objects.requireNonNull;
 import static java.util.concurrent.Executors.newScheduledThreadPool;
 
+import cn.javastudy.springboot.simulator.netconf.domain.CallhomeInfo;
 import cn.javastudy.springboot.simulator.netconf.domain.Result;
 import cn.javastudy.springboot.simulator.netconf.domain.ResultBuilder;
 import cn.javastudy.springboot.simulator.netconf.domain.SimulateDeviceInfo;
@@ -104,36 +105,42 @@ public class NetconfSimulateDevice {
     }
 
     @SuppressWarnings("IllegalCatch")
-    public ListenableFuture<Boolean> callhomeConnect(InetSocketAddress address) {
+    private ListenableFuture<Result<CallhomeInfo>> callhomeConnect(CallhomeInfo info, InetSocketAddress address) {
         if (simulateServer == null) {
             LOG.warn("Simulate server does not started.");
             return Futures.immediateFailedFuture(new RuntimeException("Simulate server does not started."));
         }
 
         try {
-            SettableFuture<Boolean> settableFuture = SettableFuture.create();
+            SettableFuture<Result<CallhomeInfo>> settableFuture = SettableFuture.create();
             simulateServer.connect(address)
                 .addListener(future -> {
                     if (future.isConnected()) {
-                        settableFuture.set(Boolean.TRUE);
+                        settableFuture.set(ResultBuilder.success(info).build());
                     } else {
-                        settableFuture.set(Boolean.FALSE);
+                        settableFuture.set(ResultBuilder.failed(info, "connect failed").build());
                     }
 
                     if (future.getException() != null) {
-                        settableFuture.setException(future.getException());
+                        settableFuture.set(ResultBuilder.failed(info, future.getException()).build());
                     }
                 });
 
             return settableFuture;
         } catch (Throwable throwable) {
-            return Futures.immediateFailedFuture(throwable);
+            return Futures.immediateFuture(ResultBuilder.failed(info, throwable).build());
         }
     }
 
-    public ListenableFuture<Boolean> callhomeConnect(String ipaddress, Integer port) {
+    public ListenableFuture<Result<CallhomeInfo>> callhomeConnect(String ipaddress, Integer port) {
+        CallhomeInfo callhomeInfo = new CallhomeInfo();
+
+        callhomeInfo.setCallhomeIp(ipaddress);
+        callhomeInfo.setCallhomePort(port);
+        callhomeInfo.setUniqueKey(uniqueKey);
+
         InetSocketAddress inetAddress = getInetAddress(ipaddress, port.toString());
-        return callhomeConnect(inetAddress);
+        return callhomeConnect(callhomeInfo, inetAddress);
     }
 
     public void callhomeDisconnect(String ipaddress, Integer port) {

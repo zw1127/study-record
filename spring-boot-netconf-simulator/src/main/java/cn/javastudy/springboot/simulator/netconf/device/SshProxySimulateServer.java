@@ -174,7 +174,7 @@ public class SshProxySimulateServer implements AutoCloseable {
                     InetSocketAddress callhomeServerAddress = (InetSocketAddress) remoteAddress;
                     sessionMap.remove(callhomeServerAddress);
                     if (callhomeServerMap.containsKey(callhomeServerAddress)) {
-                        LOG.info("sleep 10 seconds, reconnect");
+                        LOG.info("sleep 10 seconds, reconnect target:{}", callhomeServerAddress);
                         minaTimerExecutor.schedule(() -> reconnect(callhomeServerAddress), 10, TimeUnit.SECONDS);
                     }
                 }

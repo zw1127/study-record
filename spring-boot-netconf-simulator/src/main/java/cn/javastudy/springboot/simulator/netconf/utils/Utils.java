@@ -1,5 +1,8 @@
 package cn.javastudy.springboot.simulator.netconf.utils;
 
+import static java.util.Objects.requireNonNull;
+
+import cn.javastudy.springboot.simulator.netconf.domain.DeviceBatchBaseInfo;
 import cn.javastudy.springboot.simulator.netconf.properties.DynamicConfig;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
@@ -7,7 +10,9 @@ import java.math.RoundingMode;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import javax.xml.namespace.NamespaceContext;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -141,5 +146,16 @@ public final class Utils {
         } catch (final XPathExpressionException e) {
             throw new IllegalStateException("Error while compiling xpath expression " + xpath, e);
         }
+    }
+
+    public static List<String> generateDeviceIdList(DeviceBatchBaseInfo baseInfo) {
+        String deviceIdPrefix = requireNonNull(baseInfo.getDeviceIdPrefix(), "deviceIdPrefix is null");
+        int deviceIdStart = requireNonNull(baseInfo.getDeviceIdStart(), "deviceIdStart is null");
+        int batchSize = requireNonNull(baseInfo.getBatchSize(), "batchSize is null");
+
+        // 根据 deviceIdStart 和 deviceIdPrefix 生成deviceId列表
+        return IntStream.range(deviceIdStart, deviceIdStart + batchSize)
+            .mapToObj(i -> deviceIdPrefix + i)
+            .collect(Collectors.toList());
     }
 }
