@@ -68,7 +68,6 @@ import org.opendaylight.netconf.api.DocumentedException;
 import org.opendaylight.netconf.api.NetconfServerDispatcher;
 import org.opendaylight.netconf.api.capability.BasicCapability;
 import org.opendaylight.netconf.api.capability.Capability;
-import org.opendaylight.netconf.api.monitoring.NetconfMonitoringService;
 import org.opendaylight.netconf.api.xml.XmlElement;
 import org.opendaylight.netconf.impl.NetconfServerDispatcherImpl;
 import org.opendaylight.netconf.impl.NetconfServerSession;
@@ -79,10 +78,24 @@ import org.opendaylight.netconf.impl.osgi.AggregatedNetconfOperationServiceFacto
 import org.opendaylight.netconf.mapping.api.NetconfOperationServiceFactory;
 import org.opendaylight.netconf.notifications.NetconfNotification;
 import org.opendaylight.netconf.shaded.sshd.common.util.threads.ThreadUtils;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.netconf.monitoring.rev101004.NetconfState;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.netconf.monitoring.rev101004.Yang;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.netconf.monitoring.rev101004.netconf.state.Schemas;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.netconf.monitoring.rev101004.netconf.state.schemas.Schema;
 import org.opendaylight.yangtools.util.ListenerRegistry;
 import org.opendaylight.yangtools.yang.common.QName;
 import org.opendaylight.yangtools.yang.data.api.YangInstanceIdentifier;
+import org.opendaylight.yangtools.yang.data.api.YangInstanceIdentifier.NodeIdentifier;
+import org.opendaylight.yangtools.yang.data.api.YangInstanceIdentifier.NodeIdentifierWithPredicates;
+import org.opendaylight.yangtools.yang.data.api.YangInstanceIdentifier.NodeWithValue;
+import org.opendaylight.yangtools.yang.data.api.schema.ContainerNode;
+import org.opendaylight.yangtools.yang.data.api.schema.LeafSetNode;
+import org.opendaylight.yangtools.yang.data.api.schema.MapEntryNode;
 import org.opendaylight.yangtools.yang.data.api.schema.NormalizedNode;
+import org.opendaylight.yangtools.yang.data.api.schema.SystemMapNode;
+import org.opendaylight.yangtools.yang.data.api.schema.builder.CollectionNodeBuilder;
+import org.opendaylight.yangtools.yang.data.impl.schema.Builders;
+import org.opendaylight.yangtools.yang.data.impl.schema.ImmutableNodes;
 import org.opendaylight.yangtools.yang.model.api.EffectiveModelContextListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -251,7 +264,7 @@ public class SimluateDeviceServiceImpl implements SimluateDeviceService {
             capabilities.add(new BasicCapability("urn:ietf:params:netconf:capability:writable-running:1.0"));
         }
 
-        NetconfMonitoringService monitoringService = new DummyMonitoringService(capabilities, sessionManager);
+        DummyMonitoringService monitoringService = new DummyMonitoringService(capabilities, sessionManager);
 
         NetconfOperationServiceFactory aggregatedFactory = createOperationServiceFactory(
             capabilities, monitoringService, uniqueInfo, initFlag);
@@ -265,11 +278,11 @@ public class SimluateDeviceServiceImpl implements SimluateDeviceService {
     }
 
     private NetconfOperationServiceFactory createOperationServiceFactory(Set<Capability> capabilities,
-                                                                         NetconfMonitoringService monitoringService,
+                                                                         DummyMonitoringService monitoringService,
                                                                          DeviceUniqueInfo uniqueInfo,
                                                                          AtomicBoolean initFlag) {
         DOMDataBroker domDataBroker = createDomDataBroker(uniqueInfo, initFlag);
-        initConfigData(uniqueInfo, domDataBroker);
+        initConfigData(monitoringService, uniqueInfo, domDataBroker);
 
         AggregatedNetconfOperationServiceFactory aggregatedFactory = new AggregatedNetconfOperationServiceFactory();
 
@@ -295,10 +308,71 @@ public class SimluateDeviceServiceImpl implements SimluateDeviceService {
         return aggregatedFactory;
     }
 
-    private void initConfigData(DeviceUniqueInfo uniqueInfo, DOMDataBroker domDataBroker) {
+    @SuppressWarnings("IllegalCatch")
+    private void prepareSchemasForNetconfMonitoring(DummyMonitoringService netconfMonitor,
+                                                    String deviceId,
+                                                    DOMDataTreeWriteTransaction writeTransaction) {
+        try {
+            ContainerNode netconf = createNetconfState(netconfMonitor);
+            YangInstanceIdentifier yangInstanceIdentifier = YangInstanceIdentifier.builder()
+                .node(NetconfState.QNAME)
+                .build();
+
+            writeTransaction.put(LogicalDatastoreType.OPERATIONAL, yangInstanceIdentifier, netconf);
+        } catch (Throwable ex) {
+            LOG.error("initia device:{} SchemasForNetconfMonitoring failed.", deviceId, ex);
+        }
+    }
+
+    private ContainerNode createNetconfState(DummyMonitoringService monitor) {
+        final QName identifier = QName.create(Schema.QNAME, "identifier");
+        final QName version = QName.create(Schema.QNAME, "version");
+        final QName format = QName.create(Schema.QNAME, "format");
+        final QName location = QName.create(Schema.QNAME, "location");
+        final QName namespace = QName.create(Schema.QNAME, "namespace");
+
+        CollectionNodeBuilder<MapEntryNode, SystemMapNode> schemaMapEntryNodeMapNodeCollectionNodeBuilder =
+            Builders.mapBuilder().withNodeIdentifier(new NodeIdentifier(Schema.QNAME));
+        LeafSetNode<String> locationLeafSet = Builders.<String>leafSetBuilder()
+            .withNodeIdentifier(new NodeIdentifier(location))
+            .withChild(Builders.<String>leafSetEntryBuilder()
+                .withNodeIdentifier(new NodeWithValue<>(location, "NETCONF"))
+                .withValue("NETCONF")
+                .build())
+            .build();
+
+        Map<QName, Object> keyValues = new HashMap<>();
+        for (final Schema schema : monitor.getSchemas().nonnullSchema().values()) {
+            keyValues.put(identifier, schema.getIdentifier());
+            keyValues.put(version, schema.getVersion());
+            keyValues.put(format, Yang.QNAME);
+
+            schemaMapEntryNodeMapNodeCollectionNodeBuilder.withChild(Builders.mapEntryBuilder()
+                .withNodeIdentifier(NodeIdentifierWithPredicates.of(Schema.QNAME, keyValues))
+                .withChild(ImmutableNodes.leafNode(identifier, schema.getIdentifier()))
+                .withChild(ImmutableNodes.leafNode(version, schema.getVersion()))
+                .withChild(ImmutableNodes.leafNode(format, Yang.QNAME))
+                .withChild(ImmutableNodes.leafNode(namespace, schema.getNamespace().getValue()))
+                .withChild(locationLeafSet)
+                .build());
+        }
+
+        return Builders.containerBuilder()
+            .withNodeIdentifier(new NodeIdentifier(NetconfState.QNAME))
+            .withChild(Builders.containerBuilder()
+                .withNodeIdentifier(new NodeIdentifier(Schemas.QNAME))
+                .withChild(schemaMapEntryNodeMapNodeCollectionNodeBuilder.build())
+                .build())
+            .build();
+    }
+
+    private void initConfigData(DummyMonitoringService netconfMonitor,
+                                DeviceUniqueInfo uniqueInfo, DOMDataBroker domDataBroker) {
         DOMDataTreeWriteTransaction writeTransaction = domDataBroker.newWriteOnlyTransaction();
 
         String uniqueKey = uniqueInfo.getUniqueKey();
+        prepareSchemasForNetconfMonitoring(netconfMonitor, uniqueKey, writeTransaction);
+
         List<SimulatorConfig> simulatorConfigs = simulatorConfigMapper.selectByDeviceId(uniqueKey);
         try {
             // 数据库中没有数据，则需要从模板中取数据
@@ -338,16 +412,24 @@ public class SimluateDeviceServiceImpl implements SimluateDeviceService {
         }
     }
 
+    @SuppressWarnings("IllegalCatch")
     private void saveSimulatorConfig(SimulatorConfig simulatorConfig,
                                      DOMDataTreeWriteTransaction writeTransaction) throws DocumentedException {
-        String nodeValue = simulatorConfig.getNodeValue();
-        if (StringUtils.isEmpty(nodeValue)) {
-            LOG.warn("SimulatorConfig:{} nodeValue is empty.", simulatorConfig);
-            return;
-        }
+        try {
+            String nodeValue = simulatorConfig.getNodeValue();
+            if (StringUtils.isEmpty(nodeValue)) {
+                LOG.warn("SimulatorConfig:{} nodeValue is empty.", simulatorConfig);
+                return;
+            }
 
-        XmlElement xmlElement = XmlElement.fromString(nodeValue);
-        saveDatabroker(xmlElement, simulatorConfig.getDeviceId(), writeTransaction);
+            XmlElement xmlElement = XmlElement.fromString(nodeValue);
+            saveDatabroker(xmlElement, simulatorConfig.getDeviceId(), writeTransaction);
+
+            //同时也要更新数据库中的数据
+            simulateConfigService.saveToDb(simulatorConfig.getDeviceId(), xmlElement);
+        } catch (Throwable ex) {
+            LOG.error("saveSimulator：{} Config failed", simulatorConfig.getDeviceId(), ex);
+        }
     }
 
     @SuppressWarnings("IllegalCatch")
@@ -360,9 +442,6 @@ public class SimluateDeviceServiceImpl implements SimluateDeviceService {
 //            writeTransaction.put(LogicalDatastoreType.CONFIGURATION, identifier, normalizedNode);
             //目前get 和 get-config 都从Operational datastore中读配置数据
             writeTransaction.put(LogicalDatastoreType.OPERATIONAL, identifier, normalizedNode);
-
-            //同时也要更新数据库中的数据
-            simulateConfigService.saveToDb(deviceId, xmlElement);
         } catch (Throwable ex) {
             LOG.error("initia device:{} xmlElement name:{} failed.", deviceId, xmlElement.getName(), ex);
         }

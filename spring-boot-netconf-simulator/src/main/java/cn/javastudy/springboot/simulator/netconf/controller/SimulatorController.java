@@ -95,7 +95,7 @@ public class SimulatorController {
     }
 
     @ApiOperationSupport(order = 1)
-    @PostMapping("/stop")
+    @PostMapping("/stop-batch")
     @Operation(summary = "批量停止模拟器")
     public String stopDeviceBatch(@RequestBody DeviceBatchBaseInfo batchBaseInfo) {
         simluateDeviceService.stopSimulateDeviceBatch(batchBaseInfo);
@@ -144,7 +144,7 @@ public class SimulatorController {
         return "disconnect device: " + uniqueKey + " callhome connectd controller:" + callhomeIp + " successful.";
     }
 
-    @PostMapping("/callhome-disconnect")
+    @PostMapping("/callhome-disconnect-batch")
     @Operation(summary = "批量断开控制器的callhome连接")
     public String callhomeDisconnectBatch(@RequestBody CallhomeBatchInfo callhomeBatchInfo) {
         simluateDeviceService.callhomeDisconnectBatch(callhomeBatchInfo);

@@ -15,7 +15,7 @@ public class NetconfMonitoringOperationService implements NetconfOperationServic
 
     @Override
     public Set<NetconfOperation> getNetconfOperations() {
-        return Set.of(new Get(monitor), new GetSchema("testtool-session", monitor));
+        return Set.of(new GetSchema("testtool-session", monitor));
     }
 
     @Override

@@ -149,6 +149,7 @@ public class NetconfSimulateDevice {
     }
 
     public void callhomeDisconnect(InetSocketAddress address) {
+        LOG.info("disconnect callhome connection, target:{}", address);
         simulateServer.disconnect(address);
     }
 

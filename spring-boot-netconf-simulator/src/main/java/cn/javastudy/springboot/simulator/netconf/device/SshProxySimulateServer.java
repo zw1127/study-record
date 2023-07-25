@@ -15,7 +15,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import org.opendaylight.netconf.shaded.sshd.common.FactoryManager;
 import org.opendaylight.netconf.shaded.sshd.common.NamedFactory;
 import org.opendaylight.netconf.shaded.sshd.common.cipher.BuiltinCiphers;
@@ -150,6 +152,11 @@ public class SshProxySimulateServer implements AutoCloseable {
 
     SessionListener createSessionListener() {
         return new SessionListener() {
+
+            private ScheduledFuture<?> scheduleFutrue;
+
+            private final AtomicBoolean isConnected = new AtomicBoolean(false);
+
             @Override
             public void sessionEvent(final Session session, final Event event) {
                 LOG.info("SSH session {} event {}", session, event);
@@ -158,6 +165,10 @@ public class SshProxySimulateServer implements AutoCloseable {
             @Override
             public void sessionCreated(final Session session) {
                 LOG.info("SSH session {} created", session);
+                isConnected.set(true);
+                if (scheduleFutrue != null) {
+                    scheduleFutrue.cancel(true);
+                }
                 SocketAddress remoteAddress = session.getRemoteAddress();
                 if (remoteAddress instanceof InetSocketAddress) {
                     InetSocketAddress inetSocketAddress = (InetSocketAddress) remoteAddress;
@@ -169,13 +180,22 @@ public class SshProxySimulateServer implements AutoCloseable {
             @Override
             public void sessionClosed(final Session session) {
                 LOG.info("SSH Session {} closed", session);
+                isConnected.set(false);
                 SocketAddress remoteAddress = session.getRemoteAddress();
                 if (remoteAddress instanceof InetSocketAddress) {
                     InetSocketAddress callhomeServerAddress = (InetSocketAddress) remoteAddress;
                     sessionMap.remove(callhomeServerAddress);
                     if (callhomeServerMap.containsKey(callhomeServerAddress)) {
-                        LOG.info("sleep 10 seconds, reconnect target:{}", callhomeServerAddress);
-                        minaTimerExecutor.schedule(() -> reconnect(callhomeServerAddress), 10, TimeUnit.SECONDS);
+                        LOG.info("start reconnect task, target:{}.", callhomeServerAddress);
+                        scheduleFutrue = minaTimerExecutor.scheduleWithFixedDelay(() -> {
+                            if (isConnected.get()) {
+                                LOG.info("target:{} is connected.", remoteAddress);
+                                return;
+                            }
+
+                            LOG.info("sleep 10 seconds, reconnect target:{}.", callhomeServerAddress);
+                            reconnect(callhomeServerAddress);
+                        }, 10, 10, TimeUnit.SECONDS);
                     }
                 }
             }
