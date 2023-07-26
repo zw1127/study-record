@@ -94,12 +94,18 @@ public class SimulatorController {
         return "stop simulator: " + uniqueKey + " successful.";
     }
 
-    @ApiOperationSupport(order = 1)
     @PostMapping("/stop-batch")
     @Operation(summary = "批量停止模拟器")
     public String stopDeviceBatch(@RequestBody DeviceBatchBaseInfo batchBaseInfo) {
         simluateDeviceService.stopSimulateDeviceBatch(batchBaseInfo);
         return "stop simulator batch: " + batchBaseInfo + " successful.";
+    }
+
+    @PostMapping("/stop-batch")
+    @Operation(summary = "停止所有模拟器")
+    public String stopAllDevices() {
+        simluateDeviceService.stopAllSimulateDevices();
+        return "stop all simulators successful.";
     }
 
     @ApiOperationSupport(order = 2)

@@ -59,6 +59,15 @@ public interface SimluateDeviceService {
             .forEach(this::stopSimulateDevice);
     }
 
+    default void stopAllSimulateDevices() {
+        startedDevices()
+            .values()
+            .stream()
+            .map(NetconfSimulateDevice::getDeviceInfo)
+            .map(SimulateDeviceInfo::getUniqueKey)
+            .forEach(this::stopSimulateDevice);
+    }
+
     ListenableFuture<Result<CallhomeInfo>> callhomeConnect(String uniqueKey, String callhomeIp, Integer callhomePort);
 
     default ListenableFuture<Result<CallhomeInfo>> callhomeConnect(String uniqueKey, String callhomeIp) {
