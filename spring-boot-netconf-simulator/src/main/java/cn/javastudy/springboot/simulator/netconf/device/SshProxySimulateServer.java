@@ -2,6 +2,7 @@ package cn.javastudy.springboot.simulator.netconf.device;
 
 import static java.util.Objects.requireNonNull;
 
+import cn.javastudy.springboot.simulator.netconf.domain.SimulateDeviceInfo;
 import com.google.common.collect.ImmutableList;
 import io.netty.channel.EventLoopGroup;
 import java.io.IOException;
@@ -18,6 +19,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 import org.opendaylight.netconf.shaded.sshd.common.FactoryManager;
 import org.opendaylight.netconf.shaded.sshd.common.NamedFactory;
 import org.opendaylight.netconf.shaded.sshd.common.cipher.BuiltinCiphers;
@@ -58,14 +60,16 @@ public class SshProxySimulateServer implements AutoCloseable {
     private final ScheduledExecutorService minaTimerExecutor;
     private final EventLoopGroup clientGroup;
     private final IoServiceFactoryFactory nioServiceWithPoolFactoryFactory;
+    private final String deviceId;
 
     private IoConnector connector;
 
     private SshProxySimulateServer(final ScheduledExecutorService minaTimerExecutor, final EventLoopGroup clientGroup,
-                                   final IoServiceFactoryFactory serviceFactory) {
+                                   final IoServiceFactoryFactory serviceFactory, final String deviceId) {
         this.minaTimerExecutor = minaTimerExecutor;
         this.clientGroup = clientGroup;
         nioServiceWithPoolFactoryFactory = serviceFactory;
+        this.deviceId = deviceId;
         sshServer = SshServer.setUpDefaultServer();
     }
 
@@ -75,8 +79,8 @@ public class SshProxySimulateServer implements AutoCloseable {
      * not want to have a thread group (and hence an anonyous thread) for each of them.
      */
     public SshProxySimulateServer(final ScheduledExecutorService minaTimerExecutor, final EventLoopGroup clientGroup,
-                                  final AsynchronousChannelGroup group) {
-        this(minaTimerExecutor, clientGroup, new SharedNioServiceFactoryFactory(group));
+                                  final AsynchronousChannelGroup group, final String deviceId) {
+        this(minaTimerExecutor, clientGroup, new SharedNioServiceFactoryFactory(group), deviceId);
     }
 
     public void bind(final SshProxyServerConfiguration sshProxyServerConfiguration) throws IOException {
@@ -153,22 +157,28 @@ public class SshProxySimulateServer implements AutoCloseable {
     SessionListener createSessionListener() {
         return new SessionListener() {
 
-            private ScheduledFuture<?> scheduleFutrue;
+            private final AtomicReference<ScheduledFuture<?>> scheduledFutrueRefence = new AtomicReference<>();
 
             private final AtomicBoolean isConnected = new AtomicBoolean(false);
 
             @Override
             public void sessionEvent(final Session session, final Event event) {
-                LOG.info("SSH session {} event {}", session, event);
+                LOG.info("device:{} SSH session {} event {}", deviceId, session, event);
             }
 
             @Override
             public void sessionCreated(final Session session) {
                 LOG.info("SSH session {} created", session);
                 isConnected.set(true);
-                if (scheduleFutrue != null) {
-                    scheduleFutrue.cancel(true);
-                }
+                scheduledFutrueRefence.getAndUpdate(prev -> {
+                    if (prev != null) {
+                        boolean cancelled = prev.cancel(true);
+                        LOG.info("device:{} remote:{} is connected, cancel scheduled task, result:{}",
+                            deviceId, session.getRemoteAddress(), cancelled);
+                    }
+
+                    return null;
+                });
                 SocketAddress remoteAddress = session.getRemoteAddress();
                 if (remoteAddress instanceof InetSocketAddress) {
                     InetSocketAddress inetSocketAddress = (InetSocketAddress) remoteAddress;
@@ -179,7 +189,7 @@ public class SshProxySimulateServer implements AutoCloseable {
 
             @Override
             public void sessionClosed(final Session session) {
-                LOG.info("SSH Session {} closed", session);
+                LOG.info("device:{} SSH Session {} closed", deviceId, session);
                 isConnected.set(false);
                 SocketAddress remoteAddress = session.getRemoteAddress();
                 if (remoteAddress instanceof InetSocketAddress) {
@@ -187,15 +197,22 @@ public class SshProxySimulateServer implements AutoCloseable {
                     sessionMap.remove(callhomeServerAddress);
                     if (callhomeServerMap.containsKey(callhomeServerAddress)) {
                         LOG.info("start reconnect task, target:{}.", callhomeServerAddress);
-                        scheduleFutrue = minaTimerExecutor.scheduleWithFixedDelay(() -> {
-                            if (isConnected.get()) {
-                                LOG.info("target:{} is connected.", remoteAddress);
-                                return;
+                        scheduledFutrueRefence.getAndUpdate(prev -> {
+                            if (prev != null) {
+                                prev.cancel(true);
                             }
 
-                            LOG.info("sleep 10 seconds, reconnect target:{}.", callhomeServerAddress);
-                            reconnect(callhomeServerAddress);
-                        }, 10, 10, TimeUnit.SECONDS);
+                            return minaTimerExecutor.scheduleWithFixedDelay(() -> {
+                                if (isConnected.get()) {
+                                    LOG.info("device:{} target:{} is connected.", deviceId, remoteAddress);
+                                    return;
+                                }
+
+                                LOG.info("sleep 10 seconds, device:{} reconnect target:{}.",
+                                    deviceId, callhomeServerAddress);
+                                reconnect(callhomeServerAddress);
+                            }, 10, 10, TimeUnit.SECONDS);
+                        });
                     }
                 }
             }

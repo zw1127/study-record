@@ -11,6 +11,7 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import javax.xml.namespace.NamespaceContext;
@@ -153,9 +154,20 @@ public final class Utils {
         int deviceIdStart = requireNonNull(baseInfo.getDeviceIdStart(), "deviceIdStart is null");
         int batchSize = requireNonNull(baseInfo.getBatchSize(), "batchSize is null");
 
+        Integer deviceIdLength = Optional.ofNullable(baseInfo.getDeviceIdLength()).orElse(0);
+
         // 根据 deviceIdStart 和 deviceIdPrefix 生成deviceId列表
         return IntStream.range(deviceIdStart, deviceIdStart + batchSize)
-            .mapToObj(i -> deviceIdPrefix + i)
+            .mapToObj(i -> Utils.generateDeviceId(deviceIdLength, deviceIdPrefix, i))
             .collect(Collectors.toList());
+    }
+
+    public static String generateDeviceId(Integer deviceIdLength, String deviceIdPrefix, int deviceIdNum) {
+        int length = deviceIdLength - deviceIdPrefix.length();
+        if (length > 0) {
+            return deviceIdPrefix + StringUtils.leftPad(Integer.toString(deviceIdNum), length, '0');
+        }
+
+        return deviceIdPrefix + deviceIdNum;
     }
 }

@@ -19,4 +19,8 @@ public class DeviceBatchBaseInfo {
     @JsonProperty("batch-size")
     private Integer batchSize;
 
+    // deviceId长度，为0表示不是定长的
+    @JsonProperty("device-id-length")
+    private Integer deviceIdLength = 0;
+
 }

@@ -37,6 +37,7 @@ mybatis:
 
 simulator:
   netconf:
+    thread-pool-size: 64
     dynamic-config-list:
       - path: "/rpc-reply/data/components/component/state/temperature/instant"
         scale: 1

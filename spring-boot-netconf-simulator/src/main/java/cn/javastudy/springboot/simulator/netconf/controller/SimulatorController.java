@@ -101,7 +101,7 @@ public class SimulatorController {
         return "stop simulator batch: " + batchBaseInfo + " successful.";
     }
 
-    @PostMapping("/stop-batch")
+    @PostMapping("/stop-all")
     @Operation(summary = "停止所有模拟器")
     public String stopAllDevices() {
         simluateDeviceService.stopAllSimulateDevices();

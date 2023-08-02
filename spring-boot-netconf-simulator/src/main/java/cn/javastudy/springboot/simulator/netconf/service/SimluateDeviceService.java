@@ -35,13 +35,14 @@ public interface SimluateDeviceService {
         int deviceIdStart = Optional.ofNullable(deviceBatchInfo.getDeviceIdStart()).orElse(DEFAULT_ID_START);
         int portStart = Optional.ofNullable(deviceBatchInfo.getPortStart()).orElse(DEFAULT_PORT_START);
         int batchSize = Optional.ofNullable(deviceBatchInfo.getBatchSize()).orElse(DEFAULT_BATCH_SIZE);
+        Integer deviceIdLength = Optional.ofNullable(deviceBatchInfo.getDeviceIdLength()).orElse(0);
 
         List<ListenableFuture<Result<SimulateDeviceInfo>>> result = new ArrayList<>();
         for (int i = 0; i < batchSize; i++) {
             int port = portStart + i;
             int deviceIdNum = deviceIdStart + i;
 
-            String deviceId = deviceIdPrefix + deviceIdNum;
+            String deviceId = Utils.generateDeviceId(deviceIdLength, deviceIdPrefix, deviceIdNum);
             SimulateDeviceInfo deviceInfo = new SimulateDeviceInfo(port);
 
             deviceInfo.setUniqueKey(deviceId);
