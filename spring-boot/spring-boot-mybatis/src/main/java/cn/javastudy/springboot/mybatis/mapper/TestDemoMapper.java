@@ -2,10 +2,13 @@ package cn.javastudy.springboot.mybatis.mapper;
 
 import cn.javastudy.springboot.mybatis.domain.TestDemo;
 import java.util.List;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 @Mapper
@@ -13,7 +16,7 @@ import org.springframework.stereotype.Repository;
 public interface TestDemoMapper {
 
     @Select("select * from test_demo")
-    @Results(id = "testDemoResult",value= {
+    @Results(id = "testDemoResult", value = {
         @Result(property = "id", column = "id"),
         @Result(property = "name", column = "name"),
         @Result(property = "status", column = "status"),
@@ -26,4 +29,25 @@ public interface TestDemoMapper {
         @Result(property = "deleted", column = "deleted")
     })
     List<TestDemo> selectAll();
+
+    @Delete({"delete from test_demo where id = #{id}"})
+    int deleteByPrimaryKey(Long id);
+
+    @Insert({
+        "insert into test_demo (name, status, type, remark, creator, updater)",
+        "values (#{name}, #{status}, #{type}, #{remark}, #{creator}, #{updater})"
+    })
+    int insert(TestDemo testDemo);
+
+    @Update({
+        " update test_demo",
+        " set name = #{name},",
+        " status = #{status},",
+        " type = #{type},",
+        " remark = #{remark},",
+        " creator = #{creator},",
+        " updater = #{updater}",
+        " where id = #{id}"
+    })
+    int updateByPrimaryKey(TestDemo record);
 }
