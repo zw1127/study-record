@@ -1,5 +1,6 @@
 package cn.javastudy.springboot.aspect;
 
+import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -18,7 +19,12 @@ public class UserServiceAspect {
         Object[] username = joinPoint.getArgs();
         LOG.info("Before method: {}", username);
         // 调用目标方法
-        Object result = joinPoint.proceed();
+        if (StringUtils.equals("wang", (String)username[0])) {
+            // 当匹配到wang的时候，修改入参
+            return joinPoint.proceed(new Object[]{"change to wang"});
+        }
+
+        Object result = joinPoint.proceed(username);
         LOG.info("After method: {}: result:{}", username, result);
 
         return result;
