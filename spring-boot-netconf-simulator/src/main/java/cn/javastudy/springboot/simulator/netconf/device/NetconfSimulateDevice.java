@@ -70,7 +70,8 @@ public class NetconfSimulateDevice {
             LocalAddress localAddress = new LocalAddress(portNumber);
             this.localServer = netconfServerDispatcher.createLocalServer(localAddress);
 
-            simulateServer = new SshProxySimulateServer(minaTimerExecutor, nettyThreadgroup, group);
+            String deviceId = deviceInfo.getUniqueKey();
+            simulateServer = new SshProxySimulateServer(minaTimerExecutor, nettyThreadgroup, group, deviceId);
 
             InetSocketAddress inetAddress = getInetAddress("0.0.0.0", portNumber);
             SshProxyServerConfigurationBuilder builder = new SshProxyServerConfigurationBuilder();
