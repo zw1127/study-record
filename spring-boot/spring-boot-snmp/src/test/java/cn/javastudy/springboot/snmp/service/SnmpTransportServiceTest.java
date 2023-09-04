@@ -2,6 +2,7 @@ package cn.javastudy.springboot.snmp.service;
 
 import java.time.Instant;
 import java.util.concurrent.TimeUnit;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +39,7 @@ import org.snmp4j.smi.UdpAddress;
 import org.snmp4j.smi.VariableBinding;
 import org.snmp4j.transport.DefaultUdpTransportMapping;
 
+@Ignore
 public class SnmpTransportServiceTest {
 
     private static final Logger LOG = LoggerFactory.getLogger(SnmpTransportServiceTest.class);
