@@ -24,7 +24,7 @@ public class UserServiceAspect {
             return joinPoint.proceed(new Object[]{"change to wang"});
         }
 
-        Object result = joinPoint.proceed(username);
+        Object result = joinPoint.proceed();
         LOG.info("After method: {}: result:{}", username, result);
 
         return result;
