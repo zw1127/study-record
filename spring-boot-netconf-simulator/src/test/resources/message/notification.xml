@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<notification xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
+    <eventTime>2023-10-17T15:33:12+08:00</eventTime>
+    <alarms-notification xmlns="http://openconfig.net/yang/system">
+        <delete>
+            <alarms>
+                <alarm>
+                    <id>7290714754555908589</id>
+                    <state>
+                        <id>7290714754555908589</id>
+                        <resource>TRANSCEIVER-1-1-C1</resource>
+                        <text>RX LOS SYNC </text>
+                        <time-created>1697527992000000000</time-created>
+                        <severity xmlns:oc-alarm-types="http://openconfig.net/yang/alarms/types">oc-alarm-types:CRITICAL</severity>
+                        <type-id>OTS</type-id>
+                        <service-affecting>true</service-affecting>
+                        <vendor-type>100GBASE-CWDM4</vendor-type>
+                        <hostname>ACCELINK-OTU-105</hostname>
+                        <ip>10.18.10.105</ip>
+                        <alarm-abbreviate>RX-LOS-SYNC</alarm-abbreviate>
+                    </state>
+                </alarm>
+            </alarms>
+        </delete>
+    </alarms-notification>
+</notification>

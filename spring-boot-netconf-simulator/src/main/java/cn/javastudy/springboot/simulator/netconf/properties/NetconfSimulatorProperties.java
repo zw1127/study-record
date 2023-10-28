@@ -13,6 +13,8 @@ public class NetconfSimulatorProperties {
 
     private int threadPoolSize = 8;
 
+    private int schedulePoolSize = 32;
+
     private int generateConfigsTimeout = (int) TimeUnit.MINUTES.toMillis(30);
 
     private boolean runningWritable = false;

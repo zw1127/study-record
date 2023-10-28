@@ -15,7 +15,6 @@ import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.google.common.util.concurrent.ListenableFuture;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,18 +28,13 @@ import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
 import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
-import org.opendaylight.netconf.api.xml.XmlUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
 
 @RestController
 @RequestMapping("/simulator/device")
@@ -186,21 +180,4 @@ public class SimulatorController {
         return deviceInfoList;
     }
 
-    @ApiOperationSupport(order = 2)
-    @PostMapping(value = "/send-notification/{uniqueKey}/{targetIp}/{targetPort}",
-        consumes = MediaType.APPLICATION_XML_VALUE)
-    @Operation(summary = "发送Notification")
-    public String sendNotification(@PathVariable("uniqueKey") String uniqueKey,
-                                   @PathVariable("targetIp") String targetIp,
-                                   @PathVariable("targetPort") Integer targetPort,
-                                   @RequestBody String notificationXml) {
-        try {
-            Document document = XmlUtil.readXmlToDocument(notificationXml);
-            ListenableFuture<Boolean> future =
-                simluateDeviceService.sendNotification(document, uniqueKey, targetIp, targetPort);
-            return future.get() ? "successful" : "failed";
-        } catch (SAXException | IOException | InterruptedException | ExecutionException e) {
-            return "failed:" + e.getMessage();
-        }
-    }
 }

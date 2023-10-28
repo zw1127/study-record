@@ -22,6 +22,7 @@ import cn.javastudy.springboot.simulator.netconf.rpchandler.RequestProcessor;
 import cn.javastudy.springboot.simulator.netconf.rpchandler.RpcHandlerImpl;
 import cn.javastudy.springboot.simulator.netconf.rpchandler.SettableOperationRpcProvider;
 import cn.javastudy.springboot.simulator.netconf.rpchandler.impl.CreateSubscriptionRequestProcessor;
+import cn.javastudy.springboot.simulator.netconf.service.NotificationMessage;
 import cn.javastudy.springboot.simulator.netconf.service.SchemaContextService;
 import cn.javastudy.springboot.simulator.netconf.service.SimluateDeviceService;
 import cn.javastudy.springboot.simulator.netconf.service.SimulateConfigService;
@@ -76,7 +77,6 @@ import org.opendaylight.netconf.impl.ServerChannelInitializer;
 import org.opendaylight.netconf.impl.SessionIdProvider;
 import org.opendaylight.netconf.impl.osgi.AggregatedNetconfOperationServiceFactory;
 import org.opendaylight.netconf.mapping.api.NetconfOperationServiceFactory;
-import org.opendaylight.netconf.notifications.NetconfNotification;
 import org.opendaylight.netconf.shaded.sshd.common.util.threads.ThreadUtils;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.netconf.monitoring.rev101004.NetconfState;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.netconf.monitoring.rev101004.Yang;
@@ -215,7 +215,7 @@ public class SimluateDeviceServiceImpl implements SimluateDeviceService {
                                                       String deviceId,
                                                       String targetIp,
                                                       Integer targetPort) {
-        NetconfNotification notification = new NetconfNotification(notificationContent);
+        NotificationMessage notification = NotificationMessage.ofNotificationContent(notificationContent);
 
         NetconfSimulateDevice simulateDevice = startedDeviceMap.get(deviceId);
         if (simulateDevice == null) {
@@ -235,7 +235,7 @@ public class SimluateDeviceServiceImpl implements SimluateDeviceService {
         if (session == null) {
             LOG.warn("targetIp:{} targetPort:{} session does not exist.", targetIp, targetPort);
             return Futures.immediateFailedFuture(
-                new SimulateException("targetIp:{0} targetPort:{} session does not exist.", deviceId));
+                new SimulateException("targetIp:{0} targetPort:{1} session does not exist.", deviceId, targetPort));
         }
 
         SettableFuture<Boolean> result = SettableFuture.create();
