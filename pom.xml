@@ -22,6 +22,7 @@
         <module>disruptor-tutorials</module>
         <module>leetcode</module>
         <module>jacoco-study</module>
+        <module>mybatis-generator</module>
     </modules>
 
 </project>
