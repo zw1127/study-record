@@ -6,7 +6,13 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Optional;
 import java.util.StringJoiner;
+import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +32,18 @@ public final class MqttPojoKeyValueUtils {
 
     public static <T> String pojoToKeyValueString(T instance) {
         // 获取对象的所有字段
-        Collection<Field> fields = BeanUtils.getFieldMap(instance.getClass()).values();
+        LinkedList<Field> fields = Optional.ofNullable(BeanUtils.getFieldMap(instance.getClass()))
+            .map(Map::values)
+            .orElse(Collections.emptyList())
+            .stream()
+            .sorted(Comparator.comparing(field -> field.getAnnotation(MqttPojoOrder.class),
+                new NullSafeComparator<>() {
+
+                    @Override
+                    protected int compareNonNull(MqttPojoOrder var1, MqttPojoOrder var2) {
+                        return Integer.compare(var1.value(), var2.value());
+                    }
+                })).collect(Collectors.toCollection(LinkedList::new));
         if (CollectionUtils.isEmpty(fields)) {
             return "";
         }

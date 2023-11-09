@@ -27,8 +27,10 @@ public class MqttPojoKeyValueUtilsTest {
     private static class User {
 
         @MqttPojoProperty("user_no")
+        @MqttPojoOrder(0)
         private Integer userNO;
 
+        @MqttPojoOrder(1)
         private String userName;
 
         private Integer age;
@@ -37,6 +39,7 @@ public class MqttPojoKeyValueUtilsTest {
 
         private Sex sex;
 
+        @MqttPojoOrder(2)
         private TestMenu testMenu;
     }
 
