@@ -48,13 +48,37 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="mqtt_user" domainObjectName="MqttUser"
+        <table tableName="mqtt_ethif_entry_config" domainObjectName="MqttEthifEntryConfig"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
 
-        <table tableName="mqtt_register" domainObjectName="MqttRegister"
+        <table tableName="mqtt_ethif_entry_state" domainObjectName="MqttEthifEntryState"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <table tableName="mqtt_vlan_if_config" domainObjectName="MqttVlanIfConfig"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <table tableName="mqtt_vlan_if_state" domainObjectName="MqttVlanIfState"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <table tableName="mqtt_ethif_poe_config" domainObjectName="MqttEthifPoeConfig"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <table tableName="mqtt_ethif_poe_state" domainObjectName="MqttEthifPoeState"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
