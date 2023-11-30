@@ -46,7 +46,7 @@ public class JobSchedulerImpl implements JobScheduler {
         for (int i = 2; i < stacks.length; i++) {
             StackTraceElement stack = stacks[i];
             String callerName = stack.getClassName();
-            if (callerName.startsWith("com.fiberhome.sdn.infrautils.jobscheduler")) {
+            if (callerName.startsWith("cn.javastudy.springboot.simulator.netconf.jobscheduler")) {
                 continue;
             }
             target = stack;

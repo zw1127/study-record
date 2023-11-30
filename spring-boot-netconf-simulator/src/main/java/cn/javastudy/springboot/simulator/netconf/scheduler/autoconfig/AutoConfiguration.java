@@ -1,11 +1,3 @@
-/*
- * Copyright (c) 2021 Fiberhome Technologies.
- *
- * No.6, Gaoxin 4th Road, Hongshan District.,Wuhan,P.R.China,
- * Fiberhome Telecommunication Technologies Co.,LTD
- *
- * All rights reserved.
- */
 package cn.javastudy.springboot.simulator.netconf.scheduler.autoconfig;
 
 import static org.slf4j.LoggerFactory.getLogger;
