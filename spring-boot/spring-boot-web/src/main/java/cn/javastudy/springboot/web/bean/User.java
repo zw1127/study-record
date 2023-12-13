@@ -3,6 +3,8 @@ package cn.javastudy.springboot.web.bean;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.collect.Sets;
+import java.util.Set;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.Data;
@@ -33,5 +35,16 @@ public class User {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String memo;
 
+    public static void main(String[] args) {
+        Set<Integer> set1 = Sets.newHashSet(1, 2, 3, 4, 5);
+        Set<Integer> set2 = Sets.newHashSet(3, 4, 5, 6, 7);
+
+        // 求两个 Set 的差集
+        Set<Integer> differenceSet = Sets.difference(set1, set2);
+
+        System.out.println("Set1: " + set1);
+        System.out.println("Set2: " + set2);
+        System.out.println("Difference Set (Set1 - Set2): " + differenceSet);
+    }
 
 }
