@@ -149,6 +149,7 @@
         <module>spring-boot-webflux</module>
         <module>spring-boot-aspect</module>
         <module>spring-boot-security</module>
+        <module>spring-boot-validate</module>
     </modules>
 
    <!-- <build>
