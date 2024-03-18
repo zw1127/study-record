@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "person": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "age": {
+          "type": "integer",
+          "minimum": 18,
+          "maximum": 45
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "street": {
+          "type": "string",
+          "minLength": 1
+        },
+        "city": {
+          "type": "string",
+          "minLength": 1
+        },
+        "zip": {
+          "type": "string",
+          "pattern": "^[0-9]{5}$"
+        }
+      },
+      "required": [
+        "street",
+        "city",
+        "zip"
+      ]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "person": {
+      "$ref": "#/definitions/person"
+    },
+    "address": {
+      "$ref": "#/definitions/address"
+    }
+  }
+}

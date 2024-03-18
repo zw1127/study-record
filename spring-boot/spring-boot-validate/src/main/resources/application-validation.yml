@@ -1,0 +1,10 @@
+study:
+  validation:
+    rules:
+      - pojoName: "User"
+        fieldName: "userName"
+        validationRule: "javax.validation.constraints.NotBlank"
+
+      - pojoName: "User"
+        fieldName: "age"
+        validationRule: "javax.validation.constraints.Min(18)"

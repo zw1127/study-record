@@ -1,0 +1,46 @@
+spring:
+  # 数据源配置项
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=MYSQL;DATABASE_TO_UPPER=false; # MODE 使用 MySQL 模式；DATABASE_TO_UPPER 配置表和字段使用小写
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 123456
+  h2:
+    console:
+      enabled: true
+      path: /console
+      settings:
+        trace: false
+        web-allow-others: true
+  sql:
+    init:
+      schema-locations: classpath:/sql/create_tables.sql
+      data-locations: classpath:/sql/insert_data.sql
+  profiles:
+    include:
+      - validation
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+    show-extensions: true
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      packages-to-scan: cn.javastudy.springboot.validate
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+    swagger-model-name: 模拟器实体类列表
+  basic:
+    enable: true
+    username: admin
+    password: Admin@123456
+
+
+
