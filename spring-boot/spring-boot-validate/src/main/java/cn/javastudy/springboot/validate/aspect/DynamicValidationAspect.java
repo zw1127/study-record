@@ -1,32 +1,35 @@
 package cn.javastudy.springboot.validate.aspect;
 
 import cn.javastudy.springboot.validate.annotation.DynamicValidation;
-import cn.javastudy.springboot.validate.service.DynamicValidator;
+import cn.javastudy.springboot.validate.json.schema.JsonSchemaService;
+import cn.javastudy.springboot.validate.json.schema.exception.ValidationException;
+import com.networknt.schema.ValidationMessage;
+import java.util.Set;
+import javax.annotation.Resource;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 @Aspect
 @Component
 public class DynamicValidationAspect {
 
-    @Autowired
-    private DynamicValidator dynamicValidator;
+    @Resource
+    private JsonSchemaService jsonSchemaService;
 
-    @Pointcut("@annotation(dynamicValidation)")
-    public void enableValidationPointcut(DynamicValidation dynamicValidation) {
-    }
-
-    @AfterReturning(pointcut = "enableValidationPointcut(dynamicValidation)", returning = "result")
+    @Before("@annotation(dynamicValidation)")
     public void enableValidationAfterReturning(JoinPoint joinPoint,
-                                               DynamicValidation dynamicValidation, Object result) throws Throwable {
+                                               DynamicValidation dynamicValidation) throws Throwable {
         Object[] args = joinPoint.getArgs();
         for (Object arg : args) {
             String pojoName = dynamicValidation.pojoName();
-            dynamicValidator.validateWithRules(arg);
+            Set<ValidationMessage> validationMessages = jsonSchemaService.validateJsonSchema(arg, pojoName);
+
+            if (!CollectionUtils.isEmpty(validationMessages)) {
+                throw new ValidationException(validationMessages);
+            }
         }
     }
 }

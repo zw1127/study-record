@@ -4,7 +4,10 @@
   "properties": {
     "name": {
       "type": "string",
-      "format": "ip-address",
+      "anyOf": [
+        {"format": "ipv4"},
+        {"format": "ipv6"}
+      ],
       "minLength": 1
     },
     "age": {
