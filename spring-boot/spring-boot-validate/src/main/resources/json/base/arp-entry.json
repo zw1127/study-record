@@ -2,21 +2,36 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "properties": {
-    "name": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "desIp": {
       "type": "string",
       "anyOf": [
-        {"format": "ipv4"},
-        {"format": "ipv6"}
+        {
+          "format": "ipv4"
+        },
+        {
+          "format": "ipv6"
+        }
       ],
       "minLength": 1
     },
-    "age": {
-      "type": "integer",
-      "minimum": 18,
-      "maximum": 45
+    "desMac": {
+      "type": "string",
+      "pattern": "^[0-9A-Fa-f]{2}([-:]?)[0-9A-Fa-f]{2}(\\1[0-9A-Fa-f]{2}){4}$",
+      "minLength": 1
+    },
+    "ifIndex": {
+      "type": "string",
+      "pattern": "^\\d+$"
     }
   },
   "required": [
-    "name"
+    "nodeId",
+    "desIp",
+    "desMac",
+    "ifIndex"
   ]
 }

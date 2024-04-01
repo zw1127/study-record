@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "aaaRadiusSerMaxRetrans": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 5
+    },
+    "aaaTacacsSerTimeout": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10
+    },
+    "aaaRadiusSerDeadtime": {
+      "type": "integer",
+      "minimum": 3,
+      "maximum": 4294967290
+    },
+    "aaaTacacsSerDeadtime": {
+      "type": "integer",
+      "minimum": 3,
+      "maximum": 4294967290
+    },
+    "aaaRadiusSerRetrans": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10
+    }
+  },
+  "required": [
+    "nodeId",
+    "aaaRadiusSerMaxRetrans",
+    "aaaTacacsSerTimeout",
+    "aaaRadiusSerDeadtime",
+    "aaaTacacsSerDeadtime",
+    "aaaRadiusSerRetrans"
+  ]
+}

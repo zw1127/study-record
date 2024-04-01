@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "wriFilterListType": {
+      "type": "string",
+      "enum": [
+        "L2",
+        "IPv4",
+        "IPv6"
+      ]
+    },
+    "wriFilterListIndex": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "nodeId",
+    "wriFilterListType",
+    "wriFilterListIndex"
+  ],
+  "if": {
+    "properties": {
+      "wriFilterListType": {
+        "const": "L2"
+      }
+    }
+  },
+  "then": {
+    "properties": {
+      "wriFilterListIndex": {
+        "minimum": 1,
+        "maximum": 1000
+      }
+    }
+  },
+  "else": {
+    "if": {
+      "properties": {
+        "wriFilterListType": {
+          "const": "IPv4"
+        }
+      }
+    },
+    "then": {
+      "properties": {
+        "wriFilterListIndex": {
+          "minimum": 1001,
+          "maximum": 2000
+        }
+      }
+    },
+    "else": {
+      "properties": {
+        "wriFilterListIndex": {
+          "minimum": 3001,
+          "maximum": 4000
+        }
+      }
+    }
+  }
+}

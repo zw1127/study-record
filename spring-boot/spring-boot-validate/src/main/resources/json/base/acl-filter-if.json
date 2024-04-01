@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ethIfIndex": {
+      "type": "string",
+      "pattern": "^\\d+$"
+    }
+  },
+  "required": [
+    "nodeId",
+    "ethIfIndex"
+  ]
+}

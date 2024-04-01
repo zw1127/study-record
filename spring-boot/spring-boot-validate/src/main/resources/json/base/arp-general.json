@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "arpAgingTime": {
+      "type": "integer",
+      "minimum": 60,
+      "maximum": 86400
+    },
+    "arpDetectTime": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10
+    }
+  },
+  "required": [
+    "nodeId",
+    "arpAgingTime",
+    "arpDetectTime"
+  ]
+}

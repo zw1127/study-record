@@ -1,11 +1,3 @@
-/*
- * Copyright (c) 2024 Fiberhome Technologies.
- *
- * No.6, Gaoxin 4th Road, Hongshan District.,Wuhan,P.R.China,
- * Fiberhome Telecommunication Technologies Co.,LTD
- *
- * All rights reserved.
- */
 package cn.javastudy.springboot.mqtt.configuration;
 
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;

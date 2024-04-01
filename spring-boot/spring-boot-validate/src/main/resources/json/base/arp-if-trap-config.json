@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ipCheckEnable": {
+      "type": "boolean"
+    },
+    "macCheckEnable": {
+      "type": "boolean"
+    },
+    "vlanCheckEnable": {
+      "type": "boolean"
+    },
+    "ifCheckEnable": {
+      "type": "boolean"
+    },
+    "ifIndex": {
+      "type": "string",
+      "pattern": "^\\d+$"
+    }
+  },
+  "required": [
+    "nodeId"
+  ]
+}
