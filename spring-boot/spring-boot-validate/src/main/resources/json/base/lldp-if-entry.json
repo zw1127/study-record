@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "lldpIfIndex": {
+      "type": "string",
+      "pattern": "^\\d+$"
+    },
+    "lldpCtrlEnable": {
+      "enum": [
+        "txOnly",
+        "rxOnly",
+        "txAndRx",
+        "disabled"
+      ]
+    },
+    "lldpAlarmEnable": {
+      "type": "boolean"
+    },
+    "lldpTlvPortDescription": {
+      "type": "boolean"
+    },
+    "lldpTlvSystemDescription": {
+      "type": "boolean"
+    },
+    "lldpTlvSystemName": {
+      "type": "boolean"
+    },
+    "lldpTlvSystemCapability": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "nodeId",
+    "lldpIfIndex",
+    "lldpCtrlEnable",
+    "lldpAlarmEnable",
+    "lldpTlvPortDescription",
+    "lldpTlvSystemDescription",
+    "lldpTlvSystemName",
+    "lldpTlvSystemCapability"
+  ]
+}

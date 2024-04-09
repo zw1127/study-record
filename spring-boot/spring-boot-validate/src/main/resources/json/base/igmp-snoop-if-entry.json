@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "igmpSnoopIfIndex": {
+      "type": "string",
+      "pattern": "^\\d+$"
+    },
+    "igmpSnoopCtrlMode": {
+      "type": "boolean"
+    },
+    "igmpSnoopFastLeave": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "nodeId",
+    "igmpSnoopIfIndex",
+    "igmpSnoopCtrlMode",
+    "igmpSnoopFastLeave"
+  ]
+}

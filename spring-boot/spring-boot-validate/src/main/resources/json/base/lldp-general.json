@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "lldpTxInterval": {
+      "type": "integer",
+      "minimum": 5,
+      "maximum": 32768
+    },
+    "lldpReinitDelay": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10
+    },
+    "lldpTxDelay": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 8192
+    },
+    "lldpNotificationInterval": {
+      "type": "integer",
+      "minimum": 5,
+      "maximum": 3600
+    }
+  },
+  "required": [
+    "nodeId",
+    "lldpTxInterval",
+    "lldpReinitDelay",
+    "lldpTxDelay",
+    "lldpNotificationInterval"
+  ]
+}
