@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ifIndex": {
+      "type": "string",
+      "pattern": "^\\d+$"
+    },
+    "wridot1xStatus": {
+      "type": "boolean"
+    },
+    "wridot1xAccountName": {
+      "type": "string"
+    },
+    "wridot1xAuthName": {
+      "type": "string"
+    },
+    "wridot1xMaxSuppNumber": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 256
+    },
+    "wridot1xAuthReAuthPeriod": {
+      "type": "integer",
+      "minimum": 60,
+      "maximum": 7200
+    },
+    "wridot1xAuthServerTimeout": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 65535
+    },
+    "wridot1xAuthMaxReq": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10
+    }
+  },
+  "required": [
+    "nodeId",
+    "ifIndex",
+    "wridot1xStatus",
+    "wridot1xMaxSuppNumber",
+    "wridot1xAuthReAuthPeriod",
+    "wridot1xAuthServerTimeout",
+    "wridot1xAuthMaxReq"
+  ]
+}

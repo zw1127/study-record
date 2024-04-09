@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dhcpSnoopIfIndex": {
+      "type": "string",
+      "pattern": "^\\d+$"
+    },
+    "dhcpSnoopIfVersion": {
+      "type": "string",
+      "enum": [
+        "v4",
+        "v6",
+        "all"
+      ]
+    },
+    "dhcpSnoopIfOption82Status": {
+      "type": "boolean"
+    },
+    "dhcpSnoopIfMacAddressCheck": {
+      "type": "boolean"
+    },
+    "dhcpSnoopIfOption82Circuitid": {
+      "type": "string"
+    },
+    "dhcpSnoopIfOption82Remoteid": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "nodeId",
+    "dhcpSnoopIfIndex",
+    "dhcpSnoopIfVersion",
+    "dhcpSnoopIfOption82Status",
+    "dhcpSnoopIfMacAddressCheck"
+  ]
+}
