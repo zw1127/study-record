@@ -17,53 +17,556 @@
         "IPv6"
       ]
     },
-    "wriFilterListIndex": {
-      "type": "integer"
+    "wriFilterNum": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1024
+    },
+    "wriFilterType": {
+      "type": "string",
+      "enum": [
+        "ip",
+        "udp",
+        "tcp",
+        "icmp",
+        "igmp",
+        "mac"
+      ]
+    },
+    "wriFilterFragment": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "filterEntryAddrConfig": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "srcMatchAny": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "dstMatchAny": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "srcAddr": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "srcPrefixLength": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "dstAddr": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "dstPrefixLength": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      }
+    },
+    "filterEntryVlanEthConfig": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "matchVlanOrEth": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "matchVlan": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "outerVlan": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "outerVlanMatchAny": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "outerVlanRangeFrom": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 4094
+        },
+        "outerVlanRangeTo": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 4094
+        },
+        "outerVlanPriority": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "innerVlan": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "innerVlanMatchAny": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "innerVlanRangeFrom": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 4094
+        },
+        "innerVlanRangeTo": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 4094
+        },
+        "innerVlanPriority": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "matchEthType": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "ethTypeOption": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "ip",
+            "arp",
+            "digital_protocol_value"
+          ]
+        },
+        "ethTypeParam": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "filterEntryPortMatchConfig": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "portMatchConfig": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "srcPortMatchAny": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "dstPortMatchAny": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "srcPort": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "srcRangePort": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "dstPort": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "dstRangePort": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "portMatchMode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "wriFilterPrecedence": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "wriFilterIpDscp": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "wriFilterIpTtl": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "wriFilterProtoType": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      }
+    },
+    "filterEntryFieldMatchConfig": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "fieldMatchConfig": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "tcpStateOption": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "syn",
+            "ack",
+            "synack",
+            "fin",
+            "finack",
+            "urg",
+            "rst",
+            "psh"
+          ]
+        },
+        "matchHoplimit": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "matchHoplimitField": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "matchNextHeader": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "matchNextHeaderField": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      }
+    },
+    "filterEntryIcmpConfig": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "icmpConfig": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "icmpTypeMatchAny": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "icmpCodeMatchAny": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "icmpType": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "icmpCode": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      }
+    },
+    "matchAction": {
+      "type": "string",
+      "enum": [
+        "drop",
+        "deny",
+        "permit"
+      ]
     }
   },
   "required": [
     "nodeId",
+    "wriFilterListId",
     "wriFilterListType",
-    "wriFilterListIndex"
+    "wriFilterNum",
+    "wriFilterType",
+    "matchAction"
   ],
-  "if": {
-    "properties": {
-      "wriFilterListType": {
-        "const": "L2"
-      }
-    }
-  },
-  "then": {
-    "properties": {
-      "wriFilterListIndex": {
-        "minimum": 1,
-        "maximum": 1000
-      }
-    }
-  },
-  "else": {
-    "if": {
-      "properties": {
-        "wriFilterListType": {
-          "const": "IPv4"
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "wriFilterListId": {
+            "minimum": 1,
+            "maximum": 1000
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "wriFilterListType": {
+            "const": "L2"
+          },
+          "wriFilterType": {
+            "const": "mac"
+          },
+          "filterEntryAddrConfig": {
+            "properties": {
+              "srcAddr": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^[0-9A-Fa-f]{2}(:[0-9A-Fa-f]{2}){5}$"
+              },
+              "srcPrefixLength": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1,
+                "maximum": 48
+              },
+              "dstAddr": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^[0-9A-Fa-f]{2}(:[0-9A-Fa-f]{2}){5}$"
+              },
+              "dstPrefixLength": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1,
+                "maximum": 48
+              }
+            }
+          }
         }
       }
     },
-    "then": {
-      "properties": {
-        "wriFilterListIndex": {
-          "minimum": 1001,
-          "maximum": 2000
+    {
+      "if": {
+        "properties": {
+          "wriFilterListId": {
+            "minimum": 1001,
+            "maximum": 2000
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "wriFilterListType": {
+            "const": "IPv4"
+          },
+          "wriFilterType": {
+            "type": "string",
+            "enum": [
+              "ip",
+              "udp",
+              "tcp",
+              "icmp",
+              "igmp"
+            ]
+          },
+          "filterEntryAddrConfig": {
+            "properties": {
+              "srcAddr": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "ipv4"
+              },
+              "srcPrefixLength": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1,
+                "maximum": 32
+              },
+              "dstAddr": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "ipv4"
+              },
+              "dstPrefixLength": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1,
+                "maximum": 32
+              }
+            }
+          }
         }
       }
     },
-    "else": {
-      "properties": {
-        "wriFilterListIndex": {
-          "minimum": 3001,
-          "maximum": 4000
+    {
+      "if": {
+        "properties": {
+          "wriFilterListId": {
+            "minimum": 3001,
+            "maximum": 4000
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "wriFilterListType": {
+            "const": "IPv6"
+          },
+          "wriFilterType": {
+            "type": "string",
+            "enum": [
+              "ip",
+              "udp",
+              "tcp",
+              "icmp",
+              "igmp"
+            ]
+          },
+          "filterEntryAddrConfig": {
+            "properties": {
+              "srcAddr": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "ipv6"
+              },
+              "srcPrefixLength": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1,
+                "maximum": 128
+              },
+              "dstAddr": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "ipv6"
+              },
+              "dstPrefixLength": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1,
+                "maximum": 128
+              }
+            }
+          }
         }
       }
     }
-  }
+  ]
 }
