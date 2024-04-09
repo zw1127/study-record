@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dhcpIfUnit": {
+      "type": "string",
+      "pattern": "^(?:[1-9]\\d{0,2}|[1-3]\\d{3}|409[0-4]|4094)$"
+    },
+    "dhcpIfMode": {
+      "type": "string",
+      "enum": [
+        "none",
+        "server",
+        "relay"
+      ]
+    },
+    "dhcpIfOption82Status": {
+      "type": "boolean"
+    },
+    "dhcpIfOption82Action": {
+      "type": "string",
+      "enum": [
+        "drop",
+        "keep",
+        "replace"
+      ]
+    },
+    "dhcpIfCircuitID": {
+      "type": "string"
+    },
+    "dhcpIfRemoteID": {
+      "type": "string"
+    },
+    "dhcpIfArpLearning": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "nodeId",
+    "dhcpIfUnit",
+    "dhcpIfOption82Status",
+    "dhcpIfOption82Action",
+    "dhcpIfArpLearning"
+  ]
+}
