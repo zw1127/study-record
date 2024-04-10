@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ifIndex": {
+      "type": "string",
+      "pattern": "^\\d+$"
+    },
+    "ingressGroup": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "egressGroup": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "nodeId",
+    "ifIndex"
+  ]
+}

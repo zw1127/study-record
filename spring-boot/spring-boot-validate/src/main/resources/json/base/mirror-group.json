@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mirrorGroupNum": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4
+    },
+    "mirrorIfIndex": {
+      "type": "string"
+    },
+    "mirrorGroupType": {
+      "type": "string",
+      "enum": [
+        "local",
+        "l2remote",
+        "l3remote"
+      ]
+    }
+  },
+  "required": [
+    "nodeId",
+    "mirrorGroupNum",
+    "mirrorIfIndex",
+    "mirrorGroupType"
+  ]
+}

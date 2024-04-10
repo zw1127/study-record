@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "clientUpdateInterval": {
+      "type": "integer",
+      "minimum": 4,
+      "maximum": 17
+    },
+    "serverBroadcastInterval": {
+      "type": ["integer", "null"],
+      "minimum": 4,
+      "maximum": 17
+    }
+  },
+  "required": [
+    "nodeId",
+    "clientUpdateInterval",
+    "serverBroadcastInterval"
+  ]
+}
