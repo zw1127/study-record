@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stpModel": {
+      "type": "string",
+      "enum": [
+        "stp",
+        "rstp",
+        "mstp"
+      ]
+    },
+    "domainName": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 32
+    },
+    "reviseEdition": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 65535
+    },
+    "maxHop": {
+      "type": "integer",
+      "minimum": 4,
+      "maximum": 30
+    },
+    "maxAge": {
+      "type": "integer",
+      "minimum": 6,
+      "maximum": 40
+    },
+    "forwardDelay": {
+      "type": "integer",
+      "minimum": 4,
+      "maximum": 30
+    },
+    "helloTimeNum": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10
+    },
+    "costStandard": {
+      "type": "string",
+      "enum": [
+        "dot1t",
+        "dot1d1998"
+      ]
+    },
+    "bpduEnable": {
+      "type": "boolean"
+    },
+    "tcbpduEnable": {
+      "type": "boolean"
+    },
+    "edgePortEnable": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "nodeId",
+    "stpModel",
+    "domainName",
+    "reviseEdition",
+    "maxHop",
+    "maxAge",
+    "forwardDelay",
+    "helloTimeNum",
+    "costStandard",
+    "bpduEnable",
+    "tcbpduEnable",
+    "edgePortEnable"
+  ]
+}

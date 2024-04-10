@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ipRouteDest": {
+      "type": "string",
+      "format": "ipv6"
+    },
+    "ipRouteMaskLength": {
+      "type": "string",
+      "pattern": "^(?:[1-9][0-9]?|1[01][0-9]|12[0-8])$"
+    },
+    "ipRouteNextHop": {
+      "type": "string",
+      "format": "ipv6"
+    },
+    "ipRouteProto": {
+      "type": "string",
+      "const": "static"
+    },
+    "preference": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1,
+      "maximum": 255
+    }
+  },
+  "required": [
+    "nodeId",
+    "ipRouteDest",
+    "ipRouteMaskLength",
+    "ipRouteNextHop",
+    "ipRouteProto",
+    "preference"
+  ]
+}

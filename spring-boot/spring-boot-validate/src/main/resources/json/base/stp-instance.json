@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stpInstanceId": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 63
+    },
+    "stpInstancePriority": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 61440,
+      "multipleOf": 4096
+    },
+    "stpInstanceVlanList": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "nodeId",
+    "stpInstanceId",
+    "stpInstancePriority",
+    "stpInstanceVlanList"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ifIndex": {
+      "type": "string",
+      "pattern": "^\\d+$"
+    },
+    "stpEdgePortEnable": {
+      "type": "boolean"
+    },
+    "stpRootGuardEnable": {
+      "type": "boolean"
+    },
+    "managePathCost": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 200000
+    },
+    "ptpManageEnable": {
+      "type": "string",
+      "enum": [
+        "forceTrue",
+        "forceFalse",
+        "auto"
+      ]
+    }
+  },
+  "required": [
+    "nodeId",
+    "ifIndex",
+    "stpEdgePortEnable",
+    "stpRootGuardEnable",
+    "managePathCost",
+    "ptpManageEnable"
+  ]
+}

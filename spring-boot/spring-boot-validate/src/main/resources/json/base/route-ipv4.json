@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ipRouteDest": {
+      "type": "string",
+      "format": "ipv4"
+    },
+    "ipRouteMask": {
+      "type": "string",
+      "format": "ipv4"
+    },
+    "ipRouteNextHop": {
+      "type": "string",
+      "format": "ipv4"
+    },
+    "ipRouteProto": {
+      "type": "string",
+      "const": "static"
+    },
+    "ipRouteMetric": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1,
+      "maximum": 255
+    }
+  },
+  "required": [
+    "nodeId",
+    "ipRouteDest",
+    "ipRouteMask",
+    "ipRouteNextHop",
+    "ipRouteProto",
+    "ipRouteMetric"
+  ]
+}
