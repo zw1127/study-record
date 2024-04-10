@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ifIndex": {
+      "type": "string",
+      "pattern": "^\\d+$"
+    },
+    "macLearningEnable": {
+      "type": "boolean"
+    },
+    "macLearningDisableAction": {
+      "type": "string",
+      "enum": [
+        "drop",
+        "forward"
+      ]
+    },
+    "macOverMaxAction": {
+      "type": "string",
+      "enum": [
+        "drop",
+        "forward"
+      ]
+    },
+    "macLimitNum": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 16384
+    },
+    "macLimitIfAlarmStatus": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "nodeId",
+    "ifIndex",
+    "macLearningEnable"
+  ]
+}

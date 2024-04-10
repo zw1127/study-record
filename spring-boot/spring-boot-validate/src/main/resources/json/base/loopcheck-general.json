@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "loopcheckLoopAction": {
+      "type": "string",
+      "enum": [
+        "port_block",
+        "vlan_block"
+      ]
+    },
+    "loopcheckSendInterval": {
+      "type": "integer",
+      "minimum": 3,
+      "maximum": 120
+    },
+    "loopcheckRecoverTime": {
+      "type": "integer",
+      "minimum": 3,
+      "maximum": 1000
+    },
+    "loopcheckAlarmEnable": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "nodeId",
+    "loopcheckLoopAction",
+    "loopcheckSendInterval",
+    "loopcheckRecoverTime",
+    "loopcheckAlarmEnable"
+  ]
+}

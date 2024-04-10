@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "loopcheckIfIndex": {
+      "type": "string",
+      "pattern": "^\\d+$"
+    },
+    "loopcheckIfEnable": {
+      "type": "boolean"
+    },
+    "loopcheckAction": {
+      "type": "string",
+      "enum": [
+        "block",
+        "shutdown",
+        "trap",
+        "nolearning"
+      ]
+    },
+    "vlanList": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "nodeId",
+    "loopcheckIfIndex",
+    "loopcheckIfEnable",
+    "loopcheckAction"
+  ]
+}
