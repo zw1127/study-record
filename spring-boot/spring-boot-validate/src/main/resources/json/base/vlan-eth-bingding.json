@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ethIfIndex": {
+      "type": "string",
+      "pattern": "^\\d+$"
+    },
+    "tagType": {
+      "type": "string",
+      "enum": [
+        "tag",
+        "untag"
+      ]
+    },
+    "vlanString": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "nodeId",
+    "ethIfIndex",
+    "tagType",
+    "vlanString"
+  ]
+}

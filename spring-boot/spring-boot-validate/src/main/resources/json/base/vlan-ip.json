@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "vlanId": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4094
+    },
+    "ipType": {
+      "type": "string",
+      "enum": [
+        "ipv4",
+        "ipv6"
+      ]
+    },
+    "ip": {
+      "type": "string"
+    },
+    "mask": {
+      "type": "integer"
+    },
+    "isSub": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "nodeId",
+    "vlanId",
+    "ip",
+    "mask",
+    "isSub"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "ipType": {
+            "const": "ipv4"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "ip": {
+            "format": "ipv4"
+          },
+          "mask": {
+            "minimum": 0,
+            "maximum": 32
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "ipType": {
+            "const": "ipv6"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "ip": {
+            "format": "ipv6"
+          },
+          "mask": {
+            "minimum": 0,
+            "maximum": 128
+          }
+        }
+      }
+    }
+  ]
+}

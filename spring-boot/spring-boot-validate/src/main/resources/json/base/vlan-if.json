@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "vlanId": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4094
+    },
+    "vlanDescr": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "portBasedVlanUnknownMulticastDiscard": {
+      "type": "string",
+      "enum": [
+        "DROP",
+        "FORWARD"
+      ]
+    },
+    "adminStatus": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "nodeId",
+    "vlanId",
+    "vlanDescr",
+    "portBasedVlanUnknownMulticastDiscard",
+    "adminStatus"
+  ]
+}

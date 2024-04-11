@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ethIfIndex": {
+      "type": "string",
+      "pattern": "^\\d+$"
+    },
+    "ethIfType": {
+      "type": "string",
+      "enum": [
+        "TRUNK",
+        "HYBRID",
+        "ACCESS"
+      ]
+    },
+    "ifPvid": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4094
+    },
+    "ifQinqEnable": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "nodeId",
+    "ethIfIndex",
+    "ethIfType",
+    "ifPvid",
+    "ifQinqEnable"
+  ]
+}

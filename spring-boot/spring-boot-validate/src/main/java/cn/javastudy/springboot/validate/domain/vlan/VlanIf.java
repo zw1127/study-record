@@ -1,7 +1,5 @@
 package cn.javastudy.springboot.validate.domain.vlan;
 
-import cn.javastudy.springboot.validate.domain.trunk.TrunkGlobalModeEnum;
-import cn.javastudy.springboot.validate.domain.trunk.TrunkIfMode;
 import lombok.Data;
 
 @Data
@@ -19,4 +17,18 @@ public class VlanIf {
     //vlan接口管理状态（可配置）
     private Boolean adminStatus;
 
+//    //主ipv4 地址
+//    private String primaryIpv4Address;
+//
+//    //主ipv4 掩码长度 0-32
+//    private String ipv4Mask;
+//
+//    //vlan接口ipv6使能
+//    private Boolean ipv6Enable;
+//
+//    //主ipv6 地址
+//    private String primaryIpv6Address;
+//
+//    //主ipv6 掩码长度：0-128
+//    private String ipv6Mask;
 }
