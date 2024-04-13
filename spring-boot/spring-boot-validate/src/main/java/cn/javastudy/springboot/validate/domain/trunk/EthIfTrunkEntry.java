@@ -11,7 +11,8 @@ public class EthIfTrunkEntry {
     private String ethifIndex;
 
     //trunk-id
-    private String ethIfTrunkPort;
+    private Integer ethIfTrunkPort;
+
     //trunk模式使能
     private Boolean ethIfTrunkEnable;
 

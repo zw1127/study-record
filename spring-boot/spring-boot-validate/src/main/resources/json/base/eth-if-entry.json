@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ethIfIndex": {
+      "type": "string",
+      "pattern": "^\\d+$"
+    },
+    "ethifDescr": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ethifAdminStatus": {
+      "type": "string",
+      "enum": [
+        "UP",
+        "DOWN"
+      ]
+    },
+    "ifMdi": {
+      "type": "string",
+      "enum": [
+        "auto",
+        "across",
+        "normal"
+      ]
+    },
+    "ifMtu": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 128,
+      "maximum": 12000
+    },
+    "ethifPriority": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 7
+    },
+    "ethifFlowCtrlEnable": {
+      "type": "boolean"
+    },
+    "ifFlowCtrlAutoNegotiation": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "nodeId",
+    "ethIfIndex",
+    "ethifDescr",
+    "ethifAdminStatus",
+    "ifMdi",
+    "ifMtu",
+    "ethifPriority",
+    "ethifFlowCtrlEnable",
+    "ifFlowCtrlAutoNegotiation"
+  ]
+}

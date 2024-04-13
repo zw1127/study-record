@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stormSuppressRecoveryInterval": {
+      "type": "integer",
+      "minimum": 30,
+      "maximum": 86400
+    }
+  },
+  "required": [
+    "nodeId",
+    "stormSuppressRecoveryInterval"
+  ]
+}

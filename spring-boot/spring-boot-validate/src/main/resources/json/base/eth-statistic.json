@@ -1,0 +1,154 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ethIfIndex": {
+      "type": "string",
+      "pattern": "^\\d+$"
+    },
+    "ethifInLimitCtrl": {
+      "type": "boolean"
+    },
+    "inLevel": {
+      "type": "string",
+      "enum": [
+        "percent",
+        "bps"
+      ]
+    },
+    "ethifInLimit": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "ethifOutLimitCtrl": {
+      "type": "boolean"
+    },
+    "outLevel": {
+      "type": "string",
+      "enum": [
+        "percent",
+        "bps"
+      ]
+    },
+    "ethifOutLimit": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "ethifAutoNego": {
+      "type": "boolean"
+    },
+    "autoNegotiateDuplexList": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "full",
+          "half"
+        ],
+        "uniqueItems": true
+      }
+    },
+    "autoNegotiateSpeedList": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "10",
+          "100",
+          "1000"
+        ],
+        "uniqueItems": true
+      }
+    }
+  },
+  "required": [
+    "nodeId",
+    "ethIfIndex",
+    "ethifInLimitCtrl",
+    "inLevel",
+    "ethifInLimit",
+    "ethifOutLimitCtrl",
+    "outLevel",
+    "ethifOutLimit",
+    "autoNegotiateDuplexList",
+    "autoNegotiateSpeedList"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "inLevel": {
+            "const": "percent"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "ethifInLimit": {
+            "minimum": 1,
+            "maximum": 100
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "inLevel": {
+            "const": "bps"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "ethifInLimit": {
+            "minimum": 10,
+            "maximum": 16000
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outLevel": {
+            "const": "percent"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "ethifOutLimit": {
+            "minimum": 1,
+            "maximum": 100
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outLevel": {
+            "const": "bps"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "ethifOutLimit": {
+            "minimum": 10,
+            "maximum": 16000
+          }
+        }
+      }
+    }
+  ]
+}

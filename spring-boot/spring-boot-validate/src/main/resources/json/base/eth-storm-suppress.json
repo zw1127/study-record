@@ -1,0 +1,135 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stormSuppressIfIndex": {
+      "type": "string",
+      "pattern": "^\\d+$"
+    },
+    "stormSuppressIfLevel": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "percent",
+        "pps",
+        "bps"
+      ]
+    },
+    "stormSuppressIfMulticastEnable": {
+      "type": "boolean"
+    },
+    "multicastLevel": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "percent",
+        "pps",
+        "bps"
+      ]
+    },
+    "stormSuppressIfMulticastMinLimit": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "stormSuppressIfMulticastMaxLimit": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "stormSuppressIfBroadcastEnable": {
+      "type": "boolean"
+    },
+    "broadcastLevel": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "percent",
+        "pps",
+        "bps"
+      ]
+    },
+    "stormSuppressIfBroadcastMinLimit": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "stormSuppressIfBroadcastMaxLimit": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "stormSuppressIfDlfEnable": {
+      "type": "boolean"
+    },
+    "dlfLevel": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "percent",
+        "pps",
+        "bps"
+      ]
+    },
+    "stormSuppressIfDlfMinLimit": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "stormSuppressIfDlfMaxLimit": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "stormSuppressIfAction": {
+      "type": "string",
+      "enum": [
+        "none",
+        "block",
+        "shutdown"
+      ]
+    },
+    "stormSuppressIfInterval": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 108
+    }
+  },
+  "required": [
+    "nodeId",
+    "stormSuppressIfIndex",
+    "stormSuppressIfLevel",
+    "stormSuppressIfMulticastEnable",
+    "multicastLevel",
+    "stormSuppressIfMulticastMinLimit",
+    "stormSuppressIfMulticastMaxLimit",
+    "stormSuppressIfBroadcastEnable",
+    "broadcastLevel",
+    "stormSuppressIfBroadcastMinLimit",
+    "stormSuppressIfBroadcastMaxLimit",
+    "stormSuppressIfDlfEnable",
+    "dlfLevel",
+    "stormSuppressIfDlfMinLimit",
+    "stormSuppressIfDlfMaxLimit",
+    "stormSuppressIfAction",
+    "stormSuppressIfInterval"
+  ]
+}

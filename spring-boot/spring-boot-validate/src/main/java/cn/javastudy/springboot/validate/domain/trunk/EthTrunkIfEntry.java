@@ -8,7 +8,7 @@ public class EthTrunkIfEntry {
     //设备id(key)
     private String nodeId;
     //trunk-id
-    private String ethTrunkId;
+    private Integer ethTrunkId;
 
     private String ethTrunkIndex;
 
