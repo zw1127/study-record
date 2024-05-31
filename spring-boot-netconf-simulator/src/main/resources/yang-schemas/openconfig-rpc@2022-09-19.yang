@@ -48,7 +48,7 @@ module openconfig-rpc {
   revision "2020-11-16" {
     description
       "Revised By Baidu and Kuaishou";
-  }  
+  }
 
   revision "2019-04-30" {
     description
@@ -56,7 +56,7 @@ module openconfig-rpc {
     reference "0.1.0";
   }
 
-  // typedef statements 
+  // typedef statements
 
   typedef action-result {
     type enumeration {
@@ -67,8 +67,8 @@ module openconfig-rpc {
       enum FAIL {
         description
         "The RPC action is fail";
-      }     
-    }    
+      }
+    }
   }
 
   typedef pm-parameter-type {
@@ -91,7 +91,7 @@ module openconfig-rpc {
       enum line-secondary-in-power-instant { description "optical power of line secondary in port for optical line protection, includes instant only"; }
       enum line-secondary-out-power-instant { description "optical power of line secondary out port for optical line protection, includes instant only"; }
       enum common-in-power-instant { description "optical power of common in port for optical line protection, includes instant only"; }
-      enum common-output-power-instant { description "optical power of common output port for optical line protection, includes instant only"; }       
+      enum common-output-power-instant { description "optical power of common output port for optical line protection, includes instant only"; }
       enum errored-seconds-instant { description "pm for terminal-device, includes instant only"; }
       enum unavailable-seconds-instant { description "pm for terminal-device, includes instant only"; }
       enum pre-fec-ber-instant { description "pm for terminal-device, includes instant only"; }
@@ -120,7 +120,7 @@ module openconfig-rpc {
       enum line-secondary-in-power-max { description "optical power of line secondary in port for optical line protection, includes maximum only"; }
       enum line-secondary-out-power-max { description "optical power of line secondary out port for optical line protection, includes maximum only"; }
       enum common-in-power-max { description "optical power of common in port for optical line protection, includes maximum only"; }
-      enum common-output-power-max { description "optical power of common output port for optical line protection, includes maximum only"; }       
+      enum common-output-power-max { description "optical power of common output port for optical line protection, includes maximum only"; }
       enum pre-fec-ber-max { description "pm for terminal-device, includes maximum only"; }
       enum post-fec-ber-max { description "pm for terminal-device, includes maximum only"; }
       enum q-value-max { description "pm for terminal-device, includes maximum only"; }
@@ -144,7 +144,7 @@ module openconfig-rpc {
       enum line-secondary-in-power-min { description "optical power of line secondary in port for optical line protection, includes minimum only"; }
       enum line-secondary-out-power-min { description "optical power of line secondary out port for optical line protection, includes minimum only"; }
       enum common-in-power-min { description "optical power of common in port for optical line protection, includes minimum only"; }
-      enum common-output-power-min { description "optical power of common output port for optical line protection, includes minimum only"; }       
+      enum common-output-power-min { description "optical power of common output port for optical line protection, includes minimum only"; }
       enum pre-fec-ber-min { description "pm for terminal-device, includes minimum only"; }
       enum post-fec-ber-min { description "pm for terminal-device, includes minimum only"; }
       enum q-value-min { description "pm for terminal-device, includes minimum only"; }
@@ -169,27 +169,27 @@ module openconfig-rpc {
       enum image {
         description
         "the file is image";
-      }    
+      }
       enum image-database {
         description
         "the file is image and database";
-      }    
+      }
       enum certificate {
         description
         "the file is certificate";
-      }     
+      }
       enum license {
         description
         "the file is license";
-      }           
+      }
       enum otdr {
         description
         "the file is otdr";
-      }    
+      }
       enum ocm {
         description
         "the file is ocm";
-      }     
+      }
     }
   }
 
@@ -205,23 +205,23 @@ module openconfig-rpc {
         mandatory true;
         description
           "the username for uploading file";
-      }  
-      
+      }
+
       leaf password {
         type string;
         mandatory true;
         description
           "the password for uploading file";
-      }  
-  }  
+      }
+  }
 
- 
+
 
 
   // rpc statements
 
   rpc reboot {
-    description 
+    description
        "Reboot the specific component, i.e. card, transceiver";
       input {
         leaf component-name {
@@ -231,38 +231,38 @@ module openconfig-rpc {
           }
           description
              "target reboot components";
-        }       
+        }
 
         leaf reboot-type {
           type enumeration {
-            enum warm { 
+            enum warm {
               description "warm reboot";
             }
-            enum cold { 
+            enum cold {
               description "cold reboot";
             }
           }
-          description 
+          description
             "Reboot type";
         }
       }
       output {
         leaf reboot-result {
           type action-result;
-          description 
+          description
             "Result of the reboot operation";
         }
       }
   }
 
   rpc download {
-    description 
-       "this RPC send file from NMS to the device";  
+    description
+       "this RPC send file from NMS to the device";
     input {
       leaf file-type {
-        type common-file-type; 
+        type common-file-type;
         mandatory true;
-        description 
+        description
           "file type for the download action";
       }
       leaf file-name {
@@ -293,25 +293,25 @@ module openconfig-rpc {
     output {
       leaf download-result {
         type action-result;
-        description 
+        description
           "Result of the download file operation";
       }
       leaf text {
         type string;
-        description 
+        description
           "reasons for failure, defined by vendor";
       }
     }
   }
 
   rpc get-download-status {
-    description 
+    description
        "this RPC get the status of the download operation";
     input {
       leaf file-type {
-        type common-file-type; 
+        type common-file-type;
         mandatory true;
-        description 
+        description
           "file type for the download action";
       }
 
@@ -320,14 +320,14 @@ module openconfig-rpc {
         mandatory true;
         description
             "the download file name";
-      } 
+      }
 
       leaf source {
         type string;
         mandatory true;
         description
           "the source path for downloading file, for example, [sftp]://hostname/directorypath/filename";
-      }  
+      }
     }
     output {
       leaf download-status {
@@ -339,47 +339,47 @@ module openconfig-rpc {
           enum SUCCESS {
             description
             "the status of download operation is finished and success";
-          }     
+          }
           enum FAIL {
             description
             "the status of download operation is fail";
-          }  
-        }    
+          }
+        }
       }
       leaf text {
         type string;
-        description 
+        description
           "reasons for failure, defined by vendor";
       }
     }
   }
 
   rpc upload {
-    description 
+    description
        "this RPC get file from the device to NMS";
     input {
       leaf file-type {
-        type common-file-type; 
+        type common-file-type;
         mandatory true;
-        description 
+        description
           "file type for the upload operation";
       }
       leaf file-name {
         type string;
         description
             "the upload file name";
-      } 
+      }
       leaf destination {
         type string;
         mandatory true;
         description
           "the destination path for the upload operation, for example, [sftp]://hostname/directorypath/filename";
-      }  
+      }
       leaf cert-name {
         type string;
         description
           "the certificate name";
-      }  
+      }
       leaf key-name {
         type string;
         description
@@ -390,61 +390,61 @@ module openconfig-rpc {
     output {
       leaf upload-result {
         type action-result;
-        description 
+        description
           "Result of the upload file operation";
       }
 
       leaf text {
         type string;
-        description 
+        description
           "reasons for failure, defined by vendor";
       }
     }
   }
 
   rpc remove-file {
-    description 
+    description
        "remove the file in device";
     input {
       leaf file-type {
         type common-file-type;
-        mandatory true; 
-        description 
+        mandatory true;
+        description
           "file type for the remove operation";
       }
       leaf image-name {
         type string;
         description
           "the image name for the remove operation";
-      }  
+      }
       leaf database-name {
         type string;
         description
           "the database name for the remove operation";
-      }  
+      }
     }
     output {
       leaf remove-file-result {
         type action-result;
-        description 
+        description
           "Result of the remove operation";
       }
       leaf text {
         type string;
-        description 
-          "reasons for failure, defined by vendor";        
+        description
+          "reasons for failure, defined by vendor";
       }
     }
   }
 
   rpc activate-file {
-    description 
+    description
        "activate the file in device";
     input {
       leaf file-type {
         type common-file-type;
-        mandatory true; 
-        description 
+        mandatory true;
+        description
           "file type for the activate operation";
       }
 
@@ -452,24 +452,24 @@ module openconfig-rpc {
         type string;
         description
           "the image name for the activate operation";
-      }  
+      }
 
       leaf database-name {
         type string;
         description
           "the database name for the activate operation";
-      }  
+      }
 
       leaf reboot-type {
         type enumeration {
-          enum warm { 
+          enum warm {
             description "warm reboot";
           }
-          enum cold { 
+          enum cold {
             description "cold reboot";
           }
         }
-        description 
+        description
           "Reboot type";
       }
     }
@@ -477,26 +477,26 @@ module openconfig-rpc {
     output {
       leaf activate-result {
         type action-result;
-        description 
+        description
           "Result of the activate operation";
       }
 
       leaf text {
         type string;
-        description 
+        description
           "reasons for failure, defined by vendor";
       }
     }
   }
 
   rpc get-activate-status {
-    description 
+    description
        "this RPC get the status of the active operation";
     input {
       leaf file-type {
-        type common-file-type; 
+        type common-file-type;
         mandatory true;
-        description 
+        description
           "file type for the active action";
       }
 
@@ -517,28 +517,28 @@ module openconfig-rpc {
           enum SUCCESS {
             description
             "the status of active operation is finished and success";
-          }     
+          }
           enum FAIL {
             description
             "the status of active operation is fail";
-          }  
-        }    
-      } 
+          }
+        }
+      }
       leaf text {
         type string;
-        description 
+        description
           "reasons for failure, defined by vendor";
       }
     }
   }
 
   rpc get-pm-data {
-    description 
+    description
        "get the pm data from the device";
     input {
       leaf pm-type {
         type enumeration {
-          enum current { 
+          enum current {
             description "get current pm data";
           }
           enum history {
@@ -546,12 +546,12 @@ module openconfig-rpc {
           }
         }
         default history;
-        description 
+        description
           "pm data type";
       }
       leaf pm-point {
         type string;
-        description 
+        description
           "the monitoring point of the pm data, reference to the component, i.e. LINECARD-1-1, or logical channel, i.e. OTUC2-1-1-L1, or all ,means all points ";
       }
       leaf pm-point-type {
@@ -569,15 +569,15 @@ module openconfig-rpc {
           enum all { description "pm point is all";}
           enum interface { description "pm point is interface";}
         }
-        description 
+        description
           "pm point type";
       }
       leaf pm-time-period {
         type enumeration {
-          enum 15min { 
+          enum 15min {
             description "15min pm data";
           }
-          enum 24h { 
+          enum 24h {
             description "24h pm data";
           }
           enum untimed {
@@ -585,21 +585,24 @@ module openconfig-rpc {
           }
         }
         default 15min;
-        description 
+        description
           "granularity of pm bins";
       }
       leaf pm-parameter {
-        type pm-parameter-type;
-        description 
+        type union {
+          type pm-parameter-type;
+          type string;
+        }
+        description
           "the history data of pm parameters that can be saved in device";
       }
       leaf history-data-type {
         when "../pm-type = 'history'";
         type enumeration {
-          enum records { 
+          enum records {
             description "history pm data is get by number of records";
           }
-          enum time { 
+          enum time {
             description "history pm data is get by setting time";
           }
         }
@@ -617,19 +620,19 @@ module openconfig-rpc {
         type oc-yang:date-and-time;
         description
           "the start of the monitoring date and time";
-      }   
+      }
       leaf end-mon-date-time {
         when "../history-data-type = 'time'";
         type oc-yang:date-and-time;
         description
           "the end of the monitoring date and time";
-      }   
+      }
     }
 
     output {
       leaf get-pm-result {
         type action-result;
-        description 
+        description
           "Result of the get pm data operation";
       }
 
@@ -667,7 +670,7 @@ module openconfig-rpc {
                 type string;
                 description
                   "the monitoring point of the pm dat, reference to the component, i.e. LINECARD-1-1, or logical channel, i.e. OTUC2-1-1-L1 ";
-              }            
+              }
 
               container parameters {
                 description
@@ -676,11 +679,15 @@ module openconfig-rpc {
                 list parameter {
                   key "pm-parameter";
                   description
-                    "List of output pm data parameter, keyed by pm-parameter and pm-point";       
-            
+                    "List of output pm data parameter, keyed by pm-parameter and pm-point";
+
                   leaf pm-parameter {
-                    type string;
-                    description 
+                    type union {
+                      type pm-parameter-type;
+                      type string;
+                    }
+
+                    description
                       "the pm parameters that can be saved in device";
                   }
 
@@ -704,11 +711,11 @@ module openconfig-rpc {
           }
         }
       }
-    }  
+    }
   }
 
   rpc switch-olp {
-    description 
+    description
        "Manual switch the aps to the desired port";
     input {
       leaf name {
@@ -718,8 +725,8 @@ module openconfig-rpc {
         }
         description
           "target aps name";
-      }  
-    
+      }
+
       leaf switch-to-port {
         type enumeration {
           enum PRIMARY {
@@ -739,17 +746,17 @@ module openconfig-rpc {
     output {
       leaf switch-olp-result {
         type action-result;
-        description 
+        description
           "Result of the switch olp operation";
       }
     }
   }
 
   rpc get-log {
-    description 
+    description
        "get the specific type log from the device";
     input {
-      leaf log-type {         
+      leaf log-type {
         type enumeration {
           enum CONFIGURATION {
             description
@@ -780,7 +787,7 @@ module openconfig-rpc {
           "the output log type";
       }
 
-      leaf file-type {         
+      leaf file-type {
         type enumeration {
           enum csv {
             description
@@ -800,7 +807,7 @@ module openconfig-rpc {
         mandatory true;
         description
           "the destination path for the get-log operation, for example, [sftp]://hostname/directorypath/filename";
-      }  
+      }
 
       uses sftp-username-password;
     }
@@ -808,33 +815,33 @@ module openconfig-rpc {
     output {
       leaf get-log-result {
         type action-result;
-        description 
+        description
           "Result of the get log operation";
       }
     }
   }
 
   rpc set-datetime {
-    description 
+    description
        "Set equipments' datetime.";
     input {
       leaf datetime {
         type oc-yang:date-and-time;
         description
             "target datetime";
-      }       
+      }
     }
     output {
       leaf set-datetime-result {
         type action-result;
-        description 
+        description
           "Result of the set operation";
       }
     }
   }
 
   rpc change-password {
-    description 
+    description
        "change password of the current user";
     input {
       leaf operator-password {
@@ -878,12 +885,12 @@ module openconfig-rpc {
   }
 
   rpc clear-pm-counter {
-    description 
+    description
        "clear the counter of the pointed pm";
     input {
       leaf pm-point {
         type string;
-        description 
+        description
           "the monitoring point of the pm data, reference to the component, i.e. LINECARD-1-1, or logical channel, i.e. OTUC2-1-1-L1, or all ,means all points ";
       }
 
@@ -893,16 +900,16 @@ module openconfig-rpc {
           enum ethernet { description "pm point is ethernet";}
           enum all { description "all pm points";}
         }
-        description 
+        description
           "pm point type";
       }
 
       leaf pm-time-period {
         type enumeration {
-          enum 15min { 
+          enum 15min {
             description "15min pm data";
           }
-          enum 24h { 
+          enum 24h {
             description "24h pm data";
           }
           enum untimed {
@@ -910,13 +917,16 @@ module openconfig-rpc {
           }
         }
         default 15min;
-        description 
+        description
           "pm data period";
       }
 
       leaf pm-parameter {
-        type pm-parameter-type;
-        description 
+        type union {
+          type pm-parameter-type;
+          type string;
+        }
+        description
           "the counter-type pm parameter selected to be cleared";
       }
     }

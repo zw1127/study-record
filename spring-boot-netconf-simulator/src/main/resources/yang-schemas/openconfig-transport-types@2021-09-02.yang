@@ -29,7 +29,7 @@ module openconfig-transport-types {
       "Add CFP2_DCO identity based on
       TRANSCEIVER_FORM_FACTOR_TYPE by Baidu and Kuaishou";
   }
-  
+
   revision "2020-12-01" {
     description
       "Add Ethernet compliance code 400G SR8 & 400G DR4,
@@ -171,6 +171,16 @@ module openconfig-transport-types {
   identity GFP_F {
     base FRAME_MAPPING_PROTOCOL;
     description "Framed-Mapped Generic Framing Protocol";
+  }
+
+  identity IMP {
+    base FRAME_MAPPING_PROTOCOL;
+    description "Idle Mapping Procedure.";
+  }
+
+  identity MAC_BTB {
+    base FRAME_MAPPING_PROTOCOL;
+    description "Mac back to back Framing Protocol";
   }
 
   identity TRIBUTARY_SLOT_GRANULARITY {
@@ -416,6 +426,160 @@ module openconfig-transport-types {
     uses oc-types:min-max-time;
   }
 
+  grouping avg-min-max-instant-stats-precision1-mhz {
+    description
+      "Common grouping for recording frequency values in MHz with
+      1 decimal precision. Values include the instantaneous, average,
+      minimum, and maximum statistics. Statistics are computed and
+      reported based on a moving time interval (e.g., the last 30s).
+      If supported by the device, the time interval over which the
+      statistics are computed, and the times at which the minimum and
+      maximum values occurred, are also reported.";
+
+    leaf instant {
+      type decimal64 {
+        fraction-digits 1;
+      }
+      units MHz;
+      description
+        "The instantaneous value of the statistic.";
+    }
+
+    leaf avg {
+      type decimal64 {
+        fraction-digits 1;
+      }
+      units MHz;
+      description
+        "The arithmetic mean value of the statistic over the
+        time interval.";
+    }
+
+    leaf min {
+      type decimal64 {
+        fraction-digits 1;
+      }
+      units MHz;
+      description
+        "The minimum value of the statistic over the time interval.";
+    }
+
+    leaf max {
+      type decimal64 {
+        fraction-digits 1;
+      }
+      units MHz;
+      description
+        "The maximum value of the statistic over the time interval.";
+    }
+
+    uses oc-types:stat-interval-state;
+    uses oc-types:min-max-time;
+  }
+
+  grouping avg-min-max-instant-stats-precision1-krads {
+    description
+      "Common grouping for recording kiloradian per second (krad/s) values
+      with 1 decimal precision. Values include the instantaneous,
+      average, minimum, and maximum statistics. Statistics are computed
+      and reported based on a moving time interval (e.g., the last 30s).
+      If supported by the device, the time interval over which the
+      statistics are computed, and the times at which the minimum and
+      maximum values occurred, are also reported.";
+
+    leaf instant {
+      type decimal64 {
+        fraction-digits 1;
+      }
+      units "krad/s";
+      description
+        "The instantaneous value of the statistic.";
+    }
+
+    leaf avg {
+      type decimal64 {
+        fraction-digits 1;
+      }
+      units "krad/s";
+      description
+        "The arithmetic mean value of the statistic over the
+        time interval.";
+    }
+
+    leaf min {
+      type decimal64 {
+        fraction-digits 1;
+      }
+      units "krad/s";
+      description
+        "The minimum value of the statistic over the time interval.";
+    }
+
+    leaf max {
+      type decimal64 {
+        fraction-digits 1;
+      }
+      units "krad/s";
+      description
+        "The maximum value of the statistic over the time interval.";
+    }
+
+    uses oc-types:stat-interval-state;
+    uses oc-types:min-max-time;
+  }
+
+  grouping avg-min-max-instant-stats-precision2-pct {
+    description
+      "Common grouping for percentage statistics with 2 decimal precision.
+      Values include the instantaneous, average, minimum, and maximum
+      statistics. Statistics are computed and reported based on a moving
+      time interval (e.g., the last 30s). If supported by the device,
+      the time interval over which the statistics are computed, and the
+      times at which the minimum and maximum values occurred, are also
+      reported.";
+
+    leaf instant {
+      type decimal64 {
+        fraction-digits 2;
+      }
+      units percentage;
+      description
+        "The instantaneous value of the statistic.";
+    }
+
+    leaf avg {
+      type decimal64 {
+        fraction-digits 2;
+      }
+      units percentage;
+      description
+        "The arithmetic mean value of the statistic over the
+        time interval.";
+    }
+
+    leaf min {
+      type decimal64 {
+        fraction-digits 2;
+      }
+      units percentage;
+      description
+        "The minimum value of the statistic over the time interval.";
+    }
+
+    leaf max {
+      type decimal64 {
+        fraction-digits 2;
+      }
+      units percentage;
+      description
+        "The maximum value of the statistic over the time interval.";
+    }
+
+    uses oc-types:stat-interval-state;
+    uses oc-types:min-max-time;
+  }
+
+
   // identity statements
 
   identity TRIBUTARY_PROTOCOL_TYPE {
@@ -533,7 +697,7 @@ module openconfig-transport-types {
     base TRIBUTARY_PROTOCOL_TYPE;
     description "OTU Cn protocol";
   }
-  
+
   identity PROT_OTUJ {
     base TRIBUTARY_PROTOCOL_TYPE;
     description "OTU J protocol for acacia";
@@ -548,14 +712,40 @@ module openconfig-transport-types {
     base TRIBUTARY_PROTOCOL_TYPE;
     description "ODU 4 protocol";
   }
-  
+
   identity PROT_400GE {
     base TRIBUTARY_PROTOCOL_TYPE;
     description "400G Ethernet protocol";
-  }  
+  }
+
+  identity PROT_OTSIG {
+    base TRIBUTARY_PROTOCOL_TYPE;
+    description "Optical tributary signal group protocol";
+  }
+
+  identity PROT_ODUFLEX_CBR {
+    base TRIBUTARY_PROTOCOL_TYPE;
+    description "ODU Flex with CBR protocol";
+  }
+
+  identity PROT_ODUFLEX_GFP {
+    base TRIBUTARY_PROTOCOL_TYPE;
+    description "ODU Flex with GFP protocol";
+  }
+
+  identity PROT_ODUFLEX_IMP {
+    base TRIBUTARY_PROTOCOL_TYPE;
+    description "ODU Flex with IMP protocol";
+  }
 
   identity PROT_ODUFLEX {
     base TRIBUTARY_PROTOCOL_TYPE;
+    description "ODU Flex";
+  }
+
+  identity PROT_TDUFLEX {
+    base TRIBUTARY_PROTOCOL_TYPE;
+    description "TDU Flex";
   }
 
   identity TRANSCEIVER_FORM_FACTOR_TYPE {
@@ -620,11 +810,51 @@ module openconfig-transport-types {
       "QSFP pluggable optic with support for up to 4x28G physical
       channels";
   }
-  
+
   identity QSFPDD {
     base TRANSCEIVER_FORM_FACTOR_TYPE;
     description
       "QSFP Double Density pluggable optic with support for up to 400G";
+  }
+
+  identity QSFP56 {
+    base TRANSCEIVER_FORM_FACTOR_TYPE;
+    description
+      "QSFP pluggable optic with support for up to 4x56G physical
+      channels";
+  }
+
+  identity QSFP56_DD {
+    base TRANSCEIVER_FORM_FACTOR_TYPE;
+    description
+      "QSFP-DD electrical interfaces will employ 8 lanes that operate up to
+      25 Gbps NRZ modulation or 50 Gbps PAM4 modulation, providing
+      solutions up to 200 Gbps or 400 Gbps aggregate";
+    reference "http://qsfp-dd.com";
+  }
+
+  identity QSFP56_DD_TYPE1 {
+    base TRANSCEIVER_FORM_FACTOR_TYPE;
+    status deprecated;
+    description
+      "QSFP DD pluggable optic with support for up to 8x56G physical
+      channels. Type 1 uses eight optical and electrical signals.";
+  }
+
+  identity QSFP56_DD_TYPE2 {
+    base TRANSCEIVER_FORM_FACTOR_TYPE;
+    status deprecated;
+    description
+      "QSFP DD pluggable optic with support for up to 4x112G physical
+      channels. Type 2 uses four optical and eight electrical
+      signals.";
+  }
+
+  identity QSFP112 {
+    base TRANSCEIVER_FORM_FACTOR_TYPE;
+    description
+      "QSFP pluggable optic with support for up to 4x112G physical
+      channels.";
   }
 
   identity CPAK {
@@ -647,6 +877,36 @@ module openconfig-transport-types {
       up to 16 Gb/s signals, including 10 GbE and OTU2";
   }
 
+  identity SFP28 {
+    base TRANSCEIVER_FORM_FACTOR_TYPE;
+    description
+      "Small form-factor pluggable transceiver supporting up to
+      25 Gb/s signal";
+  }
+
+  identity SFP56 {
+    base TRANSCEIVER_FORM_FACTOR_TYPE;
+    description
+      "Small form-factor pluggable transceiver supporting up to
+      50 Gb/s signal";
+  }
+
+  identity SFP_DD {
+    base TRANSCEIVER_FORM_FACTOR_TYPE;
+    description
+      "SFP-DD electrical interfaces will employ 2 lanes that operate up to
+      25 Gbps NRZ modulation or 56 Gbps PAM4 modulation, providing
+      solutions up to 50 Gbps or 112 Gbps PAM4 aggregate";
+    reference "http://sfp-dd.com";
+  }
+
+  identity DSFP {
+    base TRANSCEIVER_FORM_FACTOR_TYPE;
+    description
+      "A transceiver implementing the DSFP Transceiver specification";
+    reference "https://dsfpmsa.org/";
+  }
+
   identity XFP {
     base TRANSCEIVER_FORM_FACTOR_TYPE;
     description
@@ -659,6 +919,13 @@ module openconfig-transport-types {
     description
       "10 Gigabit small form factor pluggable transceiver supporting
       10 GbE using a XAUI inerface and 4 data channels.";
+  }
+
+  identity OSFP {
+    base TRANSCEIVER_FORM_FACTOR_TYPE;
+    description
+      "Octal small form factor pluggable transceiver supporting
+      400 Gb/s.";
   }
 
   identity NON_PLUGGABLE {
@@ -696,6 +963,18 @@ module openconfig-transport-types {
     description
       "MPO (multi-fiber push-on/pull-off) type fiber connector
       1x12 fibers";
+  }
+
+  identity AOC_CONNECTOR {
+    base FIBER_CONNECTOR_TYPE;
+    description
+      "AOC (active optical cable) type fiber connector";
+  }
+
+  identity DAC_CONNECTOR {
+    base FIBER_CONNECTOR_TYPE;
+    description
+      "DAC (direct attach copper) type fiber connector";
   }
 
   identity ETHERNET_PMD_TYPE {
@@ -792,7 +1071,7 @@ module openconfig-transport-types {
     base ETHERNET_PMD_TYPE;
     description "Ethernet compliance code: ETH_100GBASE_LR4D";
   }
-	
+
   identity ETH_100GBASE_ER4 {
     base ETHERNET_PMD_TYPE;
     description "Ethernet compliance code: 100GBASE_ER4";
@@ -817,15 +1096,50 @@ module openconfig-transport-types {
     base ETHERNET_PMD_TYPE;
     description "Ethernet compliance code: 100GBASE_CR4";
   }
-  
+
+  identity ETH_100GBASE_LR {
+    base ETHERNET_PMD_TYPE;
+    description "Ethernet compliance code: 100GBASE_LR";
+  }
+
+  identity ETH_100GBASE_FR {
+    base ETHERNET_PMD_TYPE;
+    description "Ethernet compliance code: 100GBASE_FR";
+  }
+
+  identity ETH_100GBASE_DR {
+    base ETHERNET_PMD_TYPE;
+    description "Ethernet compliance code: 100GBASE_DR";
+  }
+
+  identity ETH_100GBASE_LR1 {
+    base ETHERNET_PMD_TYPE;
+    description "Ethernet compliance code: 100GBASE_LR1";
+  }
+
+  identity ETH_100GBASE_FR1 {
+    base ETHERNET_PMD_TYPE;
+    description "Ethernet compliance code: 100GBASE_FR1";
+  }
+
+  identity ETH_100GBASE_DR1 {
+    base ETHERNET_PMD_TYPE;
+    description "Alias for Ethernet compliance code: 100GBASE_DR";
+  }
+
   identity ETH_400GBASE_SR8 {
     base ETHERNET_PMD_TYPE;
     description "Ethernet compliance code: 400GBASE_SR8";
   }
-  
+
   identity ETH_400GBASE_DR4 {
     base ETHERNET_PMD_TYPE;
     description "Ethernet compliance code: 400GBASE_DR4";
+  }
+
+  identity ETH_400GBASE_LR4 {
+    base ETHERNET_PMD_TYPE;
+    description "Ethernet compliance code: 400GBASE_LR4";
   }
 
   identity ETH_400GBASE_FR4 {
@@ -836,12 +1150,17 @@ module openconfig-transport-types {
   identity ETH_400GBASE_LR8 {
     base ETHERNET_PMD_TYPE;
     description "Ethernet compliance code: 400GBASE_LR8";
-  }	
-  
+  }
+
   identity ETH_400GBASE_ZR {
     base ETHERNET_PMD_TYPE;
     description "Ethernet compliance code: 400GBASE_ZR";
-  }	  
+  }
+
+  identity ETH_400GMSA_PSM4 {
+    base ETHERNET_PMD_TYPE;
+    description "Ethernet compliance code: 400GMSA_PSM4";
+  }
 
   identity ETH_UNDEFINED {
     base ETHERNET_PMD_TYPE;
@@ -912,6 +1231,12 @@ module openconfig-transport-types {
       rounded bit rate.";
   }
 
+  identity TRIB_RATE_FLEX {
+    base TRIBUTARY_RATE_CLASS_TYPE;
+    description
+      "flexible tributary signal rate";
+  }
+
   identity TRIB_RATE_1G {
     base TRIBUTARY_RATE_CLASS_TYPE;
     description
@@ -966,10 +1291,22 @@ module openconfig-transport-types {
       "300G tributary signal rate";
   }
 
+  identity TRIB_RATE_350G {
+    base TRIBUTARY_RATE_CLASS_TYPE;
+    description
+      "350G tributary signal rate";
+  }
+
   identity TRIB_RATE_400G {
     base TRIBUTARY_RATE_CLASS_TYPE;
     description
       "400G tributary signal rate";
+  }
+
+  identity TRIB_RATE_450G {
+    base TRIBUTARY_RATE_CLASS_TYPE;
+    description
+      "450G tributary signal rate";
   }
 
   identity TRIB_RATE_500G {
@@ -978,10 +1315,22 @@ module openconfig-transport-types {
       "500G tributary signal rate";
   }
 
+  identity TRIB_RATE_550G {
+    base TRIBUTARY_RATE_CLASS_TYPE;
+    description
+      "550G tributary signal rate";
+  }
+
   identity TRIB_RATE_600G {
     base TRIBUTARY_RATE_CLASS_TYPE;
     description
       "600G tributary signal rate";
+  }
+
+  identity TRIB_RATE_650G {
+    base TRIBUTARY_RATE_CLASS_TYPE;
+    description
+      "650G tributary signal rate";
   }
 
   identity TRIB_RATE_700G {
@@ -990,10 +1339,22 @@ module openconfig-transport-types {
       "700G tributary signal rate";
   }
 
+  identity TRIB_RATE_750G {
+    base TRIBUTARY_RATE_CLASS_TYPE;
+    description
+      "750G tributary signal rate";
+  }
+
   identity TRIB_RATE_800G {
     base TRIBUTARY_RATE_CLASS_TYPE;
     description
       "800G tributary signal rate";
+  }
+
+  identity TRIB_RATE_850G {
+    base TRIBUTARY_RATE_CLASS_TYPE;
+    description
+      "850G tributary signal rate";
   }
 
   identity TRIB_RATE_900G {
@@ -1002,16 +1363,88 @@ module openconfig-transport-types {
       "900G tributary signal rate";
   }
 
+  identity TRIB_RATE_950G {
+    base TRIBUTARY_RATE_CLASS_TYPE;
+    description
+      "950G tributary signal rate";
+  }
+
   identity TRIB_RATE_1000G {
     base TRIBUTARY_RATE_CLASS_TYPE;
     description
       "1000G tributary signal rate";
   }
 
+  identity TRIB_RATE_1050G {
+    base TRIBUTARY_RATE_CLASS_TYPE;
+    description
+      "1050G tributary signal rate";
+  }
+
   identity TRIB_RATE_1100G {
     base TRIBUTARY_RATE_CLASS_TYPE;
     description
       "1100G tributary signal rate";
+  }
+
+  identity TRIB_RATE_1150G {
+    base TRIBUTARY_RATE_CLASS_TYPE;
+    description
+      "1150G tributary signal rate";
+  }
+
+  identity TRIB_RATE_1200G {
+    base TRIBUTARY_RATE_CLASS_TYPE;
+    description
+      "1200G tributary signal rate";
+  }
+
+  identity TRIB_RATE_1250G {
+    base TRIBUTARY_RATE_CLASS_TYPE;
+    description
+      "1250G tributary signal rate";
+  }
+
+  identity TRIB_RATE_1300G {
+    base TRIBUTARY_RATE_CLASS_TYPE;
+    description
+      "1300G tributary signal rate";
+  }
+
+  identity TRIB_RATE_1350G {
+    base TRIBUTARY_RATE_CLASS_TYPE;
+    description
+      "1350G tributary signal rate";
+  }
+
+  identity TRIB_RATE_1400G {
+    base TRIBUTARY_RATE_CLASS_TYPE;
+    description
+      "1400G tributary signal rate";
+  }
+
+  identity TRIB_RATE_1450G {
+    base TRIBUTARY_RATE_CLASS_TYPE;
+    description
+      "1450G tributary signal rate";
+  }
+
+  identity TRIB_RATE_1500G {
+    base TRIBUTARY_RATE_CLASS_TYPE;
+    description
+      "1500G tributary signal rate";
+  }
+
+  identity TRIB_RATE_1550G {
+    base TRIBUTARY_RATE_CLASS_TYPE;
+    description
+      "1550G tributary signal rate";
+  }
+
+  identity TRIB_RATE_1600G {
+    base TRIBUTARY_RATE_CLASS_TYPE;
+    description
+      "1600G tributary signal rate";
   }
 
   identity LOGICAL_ELEMENT_PROTOCOL_TYPE {
@@ -1117,4 +1550,70 @@ module openconfig-transport-types {
       transponder or muxponder).";
   }
 
+  identity CLIENT_MAPPING_MODE {
+    description
+      "Type definition for optical transport client mapping modes.";
+  }
+
+  identity MODE_1X100G {
+    base CLIENT_MAPPING_MODE;
+    description
+      "1 x 100G client mapping mode.";
+  }
+
+  identity MODE_1X200G {
+    base CLIENT_MAPPING_MODE;
+    description
+      "1 x 200G client mapping mode.";
+  }
+
+  identity MODE_1X400G {
+    base CLIENT_MAPPING_MODE;
+    description
+      "1 x 400G client mapping mode.";
+  }
+
+  identity MODE_2X100G {
+    base CLIENT_MAPPING_MODE;
+    description
+      "2 x 100G client mapping mode.";
+  }
+
+  identity MODE_2X200G {
+    base CLIENT_MAPPING_MODE;
+    description
+      "2 x 200G client mapping mode.";
+  }
+
+  identity MODE_3X100G {
+    base CLIENT_MAPPING_MODE;
+    description
+      "3 x 100G client mapping mode.";
+  }
+
+  identity MODE_4X100G {
+    base CLIENT_MAPPING_MODE;
+    description
+      "4 x 100G client mapping mode.";
+  }
+
+  identity TRANSCEIVER_MODULE_FUNCTIONAL_TYPE {
+    description
+      "Type definition for transceiver module functional types.";
+  }
+
+  identity TYPE_STANDARD_OPTIC {
+    base TRANSCEIVER_MODULE_FUNCTIONAL_TYPE;
+    description
+      "Standard optic using a grey wavelength (i.e. 1310, 1550, etc.)
+      and on-off-keying (OOK) modulation.";
+  }
+
+  identity TYPE_DIGITAL_COHERENT_OPTIC {
+    base TRANSCEIVER_MODULE_FUNCTIONAL_TYPE;
+    description
+      "Digital coherent module which transmits a phase / amplitude
+      modulated signal and uses a digital signal processor to receive
+      and decode the received signal.";
+  }
 }

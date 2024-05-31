@@ -265,6 +265,12 @@ module openconfig-platform-types {
       "A active optical flexible muxplexing/demuplexing component, such as wavelength selective switch MUX";
   }
 
+  identity RBMUX {
+    base OPENCONFIG_HARDWARE_COMPONENT;
+    description
+      "A multiplexing/demultiplexing optical component for red band signal (1528nm-1547nm) and blue band signal (1549.8nm-1568nm).";
+  }
+
 
   identity WSS {
     base OPENCONFIG_HARDWARE_COMPONENT;
@@ -272,6 +278,11 @@ module openconfig-platform-types {
       "The optical cross connection used for wavelength selective switch";
   }
 
+  identity ASE {
+    base OPENCONFIG_HARDWARE_COMPONENT;
+    description
+      "The ase module used for injection of ase noise in wss.";
+  }
 
   identity OLP {
     base OPENCONFIG_HARDWARE_COMPONENT;

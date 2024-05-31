@@ -348,7 +348,7 @@ module openconfig-terminal-device {
         enum LOOPBACK;
         enum TRANSPARENT;
       }
-      default TRANSPARENT;
+      //default TRANSPARENT;
     }
 
   }
@@ -1140,16 +1140,16 @@ module openconfig-terminal-device {
 
     leaf fast-switching-mode {
       type uint8;
-      default 0;
+      //default 0;
       description
         "Fast switching mode setting,
-        0: LH £¼ 2000km,
-        1: Region: Max transmission distance£¼ 120km, the difference between the work path and protection path £¼ 60km,
-        2: Region: Max transmission distance£¼ 120km, the difference between the work path and protection path £¼ 120km,
-        3: Region: Max transmission distance£¼ 200km, the difference between the work path and protection path £¼ 100km,
-        4: Region: Max transmission distance£¼ 200km, the difference between the work path and protection path £¼ 200km,
-        5: Metro: Max transmission distance£¼ 300km, the difference between the work path and protection path £¼ 150km,
-        6: Metro: Max transmission distance£¼ 300km, the difference between the work path and protection path £¼ 300km,
+        0: LH ï¼œ 2000km,
+        1: Region: Max transmission distanceï¼œ 120km, the difference between the work path and protection path ï¼œ 60km,
+        2: Region: Max transmission distanceï¼œ 120km, the difference between the work path and protection path ï¼œ 120km,
+        3: Region: Max transmission distanceï¼œ 200km, the difference between the work path and protection path ï¼œ 100km,
+        4: Region: Max transmission distanceï¼œ 200km, the difference between the work path and protection path ï¼œ 200km,
+        5: Metro: Max transmission distanceï¼œ 300km, the difference between the work path and protection path ï¼œ 150km,
+        6: Metro: Max transmission distanceï¼œ 300km, the difference between the work path and protection path ï¼œ 300km,
         default value = 0";
     }
 
@@ -1230,8 +1230,21 @@ module openconfig-terminal-device {
       uses oc-types:avg-min-max-instant-stats-precision2-dB;
     }
 
+    container carrier-frequency-offset {
+      description
+        "Carrier frequency offset in MHz with 1 decimal precision.
+        Values include the instantaneous, average, minimum, and
+        maximum statistics. If avg/min/max statistics are not supported,
+        the target is expected to just supply the instant value.";
+
+      reference "IA OIF-C-CMIS-01.1 Table 7";
+
+      uses oc-opt-types:avg-min-max-instant-stats-precision1-mhz;
+    }
+
     leaf laser-freq-offset {
       type oc-opt-types:frequency-type;
+      status deprecated;
       description
         "the value of LOFO in DSP, expressed in MHz, indicates the
          frequency offset between the signal and local oscillators";

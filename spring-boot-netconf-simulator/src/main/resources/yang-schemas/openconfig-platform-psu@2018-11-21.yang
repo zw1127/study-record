@@ -76,7 +76,7 @@ module openconfig-platform-psu {
     // TODO(aashaikh): May need to convert some of these to
     // interval statistics once decided on which leaves to include.
     leaf capacity {
-      type oc-types:ieeefloat32;
+      type string;
       units watts;
       description
         "Maximum power capacity of the power supply.";

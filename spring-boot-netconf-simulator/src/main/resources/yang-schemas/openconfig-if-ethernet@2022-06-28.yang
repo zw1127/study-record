@@ -25,12 +25,12 @@ module openconfig-if-ethernet {
     model for interface configuration and state.";
 
   oc-ext:openconfig-version "2.7.2";
-  
+
   revision "2022-06-28" {
     description
       "Fix when statements. Revised by Baidu.";
   }
-  
+
   revision "2020-12-01" {
     description
       "Add 400 Gbps Ethernet speed by Kuaishou and Baidu";
@@ -171,10 +171,20 @@ module openconfig-if-ethernet {
     base ETHERNET_SPEED;
     description "100 Gbps Ethernet";
   }
-  
+
   identity SPEED_400GB {
     base ETHERNET_SPEED;
     description "400 Gbps Ethernet";
+  }
+
+  identity SPEED_600GB {
+    base ETHERNET_SPEED;
+    description "600 Gbps Ethernet";
+  }
+
+  identity SPEED_800GB {
+    base ETHERNET_SPEED;
+    description "800 Gbps Ethernet";
   }
 
   identity SPEED_UNKNOWN {
@@ -347,7 +357,7 @@ module openconfig-if-ethernet {
       description
         "The number of received errored blocks. Error detection codes
         are capable of detecting whether one or more errors have
-        occurred in a given sequence of bits - the block. It is
+        occurred in a given sequence of bits ¨C the block. It is
         normally not possible to determine the exact number of errored
         bits within the block";
     }

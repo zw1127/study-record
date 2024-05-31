@@ -158,12 +158,24 @@ module openconfig-channel-monitor {
       description
         "Upper frequency of the specified PSD";
     }
-  
   }
+
 
   grouping media-channel-psd-state {
     description
       "Operational state data for the media channel PSD";
+
+    leaf lower-frequency {
+      type oc-opt-types:frequency-type;
+      description
+        "Lower frequency of the specified PSD";
+    }
+
+    leaf upper-frequency {
+      type oc-opt-types:frequency-type;
+      description
+        "Upper frequency of the specified PSD";
+    }
 
     leaf psd {
       type oc-types:ieeefloat32;
@@ -213,19 +225,15 @@ module openconfig-channel-monitor {
           "List of tuples describing the PSD distribution";
 
         leaf lower-frequency {
-          type leafref {
-            path "../config/lower-frequency";
-          }
+          type oc-opt-types:frequency-type;
           description
-            "Reference to the list key";
+            "Lower frequency of the specified PSD";
         }
 
         leaf upper-frequency {
-          type leafref {
-            path "../config/upper-frequency";
-          }
+          type oc-opt-types:frequency-type;
           description
-            "Reference to the list key";
+            "Upper frequency of the specified PSD";
         }
 
         container config {
@@ -243,14 +251,13 @@ module openconfig-channel-monitor {
           description
             "Operational state data for PSD";
 
-          uses media-channel-psd-config;
           uses media-channel-psd-state;
         }
       }
     container spectrum {
 
         config false;
-        
+
         description
           "Enclosing container for the spectrum raw data";
 
@@ -259,7 +266,7 @@ module openconfig-channel-monitor {
           description
             "the spectrum raw data";
         }
-      }      
+      }
     }
   }
 
@@ -357,7 +364,7 @@ module openconfig-channel-monitor {
         }
 
       }
-	default 75GHz;
+	    default 75GHz;
       description
         "OCM'S configuration for fixed grid or flex-grid";            
     }  

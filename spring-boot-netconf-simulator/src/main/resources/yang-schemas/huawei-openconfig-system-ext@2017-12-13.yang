@@ -1,0 +1,183 @@
+module huawei-openconfig-system-ext {
+  namespace "urn:huawei:yang:huawei-openconfig-system-ext";
+  prefix hw-oc-ext;
+
+  import openconfig-yang-types {
+    prefix oc-yang;
+  }
+
+  import openconfig-inet-types {
+    prefix oc-inet;
+  }
+
+  import openconfig-system {
+    prefix oc-sys;
+  }
+
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com
+     ";
+  description
+    "UTS NTP module.";
+
+  revision 2017-12-13 {
+    description
+      "Initial version";
+    reference
+      "Huawei private";
+  }
+
+  typedef uts-neid-type {
+    type string {
+      pattern "0x0{0,2}((0([1-9]|[a-f]))|(([1-9]|[a-e])([0-9]|[a-f]))|(f([0-9]|[a-e])))(((([0-9])|a)([0-9]|[a-f]){3})|(b([0-9]|[a-e])([0-9]|[a-f]){2})|(bf([0-9]|[a-e])([0-9]|[a-f])))";
+    }
+    description
+      "Uts neid type.";
+  }
+
+  typedef uts-ip-type {
+    type string {
+      pattern "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])";
+    }
+    description
+      "Uts ip type.";
+  }
+
+  grouping ntp-server-key-id {
+    description
+      "Adds the ID of the client and server keys.";
+    leaf key-id {
+      type uint16 {
+        range "0..1024";
+      }
+      description
+        "Integer identifier used by the client and server to designate a secret key";
+    }
+  }
+
+  grouping sys-dcn-config {
+    description
+      "Configuration data for DCN management port";
+    leaf neip {
+      type uts-ip-type;
+      description
+        "The system DCN management IP address";
+    }
+
+    leaf submask {
+      type uts-ip-type;
+      description
+        "The system DCN management IP submask";
+    }
+
+    leaf gateway {
+      type uts-ip-type;
+      description
+        "The system DCN gateway";
+    }
+
+    leaf neid {
+      type uts-neid-type;
+      description
+        "The system DCN net element identifier.";
+    }
+  }
+
+  augment "/oc-sys:system/oc-sys:ntp/oc-sys:servers/oc-sys:server/oc-sys:config" {
+    description
+      "Adds configuration data for ntp server.";
+    uses ntp-server-key-id;
+  }
+
+  augment "/oc-sys:system/oc-sys:ntp/oc-sys:servers/oc-sys:server/oc-sys:state" {
+    description
+      "Adds state data for ntp server.";
+    uses ntp-server-key-id;
+  }
+
+  augment "/oc-sys:system/oc-sys:ntp/oc-sys:state" {
+    description
+      "Adds state data to ntp.";
+    leaf status {
+      type enumeration {
+        enum "UNSYNCHRONIZED" {
+          description
+            "NE is UNSYNCHRONIZED with server";
+        }
+        enum "SYNCHRONIZED" {
+          description
+            "NE is SYNCHRONIZED with server";
+        }
+      }
+      description
+        "NE type enumeration.";
+    }
+  }
+
+  augment "/oc-sys:system" {
+    description
+      "The system DCN extension.";
+    container dcn {
+      description
+        "Container for DCN configuration and state";
+      container config {
+        description
+          "Container for system DCN configuration";
+        uses sys-dcn-config;
+      }
+
+      container state {
+        config false;
+        description
+          "Container for system DCN configuration";
+        uses sys-dcn-config;
+
+        leaf ne-macaddr {
+          type string {
+            pattern "[0-9a-fA-F]{2}(:[0-9a-fA-F]{2}){5}";
+          }
+          description
+            "The mac-address of DCN management port";
+        }
+
+        list ip-port {
+          key "portnum protocol-type task-name";
+          description
+            "List of ip ports";
+          leaf portnum {
+            type uint16;
+            description
+              "The TCP/UDP port number";
+          }
+
+          leaf protocol-type {
+            type string;
+            description
+              "Protocol-type.";
+          }
+
+          leaf task-name {
+            type string;
+            description
+              "The task name listening on the TCP/UDP port";
+          }
+
+          leaf enabled {
+            type boolean;
+            description
+              "The TCP/UDP port status.
+               if true, the port status is open;
+               if false, the port status is close";
+          }
+        }
+      }
+    }
+  }
+}
