@@ -50,7 +50,7 @@ public class JsonSchemaService {
             Resource resource = new ClassPathResource(JSON_SCHEMA_ROOT_PATH);
             Path path = FileSystems.getDefault().getPath(resource.getFile().getCanonicalPath());
 
-            JsonSchemaFactory schemaFactory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V7);
+            JsonSchemaFactory schemaFactory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V202012);
             Files.walkFileTree(path, new SimpleFileVisitor<>() {
                 @Override
                 public FileVisitResult visitFile(Path file,
