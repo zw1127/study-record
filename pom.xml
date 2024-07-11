@@ -23,6 +23,7 @@
         <module>leetcode</module>
         <module>jacoco-study</module>
         <module>mybatis-generator</module>
+        <module>odl-queue-notification</module>
     </modules>
 
 </project>

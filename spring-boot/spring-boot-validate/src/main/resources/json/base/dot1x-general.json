@@ -22,8 +22,6 @@
   "required": [
     "nodeId",
     "wridot1xPaeSystemAuthControl",
-    "wridot1xPaeSystemInterfaceAAAEnable",
-    "wridot1xPaeSystemAuthName",
-    "wridot1xPaeSystemAccountName"
+    "wridot1xPaeSystemInterfaceAAAEnable"
   ]
 }

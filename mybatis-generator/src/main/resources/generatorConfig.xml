@@ -48,19 +48,19 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="mqtt_ethif_entry_config" domainObjectName="MqttEthifEntryConfig"
+        <table tableName="ethif_storm_control_config" domainObjectName="EthifStormControlConfig"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
 
-        <table tableName="mqtt_ethif_entry_state" domainObjectName="MqttEthifEntryState"
+        <table tableName="ethif_storm_control_state" domainObjectName="EthifStormControlState"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
 
-        <table tableName="mqtt_vlan_if_config" domainObjectName="MqttVlanIfConfig"
+        <!--<table tableName="mqtt_vlan_if_config" domainObjectName="MqttVlanIfConfig"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
@@ -83,7 +83,7 @@
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
-
+-->
 <!--
         <table tableName="system_job_log" domainObjectName="SystemJobLog"
                enableCountByExample="false" enableUpdateByExample="false"
