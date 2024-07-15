@@ -12,7 +12,6 @@ import cn.javastudy.springboot.simulator.netconf.domain.DeviceUniqueInfo;
 import cn.javastudy.springboot.simulator.netconf.domain.Result;
 import cn.javastudy.springboot.simulator.netconf.domain.SimulateDeviceInfo;
 import cn.javastudy.springboot.simulator.netconf.exception.SimulateException;
-import cn.javastudy.springboot.simulator.netconf.monitoring.NetconfMonitoringOperationService;
 import cn.javastudy.springboot.simulator.netconf.monitoring.NetconfMonitoringOperationServiceFactory;
 import cn.javastudy.springboot.simulator.netconf.operate.InMemoryOperationServiceFactory;
 import cn.javastudy.springboot.simulator.netconf.properties.NetconfSimulatorProperties;
@@ -287,7 +286,7 @@ public class SimluateDeviceServiceImpl implements SimluateDeviceService {
         AggregatedNetconfOperationServiceFactory aggregatedFactory = new AggregatedNetconfOperationServiceFactory();
 
         NetconfMonitoringOperationServiceFactory monitoringServiceFactory =
-            new NetconfMonitoringOperationServiceFactory(new NetconfMonitoringOperationService(monitoringService));
+            new NetconfMonitoringOperationServiceFactory(monitoringService);
 
         InMemoryOperationServiceFactory operationServiceFactory =
             new InMemoryOperationServiceFactory(capabilities, schemaContextService, domDataBroker);
