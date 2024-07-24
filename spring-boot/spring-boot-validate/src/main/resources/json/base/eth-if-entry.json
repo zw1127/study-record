@@ -6,7 +6,7 @@
       "type": "string",
       "minLength": 1
     },
-    "ethIfIndex": {
+    "ethifIndex": {
       "type": "string",
       "pattern": "^\\d+$"
     },
@@ -24,11 +24,17 @@
       ]
     },
     "ifMdi": {
-      "type": "string",
-      "enum": [
-        "auto",
-        "across",
-        "normal"
+      "anyOf": [
+        {
+          "enum": [
+            "auto",
+            "across",
+            "normal"
+          ]
+        },
+        {
+          "type": "null"
+        }
       ]
     },
     "ifMtu": {
@@ -45,7 +51,10 @@
       "maximum": 7
     },
     "ethifFlowCtrlEnable": {
-      "type": "boolean"
+      "type": [
+        "boolean",
+        "null"
+      ]
     },
     "ifFlowCtrlAutoNegotiation": {
       "type": "boolean"
@@ -53,7 +62,7 @@
   },
   "required": [
     "nodeId",
-    "ethIfIndex",
+    "ethifIndex",
     "ethifDescr",
     "ethifAdminStatus",
     "ifMdi",
