@@ -1,8 +1,8 @@
 package cn.javastudy.springboot.jasypt;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import org.jasypt.encryption.StringEncryptor;
 import org.junit.Test;
 import org.junit.runner.RunWith;

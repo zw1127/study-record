@@ -9,7 +9,6 @@ package cn.javastudy.concepts;
 
 import static java.util.Objects.requireNonNull;
 
-import com.google.common.annotations.Beta;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.MoreObjects.ToStringHelper;
 import org.eclipse.jdt.annotation.NonNull;

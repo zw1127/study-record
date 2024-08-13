@@ -1,7 +1,7 @@
 package cn.javastudy.springboot.quartz.job;
 
+import jakarta.annotation.Resource;
 import java.util.concurrent.atomic.AtomicInteger;
-import javax.annotation.Resource;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.slf4j.Logger;

@@ -3,11 +3,9 @@ package cn.javastudy.springboot.properties;
 import java.util.Date;
 import java.util.StringJoiner;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.ConstructorBinding;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@ConstructorBinding
 @ConfigurationProperties(prefix = "user")
 public class UserProperties {
 

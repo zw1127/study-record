@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Sets;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.util.Set;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

@@ -5,10 +5,10 @@ import cn.javastudy.springboot.aop.log.domain.SysLog;
 import cn.javastudy.springboot.aop.log.mapper.SysLogMapper;
 import cn.javastudy.springboot.aop.log.util.HttpContextUtils;
 import cn.javastudy.springboot.aop.log.util.IPUtils;
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.util.Date;
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -16,7 +16,6 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.stereotype.Component;
 
 @Aspect
@@ -63,16 +62,16 @@ public class LogAspect {
         sysLog.setMethod(className + "." + methodName + "()");
         // 请求的方法参数值
         Object[] args = joinPoint.getArgs();
-        // 请求的方法参数名称
-        LocalVariableTableParameterNameDiscoverer u = new LocalVariableTableParameterNameDiscoverer();
-        String[] paramNames = u.getParameterNames(method);
-        if (args != null && paramNames != null) {
-            String params = "";
-            for (int i = 0; i < args.length; i++) {
-                params += "  " + paramNames[i] + ": " + args[i];
-            }
-            sysLog.setParams(params);
-        }
+//        // 请求的方法参数名称
+//        LocalVariableTableParameterNameDiscoverer u = new LocalVariableTableParameterNameDiscoverer();
+//        String[] paramNames = u.getParameterNames(method);
+//        if (args != null && paramNames != null) {
+//            String params = "";
+//            for (int i = 0; i < args.length; i++) {
+//                params += "  " + paramNames[i] + ": " + args[i];
+//            }
+//            sysLog.setParams(params);
+//        }
         // 获取request
         HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
         // 设置IP地址

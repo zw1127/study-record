@@ -1,8 +1,8 @@
 package cn.javastudy.springboot.aspect;
 
+import jakarta.annotation.Resource;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

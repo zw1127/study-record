@@ -6,7 +6,6 @@ import cn.javastudy.disruptor.consumer.service.OrderEventProducerWithTranslator;
 import com.lmax.disruptor.dsl.Disruptor;
 import com.lmax.disruptor.util.DaemonThreadFactory;
 import javax.annotation.PostConstruct;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

@@ -7,7 +7,7 @@ import cn.javastudy.springboot.web.servlet.RegisterServlet;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import javax.servlet.ServletRegistration;
+import jakarta.servlet.ServletRegistration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;

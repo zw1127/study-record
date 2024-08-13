@@ -2,6 +2,7 @@ package cn.javastudy.springboot.web.config;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
+import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,12 +16,16 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.authorizeRequests()
-            .antMatchers("/").permitAll()
-            .antMatchers("/test/**").hasRole("TEST")
-            .and().logout().logoutSuccessUrl("/")
-            .and().formLogin(withDefaults())
-            .build();
+        return http.authorizeHttpRequests((authorize) -> {
+                authorize.requestMatchers("/").permitAll()
+                    .requestMatchers(EndpointRequest.to("health")).hasRole("ENDPOINT_ADMIN")
+                    .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll();
+            })
+            //                .csrf(csrf -> csrf.disable())
+            .csrf(csrf -> csrf.ignoringRequestMatchers(EndpointRequest.toAnyEndpoint()))
+            .formLogin(withDefaults())
+            .logout().logoutSuccessUrl("/")
+            .and().build();
     }
 
     @Bean

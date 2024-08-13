@@ -1,6 +1,5 @@
 package cn.javastudy.springboot.validate.domain;
 
-import javax.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data

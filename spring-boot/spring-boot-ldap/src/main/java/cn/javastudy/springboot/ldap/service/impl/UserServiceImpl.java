@@ -3,13 +3,10 @@ package cn.javastudy.springboot.ldap.service.impl;
 import cn.javastudy.springboot.ldap.domain.Person;
 import cn.javastudy.springboot.ldap.repo.PersonRepository;
 import cn.javastudy.springboot.ldap.service.UserService;
+import jakarta.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Resource;
 import javax.naming.Name;
-import javax.naming.ldap.LdapName;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ldap.support.LdapNameBuilder;
 import org.springframework.ldap.support.LdapUtils;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
 package cn.javastudy.springboot.mqtt;
 
 import cn.javastudy.springboot.mqtt.configuration.MqttProducer;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

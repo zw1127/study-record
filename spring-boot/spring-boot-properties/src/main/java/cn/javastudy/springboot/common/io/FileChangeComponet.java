@@ -1,7 +1,7 @@
 package cn.javastudy.springboot.common.io;
 
+import jakarta.annotation.PostConstruct;
 import java.io.File;
-import javax.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 

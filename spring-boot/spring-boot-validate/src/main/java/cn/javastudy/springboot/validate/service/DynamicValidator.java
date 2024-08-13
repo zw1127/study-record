@@ -2,15 +2,14 @@ package cn.javastudy.springboot.validate.service;
 
 import cn.javastudy.springboot.validate.config.ValidationRulesConfig;
 import cn.javastudy.springboot.validate.domain.ValidationRule;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ValidationException;
+import jakarta.validation.Validator;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 import java.util.List;
 import java.util.Set;
-import javax.validation.ConstraintViolation;
-import javax.validation.ValidationException;
-import javax.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -52,7 +51,7 @@ public class DynamicValidator {
             String annotationName = parts[0];
 
             // Creating an instance of the annotation class
-            return  (Class<? extends Annotation>) Class.forName(annotationName);
+            return (Class<? extends Annotation>) Class.forName(annotationName);
 
             // If there are attributes specified
         } catch (Exception e) {

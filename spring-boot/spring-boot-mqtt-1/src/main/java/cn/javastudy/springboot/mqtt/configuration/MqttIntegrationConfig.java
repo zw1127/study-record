@@ -3,7 +3,6 @@ package cn.javastudy.springboot.mqtt.configuration;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.springframework.context.annotation.Bean;
 import org.springframework.integration.dsl.IntegrationFlow;
-import org.springframework.integration.dsl.IntegrationFlows;
 import org.springframework.integration.dsl.Pollers;
 import org.springframework.integration.endpoint.MessageProducerSupport;
 import org.springframework.integration.handler.LoggingHandler;
@@ -33,7 +32,7 @@ public class MqttIntegrationConfig {
 
     @Bean
     public IntegrationFlow mqttOutFlow() {
-        return IntegrationFlows.from(CharacterStreamReadingMessageSource.stdin(),
+        return IntegrationFlow.from(CharacterStreamReadingMessageSource.stdin(),
                 e -> e.poller(Pollers.fixedDelay(1000)))
             .transform(p -> p + " sent to MQTT")
             .handle(mqttOutbound())
@@ -52,7 +51,7 @@ public class MqttIntegrationConfig {
 
     @Bean
     public IntegrationFlow mqttInFlow() {
-        return IntegrationFlows.from(mqttInbound())
+        return IntegrationFlow.from(mqttInbound())
             .transform(p -> p + ", received from MQTT")
             .handle(logger())
             .get();

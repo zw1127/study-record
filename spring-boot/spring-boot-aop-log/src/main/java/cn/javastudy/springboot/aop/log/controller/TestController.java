@@ -3,8 +3,8 @@ package cn.javastudy.springboot.aop.log.controller;
 import cn.javastudy.springboot.aop.log.annotation.Log;
 import cn.javastudy.springboot.aop.log.domain.SysLog;
 import cn.javastudy.springboot.aop.log.mapper.SysLogMapper;
+import jakarta.annotation.Resource;
 import java.util.List;
-import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

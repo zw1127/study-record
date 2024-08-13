@@ -46,7 +46,7 @@ public class MqttInboundConfiguration {
 
         adapter.setCompletionTimeout(60000);
         adapter.setConverter(new DefaultPahoMessageConverter());
-        adapter.setRecoveryInterval(10000);
+//        adapter.setRecoveryInterval(10000);
         adapter.setQos(0);
         adapter.setOutputChannel(mqttInBoundChannel());
         return adapter;

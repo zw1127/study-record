@@ -4,9 +4,9 @@ import static cn.javastudy.springboot.snmp.utils.SnmpConstans.DEFAULT_LISTENER_P
 import static cn.javastudy.springboot.snmp.utils.SnmpConstans.DEFAULT_POOL_SIZE;
 
 import cn.javastudy.springboot.snmp.configuration.SnmpProperties;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Resource;
 import java.io.IOException;
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.snmp4j.CommandResponder;
@@ -36,7 +36,6 @@ import org.snmp4j.smi.Address;
 import org.snmp4j.smi.GenericAddress;
 import org.snmp4j.smi.OctetString;
 import org.snmp4j.smi.UdpAddress;
-import org.snmp4j.transport.DefaultTcpTransportMapping;
 import org.snmp4j.transport.DefaultUdpTransportMapping;
 import org.snmp4j.util.MultiThreadedMessageDispatcher;
 import org.snmp4j.util.ThreadPool;
