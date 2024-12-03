@@ -14,6 +14,11 @@ public class MaxTest {
         String s = "abcdddeeeeaabbbcd";
 //        String s = "aaa";
         System.out.println(largeGroupPositions(s));
+        Long value = 4294967297L;
+        System.out.println(value.intValue());
+//        System.out.println(Integer.toUnsignedLong((int) value));
+        System.out.println(((long) -1) & 0xFFFFFFFFL);
+        System.out.println((int) (value & 0xFFFFFFFFL));
     }
 
     public static int getMax(int a, int b) {
