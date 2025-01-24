@@ -27,3 +27,9 @@ SHOW VARIABLES LIKE "general_log%";
 SHOW PROCESSLIST;
 ```
 
+### 4、SQL执行计划分析的时候，需要注意的东西
+下面是一次explain返回一条SQL语句的执行计划内容：
+```sql
+
+```
+

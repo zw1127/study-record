@@ -14,7 +14,9 @@ public class BinaryTreeTraversalStack {
         head.right.left = new TreeNode(6);
         head.right.right = new TreeNode(7);
 
-        print(head);
+//        print(head);
+
+        test1();
     }
 
     //递归遍历
@@ -30,6 +32,44 @@ public class BinaryTreeTraversalStack {
         postOrder(head);
         System.out.println();
         System.out.println("后序遍历单栈版");
+    }
+
+    private static void test1() {
+        // 90, 17, 83, 24, 85, 71
+        TreeNode head = new TreeNode(90);
+        head.left = new TreeNode(17);
+        head.left.right = new TreeNode(83);
+        head.left.right.left = new TreeNode(24);
+        head.left.right.right = new TreeNode(85);
+        head.left.right.right.left = new TreeNode(71);
+
+        //先序遍历
+        preOrder(head);
+
+        System.out.println("中序遍历一下，看看是否是有序的");
+        //中序遍历一下，看看是否是有序的
+        inOrder(head);
+
+        System.out.println();
+        System.out.println(isValidBST(head));
+    }
+
+    public static boolean isValidBST(TreeNode root) {
+        return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+
+    public static boolean isValidBST(TreeNode node, long min, long max) {
+        // 如果节点为空，返回true，因为空树也是BST
+        if (node == null) {
+            return true;
+        }
+
+        // 如果当前节点的值不满足BST的条件，返回false
+        if (node.val <= min || node.val >= max) {
+            return false;
+        }
+        // 递归检查左子树和右子树，更新min和max的范围
+        return isValidBST(node.left, min, node.val) && isValidBST(node.right, node.val, max);
     }
 
     //先序遍历：中 -> 左 -> 右
