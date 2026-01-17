@@ -1,0 +1,76 @@
+module openconfig-transport-performance-types {
+
+  yang-version "1";
+
+  // namespace
+  namespace "http://openconfig.net/yang/transport-performance-types";
+
+  prefix "oc-opt-pm-types";
+
+  // imports
+  import openconfig-types { prefix "oc-types"; }
+  import openconfig-yang-types { prefix "oc-yang"; }
+
+
+  // meta
+  organization "private";
+
+
+  description 
+    "This module contains type definitions for 
+    openconfig-transport-performance module.";
+
+  revision "2022-06-27" {
+    description "initial resivion";
+  }
+  
+  // Type definitions
+
+  typedef pm-point-type {
+    type enumeration {
+      enum chassis { description "pm point is chassis";}
+      enum card { description "pm point is card";}
+      enum port { description "pm point is port";}
+      enum transceiver { description "pm point is transceiver";}
+      enum optical-channel { description "pm point is optical channel";}
+      enum physical-channel { description "pm point is physical channel";}
+      enum aps { description "pm point is aps";}
+      enum amplifier { description "pm point is amplifier";}
+      enum otn { description "pm point is otn";}
+      enum ethernet { description "pm point is ethernet";}
+      enum interface { description "pm point is interface"; }
+    }
+    description 
+    "pm point type";
+  }
+
+  typedef pm-period-type {
+    type enumeration {
+      enum 15min { 
+        description "15min pm data";
+      }
+      enum 24h { 
+        description "24h pm data";
+      }
+      enum untimed {
+        description "digital counters pm data";
+      }
+    }
+    description 
+      "granularity of pm bins";
+  }
+
+  typedef pm-data-value-type {
+    type union {
+      type uint32;
+      type uint64;
+      type oc-yang:counter64;
+      type oc-types:timeticks64;
+      type decimal64 {
+        fraction-digits 18;
+      }
+      type string;
+    }
+  }
+  
+}

@@ -17,7 +17,9 @@
         </commentGenerator>
 
         <!--数据库链接URL，用户名、密码 -->
-        <jdbcConnection driverClass="org.mariadb.jdbc.Driver" connectionURL="${jdbc.url}" userId="${jdbc.username}"
+<!--        <jdbcConnection driverClass="org.mariadb.jdbc.Driver" connectionURL="${jdbc.url}" userId="${jdbc.username}"-->
+<!--                        password="${jdbc.password}">-->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver" connectionURL="${jdbc.url}" userId="${jdbc.username}"
                         password="${jdbc.password}">
             <property name="useInformationSchema" value="true"/>
         </jdbcConnection>
@@ -48,17 +50,27 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="ethif_storm_control_config" domainObjectName="EthifStormControlConfig"
+        <table tableName="shop" domainObjectName="Shop"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="staff" domainObjectName="Staff"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="orders" domainObjectName="Orders"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
 
-        <table tableName="ethif_storm_control_state" domainObjectName="EthifStormControlState"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
+        <!--   <table tableName="ethif_storm_control_state" domainObjectName="EthifStormControlState"
+                  enableCountByExample="false" enableUpdateByExample="false"
+                  enableDeleteByExample="false" enableSelectByExample="false"
+                  selectByExampleQueryId="false">
+           </table>-->
 
         <!--<table tableName="mqtt_vlan_if_config" domainObjectName="MqttVlanIfConfig"
                enableCountByExample="false" enableUpdateByExample="false"
@@ -84,13 +96,13 @@
                selectByExampleQueryId="false">
         </table>
 -->
-<!--
-        <table tableName="system_job_log" domainObjectName="SystemJobLog"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
--->
+        <!--
+                <table tableName="system_job_log" domainObjectName="SystemJobLog"
+                       enableCountByExample="false" enableUpdateByExample="false"
+                       enableDeleteByExample="false" enableSelectByExample="false"
+                       selectByExampleQueryId="false">
+                </table>
+        -->
 
         <!--        <table tableName="user" domainObjectName="User"-->
         <!--               enableCountByExample="false" enableUpdateByExample="false"-->

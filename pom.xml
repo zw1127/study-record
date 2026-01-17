@@ -26,6 +26,9 @@
         <module>mybatis-generator</module>
 <!--        <module>odl-queue-notification</module>-->
         <module>spring-boot-netconf-simulator</module>
+        <module>spring-boot-netconf-client</module>
+        <module>spring-boot-ratelimit</module>
+        <module>spring-boot-demo</module>
     </modules>
 
 </project>

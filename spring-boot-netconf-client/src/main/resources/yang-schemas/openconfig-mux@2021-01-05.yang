@@ -1,0 +1,198 @@
+module openconfig-mux {
+
+  yang-version "1";
+
+  // namespace
+  namespace "http://openconfig.net/yang/mux";
+
+  prefix "oc-mux";
+
+  import openconfig-platform { prefix oc-platform; }
+  import openconfig-extensions { prefix oc-ext; }
+  import openconfig-transport-types { prefix oc-opt-types; }
+
+  // meta
+  organization "OpenConfig working group";
+
+  contact
+    "OpenConfig working group
+    www.openconfig.net";
+
+  description
+    "This model describes configuration and operational state data
+    for variable mux, deployed as part of a transport
+    line system.";
+
+  oc-ext:openconfig-version "0.2.0";
+
+  revision "2021-01-05" {
+    description
+      "Fix the bug for voa-attenuation";
+    reference "0.2.0";
+  }
+
+  revision "2020-11-14" {
+    description
+      "Initial release";
+    reference "0.1.0";
+  }
+
+  // extension statements
+
+  // feature statements
+
+  // identity statements
+
+  // grouping statements
+
+  grouping mux-config {
+    description
+      "Configuration data for muxs";
+
+    leaf name {
+      type leafref {
+        path "/oc-platform:components/oc-platform:component/"
+                 + "oc-platform:name";
+      }
+      description
+        "Reference to the component name (in the platform model)
+        corresponding to this mux in the device";
+    }
+  }
+
+  grouping mux-state {
+    description
+      "Operational state data for mux";
+
+    leaf attenuation-enable {
+      type boolean;
+      description
+        "True indicates that attenuations are supported, false indicates
+        that attenuations are not supported.";
+    }
+  }
+
+  grouping mux-ports-config {
+    description
+      "Configuration data for mux ports";
+
+    leaf voa-attenuation {
+      type decimal64 {
+        fraction-digits 2;
+        range 0..max;
+      }
+      units dB;
+      description
+        "Attenuation of the variable optical attenuator
+        associated with the port in increments of 0.01 dB.";
+    }
+  }
+
+  grouping mux-ports-state {
+    description
+      "Operational state data for mux ports";
+
+    leaf lower-frequency {
+      type oc-opt-types:frequency-type;
+      description
+        "Lower frequency of the specified PSD";
+    }
+
+    leaf upper-frequency {
+      type oc-opt-types:frequency-type;
+      description
+        "Upper frequency of the specified PSD";
+    }
+  }
+
+  grouping mux-ports {
+    description
+      "Top level grouping for mux ports";
+
+    list port {
+      key "name";
+      description
+        "Container for information related to mux port";
+
+      leaf name {
+        type leafref {
+          path "/oc-platform:components/oc-platform:component/" +
+            "oc-platform:name";
+        }
+        description
+          "Reference to system-supplied name of the port on the mux.";
+      }
+
+      container config {
+        description
+          "Configuration data for the mux ports";
+
+        uses mux-ports-config;
+      }
+
+      container state {
+        
+        config false;
+
+        description
+          "Operational state data for the mux ports";
+
+        uses mux-ports-config;
+        uses mux-ports-state;
+      }
+    }
+  }
+
+
+  grouping mux-top {
+    description
+      "Top-level grouping for mux data";
+
+    container muxs {
+      description
+        "Enclosing container for list of mux";
+
+      list mux {
+        key "name";
+        description
+          "List of variable mux present in the device";
+
+        leaf name {
+          type leafref {
+            path "../config/name";
+          }
+          description
+            "Reference to the name of the mux";
+        }
+
+        container config {
+          description
+            "Configuration data for the mux";
+
+          uses mux-config;
+        }
+
+        container state {
+
+          config false;
+
+          description
+            "Operational state data for the mux";
+
+          uses mux-config;
+          uses mux-state;
+        }
+
+        container ports {
+          description
+          "Top level grouping for mux ports";
+          uses mux-ports;
+        }
+      }
+    }  
+  }
+
+  // data definition statements
+  uses mux-top;
+
+}

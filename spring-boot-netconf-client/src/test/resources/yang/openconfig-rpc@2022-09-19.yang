@@ -1,0 +1,955 @@
+module openconfig-rpc {
+
+  yang-version "1";
+
+    // namespace
+  namespace "http://openconfig.net/yang/rpc";
+
+  prefix "oc-rpc";
+
+  // import 
+  import openconfig-types { prefix oc-types; }
+  import openconfig-yang-types { prefix oc-yang; }
+  import openconfig-platform { prefix oc-platform; }
+  import openconfig-extensions { prefix oc-ext; }
+
+
+  // meta
+  organization "private";
+
+  description
+    "This YANG module contains all RPCs for OLS systems.
+       This module includes all RPCs usable by NETCONF.";
+  
+  oc-ext:openconfig-version "0.4.0";
+
+  revision "2022-09-19" {
+    description
+      "Fix the position of new enums in pm-parameter-type
+       and pm-point-type.";
+  }
+
+  revision "2022-06-27" {
+    description
+      "Add pm data for interfaces";
+  }
+
+  revision "2021-08-16" {
+    description
+      "Add clear-counter RPC by Kuaishou";
+    reference "0.5.0";
+  }
+
+  revision "2021-08-04" {
+    description
+      "Add change-password RPC by Baidu";
+  }
+
+  revision "2020-11-16" {
+    description
+      "Revised By Baidu and Kuaishou";
+  }
+
+  revision "2019-04-30" {
+    description
+      "Initial release version";
+    reference "0.1.0";
+  }
+
+  // typedef statements
+
+  typedef action-result {
+    type enumeration {
+      enum SUCCESS {
+        description
+        "The RPC action is success";
+      }
+      enum FAIL {
+        description
+        "The RPC action is fail";
+      }
+    }
+  }
+
+  typedef pm-parameter-type {
+    type enumeration {
+      enum output-power-instant { description "general pm parameter for optical channel, optical port, transceiver, physical channel, includes instant only"; }
+      enum input-power-instant { description "general pm parameter for optical channel, optical port, transceiver, physical channel, includes instant only"; }
+      enum laser-bias-current-instant { description "general pm parameter for optical channel, optical port, transceiver, physical channel, includes instant only";}
+      enum tec-current-instant { description "general pm parameter for transceiver, includes instant only"; }
+      enum temperature-instant { description "general pm parameter for component, includes instant only"; }
+      enum chromatic-dispersion-instant { description "pm parameter for optical channel, includes instant only"; }
+      enum polarization-mode-dispersion-instant { description "pm parameter for optical channel, includes instant only"; }
+      enum second-order-polarization-mode-dispersion-instant { description "pm parameter for optical channel, includes instant only"; }
+      enum polarization-dependent-loss-instant { description "pm parameter for optical channel, includes instant only"; }
+      enum amplifier-input-power-total-instant { description "pm parameter for amplifer, includes instant only"; }
+      enum amplifier-output-power-total-instant { description "pm parameter for amplifer, includes instant only"; }
+      enum amplifier-input-power-c-band-instant { description "pm parameter for amplifer, includes instant only"; }
+      enum amplifier-output-power-c-band-instant{ description "pm parameter for amplifer, includes instant only"; }
+      enum line-primary-in-power-instant { description "optical power of line primary in port for optical line protection, includes instant only"; }
+      enum line-primary-out-power-instant { description "optical power of line primary out port for optical line protection, includes instant only"; }
+      enum line-secondary-in-power-instant { description "optical power of line secondary in port for optical line protection, includes instant only"; }
+      enum line-secondary-out-power-instant { description "optical power of line secondary out port for optical line protection, includes instant only"; }
+      enum common-in-power-instant { description "optical power of common in port for optical line protection, includes instant only"; }
+      enum common-output-power-instant { description "optical power of common output port for optical line protection, includes instant only"; }
+      enum errored-seconds-instant { description "pm for terminal-device, includes instant only"; }
+      enum unavailable-seconds-instant { description "pm for terminal-device, includes instant only"; }
+      enum pre-fec-ber-instant { description "pm for terminal-device, includes instant only"; }
+      enum post-fec-ber-instant { description "pm for terminal-device, includes instant only"; }
+      enum q-value-instant { description "pm for terminal-device, includes instant only"; }
+      enum esnr-instant { description "pm for terminal-device, includes instant only"; }
+      enum in-crc-errors-instant { description "pm for terminal-device, includes instant only"; }
+      enum out-crc-errors-instant { description "pm for terminal-device, includes instant only"; }
+      enum osnr-instant { description "Optical signal noise ratio, includes instant only"; }
+
+      enum output-power-max { description "general pm parameter for optical channel, optical port, transceiver, physical channel, includes maximum only"; }
+      enum input-power-max { description "general pm parameter for optical channel, optical port, transceiver, physical channel, includes maximum only"; }
+      enum laser-bias-current-max { description "general pm parameter for optical channel, optical port, transceiver, physical channel, includes maximum only";}
+      enum tec-current-max { description "general pm parameter for transceiver, includes maximum only"; }
+      enum temperature-max { description "general pm parameter for component, includes maximum only"; }
+      enum chromatic-dispersion-max { description "pm parameter for optical channel, includes maximum only"; }
+      enum polarization-mode-dispersion-max { description "pm parameter for optical channel, includes maximum only"; }
+      enum second-order-polarization-mode-dispersion-max { description "pm parameter for optical channel, includes maximum only"; }
+      enum polarization-dependent-loss-max { description "pm parameter for optical channel, includes maximum only"; }
+      enum amplifier-input-power-total-max { description "pm parameter for amplifer, includes maximum only"; }
+      enum amplifier-output-power-total-max { description "pm parameter for amplifer, includes maximum only"; }
+      enum amplifier-input-power-c-band-max { description "pm parameter for amplifer, includes maximum only"; }
+      enum amplifier-output-power-c-band-max { description "pm parameter for amplifer, includes maximum only"; }
+      enum line-primary-in-power-max { description "optical power of line primary in port for optical line protection, includes maximum only"; }
+      enum line-primary-out-power-max { description "optical power of line primary out port for optical line protection, includes maximum only"; }
+      enum line-secondary-in-power-max { description "optical power of line secondary in port for optical line protection, includes maximum only"; }
+      enum line-secondary-out-power-max { description "optical power of line secondary out port for optical line protection, includes maximum only"; }
+      enum common-in-power-max { description "optical power of common in port for optical line protection, includes maximum only"; }
+      enum common-output-power-max { description "optical power of common output port for optical line protection, includes maximum only"; }
+      enum pre-fec-ber-max { description "pm for terminal-device, includes maximum only"; }
+      enum post-fec-ber-max { description "pm for terminal-device, includes maximum only"; }
+      enum q-value-max { description "pm for terminal-device, includes maximum only"; }
+      enum esnr-max { description "pm for terminal-device, includes maximum only"; }
+
+      enum output-power-min { description "general pm parameter for optical channel, optical port, transceiver, physical channel, includes minimum only"; }
+      enum input-power-min { description "general pm parameter for optical channel, optical port, transceiver, physical channel, includes minimum only"; }
+      enum laser-bias-current-min { description "general pm parameter for optical channel, optical port, transceiver, physical channel, includes minimum only";}
+      enum tec-current-min { description "general pm parameter for transceiver, includes minimum only"; }
+      enum temperature-min { description "general pm parameter for component, includes minimum only"; }
+      enum chromatic-dispersion-min { description "pm parameter for optical channel, includes minimum only"; }
+      enum polarization-mode-dispersion-min { description "pm parameter for optical channel, includes minimum only"; }
+      enum second-order-polarization-mode-dispersion-min { description "pm parameter for optical channel, includes minimum only"; }
+      enum polarization-dependent-loss-min { description "pm parameter for optical channel, includes minimum only"; }
+      enum amplifier-input-power-total-min { description "pm parameter for amplifer, includes minimum only"; }
+      enum amplifier-output-power-total-min { description "pm parameter for amplifer, includes minimum only"; }
+      enum amplifier-input-power-c-band-min { description "pm parameter for amplifer, includes minimum only"; }
+      enum amplifier-output-power-c-band-min { description "pm parameter for amplifer, includes minimum only"; }
+      enum line-primary-in-power-min { description "optical power of line primary in port for optical line protection, includes minimum only"; }
+      enum line-primary-out-power-min { description "optical power of line primary out port for optical line protection, includes minimum only"; }
+      enum line-secondary-in-power-min { description "optical power of line secondary in port for optical line protection, includes minimum only"; }
+      enum line-secondary-out-power-min { description "optical power of line secondary out port for optical line protection, includes minimum only"; }
+      enum common-in-power-min { description "optical power of common in port for optical line protection, includes minimum only"; }
+      enum common-output-power-min { description "optical power of common output port for optical line protection, includes minimum only"; }
+      enum pre-fec-ber-min { description "pm for terminal-device, includes minimum only"; }
+      enum post-fec-ber-min { description "pm for terminal-device, includes minimum only"; }
+      enum q-value-min { description "pm for terminal-device, includes minimum only"; }
+      enum esnr-min { description "pm for terminal-device, includes minimum only"; }
+
+      enum all { description "all of pm parameter type"; }
+
+      enum otn-delay-instant { description "pm for terminal-device, includes instant only"; }
+      enum in-pkts-instant { description "pm for interface, includes instant only"; }
+      enum out-pkts-instant { description "pm for interface, includes instant only"; }
+      enum in-octets-instant { description "pm for interface, includes instant only"; }
+      enum out-octets-instant { description "pm for interface, includes instant only"; }
+    }
+  }
+
+  typedef common-file-type {
+    type enumeration  {
+      enum database  {
+        description
+        "the file is database";
+      }
+      enum image {
+        description
+        "the file is image";
+      }
+      enum image-database {
+        description
+        "the file is image and database";
+      }
+      enum certificate {
+        description
+        "the file is certificate";
+      }
+      enum license {
+        description
+        "the file is license";
+      }
+      enum otdr {
+        description
+        "the file is otdr";
+      }
+      enum ocm {
+        description
+        "the file is ocm";
+      }
+    }
+  }
+
+
+  // grouping statements ( )
+
+  grouping sftp-username-password {
+    description
+      "The username and password for file transport via sftp";
+
+      leaf username {
+        type string;
+        mandatory true;
+        description
+          "the username for uploading file";
+      }
+
+      leaf password {
+        type string;
+        mandatory true;
+        description
+          "the password for uploading file";
+      }
+  }
+
+
+
+
+  // rpc statements
+
+  rpc reboot {
+    description
+       "Reboot the specific component, i.e. card, transceiver";
+      input {
+        leaf component-name {
+          type leafref {
+            path "/oc-platform:components/oc-platform:component/" +
+             "oc-platform:name";
+          }
+          description
+             "target reboot components";
+        }
+
+        leaf reboot-type {
+          type enumeration {
+            enum warm {
+              description "warm reboot";
+            }
+            enum cold {
+              description "cold reboot";
+            }
+          }
+          description
+            "Reboot type";
+        }
+      }
+      output {
+        leaf reboot-result {
+          type action-result;
+          description
+            "Result of the reboot operation";
+        }
+      }
+  }
+
+  rpc download {
+    description
+       "this RPC send file from NMS to the device";
+    input {
+      leaf file-type {
+        type common-file-type;
+        mandatory true;
+        description
+          "file type for the download action";
+      }
+      leaf file-name {
+        type string;
+        mandatory true;
+        description
+            "the download file name";
+      }
+      leaf source {
+        type string;
+        mandatory true;
+        description
+          "the source path for downloading file, for example, [sftp]://hostname/directorypath/filename";
+      }
+      leaf cert-name {
+        type string;
+        description
+          "the certificate name";
+      }
+      leaf key-name {
+        type string;
+        description
+          "the key name";
+      }
+      uses sftp-username-password;
+    }
+
+    output {
+      leaf download-result {
+        type action-result;
+        description
+          "Result of the download file operation";
+      }
+      leaf text {
+        type string;
+        description
+          "reasons for failure, defined by vendor";
+      }
+    }
+  }
+
+  rpc get-download-status {
+    description
+       "this RPC get the status of the download operation";
+    input {
+      leaf file-type {
+        type common-file-type;
+        mandatory true;
+        description
+          "file type for the download action";
+      }
+
+      leaf file-name {
+        type string;
+        mandatory true;
+        description
+            "the download file name";
+      }
+
+      leaf source {
+        type string;
+        mandatory true;
+        description
+          "the source path for downloading file, for example, [sftp]://hostname/directorypath/filename";
+      }
+    }
+    output {
+      leaf download-status {
+        type enumeration {
+          enum NORMAL {
+            description
+            "the status of download operation is normal";
+          }
+          enum SUCCESS {
+            description
+            "the status of download operation is finished and success";
+          }
+          enum FAIL {
+            description
+            "the status of download operation is fail";
+          }
+        }
+      }
+      leaf text {
+        type string;
+        description
+          "reasons for failure, defined by vendor";
+      }
+    }
+  }
+
+  rpc upload {
+    description
+       "this RPC get file from the device to NMS";
+    input {
+      leaf file-type {
+        type common-file-type;
+        mandatory true;
+        description
+          "file type for the upload operation";
+      }
+      leaf file-name {
+        type string;
+        description
+            "the upload file name";
+      }
+      leaf destination {
+        type string;
+        mandatory true;
+        description
+          "the destination path for the upload operation, for example, [sftp]://hostname/directorypath/filename";
+      }
+      leaf cert-name {
+        type string;
+        description
+          "the certificate name";
+      }
+      leaf key-name {
+        type string;
+        description
+          "the key name";
+      }
+      uses sftp-username-password;
+    }
+    output {
+      leaf upload-result {
+        type action-result;
+        description
+          "Result of the upload file operation";
+      }
+
+      leaf text {
+        type string;
+        description
+          "reasons for failure, defined by vendor";
+      }
+    }
+  }
+
+  rpc remove-file {
+    description
+       "remove the file in device";
+    input {
+      leaf file-type {
+        type common-file-type;
+        mandatory true;
+        description
+          "file type for the remove operation";
+      }
+      leaf image-name {
+        type string;
+        description
+          "the image name for the remove operation";
+      }
+      leaf database-name {
+        type string;
+        description
+          "the database name for the remove operation";
+      }
+    }
+    output {
+      leaf remove-file-result {
+        type action-result;
+        description
+          "Result of the remove operation";
+      }
+      leaf text {
+        type string;
+        description
+          "reasons for failure, defined by vendor";
+      }
+    }
+  }
+
+  rpc activate-file {
+    description
+       "activate the file in device";
+    input {
+      leaf file-type {
+        type common-file-type;
+        mandatory true;
+        description
+          "file type for the activate operation";
+      }
+
+      leaf image-name {
+        type string;
+        description
+          "the image name for the activate operation";
+      }
+
+      leaf database-name {
+        type string;
+        description
+          "the database name for the activate operation";
+      }
+
+      leaf reboot-type {
+        type enumeration {
+          enum warm {
+            description "warm reboot";
+          }
+          enum cold {
+            description "cold reboot";
+          }
+        }
+        description
+          "Reboot type";
+      }
+    }
+
+    output {
+      leaf activate-result {
+        type action-result;
+        description
+          "Result of the activate operation";
+      }
+
+      leaf text {
+        type string;
+        description
+          "reasons for failure, defined by vendor";
+      }
+    }
+  }
+
+  rpc get-activate-status {
+    description
+       "this RPC get the status of the active operation";
+    input {
+      leaf file-type {
+        type common-file-type;
+        mandatory true;
+        description
+          "file type for the active action";
+      }
+
+      leaf file-name {
+        type string;
+        mandatory true;
+        description
+            "the active file name";
+      }
+    }
+    output {
+      leaf active-status {
+        type enumeration {
+          enum NORMAL {
+            description
+            "the status of active operation is normal";
+          }
+          enum SUCCESS {
+            description
+            "the status of active operation is finished and success";
+          }
+          enum FAIL {
+            description
+            "the status of active operation is fail";
+          }
+        }
+      }
+      leaf text {
+        type string;
+        description
+          "reasons for failure, defined by vendor";
+      }
+    }
+  }
+
+  rpc get-pm-data {
+    description
+       "get the pm data from the device";
+    input {
+      leaf pm-type {
+        type enumeration {
+          enum current {
+            description "get current pm data";
+          }
+          enum history {
+            description "get history pm data";
+          }
+        }
+        default history;
+        description
+          "pm data type";
+      }
+      leaf pm-point {
+        type string;
+        description
+          "the monitoring point of the pm data, reference to the component, i.e. LINECARD-1-1, or logical channel, i.e. OTUC2-1-1-L1, or all ,means all points ";
+      }
+      leaf pm-point-type {
+        type enumeration {
+          enum chassis { description "pm point is chassis";}
+          enum card { description "pm point is card";}
+          enum port { description "pm point is port";}
+          enum transceiver { description "pm point is transceiver";}
+          enum optical-channel { description "pm point is optical channel";}
+          enum physical-channel { description "pm point is physical channel";}
+          enum aps { description "pm point is aps";}
+          enum amplifier { description "pm point is amplifier";}
+          enum otn { description "pm point is otn";}
+          enum ethernet { description "pm point is ethernet";}
+          enum all { description "pm point is all";}
+          enum interface { description "pm point is interface";}
+        }
+        description
+          "pm point type";
+      }
+      leaf pm-time-period {
+        type enumeration {
+          enum 15min {
+            description "15min pm data";
+          }
+          enum 24h {
+            description "24h pm data";
+          }
+          enum untimed {
+            description "digital counters pm data";
+          }
+        }
+        default 15min;
+        description
+          "granularity of pm bins";
+      }
+      leaf pm-parameter {
+        type union {
+          type pm-parameter-type;
+          type string;
+        }
+        description
+          "the history data of pm parameters that can be saved in device";
+      }
+      leaf history-data-type {
+        when "../pm-type = 'history'";
+        type enumeration {
+          enum records {
+            description "history pm data is get by number of records";
+          }
+          enum time {
+            description "history pm data is get by setting time";
+          }
+        }
+        description
+          "the input type for history pm data";
+      }
+      leaf number-of-records {
+        when "../history-data-type = 'records'";
+        type uint16;
+        description
+          "the number of the records for the target pm data";
+      }
+      leaf start-mon-date-time {
+        when "../history-data-type = 'time'";
+        type oc-yang:date-and-time;
+        description
+          "the start of the monitoring date and time";
+      }
+      leaf end-mon-date-time {
+        when "../history-data-type = 'time'";
+        type oc-yang:date-and-time;
+        description
+          "the end of the monitoring date and time";
+      }
+    }
+
+    output {
+      leaf get-pm-result {
+        type action-result;
+        description
+          "Result of the get pm data operation";
+      }
+
+      container results {
+        description
+          "Enclosing container for pm data result list";
+
+        list result {
+          key "number-of-bin";
+          description
+            "List of pm data, keyed by number of bin";
+
+          leaf number-of-bin {
+            type uint32;
+            description
+              "Index of pm data results ";
+          }
+
+          leaf monitoring-date-time {
+            type oc-yang:date-and-time;
+            description
+              "the date and time of the current bin";
+          }
+
+          container points {
+            description
+              "Enclosing container for pm data result list";
+
+            list point {
+              key "pm-point";
+              description
+                "List of pm data, keyed by number of bin";
+
+              leaf pm-point {
+                type string;
+                description
+                  "the monitoring point of the pm dat, reference to the component, i.e. LINECARD-1-1, or logical channel, i.e. OTUC2-1-1-L1 ";
+              }
+
+              container parameters {
+                description
+                  "Enclosing container for pm data result list";
+
+                list parameter {
+                  key "pm-parameter";
+                  description
+                    "List of output pm data parameter, keyed by pm-parameter and pm-point";
+
+                  leaf pm-parameter {
+                    type union {
+                      type pm-parameter-type;
+                      type string;
+                    }
+
+                    description
+                      "the pm parameters that can be saved in device";
+                  }
+
+                  leaf pm-data-value {
+                    type union {
+                      type string;
+                      type uint32;
+                      type uint64;
+                      type oc-yang:counter64;
+                      type oc-types:timeticks64;
+                      type decimal64 {
+                        fraction-digits 18;
+                      }
+                    }
+                    description
+                      "pm data for pm parameter, support more than one result, such as instant, min, max";
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  rpc switch-olp {
+    description
+       "Manual switch the aps to the desired port";
+    input {
+      leaf name {
+        type leafref  {
+          path "/oc-platform:components/oc-platform:component/" +
+            "oc-platform:name";
+        }
+        description
+          "target aps name";
+      }
+
+      leaf switch-to-port {
+        type enumeration {
+          enum PRIMARY {
+            description
+              "manual switch the OLP to the primary line port";
+          }
+          enum SECONDARY {
+            description
+              "manual switch the OLP to the secondary line port";
+          }
+        }
+        description
+          "manual set the optical switch to a port";
+      }
+    }
+
+    output {
+      leaf switch-olp-result {
+        type action-result;
+        description
+          "Result of the switch olp operation";
+      }
+    }
+  }
+
+  rpc get-log {
+    description
+       "get the specific type log from the device";
+    input {
+      leaf log-type {
+        type enumeration {
+          enum CONFIGURATION {
+            description
+              "configuration type";
+          }
+          enum ALARM {
+            description
+              "alarm type";
+          }
+          enum EVENT {
+            description
+              "event type";
+          }
+          enum SECURITY {
+            description
+              "security type";
+          }
+          enum DEBUG {
+            description
+              "debug type";
+          }
+          enum ALL {
+            description
+              "ALL type of log";
+          }
+        }
+        description
+          "the output log type";
+      }
+
+      leaf file-type {
+        type enumeration {
+          enum csv {
+            description
+              "log file format is csv";
+          }
+          enum txt {
+            description
+              "log file format is txt";
+          }
+        }
+        description
+          "log file type";
+      }
+
+      leaf destination {
+        type string;
+        mandatory true;
+        description
+          "the destination path for the get-log operation, for example, [sftp]://hostname/directorypath/filename";
+      }
+
+      uses sftp-username-password;
+    }
+
+    output {
+      leaf get-log-result {
+        type action-result;
+        description
+          "Result of the get log operation";
+      }
+    }
+  }
+
+  rpc set-datetime {
+    description
+       "Set equipments' datetime.";
+    input {
+      leaf datetime {
+        type oc-yang:date-and-time;
+        description
+            "target datetime";
+      }
+    }
+    output {
+      leaf set-datetime-result {
+        type action-result;
+        description
+          "Result of the set operation";
+      }
+    }
+  }
+
+  rpc change-password {
+    description
+       "change password of the current user";
+    input {
+      leaf operator-password {
+        type string;
+        description
+            "the operator's password for second authentication";
+      }
+      leaf username {
+        type string;
+        description
+          "the target user";
+      }
+      leaf new-password {
+        type string;
+        description
+            "the new password";
+      }
+      leaf new-password-confirm {
+        type string;
+        description
+            "new password confirmed";
+      }
+    }
+
+    output {
+      leaf status {
+        type enumeration {
+          enum SUCCESS {
+            description "The RPC action is success";
+          }
+          enum FAIL {
+            description "The RPC action is fail";
+          }
+        }
+      }
+      leaf status-message {
+        type string;
+        description "detailed information about status, e.g. the resaon for failure";
+      }
+    }
+  }
+
+  rpc clear-pm-counter {
+    description
+       "clear the counter of the pointed pm";
+    input {
+      leaf pm-point {
+        type string;
+        description
+          "the monitoring point of the pm data, reference to the component, i.e. LINECARD-1-1, or logical channel, i.e. OTUC2-1-1-L1, or all ,means all points ";
+      }
+
+      leaf pm-point-type {
+        type enumeration {
+          enum otn { description "pm point is otn";}
+          enum ethernet { description "pm point is ethernet";}
+          enum all { description "all pm points";}
+        }
+        description
+          "pm point type";
+      }
+
+      leaf pm-time-period {
+        type enumeration {
+          enum 15min {
+            description "15min pm data";
+          }
+          enum 24h {
+            description "24h pm data";
+          }
+          enum untimed {
+            description "digital counters pm data";
+          }
+        }
+        default 15min;
+        description
+          "pm data period";
+      }
+
+      leaf pm-parameter {
+        type union {
+          type pm-parameter-type;
+          type string;
+        }
+        description
+          "the counter-type pm parameter selected to be cleared";
+      }
+    }
+
+    output {
+      leaf clear-counter-result {
+        type action-result;
+        description 
+          "Result of the clear counter operation";
+      }
+    }
+  }
+
+  // data definition statements
+
+  // augment statements
+
+  // rpc statements
+
+  // notification statements
+
+
+
+}
+
+

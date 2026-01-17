@@ -1,0 +1,873 @@
+module openconfig-wavelength-selective-switch {
+
+  yang-version 1;
+
+  // namespace
+  namespace "http://openconfig.net/yang/wavelength-selective-switch";
+
+  prefix "oc-wss";
+
+  // import some basic types
+  import openconfig-extensions { prefix "oc-ext"; }
+  import openconfig-platform { prefix "oc-platform"; }
+  import openconfig-platform-types { prefix "oc-platform-types"; }
+  import openconfig-transport-types { prefix "oc-opt-types"; }
+  import openconfig-types { prefix "oc-types"; }
+
+  // meta
+  organization "OpenConfig working group";
+
+  contact
+    "OpenConfig working group
+      www.openconfig.net";
+
+  description
+    "This model describes configuration and operational state data
+     for Wavelength-Selective-Switches, whoes type can be 1*n WSS,
+     n*1 WSS or n*m WSS. They may serve optical mux/demux, part of
+     ROADM function on one direction, or CDC local direction in a
+     ROADM.
+
+     One WSS is modeled as a configurable switching element with
+     optical ports, together with wavelength routing function among
+     those ports.";
+
+  oc-ext:openconfig-version 0.4.0;
+
+  revision 2022-06-27 {
+    description
+      "Add nodes and rpcs for ase injection.";
+    reference "0.4.0";
+  }
+
+  revision 2020-05-27 {
+    description
+      "Add RPC function to help connection validation.";
+    reference "0.2.0";
+  }
+
+  revision 2019-02-18 {
+    description
+      "Data model for Wavelength Selective Switches";
+    reference "0.1.0";
+  }
+
+  // extension statements
+
+  // feature statements
+
+  // identity statements
+
+  identity POWER-CONTROL-MODE-TYPE {
+    description
+      "Type definition for different types of media channel
+       power control mode";
+  }
+
+  identity SET-ATTENUATION {
+    base POWER-CONTROL-MODE-TYPE;
+    description
+      "Control the media channel power by setting the absolute
+       attenuation value";
+  }
+
+  identity SET-TARGET-POWER {
+    base POWER-CONTROL-MODE-TYPE;
+    description
+      "Control the media channel power by settting the target
+       output power";
+  }
+
+  identity ASE_CONTROL_MODE {
+    description
+      "The definition for different types of ASE control modes
+      on a media channel";
+  }
+
+  identity IDLE {
+    base ASE_CONTROL_MODE;
+    description
+      "No ase-related operation will be executed automatically.";
+  }
+
+  identity FORCE_INJECTION {
+    base ASE_CONTROL_MODE;
+    description
+      "ASE noise injection is forcefully.";
+  }
+
+  identity FORCE_REMOVE {
+    base ASE_CONTROL_MODE;
+    description
+      "Removes any ASE noise injection that may be present on the
+      media channel";
+  }
+
+  identity AUTO_INJECTION {
+    base ASE_CONTROL_MODE;
+    description
+      "The media channel will automatically be injected with ase noise
+       when its spectrum power drops below the provided threshold.";
+  }
+
+  identity AUTO_REMOVE {
+    base ASE_CONTROL_MODE;
+    description
+      "Injected ase noise will be automatically removed when 
+       the original signal is restored.";
+  }
+
+  identity AUTO_INJECTION_AND_REMOVE {
+    base ASE_CONTROL_MODE;
+    description
+      "Ase noise will automatically be injected into corresponding
+       media channel whose power spectrum drops below provided threshold,
+       and be automatically removed when the media channel is restored.";
+  }
+
+  // grouping statements
+
+  grouping wss-port-properties-config {
+    description
+      "Configuration proerties related with one WSS's port";
+
+    leaf name {
+      type leafref {
+        path "/oc-platform:components/oc-platform:component/"
+                 + "oc-platform:name";
+      }
+      description
+        "Reference to the corresponding optical port";
+    }
+
+    container far-end-info {
+      description
+        "It describes the far end port information connected with
+         this port. It can be configured manually or discovered
+         automatically";
+      leaf chassis-name {
+        type string;
+        description
+          "It describes which chassis the far-end card locates";
+      }
+      leaf card-name {
+        type string;
+        description
+          "It describes the name of the far-end card";
+      }
+      leaf port-name {
+        type string;
+        description
+          "It describes the far-end port name";
+      }
+    }
+
+  }
+
+  grouping wss-port-properties-state {
+    description
+      "Operation properties related with one WSS's port";
+
+    container optical-power {
+      description
+        "Aggregated optical power at this port. If avg/min/max
+         statistics are not supported,  just supply the instant value";
+
+      uses oc-types:avg-min-max-instant-stats-precision2-dBm;
+    }
+  }
+
+  grouping wss-ports-config {
+    description
+      "Configuration data for all optical ports on WSS";
+
+    container in-ports {
+      description
+        "Enclosing container for the list of input ports on
+         this WSS. The port where optical signal comes from
+         external devices are defined as in-port";
+
+      list in-port {
+
+        key name;
+
+        uses wss-port-properties-config;
+
+      }
+    }
+
+    container out-ports {
+      description
+        "Enclosing container for the list of output ports on
+         this WSS, and the ports where optial signal comes from
+         this WSS and outputs to the external device is defined
+         as out-port";
+
+      list out-port {
+
+        key name;
+
+        uses wss-port-properties-config;
+        leaf target-power-monitor-port {
+          type leafref {
+            path "/oc-platform:components/oc-platform:component/"
+                         + "oc-platform:name";
+          }
+          description
+            "Generally, wavelength-channels output power is measured by
+             specific monitor port on the same platform, e.g. WSS's monitor
+             port or OA's monitor port. This leaf denotes the
+             power monitor port for all the wavelength-channels passing through
+             this optical port";
+
+        }
+
+      }
+    }
+  }
+
+  grouping wss-ports-state {
+    description
+      "Operational state data for optical ports on wss";
+
+    container in-ports {
+      description
+        "Enclosing container for the list of input ports on
+         this WSS, and the ports where optical signal comes from
+         exteranl devices is defined as in-port";
+
+      list in-port {
+
+        key name;
+
+        uses wss-port-properties-config;
+        uses wss-port-properties-state;
+
+      }
+    }
+
+    container out-ports {
+      description
+        "Enclosing container for the list of output ports on
+         this WSS, and the ports where optical signal comes from
+         this WSS and outputs to the external device is defined
+         as out-port";
+
+      list out-port {
+
+        key name;
+
+        uses wss-port-properties-config;
+        leaf target-power-monitor-port {
+          type leafref {
+            path "/oc-platform:components/oc-platform:component/"
+                         + "oc-platform:name";
+          }
+          description
+            "Generally, wavelength-channels output power is measured by
+             specific monitor port on the same platform, e.g. WSS's monitor
+             port or OA's monitor port. This leaf denotes the
+             power monitor port for all the wavelength-channels passing through
+             this optical port";
+
+        }
+        uses wss-port-properties-state;
+
+      }
+    }
+
+  }
+
+
+  grouping wss-general-config {
+    description
+      "Configuration data for WSS card in general";
+
+    leaf name {
+      type leafref {
+        path "/oc-platform:components/oc-platform:component/"
+                 + "oc-platform:name";
+      }
+      description
+        "Reference to the corresponding WSS";
+    }
+  }
+
+  grouping wss-general-state {
+    description
+      "Operational state data for a WSS";
+
+    leaf in-ports-num {
+      description
+        "Number of input ports of this WSS";
+      type uint32;
+    }
+
+    leaf out-ports-num {
+      description
+        "Number of output ports of this WSS";
+      type uint32;
+    }
+
+    leaf lower-frequency {
+      type oc-opt-types:frequency-type;
+      description
+        "Lower frequency of WSS operation";
+    }
+
+    leaf upper-frequency {
+      type oc-opt-types:frequency-type;
+      description
+        "Upper frequency of WSS operation";
+    }
+
+    leaf frequency-slot-granularity {
+      type oc-opt-types:frequency-type;
+      description
+        "Granularity of frequency slot";
+    }
+
+  }
+
+  grouping wss-general-top {
+    container config {
+
+      config true;
+      uses wss-general-config;
+      uses wss-ports-config;
+
+    }
+    container state {
+
+      config false;
+      uses wss-general-state;
+      uses wss-ports-state;
+
+    }
+  }
+
+
+  grouping media-channel-port-config {
+    description
+      "Configuration data for a media channel source/dest port";
+
+    leaf port-name {
+      type leafref {
+        path "/oc-platform:components/oc-platform:component/"
+                 + "oc-platform:name";
+      }
+      description
+        "Reference to the corresponding node port";
+    }
+  }
+
+  grouping media-channel-port-state {
+    description
+      "Operational state data for a media channel source/dest port";
+  }
+
+  grouping media-channel-ports-config {
+    container source {
+      description
+        "Top-level container for media channel source";
+      uses media-channel-port-config;
+    }
+    container dest {
+      description
+        "Top-level container for media channel source";
+      uses media-channel-port-config;
+    }
+
+
+  }
+
+  grouping media-channel-ports-state ;
+
+  grouping frequency-slot-config {
+    description
+      "Basic configuration element of this WSS";
+    leaf lower-frequency {
+      type oc-opt-types:frequency-type;
+      description
+        "The lower frequency for the spectrum defined by this
+         frequency slot";
+    }
+
+    leaf upper-frequency {
+      type oc-opt-types:frequency-type;
+      description
+        "The upper frequency for the spectrum defined by this
+         frequency slot";
+    }
+    leaf control-mode {
+      type identityref {
+        base POWER-CONTROL-MODE-TYPE;
+      }
+      description
+        "Sets the power control mode of the frequency slot";
+    }
+
+    leaf attenuation-value {
+      type decimal64 {
+          fraction-digits 2;
+      }
+      units dB;
+      description
+        "The attenuation value set on this frequency slot, and
+         it is only valid when control-mode is SET-ATTENUATION";
+    }
+    leaf target-power-value {
+      type decimal64 {
+          fraction-digits 2;
+      }
+      units dBm;
+      description
+        "The target power value set on this frequency slot, and
+         it is only valid when control-mode is SET-TARGET-POWER";
+    }
+
+  }
+
+  grouping frequency-slot-state {
+    description
+      "Operation data for basic element of this WSS";
+    leaf actual-power-value {
+      type decimal64 {
+          fraction-digits 2;
+      }
+      units dBm;
+      description
+        "The actual power value measured within this frequency slot
+         usually by OCM";
+    }
+  }
+
+  grouping frequency-slots-config-top {
+    description
+      "Configuration of all the freqeuncy slots within one media-channel";
+
+    container frequency-slots {
+      list frequency-slot {
+        key "lower-frequency upper-frequency";
+        uses frequency-slot-config;
+      }
+    }
+
+  }
+
+  grouping frequency-slots-state-top {
+    description
+      "Operation data of all the frequency slots within one media-channel";
+
+    container frequency-slots {
+      list frequency-slot {
+        key "lower-frequency upper-frequency";
+        uses frequency-slot-config;
+        uses frequency-slot-state;
+      }
+    }
+
+  }
+
+
+
+
+  grouping media-channel-config {
+    description
+      "Configuration data for media channel definitions";
+
+    leaf index {
+      type uint32;
+      description
+        "Identifier for the defined media channel";
+    }
+
+    leaf name {
+      type string;
+      description
+        "The user supplied name of the media channel";
+    }
+
+    leaf lower-frequency {
+      type oc-opt-types:frequency-type;
+      description
+        "The lower frequency for the spectrum defined by this media
+         channel";
+    }
+
+    leaf upper-frequency {
+      type oc-opt-types:frequency-type;
+      description
+        "The upper frequency for the spectrum defined by this media
+         channel";
+    }
+
+    leaf admin-status {
+      type oc-opt-types:admin-state-type;
+      description
+        "Sets the admin status of the media channel";
+    }
+
+
+    uses media-channel-ports-config;
+    uses ase-injection-config;
+
+
+  }
+
+
+  grouping media-channel-state {
+    description
+      "Operational state data for media channels ";
+
+    leaf oper-status {
+      type identityref {
+        base oc-platform-types:COMPONENT_OPER_STATUS;
+      }
+      description
+        "If applicable, this reports the current operational status
+         of the media channel.";
+    }
+
+    leaf channel-power {
+      type decimal64 {
+          fraction-digits 2;
+      }
+      units dBm;
+    }
+
+    uses media-channel-ports-state;
+    uses ase-injection-state;
+
+
+  }
+
+  grouping ase-injection-config {
+    description
+      "The configuration datas.";
+    
+    leaf ase-control-mode {
+      type identityref {
+        base ASE_CONTROL_MODE;
+      }
+      default IDLE;
+      description
+        "Sets the ASE control mode for the media channel.
+        The control mode defines if and when ASE noise is injected
+        on the media channel";
+    }
+
+    leaf ase-injection-mode {
+      when "../ase-control-mode != 'oc-wss:IDLE'";
+      type enumeration {
+        enum MODE_THRESHOLD {
+          description
+            "If set, ASE noise will be injected when a defined
+            threshold is crossed.";
+        }
+        enum MODE_DELTA {
+          description
+            "If set, ASE noise will be injected when a defined
+            delta in optical power occurs.";
+        }
+      }
+    }
+    leaf ase-injection-threshold {
+      when "../ase-injection-mode = 'MODE_THRESHOLD'";
+      type decimal64 {
+        fraction-digits 2;
+      }
+      units dBm;
+      description
+        "Defines the optical power threshold value below which 
+        ASE noise should be injected.";
+    }
+    leaf ase-injection-delta {
+      when "../ase-injection-mode = 'MODE_DELTA'";
+      type decimal64 {
+        fraction-digits 2;
+      }
+      units dB;
+      description
+        "Defines the optical loss from the target power, which 
+        indicates when ASE noise should be injected.";
+    }
+  }
+
+  grouping ase-injection-state {
+    description "The state datas.";
+    
+    leaf ase-status {
+      description
+        "Status of injected ASE noise on the media channel";
+      type enumeration {
+        enum NOT_PRESENT {
+          description
+            "Media channel does not have injected ASE noise present";
+        }
+        enum PRESENT {
+          description
+            "Media channel has injected ASE noise present";
+        }
+      }
+      default NOT_PRESENT;
+    }
+  }
+
+
+  grouping media-channels-top {
+    description
+      "Top-level grouping for list of defined media channels";
+
+    container media-channels {
+      description
+        "Enclosing container for media channel list";
+
+      list media-channel {
+        key index;
+        description
+          "List of media channels";
+
+        leaf index {
+          type leafref {
+            path "../config/index";
+          }
+          description
+            "Reference to index number of the media channel";
+        }
+
+        container config {
+          description
+            "Configuration data ";
+
+          uses media-channel-config;
+          uses frequency-slots-config-top;
+
+        }
+
+        container state {
+
+          config false;
+
+          description
+            "Operational state data ";
+
+          uses media-channel-config;
+
+          uses media-channel-state;
+
+          uses frequency-slots-state-top;
+
+        }
+
+      }
+    }
+  }
+
+  grouping wavelength-selective-switch-top {
+    description
+      "Top level grouping for the wavelength router";
+
+    container wavelength-selective-switch {
+      description
+        "Top-level container for WSS";
+
+      container wsses {
+        list wss {
+          key name;
+          leaf name {
+            type leafref{
+              path "../config/name";
+            }
+          }
+          uses wss-general-top;
+
+          uses media-channels-top;
+
+        }
+
+      }
+    }
+  }
+
+
+  // data definition statements
+
+  uses wavelength-selective-switch-top;
+
+  // augment statements
+
+  // rpc statements
+  rpc specify-connection-validation-ports {
+    description
+      "Specify the connection validation ports, and this RPC is usually
+       realized by fix the auxiliary transceiver to the specified ports.";
+    input  {
+        list port-pairs {
+          key index;
+          leaf index {
+            type int32;
+          }
+          leaf tx-port {
+            type string;
+            description "Auxiliary transceiver uses this WSS sub-port to send detecting signal out.";
+          }
+          leaf rx-port {
+            type string;
+            description "Auxiliary transceiver uses this WSS sub-port to receive detecting signal.";
+          }
+        }
+        leaf hold-on-time {
+          type int32;
+          units ms;
+        }
+    }
+    output  {
+      list far-end-infos {
+        key index;
+        leaf index {
+          type int32;
+        }
+        leaf rx-status {
+          type enumeration {
+            enum Success;
+            enum Timeout;
+            enum Error;
+          }
+        }
+        container far-end-info {
+          description
+            "It describes the far end port information connected with
+             this port. ";
+          leaf chassis-name {
+            type string;
+            description
+              "It describes which chassis the far-end card locates";
+          }
+          leaf card-name {
+            type string;
+            description
+              "It describes the name of the far-end card";
+          }
+          leaf port-name {
+            type string;
+            description
+              "It describes the far-end port name";
+          }
+        }
+		  }
+		}
+  }
+
+  rpc switch-automatic-connection-validation {
+    description
+		  "Enable the connection validation function of the device.";
+
+	  input {
+			leaf method {
+				type enumeration {
+					enum ENABLE {
+	          description
+	            "Turn on automatic connection validation.";
+	        }
+
+	        enum DISABLE {
+	          description
+	            "Turn off automatic connection validation.";
+	        }
+				}
+			}
+	  }
+
+		output {
+			leaf message {
+        type string;
+        description
+          "Informational response for the switch operation.";
+      }
+		}
+
+  }
+
+  rpc inject-ase {
+    description
+      "Inject ASE noise manually into one or more specific media-channels
+       within a WSS module.";
+    
+    input {
+      leaf wss-name {
+        description "The name of target wss module.";
+        type leafref {
+          path "/oc-wss:wavelength-selective-switch/oc-wss:wsses/oc-wss:wss/oc-wss:name";
+        }
+      }
+
+      leaf-list mc-index {
+        description "The list of indexes of target media-channels.";
+        type leafref {
+          path "/oc-wss:wavelength-selective-switch/oc-wss:wsses/"
+           + "oc-wss:wss[oc-wss:name=current()/../wss-name]/"
+           + "oc-wss:media-channels/oc-wss:media-channel/oc-wss:index";
+        }
+      }
+    }
+
+    output {
+      leaf result {
+        type enumeration {
+          enum SUCCESS;
+          enum FAIL;
+        }
+        description "The result of rpc action.";
+      }
+
+      leaf message {
+        type string;
+        description "Additional message about result.";
+      }
+    }
+  }
+
+  rpc remove-ase {
+    description
+      "Remove ase noise manually from one of more specific media-channels
+       within a WSS module.";
+    
+    input {
+      leaf wss-name {
+        description "The name of target wss module.";
+        type leafref {
+          path "/oc-wss:wavelength-selective-switch/oc-wss:wsses/oc-wss:wss/oc-wss:name";
+        }
+      }
+
+      leaf-list mc-index {
+        description "The list of indexes of target media-channels.";
+        type leafref {
+          path "/oc-wss:wavelength-selective-switch/oc-wss:wsses/"
+           + "oc-wss:wss[oc-wss:name=current()/../wss-name]/"
+           + "oc-wss:media-channels/oc-wss:media-channel/oc-wss:index";
+        }
+      }
+    }
+
+    output {
+      leaf result {
+        type enumeration {
+          enum SUCCESS;
+          enum FAIL;
+        }
+        description "The result of rpc action.";
+      }
+
+      leaf message {
+        type string;
+        description "Additional message about result.";
+      }
+    }
+
+  }
+
+  // notification statements
+
+}

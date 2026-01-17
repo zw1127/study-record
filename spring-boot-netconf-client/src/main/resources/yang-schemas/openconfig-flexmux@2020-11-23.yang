@@ -1,0 +1,118 @@
+module openconfig-flexmux {
+
+  yang-version "1";
+
+  // namespace
+  namespace "http://openconfig.net/yang/flexmux";
+
+  prefix "oc-fmux";
+
+  import openconfig-types { prefix oc-types; }
+  import openconfig-extensions { prefix oc-ext; }  
+  import openconfig-wavelength-selective-switch { prefix oc-wss; }
+
+  // meta
+  organization "OpenConfig working group";
+
+  contact
+    "OpenConfig working group
+    www.openconfig.net";
+
+  description
+    "This model describes configuration and operational state data
+    for variable mux, deployed as part of a transport
+    line system.";
+
+  oc-ext:openconfig-version "0.1.0";
+  
+
+  revision "2020-11-23" {
+    description
+      "Initial release";
+    reference "0.1.0";
+  }
+
+  // extension statements
+
+  // feature statements
+
+  // identity statements
+
+  // grouping statements
+  
+  grouping in-port-voa-attenuation {
+   container voa-attenuation{
+   
+    leaf target-voa-attenuation {
+      type decimal64 {
+        fraction-digits 2;
+      }
+      units dB;
+      description
+        "Target attenuation of the variable optical attenuator
+        associated with the port in increments of 0.01 dB.";
+    }  
+	
+    leaf actual-voa-attenuation {
+      type decimal64 {
+        fraction-digits 2;
+      }
+      units dB;
+      description
+        "Actual attenuation of the variable optical attenuator
+        associated with the port in increments of 0.01 dB.";
+    } 
+  }	
+  }
+  
+  
+  
+
+  grouping flexmux-top {
+    description
+      "Top-level grouping for mux data";
+    container flexmux{
+      description
+        "Top-level container for flexmux";
+        
+      container flexmuxs {
+        list flexmux {
+          key name;
+          leaf name {
+            type leafref{
+              path "../config/name";
+            }
+          }
+          uses oc-wss:wss-general-top;
+          uses oc-wss:media-channels-top;
+        }
+      }
+    }  
+  }
+
+  // data definition statements
+  
+  uses flexmux-top;
+
+// augment statements
+
+
+  augment "/oc-fmux:flexmux/oc-fmux:flexmuxs/oc-fmux:flexmux" +
+    "/oc-fmux:config/oc-fmux:in-ports/oc-fmux:in-port" {
+    description
+      "Adds configuration data for mux in-port voa attenuation";
+
+  uses in-port-voa-attenuation;
+
+  }
+
+  augment "/oc-fmux:flexmux/oc-fmux:flexmuxs/oc-fmux:flexmux" +
+    "/oc-fmux:state/oc-fmux:in-ports/oc-fmux:in-port" {
+    description
+      "Adds configuration data for mux in-port voa attenuation";
+
+  uses in-port-voa-attenuation;
+
+  }
+
+}

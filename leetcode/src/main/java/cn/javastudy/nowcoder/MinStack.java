@@ -39,18 +39,18 @@ public class MinStack {
     public void push(int node) {
         nums[right++] = node;
     }
-
-    public void pop() {
-
-    }
-
-    public int top() {
-
-    }
-
-    public int min() {
-
-    }
+//
+//    public void pop() {
+//
+//    }
+//
+//    public int top() {
+//
+//    }
+//
+//    public int min() {
+//
+//    }
 
     private boolean isEmpty() {
         return left == right;

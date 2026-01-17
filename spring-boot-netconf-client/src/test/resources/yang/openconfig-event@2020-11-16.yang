@@ -1,0 +1,148 @@
+module openconfig-event {
+
+  yang-version "1";
+
+  // namespace
+  namespace "http://openconfig.net/yang/event";
+
+  prefix "oc-event";
+
+  // import some basic types
+  import openconfig-alarm-types { prefix oc-alarm-types; }
+  import openconfig-extensions { prefix oc-ext; }
+  import openconfig-types { prefix oc-types; }
+  import openconfig-inet-types { prefix oc-inet; }
+
+   // meta
+  organization "private";
+
+  description
+    "This YANG module contains all event notification for OLS systems.";
+
+
+  oc-ext:openconfig-version "0.4.0";
+
+  revision "2020-11-16" {
+    description
+      "Revised By Kuaishou and Baidu";
+  }
+
+  revision "2019-05-30" {
+    description
+      "Initial release version";
+    reference "0.1.0";
+  }
+
+  // typedef statements 
+
+
+  // grouping statements
+
+  grouping event-top {
+    description
+      "state data for device events";
+
+    leaf id {
+      type string;
+      description
+        "Unique ID for the event -- this will not be a
+        configurable parameter on many implementations";
+    }
+
+    leaf resource {
+      type string;
+      description
+        "The item that is under event within the device. The
+        resource may be a reference to an item which is
+        defined elsewhere in the model. For example, it
+        may be a platform/component, interfaces/interface,
+        terminal-device/logical-channels/channel, etc. In this
+        case the system should match the name of the referenced
+        item exactly. The referenced item could alternatively be
+        the path of the item within the model.";
+    }
+
+    leaf text {
+      type string;
+      description
+        "The string used to inform operators about the event. This
+         MUST contain enough information for an operator to be able
+         to understand the problem. If this string contains structure,
+         this format should be clearly documented for programs to be
+         able to parse that information";
+    }
+
+    leaf time-created {
+      type oc-types:timeticks64;
+      description
+        "The time at which the event was raised by the system.
+        This value is expressed as nanoseconds since the Unix Epoch";
+    }
+
+    leaf severity {
+      type identityref {
+        base oc-alarm-types:OPENCONFIG_ALARM_SEVERITY;
+      }
+      description
+        "The severity level indicating the criticality and impact
+        of the event";
+    }
+
+    leaf type-id {
+      type union {
+        type string;
+        type identityref {
+          base oc-alarm-types:OPENCONFIG_ALARM_TYPE_ID;
+        }
+      }
+      description
+        "The abbreviated name of the alarm, for example LOS,
+        EQPT, or OTS. Also referred to in different systems as
+        condition type, alarm identifier, or alarm mnemonic. It
+        is recommended to use the OPENCONFIG_ALARM_TYPE_ID
+        identities where possible and only use the string type
+        when the desired identityref is not yet defined";
+      reference
+        "IETF YANG Alarm Module: Draft - typedef alarm-type-id
+        https://tools.ietf.org/html/draft-vallin-netmod-alarm-module-02";
+    }    
+
+    leaf vendor-type {
+      type string;
+      description
+        "vendor-type leaf in the platform yang model.
+        Device model type for the component, defined by the supplier.  
+        Where component preconfiguration is supported, for example,
+        the component name may be configurable.";
+    }
+
+    leaf hostname {
+      type oc-inet:domain-name;
+      description
+        "hostname leaf in the system yang model.
+        The hostname of the device -- should be a single domain
+        label, without the domain.";
+    }
+
+    leaf ip {
+      type oc-inet:ip-address;
+      description
+        "ip address of INTERFACE-1-X-NM, used to manage the device";
+    }
+
+    leaf event-abbreviate {
+      type string;
+      description
+        "optional leaf, event abbreviate for the text, defined by supplier.";
+    }
+  }
+
+  // notification
+
+  notification event-notification {
+
+    container events {
+      uses event-top;
+    }
+  }
+}

@@ -1,0 +1,98 @@
+module openconfig-transport-performance {
+
+  yang-version "1";
+
+  // namespace
+  namespace "http://openconfig.net/yang/transport-performance";
+  
+  prefix "oc-opt-pm";
+
+  import openconfig-transport-performance-types { prefix oc-opt-pm-types; }
+
+  // meta
+  organization "private";
+  
+  description 
+    "This module is designed to support the configuration of 
+    traditional performance data, including TCA threshold configuration 
+    of performance data.";
+
+  revision "2022-06-27" {
+    description "initial resivion";
+  }
+
+  // grouping statements
+
+  grouping pm-points-top {
+    container pm-points {
+      list pm-point {
+        key "name";
+        leaf name {
+          type string;
+        }
+        // state data
+        container state {
+          config false;
+          leaf point-type {
+            type oc-opt-pm-types:pm-point-type;
+          }
+        }
+
+        container parameters {
+          list parameter {
+            key "pm-name pm-period";
+            leaf pm-name {
+              type string;
+            }
+            leaf pm-period {
+              type oc-opt-pm-types:pm-period-type;
+            }
+
+            container config {
+              container thresholds {
+                leaf threshold-high {
+                  type oc-opt-pm-types:pm-data-value-type;
+                }
+                leaf threshold-low {
+                  type oc-opt-pm-types:pm-data-value-type;
+                }
+              }
+            }
+
+            container state {
+              config false;
+              container thresholds {
+                leaf threshold-high {
+                  type oc-opt-pm-types:pm-data-value-type;
+                }
+                leaf threshold-low {
+                  type oc-opt-pm-types:pm-data-value-type;
+                }
+                leaf threshold-high-max {
+                  description "the maximum value that can be applied to threshold-high.";
+                  type oc-opt-pm-types:pm-data-value-type;
+                }
+                leaf threshold-high-min {
+                  description "the minimum value that can be applied to threshold-high.";
+                  type oc-opt-pm-types:pm-data-value-type;
+                }
+                leaf threshold-low-max {
+                  description "the maximum value that can be applied to threshold-low.";
+                  type oc-opt-pm-types:pm-data-value-type;
+                }
+                leaf threshold-low-min {
+                  description "the minimum value that can be applied to threshold-low.";
+                  type oc-opt-pm-types:pm-data-value-type;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // data definition statements
+  uses pm-points-top;
+  
+}

@@ -1,0 +1,202 @@
+module openconfig-transport-line-protection-ext {
+
+  yang-version "1";
+
+  // namespace
+  namespace "http://openconfig.net/yang/optical-transport-line-protection-ext";
+
+  prefix "oc-line-protect-ext";
+
+  import openconfig-extensions { prefix oc-ext; }
+  import openconfig-platform { prefix oc-platform; }
+  import openconfig-transport-line-protection { prefix oc-line-protect; }
+
+  // meta
+  organization "OpenConfig working group";
+
+  contact
+    "OpenConfig working group
+    www.openconfig.net";
+
+  description
+    "Augments optical-transport-line-protection.";
+  
+  oc-ext:openconfig-version "0.1.0";
+  
+  revision "2023-10-25" {
+    description
+      "Initial release.";
+    reference "0.1.0";
+  }
+
+  // grouping statements
+  grouping ochp-top {
+    description
+      "Top-level grouping for configuration and operational state
+      data for the profile of optical-channel protection.";
+
+    container optical-channel-protection-profiles {
+      description
+        "Enclosing container.";
+      
+      list profile {
+        key "optical-channel";
+        description "List of optical-channel protecton profiles.";
+
+        leaf optical-channel {
+          type leafref {
+            path "../config/optical-channel";
+          }
+          description
+            "Name of the optical-channel which is detected by APS.";
+        }
+
+        container config {
+          uses ochp-config;
+        }
+
+        container state {
+          config false;
+          uses ochp-config;
+          uses ochp-state;
+        }
+      }
+    }
+  }
+
+  grouping ochp-config {
+    leaf optical-channel {
+      type leafref {
+        path "/oc-platform:components/oc-platform:component/" +
+        "oc-platform:name";
+      }
+      description
+        "Reference to system-supplied name of the optical-channel 
+        which under the protection of APS.";
+    }
+
+    // leaf hold-on-time {
+    //   type uint32;
+    //   units milliseconds;
+    //   description
+    //     "The time delay between the last swithcing and the 
+    //     next possible switching.";
+    // }
+
+    // leaf switch-num-interval {
+    //   type uint32;
+    //   units milliseconds;
+    //   description
+    //     "A moving time interval on which the number of 
+    //     switch is counted.";
+    // }
+
+    // leaf switch-num-threshold {
+    //   type uint32;
+    //   units milliseconds;
+    //   description
+    //     "The threshold of the number of switchs. When this threshold
+    //     is exceeded, the state of switch would be frozen.";
+    // }
+
+    // leaf switch-freeze-time {
+    //   type uint32;
+    //   units milliseconds;
+    //   description
+    //     "The time that must elapse after the state of switch is frozen.";
+    // }
+
+    // leaf wait-to-speculate-time {
+    //   type uint32;
+    //   units milliseconds;
+    //   description
+    //     "The time that must elapse before the electrical state 
+    //     of alternative APS path is speculated to be normal.";
+    // }
+
+    // leaf speculation-cooldown-time {
+    //   type uint32;
+    //   units milliseconds;
+    //   description
+    //     "The mechanic of speculation will come into cool down when 
+    //     used too frequently.";
+    // }
+
+    // leaf pre-fec-ber-threshold-sd {
+    //   type decimal64 {
+    //     fraction-digits 18;
+    //   }
+    //   units bit-errors-per-second;
+    //   description
+    //     "Threshold for the pre-fec ber. When this threshold is
+    //     exceeded, status of the protected entity will be regard as
+    //     SD (signal degrade).";
+    // }
+
+    // leaf pre-fec-ber-threshold-sf {
+    //   type decimal64 {
+    //     fraction-digits 18;
+    //   }
+    //   units bit-errors-per-second;
+    //   description
+    //     "Threshold for the pre-fec ber. When this threshold is
+    //     exceeded, status of the protected entity will be regard as
+    //     SF (signal fail).";
+    // }
+
+    // leaf post-fec-ber-threshold-sf {
+    //   type decimal64 {
+    //     fraction-digits 18;
+    //   }
+    //   units bit-errors-per-second;
+    //   description
+    //     "Threshold for the post-fec ber. When this threshold is
+    //     exceeded, status of the protected entity will be regard as
+    //     SF (signal fail).";
+    // }
+  }
+
+  grouping ochp-state {
+  }
+
+  grouping aps-config-ext {
+    leaf primary-los-threshold {
+      type decimal64 {
+        fraction-digits 2;
+      }
+      units dBm;
+      description
+        "The threshold at which status of the primary line port will be
+        regard as LOS (loss of signal).";
+    }
+
+    leaf secondary-los-threshold {
+      type decimal64 {
+        fraction-digits 2;
+      }
+      units dBm;
+      description
+        "The threshold at which status of the sencondary line port will be
+        regard as LOS (loss of signal).";
+    }
+  }
+
+  grouping aps-state-ext {
+  }
+
+  // data definition statements
+
+  // augment statements
+  augment "/oc-line-protect:aps/oc-line-protect:aps-modules/oc-line-protect:aps-module" {
+    uses ochp-top;
+  }
+
+  augment "/oc-line-protect:aps/oc-line-protect:aps-modules/oc-line-protect:aps-module/oc-line-protect:config" {
+    uses aps-config-ext;
+  }
+
+  augment "/oc-line-protect:aps/oc-line-protect:aps-modules/oc-line-protect:aps-module/oc-line-protect:state" {
+    uses aps-config-ext;
+  }
+
+}

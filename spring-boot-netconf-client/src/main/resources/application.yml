@@ -1,0 +1,67 @@
+server:
+  port: 8088
+  servlet:
+    context-path: /
+logging:
+  level:
+    org.opendaylight.netconf.shaded: info
+    cn.javastudy.springboot.simulator.netconf: debug
+    cn.javastudy.springboot.simulator.netconf.datastore.mapper: info
+    cn.javastudy.springboot.simulator.netconf.device.DeviceSessionManager: info
+    org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping: DEBUG
+
+spring:
+  datasource:
+    url: jdbc:h2:~/db/simulator-data
+    driver-class-name: org.h2.Driver
+    username: simulator
+    password: Fiberhome.2023
+  h2:
+    console:
+      enabled: true
+      path: /console
+      settings:
+        trace: false
+        web-allow-others: true
+  sql:
+    init:
+      schema-locations: classpath:db/schema.sql
+      mode: always
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+mybatis:
+  type-aliases-package: cn.javastudy.springboot.simulator.netconf.datastore.mapper
+  mapper-locations: classpath*:mapping/*.xml
+
+simulator:
+  netconf:
+    thread-pool-size: 64
+    dynamic-config-list:
+      - path: "/rpc-reply/data/components/component/state/temperature/instant"
+        scale: 1
+        start: "1.0"
+        end: "99.9"
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+    show-extensions: true
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/simulator/**'
+      packages-to-scan: cn.javastudy.springboot.simulator.netconf
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+    swagger-model-name: 模拟器实体类列表
+  basic:
+    enable: true
+    username: admin
+    password: Admin@123456
